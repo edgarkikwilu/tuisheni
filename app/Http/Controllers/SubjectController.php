@@ -10,7 +10,11 @@ use Illuminate\Http\Request;
 class SubjectController extends Controller
 {
     public function __construct(){
+<<<<<<< HEAD
         $this->middleware('guest:web');
+=======
+        $this->middleware('guest:users');
+>>>>>>> dd0420af0195b97adba604308357b261d6f5d00c
     }
     /**
      * Display a listing of the resource.
