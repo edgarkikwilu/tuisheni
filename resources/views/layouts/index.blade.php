@@ -5,17 +5,21 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<link rel="stylesheet" href="css/bootstrap.css">
-  <link rel="stylesheet" href="js/bootstrap.css">
-  <link rel="stylesheet" href="css/style.css">
-  <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+  <link rel="stylesheet" href="{{ asset ('js/bootstrap.css') }}">
+  <link rel="stylesheet" href="{{ asset ('css/style.css') }}">
+  <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" id="bootstrap-css">
+  <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" id="bootstrap-css">
+
+<!------ Include the above in your HEAD tag ---------->
+
 
   
 	<title>School Bata</title>
 
 </head>
 <body>
-    <nav class="navbar navbar-expand navbar-dark bg-dark">
+<!--    <nav class="navbar navbar-expand navbar-dark bg-dark">
         <h3 class="display-4" style="color: #FFF ; " ><a href="{{ route('index') }}" style="text-decoration:none; color:#FFF;">SCHOOL BATA</a> </h3>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -30,13 +34,65 @@
               <a href="#" style="color:#FFF;"> Username</a>
             @endauth
         </div>  
-      </nav>
+      </nav>  -->
 
-      <div class="container" style="text-align:center; margin-top: 40px;">
+      <nav class="navbar navbar-expand-lg navbar-light bg-primary" >
+          <a class="navbar-brand" href="#" style="font-size:26px; color:#FFF;">SCHOOL BATA</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active"style="margin-left:10px;">
+                <a class="nav-link" href="{{ route('index') }}">Home <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item" style="margin-left:10px;">
+                <a class="nav-link" href="{{ route('explore') }}">Explore Post</a>
+              </li>
+              <li class="nav-item" style="margin-left:10px;">
+                  <a class="nav-link" href="#">Online Quizzes</a>
+                </li>
+                <li class="nav-item" style="margin-left:10px; ">
+                    <a class="nav-link" href="#">Examinations</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="{{ route('profile') }}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left:10px; ">
+                        My Profile
+                      </a>
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">My Profile</a>
+                        <a class="dropdown-item" href="#">Edit My Profile</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Log Out</a>
+                      </div>
+                    </li>
+                    <li class="nav-item" style="margin-left:10px; ">
+                        <a class="nav-link" href="#">Direct Message</a>
+                      </li>
+                          
+              
+              </ul>
+              <div class="navbar-nav ml-auto">
+                  @guest
+                    <a href="{{ route('login') }}" style=" color:#FFF;">Login</a>
+                    <a href="{{ route('register') }}" style="color:#FFF;">Sign Up</a>
+                  @endguest
+                  @auth
+                    <a href="#" style=" color:#FFF;">Points</a>
+                    <a href="#" style="color:#FFF;"> Username</a>
+                  @endauth
+              </div> 
+            </div>
+        </nav>
+
+      
+      
+        <div class="container" style="text-align:center; margin-top: 40px;">
           <h3 class="display-5" style="color: #001f9c ; " >SCHOOL WEEK 1</h3>  
-      </div>      
+        </div>      
       
-      
+    <!--  
       
       <div class="container">
           <nav class="nav nav-pills nav-justified">
@@ -49,52 +105,9 @@
               <a class="nav-item nav-link" href="{{ route('dm') }}">Direct Messages</a>
               
             </nav>
-      </div>
+      </div>  -->
 
       @yield('content')
-
-<!--
-<nav class="nav flex-column" style="margin-top: 20px; margin-left: 5px;">
-NATURAL SCIENCES
-  <a class="nav-link" href="#">Physics</a>
-  <a class="nav-link" href="#">Chemistry</a>
-  <a class="nav-link" href="#">Mathematics</a>
-  <a class="nav-link" href="#">Biology</a>
-  <a class="nav-link" href="#">Agriculture</a>
-  <a class="nav-link" href="#">ICT</a>
-  <a class="nav-link" href="#">Technical Education</a>
-  <a class="nav-link" href="#">Home Economics</a>
-
-SOCIAL SCIENCES
-  <a class="nav-link" href="#">History</a>
-  <a class="nav-link" href="#">Civics</a>
-  <a class="nav-link" href="#">Geography</a>
-  <a class="nav-link" href="#">Economics</a>
-
-LANGUAGES
-  <a class="nav-link" href="#">English</a>
-  <a class="nav-link" href="#">Kiswahili</a>
-  <a class="nav-link" href="#">Arabic</a>
-  <a class="nav-link" href="#">French</a>
-
-AESTHETICS
-<a class="nav-link" href="#">Fine Arts</a>
-<a class="nav-link" href="#">Theater Arts</a>
-<a class="nav-link" href="#">Physical Education</a>
-<a class="nav-link" href="#">Music</a>
-
-  BUSINESS STUDIES
-  <a class="nav-link" href="#">Book-Keeping</a>
-  <a class="nav-link" href="#">Commerce</a>
-
-RELIGION
-  <a class="nav-link" href="#">Bible Studies</a>
-  <a class="nav-link" href="#">Islamic Studies</a>
-</nav>
--->
-
-
-
 
 
 
@@ -108,6 +121,8 @@ RELIGION
     <script src="../../../../js/bootstrap.js"></script>
     <script src="../../../../js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 </body>
 </html>

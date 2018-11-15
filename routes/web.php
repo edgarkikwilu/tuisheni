@@ -26,9 +26,15 @@ Route::get('/home', 'HomeController@index')->name('home');
 //from index page
 Route::get('/explore', 'IndexController@explore')->name('explore');
 Route::get('/profile', 'IndexController@profile')->name('profile');
+Route::get('/editprofile', 'IndexController@editprofile')->name('editprofile');
 Route::get('/dm', 'IndexController@dm')->name('dm');
 Route::get('/author/{id}', 'IndexController@author')->name('author');
 Route::get('/subject/{subject}', 'IndexController@subject')->name('subject');
+
+//from profile page
+Route::get('/assesment', 'IndexController@assesment')->name('assesment');
+Route::get('/admin', 'IndexController@admin')->name('admin');
+Route::get('/dashboard', 'IndexController@dashboard')->name('dashboard');
 
 //from subject page
 Route::get('/class/{subject}/{class}', 'SubjectController@class')->name('class');

@@ -51,28 +51,7 @@
                         
         </div>
     </div>
-  <!--  <div class="container" style=" margin-top:20px; text-align:center;">
-        <div class="row">
-                       <div class="col-lg-12">
-                            <h2 class="display-5" style="color:#001f9c">2 COMMENTS </h2>
-                       </div> 
-            </div>
-    </div>
-    <div class="container" style=" margin-top:20px;">
-        <div class="row">
-            <div class="col-lg-2">
-                    <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="150" height="150">
-           </div>
-           <div class="col-lg-10 bg-primary" style="text-align:center;">
-                    <p>Comment Lies here, lorem ipsum...</p>
-          </div>
-                
-            </div>
-        </div>
-    </div>
--->
-
-
+ 
 <div class="container">
   <div class="row">
     <div class="col-sm-10 col-sm-offset-1" id="logout">

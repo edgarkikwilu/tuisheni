@@ -14,7 +14,7 @@ class IndexController extends Controller
 {
 
     public function __construct(){
-        $this->middleware('guest:users');
+        $this->middleware('guest:web');
     }
 
     public function index(){
@@ -59,5 +59,17 @@ class IndexController extends Controller
     }
     public function author($id){
         return view('author');
+    }
+    public function editprofile(){
+        return view('editprofile');
+    }
+    public function assesment(){
+        return view('assesment');
+    }
+    public function admin(){
+        return view('admin');
+    }
+    public function dashboard(){
+        return view('dashboard');
     }
 }

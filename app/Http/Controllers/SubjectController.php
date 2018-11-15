@@ -19,7 +19,7 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        //
+        // 
     }
 
     //subject to class
