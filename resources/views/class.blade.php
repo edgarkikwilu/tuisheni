@@ -40,156 +40,38 @@
 <div class="container">
     
         <div class="row">
-                        <div class="col-lg-3"  style="margin-top: 20px;">
-                                <div class="card">
-                                        <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
-                                                <div class="container" style="text-align:center;">
-                                                    <div class="row">
-                                                    <div class="col-lg-12">
-                                                    <small class="text-muted" style="color:#001f9c;">Husna Mohamed,</small>
-                                                    <small class="text-muted">Loyola High School</small>
-                                                    </div>
-                                                    <div class="col-lg-12">
-                                                            <small class="text-muted">9 mins ago</small>
-                                                    </div>
-                                                    </div>     
+                @foreach ($votedNotes as $note)
+                <div class="col-lg-3"  style="margin-top: 20px;">
+                        <div class="card">
+                                <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
+                                        <div class="container" style="text-align:center;">
+                                                <div class="row">
+                                                <div class="col-lg-12">
+                                                <small class="text-muted" style="color:#001f9c;">Husna Mohamed,</small>
+                                                <small class="text-muted">Loyola High School</small>
                                                 </div>
-                                    <div class="container">
-                                             <div class="row">
-                                                    <div class="col-lg-12">
-                                                         <h5 class="card-title" style="color:#001f9c">Application of Physics in dailylife</h5>
-                                                    </div> 
-                                            </div>
-                                    </div>
-                                    
-                                    <div class="container">
-                                            <div class="row">
-                                                    <div class="col-lg-12">
-                                                           <small class="text-muted">#physics #introduction-to-physics</small>
-                                                    </div>
-                                            </div>
-                                    </div>
-                                          
-                                
-                                          
+                                                <div class="col-lg-12">
+                                                        <small class="text-muted">9 mins ago</small>
+                                                </div>
+                                                </div>     
                                         </div>
-                       
-                       
+                                <div class="container">
+                                        <div class="row">
+                                                <div class="col-lg-12">
+                                                        <h5 class="card-title" style="color:#001f9c">Application of Physics in dailylife</h5>
+                                                </div> 
+                                        </div>
                                 </div>
-                                <div class="col-lg-3"  style="margin-top: 20px;">
-                                    <div class="card">
-                                                <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
-                                                        <div class="container" style="text-align:center;">
-                                                            <div class="row">
-                                                            <div class="col-lg-12">
-                                                            <small class="text-muted" style="color:#001f9c;">Husna Mohamed,</small>
-                                                            <small class="text-muted">Loyola High School</small>
-                                                            </div>
-                                                            <div class="col-lg-12">
-                                                                    <small class="text-muted">9 mins ago</small>
-                                                            </div>
-                                                            </div>     
-                                                        </div>
-                                            <div class="container">
-                                                     <div class="row">
-                                                            <div class="col-lg-12">
-                                                                 <h5 class="card-title" style="color:#001f9c">Application of Physics in dailylife</h5>
-                                                            </div> 
-                                                    </div>
-                                            </div>
-                                            
-                                            <div class="container">
-                                                    <div class="row">
-                                                            <div class="col-lg-12">
-                                                                   <small class="text-muted">#physics #introduction-to-physics</small>
-                                                            </div>
-                                                    </div>
-                                            </div>
-                                                  
-                                        
-                                                  
+                                <div class="container">
+                                        <div class="row">
+                                                <div class="col-lg-12">
+                                                        <small class="text-muted">#physics #introduction-to-physics</small>
                                                 </div>
-                               
-                               
-                                </div>
-                                <div class="col-lg-3"  style="margin-top: 20px;">
-                                    <div class="card">
-                                                    <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
-                                                            <div class="container" style="text-align:center;">
-                                                                <div class="row">
-                                                                <div class="col-lg-12">
-                                                                <small class="text-muted" style="color:#001f9c;">Husna Mohamed,</small>
-                                                                <small class="text-muted">Loyola High School</small>
-                                                                </div>
-                                                                <div class="col-lg-12">
-                                                                        <small class="text-muted">9 mins ago</small>
-                                                                </div>
-                                                                </div>     
-                                                            </div>
-                                                <div class="container">
-                                                         <div class="row">
-                                                                <div class="col-lg-12">
-                                                                     <h5 class="card-title" style="color:#001f9c">Application of Physics in dailylife</h5>
-                                                                </div> 
-                                                        </div>
-                                                </div>
-                                                
-                                                <div class="container">
-                                                        <div class="row">
-                                                                <div class="col-lg-12">
-                                                                       <small class="text-muted">#physics #introduction-to-physics</small>
-                                                                </div>
-                                                        </div>
-                                                </div>
-                                                      
-                                            
-                                                      
-                                                    </div>
-                                   
-                                   
-                               </div>
-                               <div class="col-lg-3"  style="margin-top: 20px;">
-                                    <div class="card">
-                                                <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
-                                                        <div class="container" style="text-align:center;">
-                                                            <div class="row">
-                                                            <div class="col-lg-12">
-                                                            <small class="text-muted" style="color:#001f9c;">Husna Mohamed,</small>
-                                                            <small class="text-muted">Loyola High School</small>
-                                                            </div>
-                                                            <div class="col-lg-12">
-                                                                    <small class="text-muted">9 mins ago</small>
-                                                            </div>
-                                                            </div>     
-                                                        </div>
-                                            <div class="container">
-                                                     <div class="row">
-                                                            <div class="col-lg-12">
-                                                                 <h5 class="card-title" style="color:#001f9c">Application of Physics in dailylife</h5>
-                                                            </div> 
-                                                    </div>
-                                            </div>
-                                            
-                                            <div class="container">
-                                                    <div class="row">
-                                                            <div class="col-lg-12">
-                                                                   <small class="text-muted">#physics #introduction-to-physics</small>
-                                                            </div>
-                                                    </div>
-                                            </div>
-                                                  
-                                        
-                                                  
-                                                </div>
-                               
-                               
-                                </div>  
-           
-            
-        </div>
-    
-           
-     
+                                        </div>
+                                </div>        
+                        </div>             
+                </div>
+                @endforeach
 </div>
 
 <div class="container" style="text-align:left; margin-top: 40px;">

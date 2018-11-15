@@ -21,9 +21,9 @@ class Note extends Model
         return $this->morphToMany('App\Tag', 'taggable');
     }
 
-    // public function subject(){
-    //     return $this->belongsTo('App\Subject');
-    // }
+    public function subject(){
+        return $this->belongsTo('App\Subject');
+    }
 
     public function topic(){
         return $this->belongsTo('App\Topic');

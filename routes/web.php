@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'IndexController@index')->name('index');
 
 Route::post('/login', 'LoginController@login')->name('login');
 Route::post('/register', 'RegisterController@register')->name('register');
@@ -39,6 +37,7 @@ Route::get('/dashboard', 'IndexController@dashboard')->name('dashboard');
 //from subject page
 Route::get('/class/{subject}/{class}', 'SubjectController@class')->name('class');
 Route::get('/assessment/{id}', 'SubjectController@assessment')->name('assessment');
-Route::get('/index', function(){
-    return view('welcome'); 
-})->name('index');
+Route::get('/index', 'IndexController@index')->name('index');
+
+//author page
+Route::get('/follow/{id}','IndexController@follow')->name('follow');

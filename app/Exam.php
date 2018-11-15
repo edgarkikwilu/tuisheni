@@ -31,4 +31,8 @@ class Exam extends Model
     public function taggable(){
         return $this->morphedToMany('App\Tag', 'taggable');
     }
+
+    public function subject(){
+        return $this->belongsTo('App\Subject');
+    }
 }

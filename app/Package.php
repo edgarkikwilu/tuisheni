@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Package extends Model
 {
     public function packageSpecs(){
-        return $this->belongsTo('App\PackageSpecs');
+        return $this->hasMany('App\PackageSpec');
     }
 }
