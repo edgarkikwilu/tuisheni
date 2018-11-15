@@ -20,6 +20,7 @@ class CreateExamsTable extends Migration
             $table->integer('exam_type_id')->unsigned();
             $table->foreign('exam_type_id')->references('id')->on('exam_types');
             $table->string('title');
+            $table->string('subject_id');
             $table->string('description');
             $table->datetime('start')->nullable();
             $table->datetime('end')->nullable();

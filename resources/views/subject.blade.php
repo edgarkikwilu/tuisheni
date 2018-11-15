@@ -29,10 +29,20 @@
                 @endauth
         </div>    
       </nav>
+      @if (Session::has('success'))
+          <div class="alert alert-info">
+                  {{Session::get('success')}}
+          </div>
+      @endif
+      @if (Session::has('error'))
+          <div class="alert alert-danger">
+                  {{Session::get('error')}}
+          </div>
+      @endif
 <div class="container" style="text-align:center; margin-top:40px;">
         <div class="row"  >
                 <div class="col-lg-12">
-                        <h3 class="display-5" style="color: #001f9c ; " >PHYSICS</h3>
+                        <h3 class="display-5" style="color: #001f9c ; " >{{$subject}}</h3>
                 </div>  
             </div>
 </div>
@@ -53,57 +63,48 @@
 <!-- Three columns of text below the carousel -->
 <div class="row" style="margin-left: 20px;">
     <div class="container" style=" text-align: center; margin-top: 50px;">
-        <h3 class="display-6" style="color: #001f9c ; " >PHYSICS TOP 3 WEEK 1</h3>
+        <h3 class="display-6" style="color: #001f9c ; " >{{$subject}} TOP 3 WEEK 1</h3>
     </div>
+    
+    @foreach ($topStudents as $student)
     <div class="col-lg-4" style=" text-align: center; margin-top:50px;">
-      <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="110" height="110">
-      <h4>#1 John Paul</h4>
-      <h5><small class="text-muted">St. Marys High School</small></h5>
-      
-      <p>AVERAGE: 95%</p>
-      <p><a class="btn btn-secondary" href="{{ route('assessment',1) }}" role="button">View Student &raquo;</a></p>
-    </div><!-- /.col-lg-4 -->
-    <div class="col-lg-4" style=" text-align: center; margin-top:50px;">
-      <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="110" height="110">
-      <h4>#2 Aneth Steven</h4>
-      <h5><small class="text-muted">St. Marys High School</small></h5>
-      <p>AVERAGE: 90%</p>
-      <p><a class="btn btn-secondary" href="#" role="button">View Student &raquo;</a></p>
-    </div><!-- /.col-lg-4 -->
-    <div class="col-lg-4" style=" text-align: center; margin-top:50px;">
-      <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="110" height="110">
-      <h4>#3 JumaHassan</h4>
-      <h5><small class="text-muted">Mbezi High School</small></h5>
-      <p>AVERAGE: 85%</p>
-      <p><a class="btn btn-secondary" href="#" role="button">View Student &raquo;</a></p>
-    </div><!-- /.col-lg-4 -->
+        <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="110" height="110">
+    <h4>{{$student->user->firstname}} {{$student->user->lastname}}</h4>
+        <h5><small class="text-muted">{{$student->user->school}}</small></h5>
+        
+        <p>AVERAGE: {{$student->score}}%</p>
+        <p><a class="btn btn-secondary" href="{{ route('assessment',1) }}" role="button">View Student &raquo;</a></p>
+        </div><!-- /.col-lg-4 -->
+    @endforeach
     
   </div><!-- /.row -->
 
   <div class="container" style="text-align:center; margin-top: 40px;">
-        <h4 class="display-6" style="color: #001f9c ; " >MOST VIEWED PHYSICS MATERIALS</h4>  
+        <h4 class="display-6" style="color: #001f9c ; " >MOST VIEWED {{$subject}} MATERIALS</h4>  
     </div> 
     <div class="container">
             <div class="row">
-                    <div class="col-lg-4"  style="margin-top: 20px;">
-                            <div class="card">
-                                    <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
-                                    <div class="card-body">
-                                            <div class="container" style="text-align:center; margin-top:-10px;">
+                    
+                @foreach ($recommended as $note)
+                <div class="col-lg-4"  style="margin-top: 20px;">
+                        <div class="card">
+                                <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
+                                <div class="card-body">
+                                        <div class="    container" style="text-align:center; margin-top:-10px;">
                                                 <div class="row">
                                                 <div class="col-lg-12">
-                                                <small class="text-muted" style="color:#001f9c;">Husna Mohamed,</small>
-                                                <small class="text-muted">Loyola High School</small>
+                                                <small class="text-muted" style="color:#001f9c;">{{$note->user->username}},</small>
+                                                <small class="text-muted">{{$note->user->school}}</small>
                                                 </div>
                                                 <div class="col-lg-12">
-                                                        <small class="text-muted">9 mins ago</small>
+                                                        <small class="text-muted">{{$note->created_at}}</small>
                                                 </div>
                                                 </div>     
-                                            </div>
+                                        </div>
                                 <div class="container">
-                                         <div class="row">
+                                        <div class="row">
                                                 <div class="col-lg-12">
-                                                     <h5 class="card-title" style="color:#001f9c">Application of Physics in dailylife</h5>
+                                                        <h5 class="card-title" style="color:#001f9c">{{$note->title}}</h5>
                                                 </div> 
                                         </div>
                                 </div>
@@ -111,94 +112,16 @@
                                 <div class="container">
                                         <div class="row">
                                                 <div class="col-lg-12">
-                                                       <small class="text-muted">#physics #introduction-to-physics</small>
+                                                        <small class="text-muted">{{$note->tags}}</small>
                                                 </div>
                                         </div>
                                 </div>
-                                      
+                                        
                                 </div>
-                                      
-                                    </div>
-                   
-                   
-                            </div>
-                            <div class="col-lg-4"  style="margin-top: 20px;">
-                                            <div class="card">
-                                                    <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
-                                                    <div class="card-body">
-                                                            <div class="container" style="text-align:center; margin-top:-10px;">
-                                                                <div class="row">
-                                                                <div class="col-lg-12">
-                                                                <small class="text-muted" style="color:#001f9c;">Husna Mohamed,</small>
-                                                                <small class="text-muted">Loyola High School</small>
-                                                                </div>
-                                                                <div class="col-lg-12">
-                                                                        <small class="text-muted">9 mins ago</small>
-                                                                </div>
-                                                                </div>     
-                                                            </div>
-                                                <div class="container">
-                                                         <div class="row">
-                                                                <div class="col-lg-12">
-                                                                     <h5 class="card-title" style="color:#001f9c">Application of Physics in dailylife</h5>
-                                                                </div> 
-                                                        </div>
-                                                </div>
-                                                
-                                                <div class="container">
-                                                        <div class="row">
-                                                                <div class="col-lg-12">
-                                                                       <small class="text-muted">#physics #introduction-to-physics</small>
-                                                                </div>
-                                                                
-                                                        </div>
-                                                </div>
-                                                      
-                                                </div>
-                                                      
-                                                    </div>
-                                   
-              
-                                            </div>
-                                            <div class="col-lg-4"  style="margin-top: 20px;">
-                                                    <div class="card">
-                                                            <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
-                                                            <div class="card-body">
-                                                                    <div class="container" style="text-align:center; margin-top:-10px;">
-                                                                        <div class="row">
-                                                                        <div class="col-lg-12">
-                                                                        <small class="text-muted" style="color:#001f9c;">Husna Mohamed,</small>
-                                                                        <small class="text-muted">Loyola High School</small>
-                                                                        </div>
-                                                                        <div class="col-lg-12">
-                                                                                <small class="text-muted">9 mins ago</small>
-                                                                        </div>
-                                                                        </div>     
-                                                                    </div>
-                                                        <div class="container">
-                                                                 <div class="row">
-                                                                        <div class="col-lg-12">
-                                                                             <h5 class="card-title" style="color:#001f9c">Application of Physics in dailylife</h5>
-                                                                        </div> 
-                                                                </div>
-                                                        </div>
-                                                        
-                                                        <div class="container">
-                                                                <div class="row">
-                                                                        <div class="col-lg-12">
-                                                                               <small class="text-muted">#physics #introduction-to-physics</small>
-                                                                        </div>
-                                                                        
-                                                                </div>
-                                                        </div>
-                                                              
-                                                        </div>
-                                                              
-                                                            </div>
-                                           
-                      
-                                                    </div>
-       
+                                        
+                                </div>
+                        </div>
+                @endforeach
             </div>
                 <ul class="nav justify-content-center">
                         <li class="nav-item">
@@ -414,34 +337,15 @@
 
 <div class="container">
     <div class="row">
+            @foreach ($teachers as $teacher)
             <div class="col-lg-3" style=" text-align: center; margin-top:50px;">
                 <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="110" height="110">
-                <h4>Mr. Bujilima</h4>
-                <h5><small class="text-muted">Eagles Secondary School</small></h5>
-                <p><small class="text-muted">I am Mr. Bujilima, Mathematics teacher and this is my short bio. See you in class</small></p>
-                <p><a class="btn btn-secondary" href="#" role="button">Follow </a></p>
-              </div><!-- /.col-lg-4 -->
-        <div class="col-lg-3" style=" text-align: center; margin-top:50px;">
-                    <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="110" height="110">
-                    <h4>Mr. Bujilima</h4>
-                    <h5><small class="text-muted">Eagles Secondary School</small></h5>
-                    <p><small class="text-muted">I am Mr. Bujilima, Mathematics teacher and this is my short bio. See you in class</small></p>
-                    <p><a class="btn btn-secondary" href="#" role="button">Follow </a></p>
-       </div><!-- /.col-lg-4 -->
-            <div class="col-lg-3" style=" text-align: center; margin-top:50px;">
-                    <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="110" height="110">
-                    <h4>Mr. Bujilima</h4>
-                    <h5><small class="text-muted">Eagles Secondary School</small></h5>
-                    <p><small class="text-muted">I am Mr. Bujilima, Mathematics teacher and this is my short bio. See you in class</small></p>
-                    <p><a class="btn btn-secondary" href="#" role="button">Follow </a></p>
-          </div><!-- /.col-lg-4 -->
-                <div class="col-lg-3" style=" text-align: center; margin-top:50px;">
-                            <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="110" height="110">
-                            <h4>Mr. Bujilima</h4>
-                            <h5><small class="text-muted">Eagles Secondary School</small></h5>
-                            <p><small class="text-muted">I am Mr. Bujilima, Mathematics teacher and this is my short bio. See you in class</small></p>
-                        <p><a class="btn btn-secondary" href="#" role="button">Follow </a></p>  </div><!-- /.col-lg-4 -->
-    </div>
+                <h4>{{$teacher->firstname}} {{$teacher->lastname}}</h4>
+                <h5><small class="text-muted">{{$teacher->school}}</small></h5>
+                <p><small class="text-muted">{{$teacher->bio}}</small></p>
+            <p><a class="btn btn-secondary" href="{{route('follow',$teacher->id)}}" role="button">Follow </a></p>
+                </div><!-- /.col-lg-4 -->
+            @endforeach
     <ul class="nav justify-content-center">
             <li class="nav-item">
                 <a class="nav-link" href="#">See More Physics Teachers</a>

@@ -6,26 +6,21 @@ use Illuminate\Http\Request;
 
 use App\Carousel;
 use App\Package;
-<<<<<<< HEAD
 use App\User;
+use App\Follow;
+use App\Note;
+use App\Subject;
 use App\TopStudent;
 use Carbon\Carbon;
 use DB;
-=======
-use App\PackageSpec;
-use App\TopStudent;
-use Carbon;
->>>>>>> dd0420af0195b97adba604308357b261d6f5d00c
+use Auth;
+use Session;
 
 class IndexController extends Controller
 {
 
     public function __construct(){
-<<<<<<< HEAD
         $this->middleware('guest:web');
-=======
-        $this->middleware('guest:users');
->>>>>>> dd0420af0195b97adba604308357b261d6f5d00c
     }
 
     public function index(){
@@ -38,43 +33,25 @@ class IndexController extends Controller
 
         $carousels = Carousel::all();
         $packages = Package::with('packageSpecs')->get();
-<<<<<<< HEAD
         //$topIds = DB::table('top_students')->where('week',$week)->pluck('user_id')->distinct()->get();
-        $topIds = TopStudent::select('user_id')->where('week',23)->orderBy('score')->distinct()->get();
-        $topStudents = TopStudent::where('week',23)->get();
-=======
-        $topIds = DB::table('top_students')->where('week',$week)->pluck('user_id')->distinct()->get();
-        $topStudents = TopStudent::where('week',$week)->get();
->>>>>>> dd0420af0195b97adba604308357b261d6f5d00c
+        // $topIds = TopStudent::select('user_id')->where('week',23)->orderBy('score')->distinct()->get();
+        $topStudents = TopStudent::where('week',1)->where('subject','Overall')->orderBy('score','desc')->limit(3)->get();
 
         $list = collect([]);
         $sortedlist = collect([]);
 
-        foreach ($topIds as $id) {
-<<<<<<< HEAD
-            $averegaScore = DB::table('top_students')->where('week',23)->where('user_id',$id)->avg('score');
-            $top = new TopStudent();
-            $top->user_id = $id;
-            $top->score = $averegaScore;
-            dd($id);
-=======
-            $averegaScore = DB::table('top_students')->where('week',$week)->where('user_id',$id)->avg('score');
-            $top = new TopStudent();
-            $top->user_id = $id;
-            $top->score = $averegaScore;
->>>>>>> dd0420af0195b97adba604308357b261d6f5d00c
-            $list->push($top);
-        }
+        // foreach ($topIds as $id) {
+        //     $averegaScore = DB::table('top_students')->where('week',23)->where('user_id',$id)->avg('score');
+        //     $top = new TopStudent();
+        //     $top->user_id = $id;
+        //     $top->score = $averegaScore;
+        //     dd($id);
+        //     $list->push($top);
+        // }
 
-        $sortedlist = $list->sortBy('score')->take(3);
-<<<<<<< HEAD
-        dd($sortedlist);
+        //$sortedlist = $list->sortBy('score')->take(3);
         return view('welcome')->withCarousels($carousels)->withPackages($packages)
-        ->withSortedList($sortedlist);
-=======
-
-        return view('welcome')->withCarousels($carousels)->withPackages($packages)->withSortedList($sortedlist);
->>>>>>> dd0420af0195b97adba604308357b261d6f5d00c
+        ->withTopStudents($topStudents);
     }
     public function explore(){
         return view('explore');
@@ -86,15 +63,38 @@ class IndexController extends Controller
         return view('myprofile');
     }
     public function subject($subject){
-        return view('subject')->withSubject($subject);
+        $subject_id = Subject::select('id')->where('name',$subject)->get()->first();
+        //dd($subject_id);
+        $topStudents = TopStudent::where('week',1)->where('subject',$subject)
+                        ->orderBy('score','desc')->limit(3)->get();
+        $recommended = Note::where('original',true)->whereHas('topic.subject', function($query)  use ($subject_id){
+            $query->where('id', 8);
+        })->get();
+        
+        //dd($recommended);
+        $teachers = User::where('type','teacher')->orderBy('rate','desc')->limit(4)->get();
+        return view('subject')->withSubject($subject)->withTopStudents($topStudents)
+            ->withRecommended($recommended)->withTeachers($teachers);
     }
     public function author($id){
-<<<<<<< HEAD
-        $user = User::with('notes')->where('id',$id)->get()->first();
-        //dd($user);
-        return view('author')->withUser($user);
-=======
-        return view('author');
->>>>>>> dd0420af0195b97adba604308357b261d6f5d00c
+        $user = User::with('notes')->where('id',$id)->first();
+        $following = Follow::where('user_id',$id)->count();
+        $followers = Follow::where('follow_id',$id)->count();
+        return view('author')->withUser($user)->withFollowing($following)->withFollowers($followers);
+    }
+
+    public function follow($id){
+        if (Auth::check()) {
+            $follow = new Follow();
+            $follow->user_id = Auth()->id;
+            $follow->follow_id = $id;
+            $follow->save();
+            Session::flash('success','followed!');
+            return redirect()->back();
+        } else {
+            Session::flash('error','please login first!');
+            return redirect()->back();
+        }
+        
     }
 }

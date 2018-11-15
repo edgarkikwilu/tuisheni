@@ -10,11 +10,7 @@ use Illuminate\Http\Request;
 class SubjectController extends Controller
 {
     public function __construct(){
-<<<<<<< HEAD
         $this->middleware('guest:web');
-=======
-        $this->middleware('guest:users');
->>>>>>> dd0420af0195b97adba604308357b261d6f5d00c
     }
     /**
      * Display a listing of the resource.
@@ -29,15 +25,16 @@ class SubjectController extends Controller
     //subject to class
     public function class($subject, $class){
         $week = 1;
-        $topStudents = Report::where('week',$week)->orderBy('score')->take(3)->get();
-        $votednotes = Note::where('week', $week)->orderBy('votes')->take(3)->get();
-        return view('class')->withSubject($subject)->withClass($class);
+        $topStudents = Report::where('week',$week)->orderBy('score','desc')->take(3)->get();
+        $votednotes = Note::where('week', $week)->orderBy('votes','desc')->take(3)->get();
+        return view('class')->withSubject($subject)->withClass($class)->withTopStudents($topStudents)
+                ->withVotedNotes($votednotes);
     }
     public function assessment($id){
         return view('assesment');
     }
 
-    /**
+    /*
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

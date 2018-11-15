@@ -32,43 +32,17 @@
         <div class="container" style=" text-align: center; margin-top: 50px;">
             <h3 class="display-5" style="color: #001f9c ; " >TOP 3 STUDENTS WEEK 1</h3>
         </div>
-<<<<<<< HEAD
         
-        @foreach ($sortedList as $student)
+        @foreach ($topStudents as $student)
         <div class="col-lg-4" style=" text-align: center; margin-top:50px;">
           <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="110" height="110">
           <h4>#1 {{$student->user->username}}</h4>
-          <h5><small class="text-muted">{{$student->user()->school}}</small></h5>
+          <h5><small class="text-muted">{{$student->user->school}}</small></h5>
           
           <p>AVERAGE: {{$student->score}}%</p>
-          <p><a class="btn btn-secondary" href="{{ route('author',300) }}" role="button">View Student &raquo;</a></p>
+          <p><a class="btn btn-secondary" href="{{ route('author',$student->user_id) }}" role="button">View Student &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
         @endforeach
-=======
-        <div class="col-lg-4" style=" text-align: center; margin-top:50px;">
-          <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="110" height="110">
-          <h4>#1 John Paul</h4>
-          <h5><small class="text-muted">St. Marys High School</small></h5>
-          
-          <p>AVERAGE: 95%</p>
-          <p><a class="btn btn-secondary" href="{{ route('author',1) }}" role="button">View Student &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4" style=" text-align: center; margin-top:50px;">
-          <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="110" height="110">
-          <h4>#2 Aneth Steven</h4>
-          <h5><small class="text-muted">St. Marys High School</small></h5>
-          <p>AVERAGE: 90%</p>
-          <p><a class="btn btn-secondary" href="{{ route('author',1) }}" role="button">View Student &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4" style=" text-align: center; margin-top:50px;">
-          <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="110" height="110">
-          <h4>#3 JumaHassan</h4>
-          <h5><small class="text-muted">Mbezi High School</small></h5>
-          <p>AVERAGE: 85%</p>
-          <p><a class="btn btn-secondary" href="{{ route('author',1) }}" role="button">View Student &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-        
->>>>>>> dd0420af0195b97adba604308357b261d6f5d00c
       </div><!-- /.row -->
       <div class="container" style="text-align:center; margin-top: 50px;">
           <h3 class="display-5" style="color: #001f9c ; " >NATURAL SCIENCES MATERIALS</h3>
@@ -292,7 +266,6 @@
     
         <div class="container" style="margin-top:40px;">
           <div class="card-deck mb-4 text-center">
-<<<<<<< HEAD
             @foreach ($packages as $package)
             <div class="card mb-4 box-shadow">
                 <div class="card-header">
@@ -310,50 +283,6 @@
                 </div>
               </div>
             @endforeach
-=======
-            <div class="card mb-4 box-shadow" >
-              <div class="card-header">
-                <h4 class="my-0 font-weight-normal">Light</h4>
-              </div>
-              <div class="card-body">
-                <h1 class="card-title pricing-card-title">Tsh 4,000 <small class="text-muted">/ mo</small></h1>
-                <ul class="list-unstyled mt-3 mb-4">
-                  <li>2 GB of storage</li>
-                  <li>Email support</li>
-                  <li>Help center access</li>
-                </ul>
-                <button type="button" class="btn btn-lg btn-block btn-outline-primary">Get Started</button>
-              </div>
-            </div>
-            <div class="card mb-4 box-shadow">
-              <div class="card-header">
-                <h4 class="my-0 font-weight-normal">Gold</h4>
-              </div>
-              <div class="card-body">
-                <h1 class="card-title pricing-card-title">Tsh 7,000 <small class="text-muted">/ mo</small></h1>
-                <ul class="list-unstyled mt-3 mb-4">
-                  <li>10 GB of storage</li>
-                  <li>Priority email support</li>
-                  <li>Help center access</li>
-                </ul>
-                <button type="button" class="btn btn-lg btn-block btn-primary">Get Started</button>
-              </div>
-            </div>
-            <div class="card mb-4 box-shadow">
-              <div class="card-header">
-                <h4 class="my-0 font-weight-normal">Premium</h4>
-              </div>
-              <div class="card-body">
-                <h1 class="card-title pricing-card-title">Tsh 10,000 <small class="text-muted">/ mo</small></h1>
-                <ul class="list-unstyled mt-3 mb-4">
-                  <li>15 GB of storage</li>
-                  <li>Phone and email support</li>
-                  <li>Help center access</li>
-                </ul>
-                <button type="button" class="btn btn-lg btn-block btn-primary">Get Started</button>
-              </div>
-            </div>
->>>>>>> dd0420af0195b97adba604308357b261d6f5d00c
           </div>
         </div>
 @endsection
