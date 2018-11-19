@@ -17,6 +17,7 @@ class CreateTopicsTable extends Migration
             $table->increments('id');
             $table->integer('subject_id')->unsigned();
             $table->foreign('subject_id')->references('id')->on('subjects');
+            $table->integer('form')->default(1);
             $table->string('name');
             $table->integer('duration')->default(1);
             $table->integer('priority')->default(1);

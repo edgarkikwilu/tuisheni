@@ -6,120 +6,22 @@
             <h3 class="display-5" style="color: #000 ; " >RECOMMENDED POSTS</h3>  
         </div> 
             <div class="row">
-                <div class="col-lg-3"  style="margin-top: 10px;">
-                    <div class="card">
-                        <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Topic Sub-Title</h5>
-                            <small class="text-muted">9 mins ago</small>
-                            <p>
-                                <small class="text-muted">#physics #introduction-to-physics</small>    
-                            
-                            </p>    
-                        </div>
-                            
-                        </div>
-                </div>
-        
-                <div class="col-lg-3"  style="margin-top: 10px;">
-                    <div class="card">
-                        <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Topic Sub-Title</h5>
-                            <small class="text-muted">9 mins ago</small>
+                @foreach ($notesOg as $note)
+                    <div class="col-lg-3"  style="margin-top: 10px;">
+                        <div class="card">
+                            <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $note->topic->name }} Sub-Title</h5>
+                                <small class="text-muted">{{ $note->created_at->diffForHumans() }}</small>
                             <p>
                                 <small class="text-muted">#physics #introduction-to-physics</small>    
                             
                             </p> 
+                            </div>
+                                
                         </div>
-                            
-                        </div>
-                </div>
-                <div class="col-lg-3"  style="margin-top: 10px;">
-                    <div class="card">
-                        <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Topic Sub-Title</h5>
-                            <small class="text-muted">9 mins ago</small>
-                            <p>
-                                <small class="text-muted">#physics #introduction-to-physics</small>    
-                            
-                            </p>    
-                        </div>
-                            
-                        </div>
-                </div>
-                <div class="col-lg-3"  style="margin-top: 10px;">
-                    <div class="card">
-                        <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Topic Sub-Title</h5>
-                            <small class="text-muted">9 mins ago</small>
-                        <p>
-                            <small class="text-muted">#physics #introduction-to-physics</small>    
-                        
-                        </p> 
-                        </div>
-                            
-                        </div>
-                </div>
-                <div class="col-lg-3"  style="margin-top: 10px;">
-                    <div class="card">
-                        <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Topic Sub-Title</h5>
-                            <small class="text-muted">9 mins ago</small>
-                            <p>
-                                <small class="text-muted">#physics #introduction-to-physics</small>    
-                            
-                            </p>    
-                        </div>
-                            
-                        </div>
-                </div>
-        
-                <div class="col-lg-3"  style="margin-top: 10px;">
-                    <div class="card">
-                        <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Topic Sub-Title</h5>
-                            <small class="text-muted">9 mins ago</small>
-                            <p>
-                                <small class="text-muted">#physics #introduction-to-physics</small>    
-                            
-                            </p> 
-                        </div>
-                            
-                        </div>
-                </div>
-                <div class="col-lg-3"  style="margin-top: 10px;">
-                    <div class="card">
-                        <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Topic Sub-Title</h5>
-                            <small class="text-muted">9 mins ago</small>
-                            <p>
-                                <small class="text-muted">#physics #introduction-to-physics</small>    
-                            
-                            </p>    
-                        </div>
-                            
-                        </div>
-                </div>
-                <div class="col-lg-3"  style="margin-top: 10px;">
-                    <div class="card">
-                        <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Topic Sub-Title</h5>
-                            <small class="text-muted">9 mins ago</small>
-                        <p>
-                            <small class="text-muted">#physics #introduction-to-physics</small>    
-                        
-                        </p> 
-                        </div>
-                            
-                        </div>
-                </div>
+                    </div>
+                @endforeach
                 <ul class="nav justify-content-center">
                     <li class="nav-item">
                         <a class="nav-link" href="#">See More Reccomendations</a>
@@ -131,120 +33,22 @@
                 <h3 class="display-5" style="color: #000 ; " >ALL POSTS</h3>  
             </div> 
                 <div class="row">
-                <div class="col-lg-3"  style="margin-top: 10px;">
-                    <div class="card">
-                    <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Topic Sub-Title</h5>
-                        <small class="text-muted">9 mins ago</small>
-                        <p>
-                            <small class="text-muted">#physics #introduction-to-physics</small>    
-                        
-                        </p>    
-                    </div>
-                        
-                    </div>
-            </div>
-    
-            <div class="col-lg-3"  style="margin-top: 10px;">
-                <div class="card">
-                    <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Topic Sub-Title</h5>
-                        <small class="text-muted">9 mins ago</small>
-                        <p>
-                            <small class="text-muted">#physics #introduction-to-physics</small>    
-                        
-                        </p> 
-                    </div>
-                        
-                    </div>
-            </div>
-            <div class="col-lg-3"  style="margin-top: 10px;">
-                <div class="card">
-                    <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Topic Sub-Title</h5>
-                        <small class="text-muted">9 mins ago</small>
-                        <p>
-                            <small class="text-muted">#physics #introduction-to-physics</small>    
-                        
-                        </p>    
-                    </div>
-                        
-                    </div>
-            </div>
-            <div class="col-lg-3"  style="margin-top: 10px;">
-                    <div class="card">
-                        <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Topic Sub-Title</h5>
-                            <small class="text-muted">9 mins ago</small>
-                        <p>
-                            <small class="text-muted">#physics #introduction-to-physics</small>    
-                        
-                        </p> 
-                        </div>
-                            
-                        </div>
-                </div>
-                <div class="col-lg-3"  style="margin-top: 10px;">
-                    <div class="card">
-                        <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Topic Sub-Title</h5>
-                            <small class="text-muted">9 mins ago</small>
-                            <p>
-                                <small class="text-muted">#physics #introduction-to-physics</small>    
-                            
-                            </p>    
-                        </div>
-                            
-                        </div>
-                </div>
-        
-                <div class="col-lg-3"  style="margin-top: 10px;">
-                    <div class="card">
-                        <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Topic Sub-Title</h5>
-                            <small class="text-muted">9 mins ago</small>
+                @foreach ($notes as $note)
+                    <div class="col-lg-3"  style="margin-top: 10px;">
+                        <div class="card">
+                            <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $note->topic->name }} {{ $note->title }}</h5>
+                                <small class="text-muted">>{{ $note->created_at->diffForHumans() }}</small>
                             <p>
                                 <small class="text-muted">#physics #introduction-to-physics</small>    
                             
                             </p> 
+                            </div>
+                                
                         </div>
-                            
-                        </div>
-                </div>
-                <div class="col-lg-3"  style="margin-top: 10px;">
-                    <div class="card">
-                        <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Topic Sub-Title</h5>
-                            <small class="text-muted">9 mins ago</small>
-                            <p>
-                                <small class="text-muted">#physics #introduction-to-physics</small>    
-                            
-                            </p>    
-                        </div>
-                            
-                        </div>
-                </div>
-                <div class="col-lg-3"  style="margin-top: 10px;">
-                    <div class="card">
-                        <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Topic Sub-Title</h5>
-                            <small class="text-muted">9 mins ago</small>
-                        <p>
-                            <small class="text-muted">#physics #introduction-to-physics</small>    
-                        
-                        </p> 
-                        </div>
-                            
-                        </div>
-                </div>
+                    </div>
+                @endforeach
             </div>
         </div>
 @endsection

@@ -13,7 +13,7 @@ class Topic extends Model
         return $this->belongsTo('App\Subject');
     }
     public function subTopics(){
-        return $this->hasMany('App\Subtopics');
+        return $this->hasMany('App\Subtopic');
     }
 
     public function notes(){

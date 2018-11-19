@@ -7,6 +7,7 @@ $factory->define(App\Exam::class, function (Faker $faker) {
         'user_id'=>\App\User::inRandomOrder()->first()->id,
         'exam_type_id'=>\App\ExamType::inRandomOrder()->first()->id,
         'title'=>$faker->word,
+        'subject_id'=>App\Subject::inRandomOrder()->first()->id,
         'description'=>$faker->word,
         'start'=>$faker->dateTime($max = 'now', $timezone = null),
         'end'=>$faker->dateTime($max = 'now', $timezone = null),

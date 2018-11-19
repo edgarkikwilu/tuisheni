@@ -19,6 +19,7 @@ class CreateNotesTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->integer('topic_id')->unsigned();
             $table->foreign('topic_id')->references('id')->on('topics');
+            $table->integer('week')->unsigned();
             $table->string('title');
             $table->string('article')->nullable();
             $table->boolean('original');

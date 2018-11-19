@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Subject;
 use App\Report;
 use App\Note;
+use App\Topic;
+use App\Subtopic;
 use Illuminate\Http\Request;
 
 class SubjectController extends Controller
@@ -25,10 +27,15 @@ class SubjectController extends Controller
     //subject to class
     public function class($subject, $class){
         $week = 1;
+        $topics = Topic::with('subTopics')->where('form',$class)->orderBy('priority','asc')->get();
+        $firstTopic = $topics->first();
+        //dd($firstTopic);
+        $recommendedNotes = Note::where('topic_id',$firstTopic->id)->where('original', true)->get();
+        $mostVotedNotes = Note::where('topic_id',$firstTopic->id)->orderBy('votes','desc')->where('original', false)->get();
         $topStudents = Report::where('week',$week)->orderBy('score','desc')->take(3)->get();
-        $votednotes = Note::where('week', $week)->orderBy('votes','desc')->take(3)->get();
+        $votednotes = Note::where('week', $week)->where('original', true)->orderBy('votes','desc')->take(3)->get();
         return view('class')->withSubject($subject)->withClass($class)->withTopStudents($topStudents)
-                ->withVotedNotes($votednotes);
+                ->withTopics($topics->take(7))->withRecommendedNotes($recommendedNotes)->withMostVotedNotes($mostVotedNotes);
     }
     public function assessment($id){
         return view('assesment');

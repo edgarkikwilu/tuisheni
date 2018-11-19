@@ -9,6 +9,7 @@ use App\Package;
 use App\User;
 use App\Follow;
 use App\Note;
+use App\Exam;
 use App\Subject;
 use App\TopStudent;
 use Carbon\Carbon;
@@ -63,18 +64,17 @@ class IndexController extends Controller
         return view('myprofile');
     }
     public function subject($subject){
-        $subject_id = Subject::select('id')->where('name',$subject)->get()->first();
-        //dd($subject_id);
+        $subject_id = DB::table('subjects')->where('name', 'like', '%'.$subject.'%')->pluck('id')->first();
         $topStudents = TopStudent::where('week',1)->where('subject',$subject)
                         ->orderBy('score','desc')->limit(3)->get();
         $recommended = Note::where('original',true)->whereHas('topic.subject', function($query)  use ($subject_id){
             $query->where('id', 8);
         })->get();
-        
-        //dd($recommended);
+        $exams = Exam::where('subject_id', $subject_id)->get();
+        $packages = Package::with('packageSpecs')->get();
         $teachers = User::where('type','teacher')->orderBy('rate','desc')->limit(4)->get();
         return view('subject')->withSubject($subject)->withTopStudents($topStudents)
-            ->withRecommended($recommended)->withTeachers($teachers);
+            ->withRecommended($recommended)->withTeachers($teachers)->withExams($exams)->withPackages($packages);
     }
     public function author($id){
         $user = User::with('notes')->where('id',$id)->first();
@@ -103,10 +103,13 @@ class IndexController extends Controller
     public function assesment(){
         return view('assesment');
     }
+    public function single(){
+        return view('single');
+    }
     public function admin(){
         return view('admin');
     }
-    public function dashboard(){
-        return view('dashboard');
+    public function recomended_subject(){
+        return view('recomended_subject');
     }
 }

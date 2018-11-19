@@ -9,4 +9,7 @@ class Subtopic extends Model
     public function quizes(){
         return $this->hasMany('App\Quiz');
     }
+    public function topic(){
+        return $this->belongsTo('App\Topic');
+    }
 }

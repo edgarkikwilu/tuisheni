@@ -18,6 +18,7 @@
       <a class="nav-link admin-nav-item admin-sidebar-item" data-toggle="pill" href="#admin-changelog" role="tab" aria-controls="admin-changelog" aria-selected="false">Changelog</a>
     </div>
   </div>   -->
+  <!--Admin Tabs-->
   <div class="col-sm-12 admin-tabs" style="margin-top:30px;">
     <ul class="nav nav-tabs admin-nav text-uppercase" role="tablist">
       <li class="nav-item">
