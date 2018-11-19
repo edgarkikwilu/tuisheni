@@ -112,4 +112,13 @@ class IndexController extends Controller
     public function recomended_subject(){
         return view('recomended_subject');
     }
+    public function examination(){
+        return view('examination');
+    }
+    public function teacher(){
+        return view('teacher');
+    }
+    public function student(){
+        return view('student');
+    }
 }
