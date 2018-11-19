@@ -109,4 +109,16 @@ class IndexController extends Controller
     public function dashboard(){
         return view('dashboard');
     }
+    public function examination(){
+        return view('examination');
+    }
+    public function teacher(){
+        return view('teacher');
+    }
+    public function student(){
+        return view('student');
+    }
+    public function single(){
+        return view('single');
+    }
 }

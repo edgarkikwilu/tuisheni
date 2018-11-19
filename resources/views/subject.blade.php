@@ -1,43 +1,6 @@
 @extends('layouts.index')
 @section('content')
 
-<<<<<<< HEAD
-=======
-	<link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
-  <link rel="javascript" href="{{ asset('js/bootstrap.js') }}">
-  <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-  
-    <title>School Bata</title>
-
-</head>
-<body>
-    <nav class="navbar navbar-expand navbar-dark bg-dark">
-        <a href="{{ route('index') }}"><h3 class="display-4" style="color: #FFF ; " >SCHOOL BATA</h3></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="navbar-nav ml-auto">
-                @guest
-                        <a href="#" style="color:#FFF;"> Sign Up</a>
-                        <a href="#" style=" color:#FFF;">Login</a>
-                @endguest
-                @auth
-                        <a href="#" style=" color:#FFF;">Points</a>
-                        <a href="#" style="color:#FFF;"> Username</a>
-                @endauth
-        </div>    
-      </nav>
-      @if (Session::has('success'))
-          <div class="alert alert-info">
-                  {{Session::get('success')}}
-          </div>
-      @endif
-      @if (Session::has('error'))
-          <div class="alert alert-danger">
-                  {{Session::get('error')}}
-          </div>
-      @endif
->>>>>>> 02ad43945ef65475ce7e4de5dde4f11f0bd98d6b
 <div class="container" style="text-align:center; margin-top:40px;">
         <div class="row"  >
                 <div class="col-lg-12">

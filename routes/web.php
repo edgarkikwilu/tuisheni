@@ -22,6 +22,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 //from index page
+Route::get('/single', 'IndexController@single')->name('single');
 Route::get('/explore', 'IndexController@explore')->name('explore');
 Route::get('/profile', 'IndexController@profile')->name('profile');
 Route::get('/editprofile', 'IndexController@editprofile')->name('editprofile');
@@ -32,7 +33,10 @@ Route::get('/subject/{subject}', 'IndexController@subject')->name('subject');
 //from profile page
 Route::get('/assesment', 'IndexController@assesment')->name('assesment');
 Route::get('/admin', 'IndexController@admin')->name('admin');
+Route::get('/teacher', 'IndexController@teacher')->name('teacher');
+Route::get('/student', 'IndexController@student')->name('student');
 Route::get('/dashboard', 'IndexController@dashboard')->name('dashboard');
+Route::get('/examination', 'IndexController@examination')->name('examination');
 
 //from subject page
 Route::get('/class/{subject}/{class}', 'SubjectController@class')->name('class');

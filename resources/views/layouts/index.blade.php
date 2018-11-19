@@ -54,7 +54,7 @@
                   <a class="nav-link" href="#">Online Quizzes</a>
                 </li>
                 <li class="nav-item" style="margin-left:10px; ">
-                    <a class="nav-link" href="#">Examinations</a>
+                    <a class="nav-link" href="{{ route('examination') }}">Examinations</a>
                   </li>
                   <li class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle" href="{{ route('profile') }}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left:10px; ">

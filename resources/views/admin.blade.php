@@ -3,21 +3,7 @@
 <div class="container" style=" margin-top: 40px;">
     <h3 class="display-5" style="color: #001f9c ; " >Admin Dashboard</h3>  
   </div>
-<!--
-<div class="row">
-  <div class="col-sm-2 admin-sidebar">
-    <div class="nav flex-column nav-pills text-center text-uppercase admin-nav" id="sidebar-admin" role="tablist" aria-orientation="vertical">
-      <a class="nav-link active show admin-nav-item admin-sidebar-item"  data-toggle="pill" href="#admin-communicate" role="tab" aria-controls="admin-communicate" aria-selected="true">Communicate</a>
-      <a class="nav-link admin-nav-item admin-sidebar-item" data-toggle="pill" href="#admin-requests" role="tab" aria-controls="admin-requests" aria-selected="false">Requests</a>
-      <a class="nav-link admin-nav-item admin-sidebar-item" data-toggle="pill" href="#admin-users" role="tab" aria-controls="admin-users" aria-selected="false">Users</a>
-      <a class="nav-link admin-nav-item admin-sidebar-item" data-toggle="pill" href="#admin-groups" role="tab" aria-controls="admin-groups" aria-selected="false">Groups</a>
-      <a class="nav-link admin-nav-item admin-sidebar-item" data-toggle="pill" href="#admin-analytics" role="tab" aria-controls="admin-analytics" aria-selected="false">Analytics</a>
-      <a class="nav-link admin-nav-item admin-sidebar-item" data-toggle="pill" href="#admin-messages" role="tab" aria-controls="admin-messages" aria-selected="false">Messages</a>
-      <a class="nav-link admin-nav-item admin-sidebar-item" data-toggle="pill" href="#admin-sessions" role="tab" aria-controls="admin-sessions" aria-selected="false">Sessions</a>
-      <a class="nav-link admin-nav-item admin-sidebar-item" data-toggle="pill" href="#admin-testimonials" role="tab" aria-controls="admin-testimonials" aria-selected="false">Testimonials</a>
-      <a class="nav-link admin-nav-item admin-sidebar-item" data-toggle="pill" href="#admin-changelog" role="tab" aria-controls="admin-changelog" aria-selected="false">Changelog</a>
-    </div>
-  </div>   -->
+<!--RESPONSIVE BAR-->
   <div class="col-sm-12 admin-tabs" style="margin-top:30px;">
     <ul class="nav nav-tabs admin-nav text-uppercase" role="tablist">
       <li class="nav-item">
@@ -49,8 +35,10 @@
       </li>
     </ul>
   </div>
+  <!--END RESPONSIVE BAR-->
   <div class="col-sm-12" style="margin-top:30px;">
     <div class="tab-content">
+      <!--USERS-->
       <div class="tab-pane fade active show" id="admin-users" role="tabpanel" aria-labelledby="admin-users-tab">
         <ul class="nav nav-pills nav-fill">
           <li class="nav-item">
@@ -77,7 +65,7 @@
             </div>
           </form>
         </nav>
-    <!--TABLE USERS-->    
+      
     <div class="container">
         <div class="row">
             <div>
@@ -138,9 +126,10 @@
             </div>
         </div>
     </div>  
-     <!--END TABLE USERS-->   
+        
 
   </div>
+  <!--END USERS-->
   <!--ALL NOTES -->
       <div class="tab-pane fade" id="admin-notes" role="tabpanel" aria-labelledby="admin-notes-tab">
         <div class="container">
@@ -567,10 +556,6 @@
                             </div>
                 </div>
               </div>
-
-
-
-
         </div>
 <!--END ALL EXAMS-->
 <!--RESULTS-->
