@@ -51,22 +51,14 @@
                 <a class="nav-link" href="{{ route('explore') }}">Explore Post</a>
               </li>
               <li class="nav-item" style="margin-left:10px;">
-                  <a class="nav-link" href="#">Online Quizzes</a>
+                  <a class="nav-link" href="{{ route('quiz') }}">Online Quizzes</a>
                 </li>
                 <li class="nav-item" style="margin-left:10px; ">
                     <a class="nav-link" href="{{ route('examination') }}">Examinations</a>
                   </li>
-                  <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle" href="{{ route('profile') }}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left:10px; ">
-                        My Profile
-                      </a>
-                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">My Profile</a>
-                        <a class="dropdown-item" href="#">Edit My Profile</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Log Out</a>
-                      </div>
-                    </li>
+                  <li class="nav-item" style="margin-left:10px; ">
+                    <a class="nav-link" href="{{ route('admindash') }}">My Dashboard</a>
+                  </li>
                     <li class="nav-item" style="margin-left:10px; ">
                         <a class="nav-link" href="#">Direct Message</a>
                       </li>
