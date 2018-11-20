@@ -99,6 +99,6 @@ class RegisterController extends Controller
 
         Auth::guard()->login($user);
 
-        return redirect()->intended('home');
+        return redirect()->intended('profile');
     }
 }

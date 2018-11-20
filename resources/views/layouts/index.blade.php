@@ -79,8 +79,17 @@
                     <a href="{{ route('register') }}" style="color:#FFF;">Sign Up</a>
                   @endguest
                   @auth
-                    <a href="#" style=" color:#FFF;">Points</a>
-                    <a href="#" style="color:#FFF;"> Username</a>
+                    <a href="#" style=" color:#FFF;padding-right:20px;">{{ Auth::user()->points }} Points</a>
+                    {{-- <a href="#" style="color:#FFF;"> {{ Auth::user()->username }}</a> --}}
+                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ Auth::user()->username }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
                   @endauth
               </div> 
             </div>
@@ -89,7 +98,7 @@
       
       
         <div class="container" style="text-align:center; margin-top: 40px;">
-          <h3 class="display-5" style="color: #001f9c ; " >SCHOOL WEEK 1</h3>  
+          <h3 class="display-5" style="color: #001f9c ; " >SCHOOL WEEK <?php echo date('W') ?></h3>  
         </div>      
       
     <!--  

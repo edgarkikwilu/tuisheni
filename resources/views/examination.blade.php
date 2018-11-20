@@ -7,169 +7,49 @@
 
 <div class="row">
 
+@foreach ($recommended as $exam)
 <div class="col-lg-3"  style="margin-top: 20px;">
-    <div class="card">
-        <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
-        <div class="container" style="text-align:center;">
-            <div class="row">
-                <div class="col-lg-12">
-                    <small class="text-muted" style="color:#001f9c;">Mr. Masore,</small>
-                    <small class="text-muted">Loyola High School</small>
-                </div>
-                <div class="col-lg-12">
-                <small class="text-muted">9 mins ago</small>
-                </div>
-            </div>     
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h5 class="card-title" style="color:#001f9c">Masore Physics Series 1</h5>
-                </div> 
-            </div>
-        </div>
-
-        <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                    <p>Starts in: <small class="text-muted">2 days 6 hours</small></p>
-                    <p>1st Price: <small class="text-muted">10000 Points</small></p>
+                <div class="card">
+                    <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
+                    <div class="container" style="text-align:center;">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <small class="text-muted" style="color:#001f9c;">{{ $exam->user->username }},</small>
+                                <small class="text-muted">{{ $exam->user->school }}</small>
+                            </div>
+                            <div class="col-lg-12">
+                            <small class="text-muted">{{ $exam->created_at->diffForHumans() }}</small>
+                            </div>
+                        </div>     
                     </div>
-                </div>
-        </div>
-        <div class="container">
-        <div class="row">
-        <div class="col-lg-12">
-        <small class="text-muted">#physics #weekly</small>
-        </div>
-        
-        </div>
-        </div>
-        </div>
-</div>
-<div class="col-lg-3"  style="margin-top: 20px;">
-    <div class="card">
-        <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
-                <div class="container" style="text-align:center;">
-                    <div class="row">
-                    <div class="col-lg-12">
-                    <small class="text-muted" style="color:#001f9c;">Mr. Masore,</small>
-                    <small class="text-muted">Loyola High School</small>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h5 class="card-title" style="color:#001f9c">{{ $exam->title }}</h5>
+                            </div> 
+                        </div>
                     </div>
-                    <div class="col-lg-12">
-                            <small class="text-muted">9 mins ago</small>
-                    </div>
-                    </div>     
-                </div>
-        <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                    <h5 class="card-title" style="color:#001f9c">Masore Physics Series 1</h5>
-            </div> 
-        </div>
-        </div>
             
-        <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                    <p>Starts in: <small class="text-muted">2 days 6 hours</small></p>
-                    <p>1st Price: <small class="text-muted">10000 Points</small></p>
-            </div>
-        </div>
-        </div>
-            <div class="container">
-                    <div class="row">
-                    <div class="col-lg-12">
-                            <small class="text-muted">#physics #weekly</small>
-                    </div>
-                    
-            </div>
-        </div>
-        </div>
-
-</div>
-<div class="col-lg-3"  style="margin-top: 20px;">
-    <div class="card">
-        <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
-                <div class="container" style="text-align:center;">
-                    <div class="row">
-                    <div class="col-lg-12">
-                    <small class="text-muted" style="color:#001f9c;">Mr. Masore,</small>
-                    <small class="text-muted">Loyola High School</small>
-                    </div>
-                    <div class="col-lg-12">
-                            <small class="text-muted">9 mins ago</small>
-                    </div>
-                    </div>     
-                </div>
-        <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                    <h5 class="card-title" style="color:#001f9c">Masore Physics Series 1</h5>
-            </div> 
-        </div>
-        </div>
-                    
-                <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                            <p>Starts in: <small class="text-muted">2 days 6 hours</small></p>
-                            <p>1st Price: <small class="text-muted">10000 Points</small></p>
-                    </div>
-                </div>
-                </div>
                     <div class="container">
                             <div class="row">
-                            <div class="col-lg-12">
-                                    <small class="text-muted">#physics #weekly</small>
+                                <div class="col-lg-12">
+                                <p>Starts in: <small class="text-muted">{{ $exam->start}}</small></p>
+                                <p>1st Price: <small class="text-muted">{{ $exam->prize }}</small></p>
+                                </div>
                             </div>
-                            
                     </div>
-                </div>
-            </div>
-</div>
-<div class="col-lg-3"  style="margin-top: 20px;">
-    <div class="card">
-        <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
-                <div class="container" style="text-align:center;">
+                    <div class="container">
                     <div class="row">
                     <div class="col-lg-12">
-                    <small class="text-muted" style="color:#001f9c;">Mr. Masore,</small>
-                    <small class="text-muted">Loyola High School</small>
+                    <small class="text-muted">#physics #weekly</small>
                     </div>
-                    <div class="col-lg-12">
-                            <small class="text-muted">9 mins ago</small>
-                    </div>
-                    </div>     
-                </div>
-        <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                    <h5 class="card-title" style="color:#001f9c">Masore Physics Series 1</h5>
-            </div> 
-        </div>
-        </div>
                     
-                <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                            <p>Starts in: <small class="text-muted">2 days 6 hours</small></p>
-                            <p>1st Price: <small class="text-muted">10000 Points</small></p>
                     </div>
-                </div>
-                </div>
-                    <div class="container">
-                            <div class="row">
-                            <div class="col-lg-12">
-                                    <small class="text-muted">#physics #weekly</small>
-                            </div>
-                            
                     </div>
-                </div>
+                    </div>
             </div>
-</div>
-
-
+            
+@endforeach
     <ul class="nav justify-content-center">
         <li class="nav-item">
             <a class="nav-link" href="#">See More Reccomendations</a>
@@ -185,186 +65,46 @@
 
 <div class="row">
 
+@foreach ($other as $exam)
 <div class="col-lg-3"  style="margin-top: 20px;">
-    <div class="card">
-            <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
-                    <div class="container" style="text-align:center;">
-                        <div class="row">
-                        <div class="col-lg-12">
-                        <small class="text-muted" style="color:#001f9c;">Mr. Masore,</small>
-                        <small class="text-muted">Loyola High School</small>
+        <div class="card">
+                <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
+                        <div class="container" style="text-align:center;">
+                                <div class="row">
+                                <div class="col-lg-12">
+                                <small class="text-muted" style="color:#001f9c;">{{ $exam->user->username }},</small>
+                                <small class="text-muted">{{ $exam->user->school }}</small>
+                                </div>
+                                <div class="col-lg-12">
+                                        <small class="text-muted">{{ $exam->created_at->diffForHumans() }}</small>
+                                </div>
+                                </div>     
                         </div>
+                <div class="container">
+                <div class="row">
                         <div class="col-lg-12">
-                                <small class="text-muted">9 mins ago</small>
-                        </div>
-                        </div>     
-                    </div>
-        <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12">
-                                <h5 class="card-title" style="color:#001f9c">Masore Physics Series 1</h5>
+                        <h5 class="card-title" style="color:#001f9c">{{ $exam->title }}</h5>
                         </div> 
                 </div>
-        </div>
-        
-            <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                        <p>Starts in: <small class="text-muted">2 days 6 hours</small></p>
-                        <p>1st Price: <small class="text-muted">10000 Points</small></p>
                 </div>
-            </div>
-        </div>
         <div class="container">
                 <div class="row">
                         <div class="col-lg-12">
-                                <small class="text-muted">#physics #weekly</small>
+                        <p>Starts in: <small class="text-muted">{{ $exam->start }}</small></p>
+                        <p>1st Price: <small class="text-muted">{{ $exam->prize }}</small></p>
                         </div>
-                        
                 </div>
         </div>
-            
-        
-                
-            </div>
-
-
-</div>
-<div class="col-lg-3"  style="margin-top: 20px;">
-    <div class="card">
-            <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
-                    <div class="container" style="text-align:center;">
+                <div class="container">
                         <div class="row">
                         <div class="col-lg-12">
-                        <small class="text-muted" style="color:#001f9c;">Mr. Masore,</small>
-                        <small class="text-muted">Loyola High School</small>
-                        </div>
-                        <div class="col-lg-12">
-                                <small class="text-muted">9 mins ago</small>
-                        </div>
-                        </div>     
-                    </div>
-        <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12">
-                                <h5 class="card-title" style="color:#001f9c">Masore Physics Series 1</h5>
-                        </div> 
-                </div>
-        </div>
-        
-            <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                        <p>Starts in: <small class="text-muted">2 days 6 hours</small></p>
-                        <p>1st Price: <small class="text-muted">10000 Points</small></p>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-                <div class="row">
-                        <div class="col-lg-12">
                                 <small class="text-muted">#physics #weekly</small>
+                        </div>                  
                         </div>
-                        
                 </div>
         </div>
-            
-        
-                
-            </div>
-
-
-</div>
-<div class="col-lg-3"  style="margin-top: 20px;">
-    <div class="card">
-            <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
-                    <div class="container" style="text-align:center;">
-                        <div class="row">
-                        <div class="col-lg-12">
-                        <small class="text-muted" style="color:#001f9c;">Mr. Masore,</small>
-                        <small class="text-muted">Loyola High School</small>
-                        </div>
-                        <div class="col-lg-12">
-                                <small class="text-muted">9 mins ago</small>
-                        </div>
-                        </div>     
-                    </div>
-        <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12">
-                                <h5 class="card-title" style="color:#001f9c">Masore Physics Series 1</h5>
-                        </div> 
-                </div>
         </div>
-        
-            <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                        <p>Starts in: <small class="text-muted">2 days 6 hours</small></p>
-                        <p>1st Price: <small class="text-muted">10000 Points</small></p>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-                <div class="row">
-                        <div class="col-lg-12">
-                                <small class="text-muted">#physics #weekly</small>
-                        </div>
-                        
-                </div>
-        </div>
-            
-        
-                
-            </div>
-
-
-</div>
-<div class="col-lg-3"  style="margin-top: 20px;">
-    <div class="card">
-            <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
-                    <div class="container" style="text-align:center;">
-                        <div class="row">
-                        <div class="col-lg-12">
-                        <small class="text-muted" style="color:#001f9c;">Mr. Masore,</small>
-                        <small class="text-muted">Loyola High School</small>
-                        </div>
-                        <div class="col-lg-12">
-                                <small class="text-muted">9 mins ago</small>
-                        </div>
-                        </div>     
-                    </div>
-        <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12">
-                                <h5 class="card-title" style="color:#001f9c">Masore Physics Series 1</h5>
-                        </div> 
-                </div>
-        </div>
-        
-            <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                        <p>Starts in: <small class="text-muted">2 days 6 hours</small></p>
-                        <p>1st Price: <small class="text-muted">10000 Points</small></p>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-                <div class="row">
-                        <div class="col-lg-12">
-                                <small class="text-muted">#physics #weekly</small>
-                        </div>
-                        
-                </div>
-        </div>
-            
-        
-                
-            </div>
-
-
-</div>    
+@endforeach    
 
 </div>
 </div>
