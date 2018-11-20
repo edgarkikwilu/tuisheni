@@ -22,9 +22,9 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 //from index page
-Route::get('/single', 'IndexController@single')->name('single');
-Route::get('/explore', 'IndexController@explore')->name('explore');
+Route::get('/explore', 'ExploreController@index')->name('explore');
 Route::get('/profile', 'IndexController@profile')->name('profile');
+Route::get('/single', 'IndexController@single')->name('single');
 Route::get('/editprofile', 'IndexController@editprofile')->name('editprofile');
 Route::get('/dm', 'IndexController@dm')->name('dm');
 Route::get('/author/{id}', 'IndexController@author')->name('author');

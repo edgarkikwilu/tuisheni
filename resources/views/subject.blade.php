@@ -1,12 +1,21 @@
 @extends('layouts.index')
 @section('content')
-
+      @if (Session::has('success'))
+          <div class="alert alert-info">
+                  {{Session::get('success')}}
+          </div>
+      @endif
+      @if (Session::has('error'))
+          <div class="alert alert-danger">
+                  {{Session::get('error')}}
+          </div>
+      @endif
 <div class="container" style="text-align:center; margin-top:40px;">
         <div class="row"  >
                 <div class="col-lg-12">
                         <h3 class="display-5" style="color: #001f9c ; " >{{$subject}}</h3>
                 </div>  
-            </div>
+        </div>
 </div>
       
 
@@ -47,8 +56,9 @@
 </div> 
 <div class="container">
         <div class="row">
+                @foreach ($exams as $exam)
                 <div class="col-lg-3"  style="margin-top: 20px;">
-                        <div class="card">
+                                <div class="card">
                                 <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
                                         <div class="container" style="text-align:center;">
                                             <div class="row">
@@ -166,27 +176,30 @@
                                     </div>
                                     
                                      <div class="container">
+                                                <div class="row">
+                                                <div class="col-lg-12">
+                                                <small class="text-muted" style="color:#001f9c;">{{ $exam->user->username }}</small>
+                                                <small class="text-muted">{{ $exam->user->school }}</small>
+                                                </div>
+                                                <div class="col-lg-12">
+                                                        <small class="text-muted">{{ $exam->created_at }}</small>
+                                                </div>
+                                                </div>     
+                                        </div>
+                                <div class="container">
                                         <div class="row">
-                                            <div class="col-lg-12">
-                                                    <p>Starts in: <small class="text-muted">2 days 6 hours</small></p>
-                                                    <p>1st Price: <small class="text-muted">10000 Points</small></p>
-                                            </div>
+                                                <div class="col-lg-12">
+                                                        <h5 class="card-title" style="color:#001f9c">{{ $exam->title }}</h5>
+                                                </div> 
                                         </div>
-                                    </div>
-                                    <div class="container">
-                                            <div class="row">
-                                                    <div class="col-lg-12">
-                                                           <small class="text-muted">#physics #weekly</small>
-                                                    </div>
-                                                    
-                                            </div>
-                                    </div>
-                                        
-                                    
-                                          
+                                </div>
+                                
+                                <div class="container">
+                                <div class="row">
+                                        <div class="col-lg-12">
+                                                <p>Starts in: <small class="text-muted">{{ $exam->start }}</small></p>
+                                                <p>1st Prize: <small class="text-muted">10000 Points</small></p>
                                         </div>
-                       
-        
                                 </div>
                                 <div class="col-lg-3"  style="margin-top: 20px;">
                                         <div class="card">
@@ -235,10 +248,14 @@
                                
                 
                                         </div>
+                                </div>  
+                                </div>
+                        </div>
+                @endforeach
         </div>
             <ul class="nav justify-content-center">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('examination')}}">See More Physics Examinations</a>
+                        <a class="nav-link" href="{{route('examination')}}">See More {{$subject}} Examinations</a>
                     </li>
                     
                     </ul>
@@ -248,7 +265,7 @@
 </div>
 
 <div class="container" style="text-align:center; margin-top: 40px;">
-        <h4 class="display-6" style="color: #001f9c ; " >RECOMMENDED PHYSICS TEACHERS</h4>  
+        <h4 class="display-6" style="color: #001f9c ; " >RECOMMENDED {{$subject}} TEACHERS</h4>  
     </div>
 
 <div class="container">
@@ -264,7 +281,7 @@
             @endforeach
     <ul class="nav justify-content-center">
             <li class="nav-item">
-                <a class="nav-link" href="{{route('teachers')}}">See More Physics Teachers</a>
+                <a class="nav-link" href="{{route('teachers')}}">See More {{$subject}} Teachers</a>
             </li>
             
             </ul>
@@ -277,48 +294,23 @@
   
       <div class="container" style="margin-top:40px;">
         <div class="card-deck mb-4 text-center">
-          <div class="card mb-4 box-shadow" >
-            <div class="card-header">
-              <h4 class="my-0 font-weight-normal">Light</h4>
-            </div>
-            <div class="card-body">
-              <h1 class="card-title pricing-card-title">Tsh 4,000 <small class="text-muted">/ mo</small></h1>
-              <ul class="list-unstyled mt-3 mb-4">
-                <li>2 GB of storage</li>
-                <li>Email support</li>
-                <li>Help center access</li>
-              </ul>
-              <button type="button" class="btn btn-lg btn-block btn-outline-primary">Get Started</button>
-            </div>
-          </div>
-          <div class="card mb-4 box-shadow">
-            <div class="card-header">
-              <h4 class="my-0 font-weight-normal">Gold</h4>
-            </div>
-            <div class="card-body">
-              <h1 class="card-title pricing-card-title">Tsh 7,000 <small class="text-muted">/ mo</small></h1>
-              <ul class="list-unstyled mt-3 mb-4">
-                <li>10 GB of storage</li>
-                <li>Priority email support</li>
-                <li>Help center access</li>
-              </ul>
-              <button type="button" class="btn btn-lg btn-block btn-primary">Get Started</button>
-            </div>
-          </div>
-          <div class="card mb-4 box-shadow">
-            <div class="card-header">
-              <h4 class="my-0 font-weight-normal">Premium</h4>
-            </div>
-            <div class="card-body">
-              <h1 class="card-title pricing-card-title">Tsh 10,000 <small class="text-muted">/ mo</small></h1>
-              <ul class="list-unstyled mt-3 mb-4">
-                <li>15 GB of storage</li>
-                <li>Phone and email support</li>
-                <li>Help center access</li>
-              </ul>
-              <button type="button" class="btn btn-lg btn-block btn-primary">Get Started</button>
-            </div>
-          </div>
+                @foreach ($packages as $package)
+                <div class="card mb-4 box-shadow">
+                        <div class="card-header">
+                        <h4 class="my-0 font-weight-normal">{{$package->name}}</h4>
+                        </div>
+                        <div class="card-body">
+                        <h1 class="card-title pricing-card-title">Tsh {{$package->price}}
+                                <small class="text-muted">/ {{$package->duration}}</small></h1>
+                        <ul class="list-unstyled mt-3 mb-4">
+                        @foreach ($package->packageSpecs as $spec)
+                        <li>{{$spec->name}}</li>
+                        @endforeach
+                        </ul>
+                        <a href="#" class="btn btn-lg btn-block btn-primary">Get Started</a>
+                        </div>
+                        </div>
+                @endforeach
         </div>
       </div>   
 

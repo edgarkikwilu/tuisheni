@@ -19,6 +19,7 @@ class CreateReportsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->integer('exam_id')->unsigned();
             $table->foreign('exam_id')->references('id')->on('exams');
+            $table->integer('week')->unsigned();
             $table->integer('score');
             $table->string('grade');
             $table->string('remarks')->nullable();
