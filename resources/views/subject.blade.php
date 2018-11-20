@@ -35,67 +35,13 @@
         <h5><small class="text-muted">{{$student->user->school}}</small></h5>
         
         <p>AVERAGE: {{$student->score}}%</p>
-        <p><a class="btn btn-secondary" href="{{ route('assessment',1) }}" role="button">View Student &raquo;</a></p>
+        <p><a class="btn btn-secondary" href="{{ route('author',$student->user_id) }}" role="button">View Student &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
-    @endforeach
+    @endforeach  
     
   </div><!-- /.row -->
 
-  <div class="container" style="text-align:center; margin-top: 40px;">
-        <h4 class="display-6" style="color: #001f9c ; " >MOST VIEWED {{$subject}} MATERIALS</h4>  
-    </div> 
-    <div class="container">
-            <div class="row">
-                    
-                @foreach ($recommended as $note)
-                <div class="col-lg-4"  style="margin-top: 20px;">
-                        <div class="card">
-                                <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
-                                <div class="card-body">
-                                        <div class="    container" style="text-align:center; margin-top:-10px;">
-                                                <div class="row">
-                                                <div class="col-lg-12">
-                                                <small class="text-muted" style="color:#001f9c;">{{$note->user->username}},</small>
-                                                <small class="text-muted">{{$note->user->school}}</small>
-                                                </div>
-                                                <div class="col-lg-12">
-                                                        <small class="text-muted">{{$note->created_at}}</small>
-                                                </div>
-                                                </div>     
-                                        </div>
-                                <div class="container">
-                                        <div class="row">
-                                                <div class="col-lg-12">
-                                                        <h5 class="card-title" style="color:#001f9c">{{$note->title}}</h5>
-                                                </div> 
-                                        </div>
-                                </div>
-                                
-                                <div class="container">
-                                        <div class="row">
-                                                <div class="col-lg-12">
-                                                        <small class="text-muted">{{$note->tags}}</small>
-                                                </div>
-                                        </div>
-                                </div>
-                                        
-                                </div>
-                                        
-                                </div>
-                        </div>
-                @endforeach
-            </div>
-                <ul class="nav justify-content-center">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">See More Physics Exams Reccomendations</a>
-                        </li>
-                        
-                        </ul>
-            
-            </div>
-            
-    </div>
-
+  
   <div class="container" style="text-align:center; margin-top: 40px;">
     <h4 class="display-6" style="color: #001f9c ; " >RECOMMENDED PHYSICS EXAMS WEEK 1</h4>  
 </div> 
@@ -116,11 +62,13 @@
                                             </div>     
                                         </div>
                             <div class="container">
-                                     <div class="row">
+                                <a href="{{ route('single') }}">     
+                                        <div class="row">
                                             <div class="col-lg-12">
                                                  <h5 class="card-title" style="color:#001f9c">Masore Physics Series 1</h5>
                                             </div> 
                                     </div>
+                                </a>
                             </div>
                             
                              <div class="container">
@@ -161,11 +109,13 @@
                                                     </div>     
                                                 </div>
                                     <div class="container">
-                                             <div class="row">
-                                                    <div class="col-lg-12">
-                                                         <h5 class="card-title" style="color:#001f9c">Masore Physics Series 1</h5>
-                                                    </div> 
-                                            </div>
+                                        <a href="{{ route('single') }}">     
+                                                <div class="row">
+                                                        <div class="col-lg-12">
+                                                                <h5 class="card-title" style="color:#001f9c">Masore Physics Series 1</h5>
+                                                        </div> 
+                                                </div>
+                                        </a>
                                     </div>
                                     
                                      <div class="container">
@@ -206,11 +156,13 @@
                                                     </div>     
                                                 </div>
                                     <div class="container">
-                                             <div class="row">
-                                                    <div class="col-lg-12">
-                                                         <h5 class="card-title" style="color:#001f9c">Masore Physics Series 1</h5>
-                                                    </div> 
-                                            </div>
+                                        <a href="{{ route('single') }}">     
+                                                <div class="row">
+                                                        <div class="col-lg-12">
+                                                                <h5 class="card-title" style="color:#001f9c">Masore Physics Series 1</h5>
+                                                        </div> 
+                                                </div>
+                                        </a>
                                     </div>
                                     
                                      <div class="container">
@@ -251,11 +203,13 @@
                                                             </div>     
                                                         </div>
                                             <div class="container">
-                                                     <div class="row">
-                                                            <div class="col-lg-12">
-                                                                 <h5 class="card-title" style="color:#001f9c">Masore Physics Series 1</h5>
-                                                            </div> 
-                                                    </div>
+                                                        <a href="{{ route('single') }}">     
+                                                                        <div class="row">
+                                                                            <div class="col-lg-12">
+                                                                                 <h5 class="card-title" style="color:#001f9c">Masore Physics Series 1</h5>
+                                                                            </div> 
+                                                                    </div>
+                                                        </a>    
                                             </div>
                                             
                                              <div class="container">
@@ -284,7 +238,7 @@
         </div>
             <ul class="nav justify-content-center">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">See More Physics Exams Reccomendations</a>
+                        <a class="nav-link" href="{{route('examination')}}">See More Physics Examinations</a>
                     </li>
                     
                     </ul>
@@ -301,8 +255,8 @@
     <div class="row">
             @foreach ($teachers as $teacher)
             <div class="col-lg-3" style=" text-align: center; margin-top:50px;">
-                <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="110" height="110">
-                <h4>{{$teacher->firstname}} {{$teacher->lastname}}</h4>
+                <a href="{{route('author',$student->user_id) }}"> <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="110" height="110">
+                <h4>{{$teacher->firstname}} {{$teacher->lastname}}</h4> </a>
                 <h5><small class="text-muted">{{$teacher->school}}</small></h5>
                 <p><small class="text-muted">{{$teacher->bio}}</small></p>
             <p><a class="btn btn-secondary" href="{{route('follow',$teacher->id)}}" role="button">Follow </a></p>
@@ -310,7 +264,7 @@
             @endforeach
     <ul class="nav justify-content-center">
             <li class="nav-item">
-                <a class="nav-link" href="#">See More Physics Teachers</a>
+                <a class="nav-link" href="{{route('teachers')}}">See More Physics Teachers</a>
             </li>
             
             </ul>

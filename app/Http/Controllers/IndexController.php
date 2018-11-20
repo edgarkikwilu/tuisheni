@@ -103,8 +103,8 @@ class IndexController extends Controller
     public function assesment(){
         return view('assesment');
     }
-    public function admin(){
-        return view('admin');
+    public function admindash(){
+        return view('admindash');
     }
     public function dashboard(){
         return view('dashboard');
@@ -112,11 +112,20 @@ class IndexController extends Controller
     public function examination(){
         return view('examination');
     }
-    public function teacher(){
-        return view('teacher');
+    public function quiz(){
+        return view('quiz');
     }
-    public function student(){
-        return view('student');
+    public function teacherdash(){
+        return view('teacherdash');
+    }
+    public function teachers(){
+        return view('teachers');
+    }
+    public function students(){
+        return view('students');
+    }
+    public function studentdash(){
+        return view('studentdash');
     }
     public function single(){
         return view('single');

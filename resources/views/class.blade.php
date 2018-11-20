@@ -56,11 +56,13 @@
                                                 </div>     
                                         </div>
                                 <div class="container">
+                                        <a href="{{route('single')}}">
                                         <div class="row">
                                                 <div class="col-lg-12">
                                                         <h5 class="card-title" style="color:#001f9c">Application of Physics in dailylife</h5>
                                                 </div> 
                                         </div>
+                                        </a>
                                 </div>
                                 <div class="container">
                                         <div class="row">
@@ -100,11 +102,13 @@
                                             </div>     
                                         </div>
                             <div class="container">
-                                     <div class="row">
-                                            <div class="col-lg-12">
-                                                 <h5 class="card-title" style="color:#001f9c">Application of Physics in dailylife</h5>
-                                            </div> 
-                                    </div>
+                                <a href="{{route('single')}}">
+                                <div class="row">
+                                                <div class="col-lg-12">
+                                                        <h5 class="card-title" style="color:#001f9c">Application of Physics in dailylife</h5>
+                                                </div> 
+                                </div>
+                                </a>
                             </div>
                             
                             <div class="container">
@@ -136,11 +140,13 @@
                                                     </div>     
                                                 </div>
                                     <div class="container">
-                                             <div class="row">
-                                                    <div class="col-lg-12">
-                                                         <h5 class="card-title" style="color:#001f9c">Application of Physics in dailylife</h5>
-                                                    </div> 
-                                            </div>
+                                                <div class="row">
+                                                                <a href="{{route('single')}}">
+                                                                <div class="col-lg-12">
+                                                                     <h5 class="card-title" style="color:#001f9c">Application of Physics in dailylife</h5>
+                                                                </div> 
+                                                                </a>
+                                                        </div>
                                     </div>
                                     
                                     <div class="container">
@@ -172,11 +178,13 @@
                                                         </div>     
                                                     </div>
                                         <div class="container">
+                                                <a href="{{route('single')}}">
                                                  <div class="row">
                                                         <div class="col-lg-12">
                                                              <h5 class="card-title" style="color:#001f9c">Application of Physics in dailylife</h5>
                                                         </div> 
                                                 </div>
+                                                </a>
                                         </div>
                                         
                                         <div class="container">
@@ -208,11 +216,13 @@
                                                     </div>     
                                                 </div>
                                     <div class="container">
+                                        <a href="{{route('single')}}">
                                              <div class="row">
                                                     <div class="col-lg-12">
                                                          <h5 class="card-title" style="color:#001f9c">Application of Physics in dailylife</h5>
                                                     </div> 
                                             </div>
+                                        </a>
                                     </div>
                                     
                                     <div class="container">
@@ -247,11 +257,13 @@
                                             </div>     
                                         </div>
                             <div class="container">
+                                 <a href="{{route('single')}}">
                                      <div class="row">
                                             <div class="col-lg-12">
                                                  <h5 class="card-title" style="color:#001f9c">Application of Physics in dailylife</h5>
                                             </div> 
                                     </div>
+                                </a>
                             </div>
                             
                             <div class="container">
@@ -283,10 +295,12 @@
                                                     </div>     
                                                 </div>
                                     <div class="container">
+                                        <a href="{{route('single')}}">
                                              <div class="row">
                                                     <div class="col-lg-12">
                                                          <h5 class="card-title" style="color:#001f9c">Application of Physics in dailylife</h5>
                                                     </div> 
+                                                </a>
                                             </div>
                                     </div>
                                     
@@ -319,11 +333,13 @@
                                                         </div>     
                                                     </div>
                                         <div class="container">
+                                                <a href="{{route('single')}}">
                                                  <div class="row">
                                                         <div class="col-lg-12">
                                                              <h5 class="card-title" style="color:#001f9c">Application of Physics in dailylife</h5>
                                                         </div> 
                                                 </div>
+                                        </a>
                                         </div>
                                         
                                         <div class="container">
@@ -355,11 +371,13 @@
                                                     </div>     
                                                 </div>
                                     <div class="container">
+                                        <a href="{{route('single')}}">
                                              <div class="row">
                                                     <div class="col-lg-12">
                                                          <h5 class="card-title" style="color:#001f9c">Application of Physics in dailylife</h5>
                                                     </div> 
                                             </div>
+                                        </a>
                                     </div>
                                     
                                     <div class="container">

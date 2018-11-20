@@ -32,11 +32,14 @@ Route::get('/subject/{subject}', 'IndexController@subject')->name('subject');
 
 //from profile page
 Route::get('/assesment', 'IndexController@assesment')->name('assesment');
-Route::get('/admin', 'IndexController@admin')->name('admin');
-Route::get('/teacher', 'IndexController@teacher')->name('teacher');
-Route::get('/student', 'IndexController@student')->name('student');
+Route::get('/admindash', 'IndexController@admindash')->name('admindash');
+Route::get('/teachers', 'IndexController@teachers')->name('teachers');
+Route::get('/students', 'IndexController@students')->name('students');
+Route::get('/teacherdash', 'IndexController@teacherdash')->name('teacherdash');
+Route::get('/studentdash', 'IndexController@studentdash')->name('studentdash');
 Route::get('/dashboard', 'IndexController@dashboard')->name('dashboard');
 Route::get('/examination', 'IndexController@examination')->name('examination');
+Route::get('/quiz', 'IndexController@quiz')->name('quiz');
 
 //from subject page
 Route::get('/class/{subject}/{class}', 'SubjectController@class')->name('class');
