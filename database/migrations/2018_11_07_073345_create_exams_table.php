@@ -21,13 +21,14 @@ class CreateExamsTable extends Migration
             $table->foreign('exam_type_id')->references('id')->on('exam_types');
             $table->integer('subject_id')->unsigned();
             $table->foreign('subject_id')->references('id')->on('subjects');
+            $table->boolean('original')->default(false);
+            $table->integer('week')->unsigned();
             $table->string('title');
             $table->string('description');
             $table->datetime('start')->nullable();
             $table->datetime('end')->nullable();
             $table->integer('attendance')->default(0);
             $table->integer('duration');
-            $table->integer('week');
             $table->timestamps();
         });
     }
