@@ -100,21 +100,11 @@ class IndexController extends Controller
     public function editprofile(){
         return view('editprofile');
     }
-    public function assesment(){
-        return view('assesment');
-    }
-    public function admindash(){
-        return view('admindash');
-    }
+    
     public function single(){
         return view('single');
     }
-    public function admin(){
-        return view('admin');
-    }
-    public function recomended_subject(){
-        return view('recomended_subject');
-    }
+    
     public function examination(){
         return view('examination');
     }

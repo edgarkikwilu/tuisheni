@@ -1,8 +1,7 @@
 @extends('layouts.index')
 @section('content')
-
 <li class="nav-item">
-        <h4><a class="nav-link admin-header-block">RECOMENDED PHYSICS MATERIALS</a></h4>
+        <h4><a class="nav-link admin-header-block">RECOMENDED EXAMS</a></h4>
 </li>
 </ul>
 <nav class="navbar">
@@ -53,47 +52,55 @@
         </form>
         
 </nav>
-<div class="container" style="text-align:left; margin-top: 40px;">  
+<div class="container" style="text-align:left; margin-top: 40px;">
     <div class="row">
         <div class="col-lg-3"  style="margin-top: 20px;">
             <div class="card">
                     <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
-                    <div class="card-body">
-                            <div class="container" style="text-align:center; margin-top:-10px;">
+                            <div class="container" style="text-align:center;">
                                 <div class="row">
                                 <div class="col-lg-12">
-                                <small class="text-muted" style="color:#001f9c;">Husna Mohamed,</small>
+                                <small class="text-muted" style="color:#001f9c;">Mr. Masore,</small>
                                 <small class="text-muted">Loyola High School</small>
                                 </div>
                                 <div class="col-lg-12">
                                         <small class="text-muted">9 mins ago</small>
                                 </div>
-                                
                                 </div>     
                             </div>
                 <div class="container">
-                        <a href="{{route('single')}}">
-                          <div class="row">
+                    <a href="{{route('single')}}">
+                         <div class="row">
                                 <div class="col-lg-12">
-                                      <h5 class="card-title" style="color:#001f9c">Application of Physics in dailylife</h5>
+                                     <h5 class="card-title" style="color:#001f9c">Masore Physics Series 1</h5>
                                 </div> 
                         </div>
-                        </a>
+                    </a>
                 </div>
                 
+                 <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                                <p>Starts in: <small class="text-muted">2 days 6 hours</small></p>
+                                <p>1st Price: <small class="text-muted">10000 Points</small></p>
+                        </div>
+                    </div>
+                </div>
                 <div class="container">
                         <div class="row">
                                 <div class="col-lg-12">
-                                        <small class="text-muted">#physics #introduction-to-physics</small>
+                                       <small class="text-muted">#physics #weekly</small>
                                 </div>
+                            </div>
+                                
                         </div>
                 </div>
-                      
-                </div>
+                    
+                
                       
                     </div>
-    
-    
+   
+
             </div>
     </div>
 </div>

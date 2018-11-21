@@ -32,8 +32,7 @@
                                         </div>
                                     </div>
                                     <a href="{{ route('editprofile') }}" class="btn btn-secondary" style="float:left; margin-top:20px;">Edit My Profile</a>
-                                    <a href="{{ route('assesment') }}" class="btn btn-secondary" style="float:right; margin-top:20px;">View My Assesment</a>
-                                </div>
+                                   </div>
                                 
                     </div>
                 </div>

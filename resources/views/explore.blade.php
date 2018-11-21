@@ -3,7 +3,7 @@
 <div class="container" style="margin-top: 10px; border-top: 1px dotted  #566573 ;">
 <ul class="nav nav-pills nav-fill">
                 <li class="nav-item">
-                        <h4><a class="nav-link admin-header-block">FILTER MATERIALS</a></h4>
+                        <h4><a class="nav-link admin-header-block">EXPLORE MATERIALS</a></h4>
                 </li>
                 </ul>
                 <nav class="navbar">
@@ -56,7 +56,7 @@
                 </nav>
 
         <div class="container" style="text-align:left; margin-top: 40px;">
-            <h3 class="display-5" style="color: #000 ; " >RECOMMENDED POSTS</h3>  
+            <h3 class="display-5" style="color: #000 ; " >RECOMMENDED MATERIALS</h3>  
         </div> 
             <div class="row">
                 @foreach ($notesOg as $note)
@@ -64,12 +64,34 @@
                         <div class="card">
                             <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
                             <div class="card-body">
-                                <h5 class="card-title">{{ $note->topic->name }} Sub-Title</h5>
-                                <small class="text-muted">{{ $note->created_at->diffForHumans() }}</small>
-                            <p>
-                                <small class="text-muted">#physics #introduction-to-physics</small>    
-                            
-                            </p> 
+                                    <div class="container" style="text-align:center; margin-top:-10px;">
+                                            <div class="row">
+                                            <div class="col-lg-12">
+                                            <small class="text-muted" style="color:#001f9c;">Husna Mohamed,</small>
+                                            <small class="text-muted">Loyola High School</small>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                    <small class="text-muted">{{ $note->created_at->diffForHumans() }}</small>
+                                            </div>
+                                            
+                                            </div>     
+                                        </div>
+                                        <div class="container">
+                                                <a href="{{route('single')}}">
+                                                  <div class="row">
+                                                        <div class="col-lg-12">
+                                                              <h5 class="card-title" style="color:#001f9c">{{ $note->topic->name }}</h5>
+                                                        </div> 
+                                                </div>
+                                                </a>
+                                        </div>
+                                        <div class="container">
+                                                <div class="row">
+                                                        <div class="col-lg-12">
+                                                                <small class="text-muted">#physics #introduction-to-physics</small>
+                                                        </div>
+                                                </div>
+                                        </div>
                             </div>
                                 
                         </div>
@@ -83,20 +105,42 @@
                     </ul>
             </div>
             <div class="container" style="text-align:left; margin-top: 40px;">
-                <h3 class="display-5" style="color: #000 ; " >ALL POSTS</h3>  
+                <h3 class="display-5" style="color: #000 ; " >ALL MATERIALS</h3>  
             </div> 
                 <div class="row">
                 @foreach ($notes as $note)
-                    <div class="col-lg-3"  style="margin-top: 10px;">
+                <div class="col-lg-3"  style="margin-top: 10px;">
                         <div class="card">
                             <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
                             <div class="card-body">
-                                <h5 class="card-title">{{ $note->topic->name }} {{ $note->title }}</h5>
-                                <small class="text-muted">>{{ $note->created_at->diffForHumans() }}</small>
-                            <p>
-                                <small class="text-muted">#physics #introduction-to-physics</small>    
-                            
-                            </p> 
+                                    <div class="container" style="text-align:center; margin-top:-10px;">
+                                            <div class="row">
+                                            <div class="col-lg-12">
+                                            <small class="text-muted" style="color:#001f9c;">Husna Mohamed,</small>
+                                            <small class="text-muted">Loyola High School</small>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                    <small class="text-muted">{{ $note->created_at->diffForHumans() }}</small>
+                                            </div>
+                                            
+                                            </div>     
+                                        </div>
+                                        <div class="container">
+                                                <a href="{{route('single')}}">
+                                                  <div class="row">
+                                                        <div class="col-lg-12">
+                                                              <h5 class="card-title" style="color:#001f9c">{{ $note->topic->name }}</h5>
+                                                        </div> 
+                                                </div>
+                                                </a>
+                                        </div>
+                                        <div class="container">
+                                                <div class="row">
+                                                        <div class="col-lg-12">
+                                                                <small class="text-muted">#physics #introduction-to-physics</small>
+                                                        </div>
+                                                </div>
+                                        </div>
                             </div>
                                 
                         </div>
