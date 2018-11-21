@@ -106,4 +106,8 @@ class SubjectController extends Controller
     {
         //
     }
+
+    public function recomended_subject(){
+        return view('recomended_subject');
+    }
 }

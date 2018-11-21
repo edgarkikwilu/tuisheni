@@ -57,7 +57,7 @@
                     <a class="nav-link" href="{{ route('examination') }}">Examinations</a>
                   </li>
                   <li class="nav-item" style="margin-left:10px; ">
-                    <a class="nav-link" href="{{ route('admindash') }}">My Dashboard</a>
+                    <a class="nav-link" href="{{ route('admin/admindash') }}">My Dashboard</a>
                   </li>
                     <li class="nav-item" style="margin-left:10px; ">
                         <a class="nav-link" href="#">Direct Message</a>

@@ -31,15 +31,46 @@ Route::get('/author/{id}', 'IndexController@author')->name('author');
 Route::get('/subject/{subject}', 'IndexController@subject')->name('subject');
 
 //from profile page
-Route::get('/assesment', 'IndexController@assesment')->name('assesment');
-Route::get('/admindash', 'IndexController@admindash')->name('admindash');
+
+
 Route::get('/teachers', 'IndexController@teachers')->name('teachers');
 Route::get('/students', 'IndexController@students')->name('students');
-Route::get('/teacherdash', 'IndexController@teacherdash')->name('teacherdash');
 Route::get('/studentdash', 'IndexController@studentdash')->name('studentdash');
 Route::get('/dashboard', 'IndexController@dashboard')->name('dashboard');
 Route::get('/examination', 'IndexController@examination')->name('examination');
 Route::get('/quiz', 'IndexController@quiz')->name('quiz');
+Route::get('/recomended_subject', 'SubjectController@recomended_subject')->name('recomended_subject');
+Route::get('/recomended_exam', 'ExamController@recomended_exam')->name('recomended_exam');
+
+//teacher dashboard
+Route::get('/teacher/teacherdash', 'TeacherController@teacherdash')->name('teacher/teacherdash');
+Route::get('/teacher/examinations', 'TeacherController@examinations')->name('teacher/examinations');
+Route::get('/teacher/notes', 'TeacherController@notes')->name('teacher/notes');
+Route::get('/teacher/payments', 'TeacherController@payments')->name('teacher/payments');
+Route::get('/teacher/results', 'TeacherController@results')->name('teacher/results');
+Route::get('/teacher/assesment', 'TeacherController@assesment')->name('teacher/assesment');
+
+//student dashboard
+Route::get('/student/studentdash', 'StudentController@studentdash')->name('student/studentdash');
+Route::get('/student/examinations', 'StudentController@examinations')->name('student/examinations');
+Route::get('/student/notes', 'StudentController@notes')->name('student/notes');
+Route::get('/student/payments', 'StudentController@payments')->name('student/payments');
+Route::get('/student/results', 'StudentController@results')->name('student/results');
+Route::get('/student/assesment', 'StudentController@assesment')->name('student/assesment');
+
+
+//admin dashboard
+Route::get('/admin/admindash', 'AdminController@admindash')->name('admin/admindash');
+Route::get('/admin/users', 'AdminController@users')->name('admin/users');
+Route::get('/admin/notes', 'AdminController@notes')->name('admin/notes');
+Route::get('/admin/topics', 'AdminController@topics')->name('admin/topics');
+Route::get('/admin/examinations', 'AdminController@examinations')->name('admin/examinations');
+Route::get('/admin/quizzes', 'AdminController@quizzes')->name('admin/quizzes');
+Route::get('/admin/results', 'AdminController@results')->name('admin/results');
+Route::get('/admin/awards', 'AdminController@awards')->name('admin/awards');
+Route::get('/admin/advertisements', 'AdminController@advertisements')->name('admin/advertisements');
+Route::get('/admin/payments', 'AdminController@payments')->name('admin/payments');
+Route::get('/admin/violations', 'AdminController@violations')->name('admin/violations');
 
 //from subject page
 Route::get('/class/{subject}/{class}', 'SubjectController@class')->name('class');
