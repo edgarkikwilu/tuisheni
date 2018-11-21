@@ -70,7 +70,7 @@ class IndexController extends Controller
         $recommended = Note::where('original',true)->whereHas('topic.subject', function($query)  use ($subject_id){
             $query->where('id', 8);
         })->get();
-        $exams = Exam::where('subject_id', $subject_id)->get();
+        $exams = Exam::with('user')->where('subject_id', $subject_id)->get();
         $packages = Package::with('packageSpecs')->get();
         $teachers = User::where('type','teacher')->orderBy('rate','desc')->limit(4)->get();
         return view('subject')->withSubject($subject)->withTopStudents($topStudents)
