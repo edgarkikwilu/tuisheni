@@ -34,17 +34,8 @@ Route::get('/author/{id}', 'IndexController@author')->name('author');
 Route::get('/subject/{subject}', 'IndexController@subject')->name('subject');
 
 //from profile page
-<<<<<<< HEAD
 
 
-=======
-Route::get('/assesment', 'IndexController@assesment')->name('assesment');
-Route::get('/admin', 'IndexController@admin')->name('admin');
-Route::get('/teacher', 'IndexController@teacher')->name('teacher');
-Route::get('/student', 'IndexController@student')->name('student');
-Route::get('/examination', 'ExamController@index')->name('examination');
-Route::get('/admindash', 'IndexController@admindash')->name('admindash');
->>>>>>> 86dc8a62120021506d08614a0c1ee5797a924f69
 Route::get('/teachers', 'IndexController@teachers')->name('teachers');
 Route::get('/students', 'IndexController@students')->name('students');
 Route::get('/studentdash', 'IndexController@studentdash')->name('studentdash');
@@ -52,7 +43,9 @@ Route::get('/dashboard', 'IndexController@dashboard')->name('dashboard');
 //Route::get('/examination', 'IndexController@examination')->name('examination');
 Route::get('/quiz', 'IndexController@quiz')->name('quiz');
 Route::get('/recomended_subject', 'SubjectController@recomended_subject')->name('recomended_subject');
+
 Route::get('/recomended_exam', 'ExamController@recomended_exam')->name('recomended_exam');
+Route::get('/examination', 'ExamController@examination')->name('examination');
 
 //teacher dashboard
 Route::get('/teacher/teacherdash', 'TeacherController@teacherdash')->name('teacher/teacherdash');

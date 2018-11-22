@@ -18,6 +18,9 @@ class ExamController extends Controller
 
         return view('examination')->withRecommended($recommended)->withOther($other);
     }
+    public function examination (){
+        return view ('examination');
+    }
 }
 
 

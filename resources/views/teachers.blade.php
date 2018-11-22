@@ -53,84 +53,53 @@
   
 </nav>
 
-<div class="container bg-light" style="margin-top: 40px;">
+<div class="container">
     <div class="row">
-        <div class="col-sm-2" style="text-align:right;">
-                <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="130" height="130">
-        </div>
-        <div class="col-sm-5">
-            <h3 class="display-5" style="margin-top: 10px;">John Paul</h3>
-            <h5><small class="text-muted">St. Marys High School</small></h5>
-            
-            <h6><small class="text-muted">#physics #history #maths</small></h6>
-        </div>
-        <div class="col-sm-3" style="margin-top:20px;">
+        <div class="col-lg-3" style=" text-align: center; margin-top:50px;">
+            <a href="#"> <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="110" height="110">
+            <h4>Mr James Juma</h4> </a>
+            <h5><small class="text-muted">Makongo Secondary School</small></h5>
+            <p><small class="text-muted">My name is Mr James Juma this is my short bio to my students </small></p>
             <div class="btn-group" role="group" aria-label="Basic example">
                 <button type="button" class="btn btn-primary">Follow</button>
                 <button type="button" class="btn btn-success">Message</button>
             </div>
-            <h6><a class="nav-link" href="#">30 Students</a></h6>
-       </div>
-    </div>
-</div>
-<div class="container bg-light" style="margin-top: 40px;">
-    <div class="row">
-        <div class="col-sm-2" style="text-align:right;">
-                <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="130" height="130">
+            <small><a class="nav-link" href="#">30 Friends</a></small>
         </div>
-        <div class="col-sm-5">
-            <h3 class="display-5" style="margin-top: 10px;">John Paul</h3>
-            <h5><small class="text-muted">St. Marys High School</small></h5>
-            
-            <h6><small class="text-muted">#physics #history #maths</small></h6>
-        </div>
-        <div class="col-sm-3" style="margin-top:20px;">
+        <div class="col-lg-3" style=" text-align: center; margin-top:50px;">
+            <a href="#"> <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="110" height="110">
+            <h4>Mr James Juma</h4> </a>
+            <h5><small class="text-muted">Makongo Secondary School</small></h5>
+            <p><small class="text-muted">My name is Mr James Juma this is my short bio to my students </small></p>
             <div class="btn-group" role="group" aria-label="Basic example">
                 <button type="button" class="btn btn-primary">Follow</button>
                 <button type="button" class="btn btn-success">Message</button>
             </div>
-            <h6><a class="nav-link" href="#">30 Students</a></h6>
-       </div>
-    </div>
-</div>
-<div class="container bg-light" style="margin-top: 40px;">
-    <div class="row">
-        <div class="col-sm-2" style="text-align:right;">
-                <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="130" height="130">
+            <small><a class="nav-link" href="#">30 Friends</a></small>
         </div>
-        <div class="col-sm-5">
-            <h3 class="display-5" style="margin-top: 10px;">John Paul</h3>
-            <h5><small class="text-muted">St. Marys High School</small></h5>
-            
-            <h6><small class="text-muted">#physics #history #maths</small></h6>
-        </div>
-        <div class="col-sm-3" style="margin-top:20px;">
+        <div class="col-lg-3" style=" text-align: center; margin-top:50px;">
+            <a href="#"> <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="110" height="110">
+            <h4>Mr James Juma</h4> </a>
+            <h5><small class="text-muted">Makongo Secondary School</small></h5>
+            <p><small class="text-muted">My name is Mr James Juma this is my short bio to my students </small></p>
             <div class="btn-group" role="group" aria-label="Basic example">
                 <button type="button" class="btn btn-primary">Follow</button>
                 <button type="button" class="btn btn-success">Message</button>
             </div>
-            <h6><a class="nav-link" href="#">30 Students</a></h6>
-       </div>
-    </div>
-</div>
-<div class="container bg-light" style="margin-top: 40px;">
-    <div class="row">
-        <div class="col-sm-2" style="text-align:right;">
-                <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="130" height="130">
+            <small><a class="nav-link" href="#">30 Friends</a></small>
         </div>
-        <div class="col-sm-5">
-            <h3 class="display-5" style="margin-top: 10px;">John Paul</h3>
-            <h5><small class="text-muted">St. Marys High School</small></h5>
-            
-            <h6><small class="text-muted">#physics #history #maths</small></h6>
-        </div>
-        <div class="col-sm-3" style="margin-top:20px;">
+        <div class="col-lg-3" style=" text-align: center; margin-top:50px;">
+            <a href="#"> <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="110" height="110">
+            <h4>Mr James Juma</h4> </a>
+            <h5><small class="text-muted">Makongo Secondary School</small></h5>
+            <p><small class="text-muted">My name is Mr James Juma this is my short bio to my students </small></p>
             <div class="btn-group" role="group" aria-label="Basic example">
                 <button type="button" class="btn btn-primary">Follow</button>
                 <button type="button" class="btn btn-success">Message</button>
             </div>
-            <h6><a class="nav-link" href="#">30 Students</a></h6>
-       </div>
+            <small><a class="nav-link" href="#">30 Friends</a></small>
+        </div>
+        
     </div>
 </div>
 

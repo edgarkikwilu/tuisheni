@@ -57,8 +57,11 @@
                     <a class="nav-link" href="{{ route('examination') }}">Examinations</a>
                   </li>
                   <li class="nav-item" style="margin-left:10px; ">
-                    <a class="nav-link" href="{{ route('admin/admindash') }}">My Dashboard</a>
+                    <a class="nav-link" href="{{ route('teachers') }}">Teachers</a>
                   </li>
+                  <li class="nav-item" style="margin-left:10px; ">
+                      <a class="nav-link" href="{{ route('students') }}">Students</a>
+                    </li>
                     <li class="nav-item" style="margin-left:10px; ">
                         <a class="nav-link" href="#">Direct Message</a>
                       </li>
@@ -78,6 +81,7 @@
                                                      document.getElementById('logout-form').submit();">
                                         {{ Auth::user()->username }}
                                     </a>
+                                    <a href="{{ route('admin/admindash') }}" style="color:#FFF;">My Dashboard</a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
