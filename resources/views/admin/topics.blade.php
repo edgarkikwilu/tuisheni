@@ -15,40 +15,28 @@
         <div class="container" style="margin-top:10px;">
             <div class="row">
                 <div class="col-sm-12">
-                        <table class="table">
-                                <thead>
-                                  <tr>
-                                    <th scope="col">ID</th>
-                                    <th scope="col">Topic Name</th>
-                                    <th scope="col">Posts</th>
-                                    <th scope="col">Subject</th>
-                                    <th scope="col">Level</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <tr>
-                                    <th scope="row">1</th>
-                                    <td>Introduction To Physics</td>
-                                    <td>12</td>
-                                    <td>Physics</td>
-                                    <td>Form 1</td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">2</th>
-                                    <td>Introduction To Physics</td>
-                                    <td>12</td>
-                                    <td>Physics</td>
-                                    <td>Form 1</td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">3</th>
-                                    <td>Introduction To Physics</td>
-                                    <td>12</td>
-                                    <td>Physics</td>
-                                    <td>Form 1</td>
-                                </tr>
-                                </tbody>
-                              </table>
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Topic Name</th>
+                        <th scope="col">Posts</th>
+                        <th scope="col">Subject</th>
+                        <th scope="col">Level</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      @foreach ($topics as $topic)
+                        <tr>
+                          <th scope="row">{{ $topic->id }}</th>
+                          <td>{{ $topic->name }}</td>
+                          <td>{{ $topic->notes()->count() }}</td>
+                          <td>{{ $topic->subject->name }}</td>
+                          <td>{{ $topic->form }}</td>
+                        </tr>
+                      @endforeach
+                    </tbody>
+                  </table>
                 </div>
             </div>
         </div>

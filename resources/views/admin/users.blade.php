@@ -12,22 +12,20 @@
           </li>
         </ul>
         <nav class="navbar">
-          <form class="form-inline col-sm-12">
+          <form action="{{ route('admin.filter.users') }}" method="POST" class="form-inline col-sm-12">
+            @csrf
             <div class="col-sm-3">
-              <select class="custom-select">
-                <option value="1">Teachers</option>
-                <option value="2">Students</option>
-                <option value="3">School</option>
+              <select name="account" class="custom-select">
+                <option value=""></option>
+                <option value="teacher">Teachers</option>
+                <option value="student">Students</option>
+                <option value="school">School</option>
               </select>
             </div>
-            <div class="col-sm-3"><input class="form-control mr-sm-2" type="search" placeholder="First Name" aria-label="first" style="width: 100%;"></div>
-            <div class="col-sm-3"><input class="form-control mr-sm-2" type="search" placeholder="Last Name" aria-label="last" style="width: 100%;"></div>
+            <div class="col-sm-3"><input name="firstname" class="form-control mr-sm-2" type="search" placeholder="First Name" aria-label="first" style="width: 100%;"></div>
+            <div class="col-sm-3"><input name="lastname" class="form-control mr-sm-2" type="search" placeholder="Last Name" aria-label="last" style="width: 100%;"></div>
             <div class="col-sm-3">
-              <ul class="nav nav-pills nav-fill">
-                <li class="nav-item">
-                  <a class="nav-link admin-filter-button text-uppercase" href="#">Filter</a>
-                </li>
-              </ul>
+              <button type="submit" class="btn btn-block btn-primary">FILTER</button>
             </div>
           </form>
         </nav>
@@ -51,42 +49,20 @@
                               </tr>
                             </thead>
                             <tbody>
+                              @foreach ($users as $user)
                               <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Odunga</td>
-                                <td>mark_odunga</td>
-                                <td>mark@mark.com</td>
-                                <td>+255 765 386 386</td>
-                                <td>Loyola High School</td>
-                                <td>Form 3</td>
-                                <td>Student</td>
-                                <td>Active</td>
+                                <th scope="row">{{ $user->id }}</th>
+                                <td>{{ $user->firstname }}</td>
+                                <td>{{ $user->lastname }}</td>
+                                <td>{{ $user->username }}</td>
+                                <td>{{ $user->email }}</td>
+                                <td>{{ $user->mobile }}</td>
+                                <td>{{ $user->school }}</td>
+                                <td>{{ $user->form }}</td>
+                                <td>{{ $user->type }}</td>
+                                <td>{{ $user->active?'Active':'Suspended' }}</td>
                               </tr>
-                              <tr>
-                                <th scope="row">2</th>
-                                <td>Mark</td>
-                                <td>Odunga</td>
-                                <td>mark_odunga</td>
-                                <td>mark@mark.com</td>
-                                <td>+255 765 386 386</td>
-                                <td>Loyola High School</td>
-                                <td>Form 3</td>
-                                <td>Student</td>
-                                <td>Active</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">3</th>
-                                <td>Mark</td>
-                                <td>Odunga</td>
-                                <td>mark_odunga</td>
-                                <td>mark@mark.com</td>
-                                <td>+255 765 386 386</td>
-                                <td>Loyola High School</td>
-                                <td>Form 3</td>
-                                <td>Student</td>
-                                <td>Active</td>
-                            </tr>
+                              @endforeach
                             </tbody>
                           </table>
             </div>

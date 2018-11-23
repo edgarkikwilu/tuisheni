@@ -22,4 +22,8 @@ class Quiz extends Model
     public function taggable(){
         return $this->morphToMany('App\Tag', 'taggable');
     }
+
+    public function questions(){
+        return $this->hasMany('App\QuizQuestion');
+    }
 }

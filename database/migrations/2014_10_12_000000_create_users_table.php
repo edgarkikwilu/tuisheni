@@ -20,12 +20,14 @@ class CreateUsersTable extends Migration
             $table->string('lastname');
             $table->integer('mobile')->nullable();
             $table->string('school')->nullable();
+            $table->integer('form')->default(1);
             $table->string('type')->default('student');
             $table->integer('points')->default(1000);
             $table->string('email')->unique();
             $table->string('bio')->default('');
             $table->integer('rate')->default(0);
             $table->timestamp('email_verified_at')->nullable();
+            $table->boolean('active')->default(true);
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

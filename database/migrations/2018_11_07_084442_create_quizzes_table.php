@@ -24,6 +24,8 @@ class CreateQuizzesTable extends Migration
             $table->integer('subtopic_id')->unsigned()->nullable();
             $table->foreign('subtopic_id')->references('id')->on('subtopics');
             $table->integer('week');
+            $table->integer('prize')->default(10);
+            $table->boolean('original')->default(true);
             $table->timestamps();
         });
     }
