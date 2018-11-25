@@ -6,7 +6,7 @@
             <a href="{{route('admin.topics')}}"><button type="button" class="btn btn-secondary">Topics</button></a>
             <a href="{{route('admin.examinations')}}"><button type="button" class="btn btn-secondary">Examinations</button></a>
             <a href="{{route('admin.quizzes')}}"><button type="button" class="btn btn-secondary">Quizzes</button></a>
-            <a href="{{route('admin/results')}}"><button type="button" class="btn btn-secondary">Results</button></a>
+            <a href="{{route('admin.results')}}"><button type="button" class="btn btn-secondary">Results</button></a>
             <a href="{{route('admin/awards')}}"><button type="button" class="btn btn-secondary">Awards</button></a>
             <a href="{{route('admin/advertisements')}}"><button type="button" class="btn btn-secondary">Advertisements</button></a>
             <a href="{{route('admin/payments')}}"> <button type="button" class="btn btn-secondary">Payments</button></a>

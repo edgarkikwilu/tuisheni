@@ -9,14 +9,14 @@ use App\Subject;
 use App\Topic;
 use App\Exam;
 use App\Quiz;
+use App\Report;
+
+use DB;
 
 class AdminController extends Controller
 {
     public function admindash(){
         return view('admin/admindash');
-    }
-    public function results(){
-        return view('admin/results');
     }
     public function awards(){
         return view('admin/awards');
@@ -181,6 +181,102 @@ class AdminController extends Controller
         $quiz = Quiz::find($id);
         $quiz->remove();
         return redirect()->back();
+    }
+
+    public function getAllResults(){
+         $ids = Report::select('user_id')->whereMonth('created_at',date('m'))->distinct()->pluck('user_id');
+        //$results = DB::table('reports')->select('user_id','week','score')->whereMonth('created_at',date('m'))->groupBy('user_id')->get();0
+        $subjects = Subject::all();
+        $results = collect([]);
+        $avgs = collect([]);
+        $users = collect([]);
+        foreach($ids as $id){
+            $user = User::select('firstname','lastname')->where('id',$id)->get();
+            $users->push($user);
+            //dd($users[0]);
+            $scores = Report::select('user_id','score')->where('user_id',$id)->whereMonth('created_at',date('m'))->distinct()->get();
+            $sum = 0;
+            $avg = 0;
+            $count = 0;
+            foreach($scores as $score){
+                $sum += $score->score;
+                $count++;
+                if($scores->count() == $count){
+                    $avg = $sum/4;
+                    $avgs->push($avg);
+                    //dd($avgs);
+                    break;
+                }
+            }
+            $results->push($scores);
+        }
+        return view('admin/results')->withResults($results)->withSubjects($subjects)->withAverages($avgs)->withUsers($users);
+    }
+    public function results($ids){
+        $results = collect([]);
+        $avgs = collect([]);
+        foreach($ids as $id){
+            $scores = Report::select('user_id','score')->where('user_id',$id)->whereMonth('created_at',date('m'))->distinct()->get();
+            $sum = 0;
+            $avg = 0;
+            $count = 0;
+            foreach($scores as $score){
+                $sum += $score->score;
+                $count++;
+                if($scores->count() == $count){
+                    $avg = $sum/4;
+                    $avgs->push($avg);
+                    //dd($avgs);
+                    break;
+                }
+            }
+            $results->push($scores);
+        }
+        return $results;
+    }
+    public function filterResults(Request $request){
+
+        $reports = new Report();
+        $reports = $reports->newQuery();
+
+        $subjects = Subject::all();
+
+        if ($request->has('subject') && $request->subject != "") {
+            //$reports->where('subject_id', $request->subject);
+            $reports->whereHas('exams', function($query) use ($request){
+                $query->where('subject_id',$request->subject);
+            });
+        }
+
+        if ($request->has('type') && $request->type != "") {
+            //$reports->where('subject_id', $request->subject);
+            $reports->whereHas('exams', function($query) use ($request){
+                $query->where('exam_type_id',$request->type);
+            });
+        }
+
+        if ($request->has('form') && $request->form != "") {
+            $reports->where('form',$request->form);
+        }
+
+        if ($request->has('month') && $request->month != "") {
+            $reports->whereMonth('created_at',$request->month);
+        }
+
+        if ($request->has('username') && $request->username != "") {
+            $reports->whereHas('user', function($query) use ($request){
+                $query->where('username','like', '%'.$request->username.'%');
+            });
+        }
+
+        if ($request->has('school') && $request->school != "") {
+            $reports->whereHas('user', function($query) use ($request){
+                $query->where('school','like', '%'.$request->school.'%');
+            });
+        }
+
+        return view('admin.reports')->withreports($reports->get())->withSubjects($subjects);
+
     }
 
     public function addRole(Request $request){

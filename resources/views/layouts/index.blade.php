@@ -68,8 +68,6 @@
                     <li class="nav-item" style="margin-left:10px; ">
                         <a class="nav-link" href="#">Direct Message</a>
                       </li>
-                          
-              
               </ul>
               <div class="navbar-nav ml-auto">
                   @guest
@@ -79,16 +77,15 @@
                   @auth
                     <a href="#" style=" color:#FFF;padding-right:20px;">{{ Auth::user()->points }} Points</a>
                     {{-- <a href="#" style="color:#FFF;"> {{ Auth::user()->username }}</a> --}}
-                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ Auth::user()->username }}
-                                    </a>
-                                    <a href="{{ route('admin/admindash') }}" style="color:#FFF;">My Dashboard</a>
+                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">
+                        {{ Auth::user()->username }}
+                    </a>
+                    <a href="{{ route('admin/admindash') }}" style="color:#FFF;">My Dashboard</a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
                   @endauth
               </div> 
             </div>

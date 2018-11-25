@@ -52,8 +52,8 @@
         </nav>
         <div class="container" style="margin-top: 10px; border-top: 1px dotted  #566573 ;">
             <div class="row">
-              <div class="col-lg-3"  style="margin-top: 20px;">
                 @foreach ($notes as $note)
+                <div class="col-lg-3"  style="margin-top: 20px;">
                 <div class="card">
                         <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
                         <div class="card-body">
@@ -90,8 +90,8 @@
                             </div>        
                             </div>
                         </div>
+                      </div>
                 @endforeach
-                </div>
             </div>
           </div>
       <!--END ALL NOTES -->

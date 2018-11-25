@@ -24,7 +24,6 @@ class DatabaseSeeder extends Seeder
         //  $this->call(FollowTableSeeder::class);
         //$this->call(ReportTableSeeder::class);
         //$this->call(LaratrustSeeder::class);
-        //$this->call(QuizTableSeeder::class);
-
-    }
+         //$this->call(QuizTableSeeder::class);
+        }
 }
