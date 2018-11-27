@@ -22,7 +22,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-
 //from index page
 Route::get('/explore', 'ExploreController@index')->name('explore');
 Route::get('/profile', 'IndexController@profile')->name('profile');

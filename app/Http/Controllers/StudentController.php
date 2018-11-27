@@ -28,4 +28,7 @@ class StudentController extends Controller
     public function payments(){
         return view('student/payments');
     }
+    public function createnotes(){
+        return view('student/createnotes');
+    }
 }

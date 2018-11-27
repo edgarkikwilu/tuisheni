@@ -6,12 +6,14 @@
 @include('admin/dashboardnav')
 
 <!--ALL TOPICS -->
-        <ul class="nav nav-pills nav-fill">
-          <li class="nav-item">
-            <h4><a class="nav-link admin-header-block">ALL TOPICS</a></h4>
-            <button class="btn btn-primary"  href="#">Add Topic</button>
-          </li>
-        </ul>
+<div class="container">
+    <ul class="nav nav-pills nav-fill" style="margin-top:40px;">
+        <li class="nav-item">
+          <h4><a class="nav-link admin-header-block">ALL TOPICS</a></h4>
+          <button class="btn btn-primary"  href="#">Add Topic</button>
+        </li>
+      </ul>
+</div>   
         <div class="container" style="margin-top:10px;">
             <div class="row">
                 <div class="col-sm-12">

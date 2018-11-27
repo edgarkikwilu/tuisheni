@@ -1,4 +1,5 @@
 <div class="container">
+    <div class="row">
         <div class="btn-group" role="group" aria-label="Basic example">
             <a href="{{route('student.studentdash')}}"><button type="button" class="btn btn-secondary">Profile</button></a>  
             <a href="{{route('student.notes')}}"><button type="button" class="btn btn-secondary">Notes</button></a>

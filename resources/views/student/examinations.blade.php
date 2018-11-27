@@ -5,19 +5,9 @@
   </div>
   @include('student/dashboardnav')
 <!--ALL EXAMS-->          
-        <div class="container">
-            <div class="row">
-              <div class="col-sm-3">
-                  <h4><a class="nav-link admin-header-block">UPLOAD:</a></h4>
-                </div>
-              <div class="col-sm-3">
-                  <button type="button" class="btn btn-secondary" > Upload Examination</button>
-                </div>  
-            </div>
-        </div>  
-        <ul class="nav nav-pills nav-fill">
+        <ul class="nav nav-pills nav-fill" style="margin-top:40px;">
           <li class="nav-item">
-            <h4><a class="nav-link admin-header-block">FILTER EXAMS</a></h4>
+            <h4><a class="nav-link admin-header-block">MY EXAMINATIONS</a></h4>
           </li>
         </ul>
         <nav class="navbar">

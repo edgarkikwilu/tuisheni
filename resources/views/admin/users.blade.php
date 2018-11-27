@@ -5,10 +5,10 @@
   </div>
 @include('admin/dashboardnav')
 <!--USERS-->
-<div class="tab-pane fade active show" id="admin-users" role="tabpanel" aria-labelledby="admin-users-tab">
-        <ul class="nav nav-pills nav-fill">
+<div class="container">
+        <ul class="nav nav-pills nav-fill" style="margin-top:40px;">
           <li class="nav-item">
-            <h4><a class="nav-link admin-header-block">FILTER USERS</a></h4>
+            <h4><a class="nav-link admin-header-block">ALL USERS</a></h4>
           </li>
         </ul>
         <nav class="navbar">
@@ -67,9 +67,6 @@
                           </table>
             </div>
         </div>
-    </div>  
-        
-
-  </div>
+    </div> 
   <!--END USERS-->
 @endsection
