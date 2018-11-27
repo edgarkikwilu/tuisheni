@@ -81,7 +81,7 @@
                         document.getElementById('logout-form').submit();">
                         {{ Auth::user()->username }}
                     </a>
-                    <a href="{{ route('admin/admindash') }}" style="color:#FFF;">My Dashboard</a>
+                    <a href="{{ route('admin.admindash') }}" style="color:#FFF;">My Dashboard</a>
 
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf

@@ -105,9 +105,9 @@ class IndexController extends Controller
         return view('single');
     }
     
-    public function examination(){
-        return view('examination');
-    }
+    // public function examination(){
+    //     return view('examination');
+    // }
     public function quiz(){
         return view('quiz');
     }

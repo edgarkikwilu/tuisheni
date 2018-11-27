@@ -1,6 +1,6 @@
 <div class="container">
         <div class="btn-group" role="group" aria-label="Basic example">
-            <a href="{{route('admin/admindash')}}"><button type="button" class="btn btn-secondary">Profile</button></a>  
+            <a href="{{route('admin.admindash')}}"><button type="button" class="btn btn-secondary">Profile</button></a>  
             <a href="{{route('admin.users')}}"><button type="button" class="btn btn-secondary">Users</button></a>
             <a href="{{route('admin.notes')}}"><button type="button" class="btn btn-secondary">Notes</button></a>
             <a href="{{route('admin.topics')}}"><button type="button" class="btn btn-secondary">Topics</button></a>
@@ -11,5 +11,6 @@
             <a href="{{route('admin/advertisements')}}"><button type="button" class="btn btn-secondary">Advertisements</button></a>
             <a href="{{route('admin.payments')}}"> <button type="button" class="btn btn-secondary">Payments</button></a>
             <a href="{{route('admin.violations')}}"> <button type="button" class="btn btn-secondary">Violations</button></a>
+            <a href="{{route('admin.role_permission')}}"> <button type="button" class="btn btn-secondary">Role Permissions</button></a>
         </div>
     </div>

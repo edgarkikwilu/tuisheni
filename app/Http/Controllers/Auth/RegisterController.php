@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Auth;
 
+use App\Role;
+
 class RegisterController extends Controller
 {
     /*
@@ -95,10 +97,18 @@ class RegisterController extends Controller
         $user->type = $request->type;
         $user->password = Hash::make($request->password);
 
-        $user->save();
+        if ($user->save()) {
+            if ($user->type == 'student') {
+                $role_id = Role::where('name','student')->pluck('id')->first();
+                $user->attachRole($role_id);
+            } elseif($user->type == 'teacher') {
+                $role_id = Role::where('name','teacher')->pluck('id')->first();
+                $user->attachRole($role_id);
+            }
+        }
 
         Auth::guard()->login($user);
 
-        return redirect()->intended('profile');
+        return redirect()->intended(Auth::user()->type =='student'?'student/studentdash':'teacher/teacherdash');
     }
 }
