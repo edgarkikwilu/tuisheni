@@ -18,6 +18,7 @@ class CreatePaymentsTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('type');
+            $table->string('client');
             $table->integer('amount');
             $table->integer('bonus')->default(100);
             $table->timestamps();

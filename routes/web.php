@@ -58,6 +58,8 @@ Route::get('/teacher/notes', 'TeacherController@notes')->name('teacher/notes');
 Route::get('/teacher/payments', 'TeacherController@payments')->name('teacher/payments');
 Route::get('/teacher/results', 'TeacherController@results')->name('teacher/results');
 Route::get('/teacher/assesment', 'TeacherController@assesment')->name('teacher/assesment');
+Route::get('/teacher/createnotes', 'TeacherController@createnotes')->name('teacher/createnotes');
+Route::get('/teacher/createexam', 'TeacherController@createexam')->name('teacher/createexam');
 
 //student dashboard
 Route::get('/student/studentdash', 'StudentController@studentdash')->name('student/studentdash');
@@ -74,7 +76,7 @@ Route::get('/admin/admindash', 'AdminController@admindash')->name('admin/adminda
 Route::get('/admin/users', 'AdminController@getAllUsers')->name('admin.users');
 Route::post('/admin/filter/users', 'AdminController@filterUsers')->name('admin.filter.users');
 Route::get('/admin/notes', 'AdminController@getAllNotes')->name('admin.notes');
-Route::get('/admin/editnotes', 'AdminController@editNotes')->name('<admin class=""></admin>editnotes');
+Route::get('/admin/editnotes', 'AdminController@editNotes')->name('admin.editnotes');
 Route::post('/admin/filter/notes', 'AdminController@filterNotes')->name('admin.filter.notes');
 Route::get('/admin/topics', 'AdminController@getAllTopics')->name('admin.topics');
 Route::get('/admin/examinations', 'AdminController@getAllExaminations')->name('admin.examinations');
@@ -84,10 +86,12 @@ Route::post('/admin/filter/quizzes', 'AdminController@filterQuizzes')->name('adm
 Route::post('/admin/delete/quizzes', 'AdminController@deleteQuiz')->name('admin.delete.quiz');
 Route::get('/admin/results', 'AdminController@getAllResults')->name('admin.results');
 Route::post('/admin/filter/results', 'AdminController@filterResults')->name('admin.filter.results');
-Route::get('/admin/awards', 'AdminController@awards')->name('admin/awards');
+Route::get('/admin/awards', 'AdminController@getAllAwards')->name('admin.awards');
+Route::post('/admin/filter/awards', 'AdminController@filterAwards')->name('admin.filter.awards');
 Route::get('/admin/advertisements', 'AdminController@advertisements')->name('admin/advertisements');
-Route::get('/admin/payments', 'AdminController@payments')->name('admin/payments');
-Route::get('/admin/violations', 'AdminController@violations')->name('admin/violations');
+Route::get('/admin/payments', 'AdminController@getAllPayments')->name('admin.payments');
+Route::post('/admin/filter/payments', 'AdminController@filterpayments')->name('admin.filter.payments');
+Route::get('/admin/violations', 'AdminController@getAllViolations')->name('admin.violations');
 
 //from subject page
 Route::get('/class/{subject}/{class}', 'SubjectController@class')->name('class');

@@ -17,7 +17,11 @@ class CreateAwardsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
+            $table->integer('subject_id')->unsigned();
+            $table->foreign('subject_id')->references('id')->on('subjects');
+            $table->integer('form')->default(1);
             $table->string('prize');
+            $table->integer('score')->default(100);
             $table->string('title');
             $table->string('description');
             $table->integer('bonus')->default(250);

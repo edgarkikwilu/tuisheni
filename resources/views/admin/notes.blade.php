@@ -6,50 +6,43 @@
 @include('admin/dashboardnav')
 
 <!--ALL NOTES -->
-<div class="container" style="margin-top:40px;">
-          <div class="row">
-            <div class="col-sm-3">
-                <h4><a class="nav-link admin-header-block">UPLOAD NOTES:</a></h4>
-              </div>
-            <div class="col-sm-3">
-                <button type="button" class="btn btn-secondary" > Upload Notes</button>
-              </div>  
-          </div>
-          </div>  
-        <ul class="nav nav-pills nav-fill">
-          <li class="nav-item">
-            <h4><a class="nav-link admin-header-block">FILTER NOTES</a></h4>
-          </li>
+<div class="container">
+    <ul class="nav nav-pills nav-fill" style="margin-top:40px;">
+        <li class="nav-item">
+        <h4><a class="nav-link admin-header-block">ALL NOTES</a></h4>
+        </li>
         </ul>
         <nav class="navbar">
-                <form class="form-inline col-sm-12" action="{{ route('admin.filter.notes') }}" method="POST">
-                @csrf
-                  <div class="col-sm-3">
-                    <select class="custom-select" name="subject">
-                        <option value=""></option>
-                      @foreach ($subjects as $subject)
-                      <option value="{{ $subject->id }}">{{ $subject->name }}</option>
-                      @endforeach
-                    </select>
-                  </div>
-                <div class="col-sm-3">
-                        <select class="custom-select" name="form">
-                                <option value=""></option>
-                            <option value="1">Form 1</option>
-                            <option value="2">Form 2</option>
-                            <option value="3">Form 3</option>
-                            <option value="4">Form 4</option>
-                            <option value="5">Form 5</option>
-                            <option value="6">Form 6</option>
-                        </select>
-                </div>
-                  <div class="col-sm-3"><input class="form-control mr-sm-2" type="search" placeholder="Search By Username" name="username" style="width: 100%;"></div>
-                  <div class="col-sm-3"><input class="form-control mr-sm-2" type="search" placeholder="Search By School" name="school" style="width: 100%;"></div>
-                  <div class="container">
-                      <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Filter Notes</button>
-                </div>
-                </form>
+          <form class="form-inline col-sm-12" action="{{ route('admin.filter.notes') }}" method="POST">
+          @csrf
+            <div class="col-sm-3">
+              <select class="custom-select" name="subject">
+                  <option value=""></option>
+                @foreach ($subjects as $subject)
+                <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                @endforeach
+              </select>
+            </div>
+          <div class="col-sm-3">
+                  <select class="custom-select" name="form">
+                          <option value=""></option>
+                      <option value="1">Form 1</option>
+                      <option value="2">Form 2</option>
+                      <option value="3">Form 3</option>
+                      <option value="4">Form 4</option>
+                      <option value="5">Form 5</option>
+                      <option value="6">Form 6</option>
+                  </select>
+          </div>
+            <div class="col-sm-3"><input class="form-control mr-sm-2" type="search" placeholder="Search By Username" name="username" style="width: 100%;"></div>
+            <div class="col-sm-3"><input class="form-control mr-sm-2" type="search" placeholder="Search By School" name="school" style="width: 100%;"></div>
+            <div class="container">
+                <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Filter Notes</button>
+                <button type="submit" class="btn btn-secondary" style="margin-top: 10px; float:right;">Create New Notes</button>
+          </div>
+          </form>
         </nav>
+</div>
         <div class="container" style="margin-top: 10px; border-top: 1px dotted  #566573 ;">
             <div class="row">
                 @foreach ($notes as $note)

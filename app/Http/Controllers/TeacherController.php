@@ -24,4 +24,10 @@ class TeacherController extends Controller
     public function payments(){
         return view('teacher/payments');
     }
+    public function createnotes(){
+        return view('teacher/createnotes');
+    }
+    public function createexam(){
+        return view('teacher/createexam');
+    }
 }

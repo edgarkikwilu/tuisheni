@@ -20,7 +20,8 @@ class CreateViolationsTable extends Migration
             $table->integer('reported_id')->unsigned();
             $table->foreign('reported_id')->references('id')->on('users');
             $table->integer('post_id')->unsigned();
-            $table->string('type');
+            $table->string('type')->default('notes');
+            $table->string('comments');
             $table->boolean('attended')->default(false);
             $table->timestamps();
         });

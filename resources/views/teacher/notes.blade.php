@@ -6,69 +6,63 @@
   @include('teacher/dashboardnav')
 
   <!--ALL NOTES -->
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-3">
-                <h4><a class="nav-link admin-header-block">UPLOAD NOTES:</a></h4>
-              </div>
-            <div class="col-sm-3">
-                <button type="button" class="btn btn-secondary" > Upload Notes</button>
-              </div>  
-          </div>
-          </div>  
-        <ul class="nav nav-pills nav-fill">
-          <li class="nav-item">
-            <h4><a class="nav-link admin-header-block">FILTER NOTES</a></h4>
-          </li>
-        </ul>
-      <nav class="navbar">
-          <form class="form-inline col-sm-12">
-            <div class="col-sm-3">
-              <select class="custom-select">
-                <option value="1">Physics</option>
-                <option value="2">Biology</option>
-                <option value="3">Chemistry</option>
-                <option value="1">Mathematics</option>
-                <option value="2">ICT</option>
-                <option value="3">Technical Education</option>
-                <option value="1">Kiswahili</option>
-                <option value="2">English</option>
-                <option value="3">French</option>
-                <option value="3">Arabic</option>
-                <option value="1">Geography</option>
-                <option value="2">History</option>
-                <option value="3">Civics</option>
-                <option value="1">Economics</option>
-                <option value="2">Agriculture</option>
-                <option value="3">Book-Keeping</option>
-                <option value="1">Commerce</option>
-                <option value="2">Bible Knowledge</option>
-                <option value="3">Islamic Knowledge</option>
-                <option value="1">Fine Arts</option>
-                <option value="2">Theater Arts</option>
-                <option value="3">Physical Education</option>
-                <option value="3">Music</option>
-                
-              </select>
-            </div>
+<div class="container" style="margin-top:40px;">
+    <ul class="nav nav-pills nav-fill">
+        <li class="nav-item">
+          <h4><a class="nav-link admin-header-block">MY NOTES</a></h4>
+        </li>
+      </ul>
+    <nav class="navbar">
+        <form class="form-inline col-sm-12">
           <div class="col-sm-3">
-                  <select class="custom-select">
-                      <option value="1">Form 1</option>
-                      <option value="2">Form 2</option>
-                      <option value="3">Form 3</option>
-                      <option value="1">Form 4</option>
-                      <option value="2">Form 5</option>
-                      <option value="3">Form 6</option>
-                    </select>
+            <select class="custom-select">
+              <option value="1">Physics</option>
+              <option value="2">Biology</option>
+              <option value="3">Chemistry</option>
+              <option value="1">Mathematics</option>
+              <option value="2">ICT</option>
+              <option value="3">Technical Education</option>
+              <option value="1">Kiswahili</option>
+              <option value="2">English</option>
+              <option value="3">French</option>
+              <option value="3">Arabic</option>
+              <option value="1">Geography</option>
+              <option value="2">History</option>
+              <option value="3">Civics</option>
+              <option value="1">Economics</option>
+              <option value="2">Agriculture</option>
+              <option value="3">Book-Keeping</option>
+              <option value="1">Commerce</option>
+              <option value="2">Bible Knowledge</option>
+              <option value="3">Islamic Knowledge</option>
+              <option value="1">Fine Arts</option>
+              <option value="2">Theater Arts</option>
+              <option value="3">Physical Education</option>
+              <option value="3">Music</option>
+              
+            </select>
           </div>
-            <div class="col-sm-3"><input class="form-control mr-sm-2" type="search" placeholder="Search By Username" aria-label="username" style="width: 100%;"></div>
-            <div class="col-sm-3"><input class="form-control mr-sm-2" type="search" placeholder="Search By School" aria-label="school" style="width: 100%;"></div>
-            <div class="container">
-                <button class="btn btn-primary" style="margin-top: 10px;" href="#">Filter Notes</button>
-          </div>
-          </form>
-        
-      </nav>
+        <div class="col-sm-3">
+                <select class="custom-select">
+                    <option value="1">Form 1</option>
+                    <option value="2">Form 2</option>
+                    <option value="3">Form 3</option>
+                    <option value="1">Form 4</option>
+                    <option value="2">Form 5</option>
+                    <option value="3">Form 6</option>
+                  </select>
+        </div>
+          <div class="col-sm-3"><input class="form-control mr-sm-2" type="search" placeholder="Search By Username" aria-label="username" style="width: 100%;"></div>
+          <div class="col-sm-3"><input class="form-control mr-sm-2" type="search" placeholder="Search By School" aria-label="school" style="width: 100%;"></div>
+          <div class="container">
+              <button class="btn btn-primary" style="margin-top: 10px;" href="#">Filter Notes</button>
+              <button class="btn btn-secondary" style="margin-top: 10px; float:right;" href="#">Create New Notes</button>
+        </div>
+        </form>
+      
+    </nav>
+</div>
+  
       <div class="container" style="margin-top: 10px; border-top: 1px dotted  #566573 ;">
         <div class="row">
           <div class="col-lg-3"  style="margin-top: 20px;">
