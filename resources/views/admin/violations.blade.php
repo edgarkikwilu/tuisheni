@@ -9,7 +9,8 @@
         <nav class="navbar">
             <form class="form-inline col-sm-12">
                 <div class="col-sm-3">
-                    <select class="custom-select">
+                    <select name="month" class="custom-select">
+                      <option value=""></option>
                       <option value="1">January</option>
                       <option value="2">February</option>
                       <option value="3">March</option>
@@ -27,7 +28,8 @@
                   </div>
                   
               <div class="col-sm-3">
-                <select class="custom-select">
+                <select name="subject" class="custom-select">
+                  <option value=""></option>
                   <option value="1">Physics</option>
                   <option value="2">Biology</option>
                   <option value="3">Chemistry</option>
@@ -55,7 +57,8 @@
                 </select>
               </div>
             <div class="col-sm-3">
-                <select class="custom-select">
+                <select name="form" class="custom-select">
+                  <option value=""></option>
                     <option value="1">Form 1</option>
                     <option value="2">Form 2</option>
                     <option value="3">Form 3</option>
@@ -64,11 +67,11 @@
                     <option value="3">Form 6</option>
                  </select>
         </div>
-              <div class="col-sm-3" style="margin-top:10px;"><input class="form-control mr-sm-2" type="search" placeholder="Search By Username" aria-label="username" style="width: 100%;"></div>
-              <div class="col-sm-3" style="margin-top:10px;"><input class="form-control mr-sm-2" type="search" placeholder="Search By School" aria-label="school" style="width: 100%;"></div>
-              <div class="col-sm-3" style="margin-top:10px;"><input class="form-control mr-sm-2" type="search" placeholder="Search By Title" aria-label="examtitle" style="width: 100%;"></div>
+              <div class="col-sm-3" style="margin-top:10px;"><input name="username" class="form-control mr-sm-2" type="search" placeholder="Search By Username" aria-label="username" style="width: 100%;"></div>
+              <div class="col-sm-3" style="margin-top:10px;"><input name="school" class="form-control mr-sm-2" type="search" placeholder="Search By School" aria-label="school" style="width: 100%;"></div>
+              <div class="col-sm-3" style="margin-top:10px;"><input name="title" class="form-control mr-sm-2" type="search" placeholder="Search By Title" aria-label="examtitle" style="width: 100%;"></div>
               <div class="container">
-                  <button class="btn btn-primary" style="margin-top: 10px;" href="#">Filter Results</button>
+                  <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Filter Results</button>
             </div>
             </form>
           
@@ -92,123 +95,21 @@
               </tr>
           </thead>
           <tbody>
+            @foreach ($violations as $violation)
             <tr>
-              <th scope="row">1</th>
-              <td>Mrisho Abdul</td>
-              <td>Application of Physics in Daily Life</td>
-              <td>Physics</td>
-              <td>Introduction To Physics</td>
-              <td>The uploaded content doesn't match respective topic</td>
-              <td>23/04/2018 12:30</td>
-              <td>
-                <small><a class="nav-item nav-link" href="#" style="color:red;">Delete</a></small>
-                <small><a class="nav-item nav-link" href="#" style="color:#001f9c;">Edit</a></small>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mrisho Abdul</td>
-              <td>Application of Physics in Daily Life</td>
-              <td>Physics</td>
-              <td>Introduction To Physics</td>
-              <td>The uploaded content doesn't match respective topic</td>
-              <td>23/04/2018 12:30</td>
-              <td>
-                <small><a class="nav-item nav-link" href="#" style="color:red;">Delete</a></small>
-                <small><a class="nav-item nav-link" href="#" style="color:#001f9c;">Edit</a></small>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mrisho Abdul</td>
-              <td>Application of Physics in Daily Life</td>
-              <td>Physics</td>
-              <td>Introduction To Physics</td>
-              <td>The uploaded content doesn't match respective topic</td>
-              <td>23/04/2018 12:30</td>
-              <td>
-                <small><a class="nav-item nav-link" href="#" style="color:red;">Delete</a></small>
-                <small><a class="nav-item nav-link" href="#" style="color:#001f9c;">Edit</a></small>
-              </td>  
-            </tr>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mrisho Abdul</td>
-              <td>Application of Physics in Daily Life</td>
-              <td>Physics</td>
-              <td>Introduction To Physics</td>
-              <td>The uploaded content doesn't match respective topic</td>
-              <td>23/04/2018 12:30</td>
-              <td>
-                <small><a class="nav-item nav-link" href="#" style="color:red;">Delete</a></small>
-                <small><a class="nav-item nav-link" href="#" style="color:#001f9c;">Edit</a></small>
-              </td>
-          </tr>
-          <tr>
-              <th scope="row">1</th>
-              <td>Mrisho Abdul</td>
-              <td>Application of Physics in Daily Life</td>
-              <td>Physics</td>
-              <td>Introduction To Physics</td>
-              <td>The uploaded content doesn't match respective topic</td>
-              <td>23/04/2018 12:30</td>
-              <td>
-                <small><a class="nav-item nav-link" href="#" style="color:red;">Delete</a></small>
-                <small><a class="nav-item nav-link" href="#" style="color:#001f9c;">Edit</a></small>
-              </td>
-          </tr>
-          <tr>
-              <th scope="row">1</th>
-              <td>Mrisho Abdul</td>
-              <td>Application of Physics in Daily Life</td>
-              <td>Physics</td>
-              <td>Introduction To Physics</td>
-              <td>The uploaded content doesn't match respective topic</td>
-              <td>23/04/2018 12:30</td>
-              <td>
-                <small><a class="nav-item nav-link" href="#" style="color:red;">Delete</a></small>
-                <small><a class="nav-item nav-link" href="#" style="color:#001f9c;">Edit</a></small>
-              </td>
-          </tr>
-          <tr>
-              <th scope="row">1</th>
-              <td>Mrisho Abdul</td>
-              <td>Application of Physics in Daily Life</td>
-              <td>Physics</td>
-              <td>Introduction To Physics</td>
-              <td>The uploaded content doesn't match respective topic</td>
-              <td>23/04/2018 12:30</td>
-              <td>
-                <small><a class="nav-item nav-link" href="#" style="color:red;">Delete</a></small>
-                <small><a class="nav-item nav-link" href="#" style="color:#001f9c;">Edit</a></small>
-              </td>
-          </tr>
-          <tr>
-              <th scope="row">1</th>
-              <td>Mrisho Abdul</td>
-              <td>Application of Physics in Daily Life</td>
-              <td>Physics</td>
-              <td>Introduction To Physics</td>
-              <td>The uploaded content doesn't match respective topic</td>
-              <td>23/04/2018 12:30</td>
-              <td>
-                <small><a class="nav-item nav-link" href="#" style="color:red;">Delete</a></small>
-                <small><a class="nav-item nav-link" href="#" style="color:#001f9c;">Edit</a></small>
-              </td>
-          </tr>
-          <tr>
-              <th scope="row">1</th>
-              <td>Mrisho Abdul</td>
-              <td>Application of Physics in Daily Life</td>
-              <td>Physics</td>
-              <td>Introduction To Physics</td>
-              <td>The uploaded content doesn't match respective topic</td>
-              <td>23/04/2018 12:30</td>
-              <td>
-                <small><a class="nav-item nav-link" href="#" style="color:red;">Delete</a></small>
-                <small><a class="nav-item nav-link" href="#" style="color:#001f9c;">Edit</a></small>
-              </td>
-          </tr>
+                <th scope="row">{{ $violation->id }}</th>
+                <td>{{ $violation->user->username }}</td>
+                <td>Application of Physics in Daily Life</td>
+                <td>Physics</td>
+                <td>Introduction To Physics</td>
+                <td>{{ $violation->comments }}</td>
+                <td>{{ $violation->created_at }}</td>
+                <td>
+                  <small><a class="nav-item nav-link" href="#" style="color:red;">Delete</a></small>
+                  <small><a class="nav-item nav-link" href="#" style="color:#001f9c;">Edit</a></small>
+                </td>
+              </tr>
+            @endforeach
           </tbody>
         </table>
       </ul>

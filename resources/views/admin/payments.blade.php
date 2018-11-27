@@ -27,9 +27,11 @@
                 </li>
               </ul>
               <nav class="navbar">
-                      <form class="form-inline col-sm-12">
+                      <form action="{{ route('admin.filter.payments') }}" method="POST" class="form-inline col-sm-12">
+                        @csrf
                           <div class="col-sm-3">
-                              <select class="custom-select">
+                              <select name="month" class="custom-select">
+                                <option value=""></option>
                                 <option value="1">January</option>
                                 <option value="2">February</option>
                                 <option value="3">March</option>
@@ -46,7 +48,8 @@
                               </select>
                             </div>
                             <div class="col-sm-3">
-                                <select class="custom-select">
+                                <select name="week" class="custom-select">
+                                  <option value=""></option>
                                   <option value="1">Week 1</option>
                                   <option value="2">Week 2</option>
                                   <option value="3">Week 3</option>
@@ -54,28 +57,32 @@
                                 </select>
                               </div>
                         <div class="col-sm-3">
-                          <select class="custom-select">
-                            <option value="1">Teachers</option>
-                            <option value="2">Students</option>
-                            <option value="3">School</option>
+                          <select name="type" class="custom-select">
+                            <option value=""></option>
+                            <option value="teacher">Teachers</option>
+                            <option value="student">Students</option>
+                            <option value="school">School</option>
                             
                           </select>
                         </div>
                       <div class="col-sm-3">
-                              <select class="custom-select">
-                                      <option value="1">Form 1</option>
-                                      <option value="2">Form 2</option>
-                                      <option value="3">Form 3</option>
-                                      <option value="1">Form 4</option>
-                                      <option value="2">Form 5</option>
-                                      <option value="3">Form 6</option>
-                                    </select>
+                        <select name="form" class="custom-select">
+                          <option value=""></option>
+                          <option value="1">Form 1</option>
+                          <option value="2">Form 2</option>
+                          <option value="3">Form 3</option>
+                          <option value="1">Form 4</option>
+                          <option value="2">Form 5</option>
+                          <option value="3">Form 6</option>
+                        </select>
                       </div>
-                        <div class="col-sm-3" style="margin-top:10px;"><input class="form-control mr-sm-2" type="search" placeholder="Search By Username" aria-label="username" style="width: 100%;"></div>
-                        <div class="col-sm-3" style="margin-top:10px;"><input class="form-control mr-sm-2" type="search" placeholder="Search By School" aria-label="school" style="width: 100%;"></div>
+                        <div class="col-sm-3" style="margin-top:10px;">
+                          <input name="username" class="form-control mr-sm-2" type="search" placeholder="Search By Username" style="width: 100%;"></div>
+                        <div class="col-sm-3" style="margin-top:10px;">
+                          <input name="school" class="form-control mr-sm-2" type="search" placeholder="Search By School" style="width: 100%;"></div>
                         
                         <div class="container">
-                            <button class="btn btn-primary" style="margin-top: 10px;" href="#">Filter Payments</button>
+                            <button type="submit" class="btn btn-primary" style="margin-top: 10px;" >Filter Payments</button>
                       </div>
                       </form>
                     
@@ -83,7 +90,7 @@
               
               <ul class="nav nav-pills nav-fill">
                   <li class="nav-item">
-                      <h4><a class="nav-link admin-header-block">January  Payments (Tsh 560,000/=)</a></h4>
+                      <h4><a class="nav-link admin-header-block">January  Payments (Tsh {{ $sum }}/=)</a></h4>
                     </li>
                               
               
@@ -101,96 +108,18 @@
                       </tr>
                   </thead>
                   <tbody>
+                    @foreach ($payments as $payment)
                     <tr>
-                      <th scope="row">1</th>
-                      <td>Mrisho Abdul</td>
-                      <td>Eagles Secondary School</td>
-                      <td>Deposit For More Points</td>
-                      <td>Subscription Page</td>
-                      <td>Deposit</td>
-                      <td>Tsh 1000/=</td>
-                      <td>23/04/2018 12:30</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">1</th>
-                      <td>Mrisho Abdul</td>
-                      <td>Eagles Secondary School</td>
-                      <td>Deposit For More Points</td>
-                      <td>Subscription Page</td>
-                      <td>Deposit</td>
-                      <td>Tsh 1000/=</td>
-                      <td>23/04/2018 12:30</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">1</th>
-                      <td>Mrisho Abdul</td>
-                      <td>Eagles Secondary School</td>
-                      <td>Deposit For More Points</td>
-                      <td>Subscription Page</td>
-                      <td>Deposit</td>
-                      <td>Tsh 1000/=</td>
-                      <td>23/04/2018 12:30</td>  
-                    </tr>
-                    <tr>
-                      <th scope="row">1</th>
-                      <td>Mrisho Abdul</td>
-                      <td>Eagles Secondary School</td>
-                      <td>Deposit For More Points</td>
-                      <td>Subscription Page</td>
-                      <td>Deposit</td>
-                      <td>Tsh 1000/=</td>
-                      <td>23/04/2018 12:30</td>
-                  </tr>
-                  <tr>
-                      <th scope="row">1</th>
-                      <td>Mrisho Abdul</td>
-                      <td>Eagles Secondary School</td>
-                      <td>Deposit For More Points</td>
-                      <td>Subscription Page</td>
-                      <td>Deposit</td>
-                      <td>Tsh 1000/=</td>
-                      <td>23/04/2018 12:30</td>
-                  </tr>
-                  <tr>
-                      <th scope="row">1</th>
-                      <td>Mrisho Abdul</td>
-                      <td>Eagles Secondary School</td>
-                      <td>Deposit For More Points</td>
-                      <td>Subscription Page</td>
-                      <td>Deposit</td>
-                      <td>Tsh 1000/=</td>
-                      <td>23/04/2018 12:30</td>
-                  </tr>
-                  <tr>
-                      <th scope="row">1</th>
-                      <td>Mrisho Abdul</td>
-                      <td>Eagles Secondary School</td>
-                      <td>Deposit For More Points</td>
-                      <td>Subscription Page</td>
-                      <td>Deposit</td>
-                      <td>Tsh 1000/=</td>
-                      <td>23/04/2018 12:30</td>
-                  </tr>
-                  <tr>
-                      <th scope="row">1</th>
-                      <td>Mrisho Abdul</td>
-                      <td>Eagles Secondary School</td>
-                      <td>Deposit For More Points</td>
-                      <td>Subscription Page</td>
-                      <td>Deposit</td>
-                      <td>Tsh 1000/=</td>
-                      <td>23/04/2018 12:30</td>
-                  </tr>
-                  <tr>
-                      <th scope="row">1</th>
-                      <td>Mrisho Abdul</td>
-                      <td>Eagles Secondary School</td>
-                      <td>Deposit For More Points</td>
-                      <td>Subscription Page</td>
-                      <td>Deposit</td>
-                      <td>Tsh 1000/=</td>
-                      <td>23/04/2018 12:30</td>
-                  </tr>
+                        <th scope="row">{{ $payment->id }}</th>
+                        <td>{{ $payment->user->username }}</td>
+                        <td>{{ $payment->user->school }}</td>
+                        <td>{{ $payment->type }}</td>
+                        <td>{{ $payment->client }}</td>
+                        <td>Deposit</td>
+                        <td>{{ $payment->amount }}</td>
+                        <td>{{ $payment->created_at }}</td>
+                      </tr>
+                    @endforeach
                   </tbody>
                 </table>
             </ul>

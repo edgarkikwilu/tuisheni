@@ -10,6 +10,9 @@ use App\Topic;
 use App\Exam;
 use App\Quiz;
 use App\Report;
+use App\Award;
+use App\Payment;
+use App\Violation;
 
 use DB;
 
@@ -17,9 +20,6 @@ class AdminController extends Controller
 {
     public function admindash(){
         return view('admin/admindash');
-    }
-    public function awards(){
-        return view('admin/awards');
     }
     public function payments(){
         return view('admin/payments');
@@ -277,6 +277,107 @@ class AdminController extends Controller
 
         return view('admin.reports')->withreports($reports->get())->withSubjects($subjects);
 
+    }
+
+    public function getAllAwards(){
+        $awards = Award::with('user')->with('subject')->get();
+        $subjects = Subject::all();
+        return view('admin.awards')->withAwards($awards)->withSubjects($subjects);
+    }
+    public function filterAwards(Request $request){
+
+        $awards = new Award();
+        $awards = $awards->newQuery();
+
+        $subjects = Subject::all();
+
+        if ($request->has('subject') && $request->subject != "") {
+            $awards->where('subject_id', $request->subject);
+        }
+
+        if ($request->has('week') && $request->week != "") {
+            //$awards->where('week', $request->week);
+        }
+
+        if ($request->has('form') && $request->form != "") {
+            $awards->where('form',$request->form);
+        }
+
+        if ($request->has('month') && $request->month != "") {
+            $awards->whereMonth('created_at',$request->month);
+        }
+
+        if ($request->has('username') && $request->username != "") {
+            $awards->whereHas('user', function($query) use ($request){
+                $query->where('username','like', '%'.$request->username.'%');
+            });
+        }
+
+        if ($request->has('school') && $request->school != "") {
+            $awards->whereHas('user', function($query) use ($request){
+                $query->where('school','like', '%'.$request->school.'%');
+            });
+        }
+
+        return view('admin.awards')->withawards($awards->get())->withSubjects($subjects);
+
+    }
+
+    public function getAllPayments(){
+        $payments = Payment::with('user')->get();
+        $sum =  DB::table('payments')->sum('amount');
+        return view('admin.payments')->withPayments($payments)->withSum($sum);
+    }
+    public function filterPayments(Request $request){
+
+        $payments = new payment();
+        $payments = $payments->newQuery();
+
+        if ($request->has('username') && $request->username != "") {
+            $payments->whereHas('user', function($query) use ($request){
+                $query->where('type',$request->type);
+            });
+        }
+
+        if ($request->has('week') && $request->week != "") {
+            //$payments->where('week', $request->week);
+        }
+
+        if ($request->has('form') && $request->form != "") {
+            $payments->whereHas('user', function($query) use ($request){
+                $query->where('form',$request->form);
+            });
+        }
+
+        if ($request->has('type') && $request->type != "") {
+            $payments->whereHas('user', function($query) use ($request){
+                $query->where('type',$request->type);
+            });
+        }
+
+        if ($request->has('month') && $request->month != "") {
+            $payments->whereMonth('created_at',$request->month);
+        }
+
+        if ($request->has('username') && $request->username != "") {
+            $payments->whereHas('user', function($query) use ($request){
+                $query->where('username','like', '%'.$request->username.'%');
+            });
+        }
+
+        if ($request->has('school') && $request->school != "") {
+            $payments->whereHas('user', function($query) use ($request){
+                $query->where('school','like', '%'.$request->school.'%');
+            });
+        }
+
+        return view('admin.payments')->withpayments($payments->get());
+
+    }
+
+    public function getAllViolations(){
+        $violations = Violation::with('user')->get();
+        return view('admin.violations')->withViolations($violations);
     }
 
     public function addRole(Request $request){
