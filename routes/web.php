@@ -21,8 +21,6 @@ Auth::routes();
 //Route::post('register', 'RegisterController@register')->name('register');
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('dashboard/teacher', 'TeacherController@index')->name('teacher.dashboard');
-
 
 //from index page
 Route::get('/explore', 'ExploreController@index')->name('explore');
@@ -68,6 +66,7 @@ Route::get('/student/notes', 'StudentController@notes')->name('student/notes');
 Route::get('/student/payments', 'StudentController@payments')->name('student/payments');
 Route::get('/student/results', 'StudentController@results')->name('student/results');
 Route::get('/student/assesment', 'StudentController@assesment')->name('student/assesment');
+Route::get('/student/createnotes', 'StudentController@createnotes')->name('student/createnotes');
 
 
 //admin dashboard
