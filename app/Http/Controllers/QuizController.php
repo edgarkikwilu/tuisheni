@@ -38,6 +38,10 @@ class QuizController extends Controller
         //
     }
 
+    public function filterQuizzes(Request $request){
+
+    }
+
     /**
      * Display the specified resource.
      *

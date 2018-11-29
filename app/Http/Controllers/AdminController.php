@@ -13,6 +13,8 @@ use App\Report;
 use App\Award;
 use App\Payment;
 use App\Violation;
+use App\Permission;
+use App\Role;
 
 use DB;
 
@@ -380,9 +382,15 @@ class AdminController extends Controller
         return view('admin.violations')->withViolations($violations);
     }
 
+    public function role_permission(){
+        $permissions = Permission::all();
+        $roles = Role::all();
+        return view('admin.role_permission')->withPermissions($permissions)->withroles($roles);
+    }
+
     public function addRole(Request $request){
         $request->validate([
-            'name'=>'required|unique|min:3|max:30|string',
+            'name'=>'required|min:3|max:30|string',
             'display_name'=>'string|max:40',
             'description'=>'string|max:100'
         ]);
@@ -391,8 +399,8 @@ class AdminController extends Controller
         $role->display_name = $request->display_name;
         $role->description = $request->description;
         
-        if ($role->save()) {
-            $role->syncPermissions($request->permissions);
+        if ($role->save() && $request->has('permissions') && $request->permissions != "") {
+            $role->permissions()->attach($request->permissions);
         }
 
         return redirect()->back();
@@ -400,7 +408,7 @@ class AdminController extends Controller
 
     public function addPermission(Request $request){
         $request->validate([
-            'name'=>'required|unique|min:3|max:30|string',
+            'name'=>'required|min:3|max:30|string',
             'display_name'=>'string|max:40',
             'description'=>'string|max:100'
         ]);
