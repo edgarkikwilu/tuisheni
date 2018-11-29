@@ -37,19 +37,17 @@ Route::get('/admin', 'IndexController@admin')->name('admin');
 Route::get('/teacher', 'IndexController@teacher')->name('teacher');
 Route::get('/student', 'IndexController@student')->name('student');
 Route::get('/examination', 'ExamController@index')->name('examination');
+Route::post('/filter/examinations', 'ExamController@filterExams')->name('filter.examination');
 Route::get('/admindash', 'IndexController@admindash')->name('admindash');
 
 
 Route::get('/teachers', 'IndexController@teachers')->name('teachers');
 Route::get('/students', 'IndexController@students')->name('students');
-// Route::get('/studentdash', 'IndexController@studentdash')->name('studentdash');
-Route::get('/dashboard', 'IndexController@dashboard')->name('dashboard');
-//Route::get('/examination', 'IndexController@examination')->name('examination');
 Route::get('/quiz', 'IndexController@quiz')->name('quiz');
+Route::post('/filter/quiz', 'QuizController@filterquizzes')->name('filter.quiz');
 Route::get('/recomended_subject', 'SubjectController@recomended_subject')->name('recomended_subject');
 
 Route::get('/recomended_exam', 'ExamController@recomended_exam')->name('recomended_exam');
-Route::get('/examination', 'ExamController@examination')->name('examination');
 
 //teacher dashboard
 Route::middleware('role:teacher')->group(function(){

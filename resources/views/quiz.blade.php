@@ -2,50 +2,31 @@
 @section('content')
 <div class="container" style="margin-top: 10px; border-top: 1px dotted  #566573 ;">
 <nav class="navbar" style="margin-top: 40px;">
-        <form class="form-inline col-sm-12">
+        <form action="{{ route('filter.quiz') }}" method="POST" class="form-inline col-sm-12">
+                @csrf
         <div class="col-sm-3">
-        <select class="custom-select">
-        <option value="1">Physics</option>
-        <option value="2">Biology</option>
-        <option value="3">Chemistry</option>
-        <option value="1">Mathematics</option>
-        <option value="2">ICT</option>
-        <option value="3">Technical Education</option>
-        <option value="1">Kiswahili</option>
-        <option value="2">English</option>
-        <option value="3">French</option>
-        <option value="3">Arabic</option>
-        <option value="1">Geography</option>
-        <option value="2">History</option>
-        <option value="3">Civics</option>
-        <option value="1">Economics</option>
-        <option value="2">Agriculture</option>
-        <option value="3">Book-Keeping</option>
-        <option value="1">Commerce</option>
-        <option value="2">Bible Knowledge</option>
-        <option value="3">Islamic Knowledge</option>
-        <option value="1">Fine Arts</option>
-        <option value="2">Theater Arts</option>
-        <option value="3">Physical Education</option>
-        <option value="3">Music</option>
-        
+        <select name="subject" class="custom-select">
+        <option value=""></option>
+        @foreach ($subjects as $subject)
+                <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+        @endforeach
         </select>
         </div>
         <div class="col-sm-3">
-                <select class="custom-select">
+                <select name="form" class="custom-select">
                         <option value="1">Form 1</option>
                         <option value="2">Form 2</option>
                         <option value="3">Form 3</option>
-                        <option value="1">Form 4</option>
-                        <option value="2">Form 5</option>
-                        <option value="3">Form 6</option>
+                        <option value="4">Form 4</option>
+                        <option value="5">Form 5</option>
+                        <option value="6">Form 6</option>
                 </select>
         </div>
-        <div class="col-sm-3"><input class="form-control mr-sm-2" type="search" placeholder="Search By Username" aria-label="username" style="width: 100%;"></div>
-        <div class="col-sm-3"><input class="form-control mr-sm-2" type="search" placeholder="Search By School" aria-label="school" style="width: 100%;"></div>
-        <div class="col-sm-3" style="margin-top:10px;"><input class="form-control mr-sm-2" type="search" placeholder="Search By Quiz Title" aria-label="examtitle" style="width: 100%;"></div>
+        <div class="col-sm-3"><input name="username" class="form-control mr-sm-2" type="search" placeholder="Search By Username" aria-label="username" style="width: 100%;"></div>
+        <div class="col-sm-3"><input name="school" class="form-control mr-sm-2" type="search" placeholder="Search By School" aria-label="school" style="width: 100%;"></div>
+        <div class="col-sm-3" style="margin-top:10px;"><input name="title" class="form-control mr-sm-2" type="search" placeholder="Search By Quiz Title" aria-label="examtitle" style="width: 100%;"></div>
         <div class="container">
-        <button class="btn btn-primary" style="margin-top: 10px;" href="#">Filter Quizzes</button>
+        <button class="btn btn-primary" style="margin-top: 10px;" type="submit">Filter Quizzes</button>
         </div>
         </form>
 
