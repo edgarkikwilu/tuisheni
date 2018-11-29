@@ -47,9 +47,14 @@ Route::get('/dashboard', 'IndexController@dashboard')->name('dashboard');
 //Route::get('/examination', 'IndexController@examination')->name('examination');
 Route::get('/quiz', 'IndexController@quiz')->name('quiz');
 Route::get('/recomended_subject', 'SubjectController@recomended_subject')->name('recomended_subject');
+Route::get('/sidebar_subject', 'SubjectController@sidebar_subject')->name('sidebar_subject');
 
 Route::get('/recomended_exam', 'ExamController@recomended_exam')->name('recomended_exam');
-Route::get('/examination', 'ExamController@examination')->name('examination');
+//  Route::get('/examination', 'ExamController@examination')->name('examination');
+
+//quiz
+Route::get('/singlequiz', 'QuizController@singlequiz')->name('singlequiz');
+
 
 //teacher dashboard
 Route::get('/teacher/teacherdash', 'TeacherController@teacherdash')->name('teacher/teacherdash');

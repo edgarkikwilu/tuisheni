@@ -82,4 +82,7 @@ class QuizController extends Controller
     {
         //
     }
+    public function singlequiz (){
+        return view ('singlequiz');
+    }
 }

@@ -110,4 +110,7 @@ class SubjectController extends Controller
     public function recomended_subject(){
         return view('recomended_subject');
     }
+    public function sidebar_subject(){
+        return view('sidebar_subject');
+    }
 }

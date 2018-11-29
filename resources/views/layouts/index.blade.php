@@ -93,8 +93,8 @@
 
       
       
-        <div class="container" style="text-align:center; margin-top: 40px;">
-          <h3 class="display-5" style="color: #001f9c ; " >SCHOOL WEEK <?php echo date('W') ?></h3>  
+        <div style="text-align:left; margin-left:10px;">
+          <h4  ><small class="text-muted"> SCHOOL WEEK <?php echo date('W') ?></small></h4>  
         </div>      
       
     <!--  
