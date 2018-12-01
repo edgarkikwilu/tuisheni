@@ -17,8 +17,11 @@ class QuizController extends Controller
     {
         $quizzes = Quiz::all();
         $subjects = Subject::all();
+        return view('quiz/quiz')->withSubjects($subjects)->withQuizzes($quizzes);
+    }
 
-        return view('quiz')->withSubjects($subjects)->withQuizzes($quizzes);
+    public function getSingleQuiz(){
+        return view('quiz/singlequiz');
     }
 
     public function filter(Request $request){
@@ -55,14 +58,10 @@ class QuizController extends Controller
         return view('quiz')->withquizzes($quizzes->get())->withSubjects($subjects);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function attempt($id)
     {
-        //
+        $quiz = Quiz::with('questions')->with('user')->where('id',$id)->first();
+        return view('quiz/singlequiz')->withQuiz($quiz);
     }
 
     /**
