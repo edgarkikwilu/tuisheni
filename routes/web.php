@@ -25,35 +25,42 @@ Route::get('/home', 'HomeController@index')->name('home');
 //from index page
 Route::get('/explore', 'ExploreController@index')->name('explore');
 Route::get('/profile', 'IndexController@profile')->name('profile');
-Route::get('/single', 'IndexController@single')->name('single');
 Route::get('/editprofile', 'IndexController@editprofile')->name('editprofile');
 Route::get('/dm', 'IndexController@dm')->name('dm');
 Route::get('/author/{id}', 'IndexController@author')->name('author');
 Route::get('/subject/{subject}', 'IndexController@subject')->name('subject');
 
+//message controller
+Route::post('/message', 'MessageController@store')->name('message');
+
 //from profile page
 Route::get('/assesment', 'IndexController@assesment')->name('assesment');
 Route::get('/admin', 'IndexController@admin')->name('admin');
-Route::get('/teacher', 'IndexController@teacher')->name('teacher');
-Route::get('/student', 'IndexController@student')->name('student');
 Route::get('/examination', 'ExamController@index')->name('examination');
 Route::post('/filter/examinations', 'ExamController@filterExams')->name('filter.examination');
 Route::get('/admindash', 'IndexController@admindash')->name('admindash');
 
 
-Route::get('/teachers', 'IndexController@teachers')->name('teachers');
-Route::get('/students', 'IndexController@students')->name('students');
-Route::get('/quiz', 'IndexController@quiz')->name('quiz');
-Route::post('/filter/quiz', 'QuizController@filterquizzes')->name('filter.quiz');
+Route::get('/teachers', 'TeacherController@teachers')->name('teachers');
+Route::post('/filter/teachers', 'TeacherController@filterTeachers')->name('filter.teachers');
+Route::post('/follow/teacher', 'TeacherController@followTeacher')->name('follow.teacher');
+Route::post('/message/teacher', 'TeacherController@messageTeacher')->name('message.teacher');
 Route::get('/recomended_subject', 'SubjectController@recomended_subject')->name('recomended_subject');
 Route::get('/sidebar_subject', 'SubjectController@sidebar_subject')->name('sidebar_subject');
 
 Route::get('/recomended_exam', 'ExamController@recomended_exam')->name('recomended_exam');
 //  Route::get('/examination', 'ExamController@examination')->name('examination');
 
-//quiz
+//quiz controller
+Route::get('/quiz', 'QuizController@index')->name('quiz');
+Route::post('/filter/quiz', 'QuizController@filter')->name('filter.quiz');
 Route::get('/singlequiz', 'QuizController@singlequiz')->name('singlequiz');
 
+//student controller
+Route::get('/students', 'StudentController@students')->name('students');
+Route::post('/filter/students', 'StudentController@filterStudents')->name('filter.students');
+Route::post('/follow/student', 'StudentController@followStudent')->name('follow.student');
+Route::post('/message/student', 'StudentController@messageStudent')->name('message.student');
 
 //teacher dashboard
 Route::middleware('role:teacher')->group(function(){
@@ -107,6 +114,7 @@ Route::middleware('role:superadmin')->group(function(){
 //from subject page
 Route::get('/class/{subject}/{class}', 'SubjectController@class')->name('class');
 Route::get('/assessment/{id}', 'SubjectController@assessment')->name('assessment');
+Route::get('/single/{id}', 'SubjectController@single')->name('single');
 
 //author page
 Route::get('/follow/{id}','IndexController@follow')->name('follow');

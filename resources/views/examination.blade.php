@@ -164,7 +164,7 @@
                                 <small class="text-muted">{{ $exam->user->school }}</small>
                                 </div>
                                 <div class="col-lg-12">
-                                        <small class="text-muted">{{ $exam->created_at->diffForHumans() }}</small>
+                                <small class="text-muted">{{ $exam->created_at->diffForHumans() }}</small>
                                 </div>
                                 </div>     
                         </div>

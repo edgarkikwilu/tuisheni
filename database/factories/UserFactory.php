@@ -20,6 +20,7 @@ $factory->define(App\User::class, function (Faker $faker) {
         'lastname' => $faker->name,
         'mobile'=>$faker->numberBetween($min = 100, $max = 9000),
         'school'=>$faker->word,
+        'bio'=>$faker->word,
         'type'=>$faker->boolean?'teacher':'student',
         'points'=>$faker->numberBetween($min = 100, $max = 9000),
         'email' => $faker->unique()->safeEmail,

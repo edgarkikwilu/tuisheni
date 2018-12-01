@@ -38,186 +38,48 @@
 
 <div class="row">
 
+@foreach ($quizzes as $quiz)
 <div class="col-lg-3"  style="margin-top: 20px;">
-    <div class="card">
-            <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
-                    <div class="container" style="text-align:center;">
-                        <div class="row">
-                        <div class="col-lg-12">
-                        <small class="text-muted" style="color:#001f9c;">Mr. Masore,</small>
-                        <small class="text-muted">Loyola High School</small>
+        <div class="card">
+                <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
+                        <div class="container" style="text-align:center;">
+                            <div class="row">
+                            <div class="col-lg-12">
+                            <small class="text-muted" style="color:#001f9c;">{{ $quiz->user->username }},</small>
+                            <small class="text-muted">{{ $quiz->user->school }}</small>
+                            </div>
+                            <div class="col-lg-12">
+                                <small class="text-muted">{{ $quiz->user->created_at->diffForHumans() }}</small>
+                            </div>
+                            </div>     
                         </div>
-                        <div class="col-lg-12">
-                                <small class="text-muted">9 mins ago</small>
-                        </div>
-                        </div>     
-                    </div>
-        <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12">
-                                <h5 class="card-title" style="color:#001f9c">Physics Quizzes Series 1</h5>
-                        </div> 
-                </div>
-        </div>
-        
             <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                        <p>Total: <small class="text-muted">15 Questions</small></p>
-                        <p>Price: <small class="text-muted">30 Points</small></p>
-                </div>
-            </div>
-        </div>
-        <div class="container">
                 <div class="row">
                         <div class="col-lg-12">
-                                <small class="text-muted">#physics #topicname</small>
-                        </div>
-                        
-                </div>
-        </div>
-            
-        
-                
-            </div>
-
-
-</div>
-<div class="col-lg-3"  style="margin-top: 20px;">
-    <div class="card">
-            <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
-                    <div class="container" style="text-align:center;">
-                        <div class="row">
-                        <div class="col-lg-12">
-                        <small class="text-muted" style="color:#001f9c;">Mr. Masore,</small>
-                        <small class="text-muted">Loyola High School</small>
-                        </div>
-                        <div class="col-lg-12">
-                                <small class="text-muted">9 mins ago</small>
-                        </div>
-                        </div>     
-                    </div>
-        <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12">
-                                <h5 class="card-title" style="color:#001f9c">Physics Quizzes Series 1</h5>
+                        <h5 class="card-title" style="color:#001f9c">{{ $quiz->user->title }}</h5>
                         </div> 
                 </div>
-        </div>
-        
-            <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                        <p>Total: <small class="text-muted">15 Questions</small></p>
-                        <p>Price: <small class="text-muted">30 Points</small></p>
-                </div>
             </div>
-        </div>
-        <div class="container">
-                <div class="row">
-                        <div class="col-lg-12">
-                                <small class="text-muted">#physics #topicname</small>
-                        </div>
-                        
-                </div>
-        </div>
             
-        
-                
-            </div>
-
-
-</div>
-<div class="col-lg-3"  style="margin-top: 20px;">
-    <div class="card">
-            <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
-                    <div class="container" style="text-align:center;">
-                        <div class="row">
-                        <div class="col-lg-12">
-                        <small class="text-muted" style="color:#001f9c;">Mr. Masore,</small>
-                        <small class="text-muted">Loyola High School</small>
-                        </div>
-                        <div class="col-lg-12">
-                                <small class="text-muted">9 mins ago</small>
-                        </div>
-                        </div>     
+                <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p>Total: <small class="text-muted">{{ $quiz->questions->count() }} Questions</small></p>
+                        <p>Price: <small class="text-muted">{{ $quiz->prize }} Points</small></p>
                     </div>
-        <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12">
-                                <h5 class="card-title" style="color:#001f9c">Physics Quizzes Series 1</h5>
-                        </div> 
                 </div>
-        </div>
-        
+            </div>
             <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>Total: <small class="text-muted">15 Questions</small></p>
-                    <p>Price: <small class="text-muted">30 Points</small></p>
-                </div>
-            </div>
-        </div>
-        <div class="container">
                 <div class="row">
-                        <div class="col-lg-12">
-                                <small class="text-muted">#physics #topicname</small>
-                        </div>
-                        
-                </div>
-        </div>
-            
-        
-                
-            </div>
-
-
-</div>
-<div class="col-lg-3"  style="margin-top: 20px;">
-    <div class="card">
-            <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
-                    <div class="container" style="text-align:center;">
-                        <div class="row">
-                        <div class="col-lg-12">
-                        <small class="text-muted" style="color:#001f9c;">Mr. Masore,</small>
-                        <small class="text-muted">Loyola High School</small>
-                        </div>
-                        <div class="col-lg-12">
-                                <small class="text-muted">9 mins ago</small>
-                        </div>
-                        </div>     
-                    </div>
-        <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12">
-                                <h5 class="card-title" style="color:#001f9c">Physics Quizzes Series 1</h5>
-                        </div> 
-                </div>
-        </div>
-        
-            <div class="container">
-            <div class="row">
                 <div class="col-lg-12">
-                    <p>Total: <small class="text-muted">15 Questions</small></p>
-                    <p>Price: <small class="text-muted">30 Points</small></p>
+                        <small class="text-muted">#physics {{ $quiz->tag }}</small>
+                </div>          
                 </div>
-            </div>
+            </div>            
         </div>
-        <div class="container">
-                <div class="row">
-                        <div class="col-lg-12">
-                                <small class="text-muted">#physics #topicname</small>
-                        </div>
-                        
-                </div>
-        </div>
-            
-        
-                
-            </div>
+    </div>
+@endforeach
 
-
-</div>
 </div>
 </div>
 <!--END ALL QUIZZES-->

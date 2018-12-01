@@ -39,7 +39,7 @@ class ExamController extends Controller
         }
 
         if ($request->has('title') && $request->title != "") {
-            $exams->where('title',$request->title);
+            $exams->where('title','like', '%'.$request->title.'%');
         }
 
         if ($request->has('username') && $request->username != "") {

@@ -12,4 +12,7 @@ class QuizQuestion extends Model
     public function questionType(){
         return $this->belongsTo('App\QuestionType');
     }
+    public function choices(){
+        return $this->hasMany('App\Choice');
+    }
 }

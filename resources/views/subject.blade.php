@@ -32,7 +32,86 @@
                         @endforeach  
                 </div>
         </div>
+
+        <div class="container">
+                <div class="row justify-content-center">Recommended Notes</div>
+                <div class="row">
+                        @foreach ($recommended as $note)
+                        <div class="col-lg-3"  style="margin-top: 20px;">
+                                <div class="card">
+                                        <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
+                                                <div class="container" style="text-align:center;">
+                                                        <div class="row">
+                                                        <div class="col-lg-12">
+                                                        <small class="text-muted" style="color:#001f9c;">{{ $note->user->username }},</small>
+                                                        <small class="text-muted">{{ $note->user->school }}</small>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                                <small class="text-muted">{{ $note->created_at}}</small>
+                                                        </div>
+                                                        </div>     
+                                                </div>
+                                        <div class="container">
+                                                <a href="{{route('single',$note->id)}}">
+                                                <div class="row">
+                                                        <div class="col-lg-12">
+                                                                <h5 class="card-title" style="color:#001f9c">{{ $note->title }}</h5>
+                                                        </div> 
+                                                </div>
+                                                </a>
+                                        </div>
+                                        <div class="container">
+                                                <div class="row">
+                                                        <div class="col-lg-12">
+                                                                <small class="text-muted">#physics #introduction-to-physics</small>
+                                                        </div>
+                                                </div>
+                                        </div>        
+                                </div>             
+                        </div>
+                        @endforeach
+        </div>
+        </div>
         
+        <div class="container">
+                        <div class="row justify-content-center">Other Notes</div>
+                        <div class="row">
+                                @foreach ($other as $note)
+                                <div class="col-lg-3"  style="margin-top: 20px;">
+                                        <div class="card">
+                                                <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
+                                                        <div class="container" style="text-align:center;">
+                                                                <div class="row">
+                                                                <div class="col-lg-12">
+                                                                <small class="text-muted" style="color:#001f9c;">{{ $note->user->username }},</small>
+                                                                <small class="text-muted">{{ $note->user->school }}</small>
+                                                                </div>
+                                                                <div class="col-lg-12">
+                                                                        <small class="text-muted">{{ $note->created_at}}</small>
+                                                                </div>
+                                                                </div>     
+                                                        </div>
+                                                <div class="container">
+                                                        <a href="{{route('single',$note->id)}}">
+                                                        <div class="row">
+                                                                <div class="col-lg-12">
+                                                                        <h5 class="card-title" style="color:#001f9c">{{ $note->title }}</h5>
+                                                                </div> 
+                                                        </div>
+                                                        </a>
+                                                </div>
+                                                <div class="container">
+                                                        <div class="row">
+                                                                <div class="col-lg-12">
+                                                                        <small class="text-muted">#physics #introduction-to-physics</small>
+                                                                </div>
+                                                        </div>
+                                                </div>        
+                                        </div>             
+                                </div>
+                                @endforeach
+                </div>
+                </div>
 
 <div class="container" style="text-align:center; margin-top: 40px;">
         <h4 class="display-6" style="color: #001f9c ; " >RECOMMENDED PHYSICS EXAMS WEEK 1</h4>  
@@ -55,7 +134,7 @@
                                         </div>     
                                         </div>
                         <div class="container">
-                                <a href="{{ route('single') }}">     
+                                <a href="">     
                                         <div class="row">
                                         <div class="col-lg-12">
                                                 <h5 class="card-title" style="color:#001f9c">{{ $exam->title }}</h5>

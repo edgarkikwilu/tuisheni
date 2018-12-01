@@ -6,6 +6,8 @@ use App\Subject;
 use App\Report;
 use App\Note;
 use App\Topic;
+use App\Attachment;
+use App\Follow;
 use App\Subtopic;
 use Illuminate\Http\Request;
 
@@ -37,6 +39,14 @@ class SubjectController extends Controller
         return view('class')->withSubject($subject)->withClass($class)->withTopStudents($topStudents)
                 ->withTopics($topics->take(7))->withRecommendedNotes($recommendedNotes)->withMostVotedNotes($mostVotedNotes);
     }
+
+    public function single($id){
+        $notes = Note::with('attachements')->where('id',$id)->first();
+        $user_id = Note::select('user_id')->where('id',$id)->get()->first();
+        $followers = Follow::where('follow_id',$user_id)->count();
+        return view('single')->withNotes($notes)->withFollowers($followers);
+    }
+
     public function assessment($id){
         return view('assesment');
     }

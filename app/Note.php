@@ -9,8 +9,8 @@ class Note extends Model
     public function user(){
         return $this->belongsTo('App\User');
     }
-    public function attachments(){
-        return $this->hasMany('App\Attachment');
+    public function attachements(){
+        return $this->hasMany('App\Attachement');
     }
 
     public function comments(){

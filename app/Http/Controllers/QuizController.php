@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Quiz;
+use App\Subject;
 use Illuminate\Http\Request;
 
 class QuizController extends Controller
@@ -14,7 +15,44 @@ class QuizController extends Controller
      */
     public function index()
     {
-        //
+        $quizzes = Quiz::all();
+        $subjects = Subject::all();
+
+        return view('quiz')->withSubjects($subjects)->withQuizzes($quizzes);
+    }
+
+    public function filter(Request $request){
+        $quizzes = new Quiz();
+        $quizzes = $quizzes->newQuery();
+        $subjects = Subject::all();
+
+        if ($request->has('subject') && $request->subject != "") {
+            $quizzes->where('subject_id', $request->subject);
+        }
+
+        if ($request->has('form') && $request->form != "") {
+            $quizzes->whereHas('topic', function($query) use ($request){
+                $query->where('form',$request->form);
+            });
+        }
+
+        if ($request->has('title') && $request->title != "") {
+            $quizzes->where('title','like', '%'.$request->title.'%');
+        }
+
+        if ($request->has('username') && $request->username != "") {
+            $quizzes->whereHas('user', function($query) use ($request){
+                $query->where('username','like', '%'.$request->username.'%');
+            });
+        }
+
+        if ($request->has('school') && $request->school != "") {
+            $quizzes->whereHas('user', function($query) use ($request){
+                $query->where('school','like', '%'.$request->school.'%');
+            });
+        }
+
+        return view('quiz')->withquizzes($quizzes->get())->withSubjects($subjects);
     }
 
     /**

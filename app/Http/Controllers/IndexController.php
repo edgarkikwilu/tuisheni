@@ -70,11 +70,14 @@ class IndexController extends Controller
         $recommended = Note::where('original',true)->whereHas('topic.subject', function($query)  use ($subject_id){
             $query->where('id', 8);
         })->get();
+        $other = Note::where('original',true)->whereHas('topic.subject', function($query)  use ($subject_id){
+            $query->where('id', 8);
+        })->get();
         $exams = Exam::with('user')->where('subject_id', $subject_id)->get();
         $packages = Package::with('packageSpecs')->get();
         $teachers = User::where('type','teacher')->orderBy('rate','desc')->limit(4)->get();
         return view('subject')->withSubject($subject)->withTopStudents($topStudents)
-            ->withRecommended($recommended)->withTeachers($teachers)->withExams($exams)->withPackages($packages);
+            ->withRecommended($recommended)->withOther($other)->withTeachers($teachers)->withExams($exams)->withPackages($packages);
     }
     public function author($id){
         $user = User::with('notes')->where('id',$id)->first();
@@ -104,20 +107,8 @@ class IndexController extends Controller
     public function single(){
         return view('single');
     }
-    
-    public function quiz(){
-        return view('quiz');
-    }
     public function teacherdash(){
         return view('teacherdash');
     }
-    public function teachers(){
-        return view('teachers');
-    }
-    public function students(){
-        return view('students');
-    }
-    public function studentdash(){
-        return view('studentdash');
-    }
+    
 }

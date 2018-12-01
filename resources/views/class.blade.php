@@ -75,6 +75,7 @@
                 </div>
                 @endforeach
 </div>
+</div>
 
 <div class="container" style="text-align:left; margin-top: 40px;">
     <div class="row">
