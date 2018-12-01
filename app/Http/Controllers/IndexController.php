@@ -105,9 +105,7 @@ class IndexController extends Controller
         return view('single');
     }
     
-    public function quiz(){
-        return view('quiz');
-    }
+    
     public function teacherdash(){
         return view('teacherdash');
     }

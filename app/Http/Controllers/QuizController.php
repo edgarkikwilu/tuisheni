@@ -86,7 +86,14 @@ class QuizController extends Controller
     {
         //
     }
-    public function singlequiz (){
-        return view ('singlequiz');
+    public function quiz(){
+        return view('quiz/quiz');
     }
+    public function singlequiz (){
+        return view ('quiz/singlequiz');
+    }
+    public function createquiz (){
+        return view ('quiz/createquiz');
+    }
+
 }

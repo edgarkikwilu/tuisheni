@@ -34,7 +34,7 @@ class SubjectController extends Controller
         $mostVotedNotes = Note::where('topic_id',$firstTopic->id)->orderBy('votes','desc')->where('original', false)->get();
         $topStudents = Report::where('week',$week)->orderBy('score','desc')->take(3)->get();
         $votednotes = Note::where('week', $week)->where('original', true)->orderBy('votes','desc')->take(3)->get();
-        return view('class')->withSubject($subject)->withClass($class)->withTopStudents($topStudents)
+        return view('class/class')->withSubject($subject)->withClass($class)->withTopStudents($topStudents)
                 ->withTopics($topics->take(7))->withRecommendedNotes($recommendedNotes)->withMostVotedNotes($mostVotedNotes);
     }
     public function assessment($id){
@@ -112,5 +112,8 @@ class SubjectController extends Controller
     }
     public function sidebar_subject(){
         return view('sidebar_subject');
+    }
+    public function class_topic(){
+        return view('class/class_topic');
     }
 }

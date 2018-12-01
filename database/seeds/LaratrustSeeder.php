@@ -63,6 +63,7 @@ class LaratrustSeeder extends Seeder
                 'mobile'=>$faker->numberBetween($min = 100, $max = 9000),
                 'school'=>$faker->word,
                 'type'=>$faker->boolean?'teacher':'student',
+                'bio'=>$faker->word,
                 'points'=>$faker->numberBetween($min = 100, $max = 9000),
                 'email_verified_at' => now(),
                 'remember_token' => str_random(10),

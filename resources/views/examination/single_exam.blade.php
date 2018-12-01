@@ -28,7 +28,7 @@
                     </div>
                 </div>
                 <div class="container" style="text-align:center">
-                        <h3 class="card-title" style="color:blue; margin-top:10px; margin-left:5px;" >This is the post title of an exam or Notes</h3>
+                        <h3 class="card-title" style="color:blue; margin-top:10px; margin-left:5px;" >This is the post title of an exam</h3>
                         <span ><small class="text-muted">#physics #introduction to physics</small></span>
                 </div>
             

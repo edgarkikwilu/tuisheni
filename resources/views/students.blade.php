@@ -1,9 +1,11 @@
 @extends('layouts.index')
 @section('content')
-
+<div class="row">
+        @include('sidebar_subject')
+        <div class="col-md-9">
+   
 <div class="container" style=" margin-top: 40px;">
     <h3 class="display-5" style="color: #001f9c ; " >Filter Students</h3>  
-</div>
   <nav class="navbar">
     <form class="form-inline col-sm-12">
       <div class="col-sm-3">
@@ -52,6 +54,7 @@
     </form>
   
 </nav>
+</div>
 <div class="container">
     <div class="row">
         <div class="col-lg-3" style=" text-align: center; margin-top:50px;">
@@ -100,5 +103,6 @@
             </div>
     </div>
 </div>
-
+        </div>
+</div>
 @endsection
