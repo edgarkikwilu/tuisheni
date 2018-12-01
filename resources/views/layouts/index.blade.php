@@ -51,13 +51,13 @@
                 <a class="nav-link" href="{{ route('index') }}">Home <span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item" style="margin-left:10px;">
-                <a class="nav-link" href="{{ route('explore') }}">Explore Post</a>
+                <a class="nav-link" href="{{ route('explore') }}">Explore Notes</a>
               </li>
               <li class="nav-item" style="margin-left:10px;">
-                  <a class="nav-link" href="{{ route('quiz') }}">Online Quizzes</a>
+                  <a class="nav-link" href="{{ route('quiz/quiz') }}">Online Quizzes</a>
                 </li>
                 <li class="nav-item" style="margin-left:10px; ">
-                    <a class="nav-link" href="{{ route('examination') }}">Examinations</a>
+                    <a class="nav-link" href="{{ route('examination/examination') }}">Examinations</a>
                   </li>
                   <li class="nav-item" style="margin-left:10px; ">
                     <a class="nav-link" href="{{ route('teachers') }}">Teachers</a>

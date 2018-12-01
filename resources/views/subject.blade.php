@@ -14,7 +14,8 @@
 <div class="row">
 @include('sidebar_subject')
 <div class="col-md-9">
-        <div class="container" style=" text-align: center;">
+@include('class/classnav')
+        <div class="container" style=" text-align: center; margin-top:30px;">
         <h3 class="display-6" style="color: #001f9c ; " >{{$subject}} TOP 3 WEEK <?php echo date('W') ?></h3>
         </div>
         
@@ -224,17 +225,7 @@
 </div>
 </div>
 <!--
-<div class="container">
-    <nav class="nav nav-pills nav-justified">
-        
-       <a class="nav-item nav-link" href="{{ route('class',[$subject,1]) }}">Form One</a>
-        <a class="nav-item nav-link" href="{{ route('class',[$subject,2]) }}">Form Two</a>
-        <a class="nav-item nav-link" href="{{ route('class',[$subject,3]) }}">Form Three</a>
-        <a class="nav-item nav-link" href="{{ route('class',[$subject,4]) }}">Form Four</a>
-        <a class="nav-item nav-link" href="{{ route('class',[$subject,5]) }}">Form Five</a>
-        <a class="nav-item nav-link" href="{{ route('class',[$subject,6]) }}">Form Six</a>
-      </nav>
-</div>  -->
+  -->
 
 <!-- Three columns of text below the carousel -->
  

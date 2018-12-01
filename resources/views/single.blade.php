@@ -1,6 +1,9 @@
 @extends('layouts.index')
 @section('content')
-
+<div class="row">
+    @include('sidebar_subject')
+    <div class="col-md-9">
+   
 <div class="container" style="margin-top: 10px; ">
     <div class="row">
         <div class="col-lg-12"  style="margin-top: 20px;">
@@ -21,7 +24,7 @@
                                 <!-- Trigger the modal with a button -->
                             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Message</button>
                             </div>
-                            <small><a class="nav-link" href="#">{{ $followers }} Friends</a></small>
+                            <small><a class="nav-link" href="#">{{ $followers }} Friends/Views</a></small>
                         </div>
                     </div>
                 </div>
@@ -34,24 +37,24 @@
                         {{ $notes->article }}
                 </div>
                 <div class="card-body">
-                        <h5 class="text-muted">Attachments spa</h5>
-                        <div class="row">
-                            @foreach ($notes->attachements as $attachment)
-                            <div class="col-md-3 text-center">
-                                <div class="row">
-                                        <div class="col-md-12">
-                                                <img class="card-image" style="margin-left:5px;" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="90" height="90">
-                                        </div>
-                                        <div class="col-md-12">{{ $attachment->filename }}</div>
+                    <h5 class="text-muted">Attachments spa</h5>
+                    <div class="row">
+                        @foreach ($notes->attachements as $attachment)
+                        <div class="col-md-3 text-center">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <img class="card-image" style="margin-left:5px;" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="90" height="90">
                                 </div>
+                                <div class="col-md-12">{{ $attachment->filename }}</div>
                             </div>
-                            @endforeach
                         </div>
+                        @endforeach
+                    </div>
                 </div>
-                
-                <button type="button" class="btn btn-primary">VIEW / DOWNLOAD ATTACHMENTS</button>
             </div>
         </div>
+    </div>
+</div>
     </div>
 </div>
 

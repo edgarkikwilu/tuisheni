@@ -1,5 +1,9 @@
 @extends('layouts.index')
 @section('content')
+<div class="row">
+@include('sidebar_subject')
+<div class="col-md-9">
+           
 <div class="container" style="margin-top: 10px; border-top: 1px dotted  #566573 ;">
 <nav class="navbar" style="margin-top: 40px;">
         <form action="{{ route('filter.examination') }}" method="POST" class="form-inline col-sm-12">
@@ -34,6 +38,7 @@
         </form>
 
 </nav>
+</div>
 
 @if ($show)
     <!--RECOMENDATIONS-->
@@ -198,4 +203,6 @@
 @endif
 
 </div>
+</div>
+
 @endsection
