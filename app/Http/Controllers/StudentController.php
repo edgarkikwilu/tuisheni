@@ -8,6 +8,8 @@ use App\Subject;
 use App\User;
 use App\Follow;
 
+use DB;
+
 class StudentController extends Controller
 {
     public function studentdash(){
@@ -54,6 +56,17 @@ class StudentController extends Controller
         return view('student/payments');
     }
     public function createnotes(){
-        return view('student/createnotes');
+        $subjects = Subject::with('topics')->get();
+        return view('student/createnotes')->withSubjects($subjects);
+    }
+
+    public function getTopics($id){
+        $topics = DB::table("topics")->where("subject_id",$id)->pluck("name","id");
+        return json_encode($topics);
+    }
+
+    public function getSubTopics($id){
+        $subtopics = DB::table("subtopics")->where("topic_id",$id)->pluck("name","id");
+        return json_encode($subtopics);
     }
 }

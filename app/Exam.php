@@ -9,6 +9,9 @@ class Exam extends Model
     public function attendances(){
         return $this->hasMany('App\Attendance');
     }
+    public function attachments(){
+        return $this->hasMany('App\ExamAttachment');
+    }
     public function user(){
         return $this->belongsTo('App\User');
     }

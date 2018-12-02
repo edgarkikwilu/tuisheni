@@ -39,8 +39,8 @@ Route::get('/admin', 'IndexController@admin')->name('admin');
 Route::get('/examination', 'ExamController@index')->name('examination');//cuurent
 Route::get('/teacher', 'IndexController@teacher')->name('teacher');
 Route::get('/student', 'IndexController@student')->name('student');
-Route::get('/examination/examination', 'ExamController@index')->name('examination/examination');
-Route::get('/examination/single_exam', 'ExamController@single_exam')->name('examination/single_exam');//incoming
+Route::get('/examination/examination', 'ExamController@index')->name('examination.examination');
+Route::get('/examination/single_exam/{id}', 'ExamController@single_exam')->name('examination.single_exam');//incoming
 Route::post('/filter/examinations', 'ExamController@filterExams')->name('filter.examination');
 Route::get('/admindash', 'IndexController@admindash')->name('admindash');
 
@@ -80,16 +80,19 @@ Route::middleware('role:teacher')->group(function(){
 
 //student dashboard
 Route::middleware('role:student')->group(function(){
-    Route::get('/student/studentdash','StudentController@studentdash')->name('student/studentdash');
-    Route::get('/student/examinations','StudentController@examinations')->name('student/examinations');
+    Route::get('/student/studentdash','StudentController@studentdash')->name('student.studentdash');
+    Route::get('/student/examinations','StudentController@examinations')->name('student.examinations');
     Route::get('/student/notes','StudentController@notes')->name('student.notes');
     Route::post('/student/filter/notes','StudentController@filterNotes')->name('student.filter.notes');
-    Route::get('/student/payments','StudentController@payments')->name('student/payments');
-    Route::get('/student/results','StudentController@results')->name('student/results');
-    Route::get('/student/assesment','StudentController@assesment')->name('student/assesment');
-    Route::get('/student/createnotes','StudentController@createnotes')->name('student/createnotes');
+    Route::get('/student/payments','StudentController@payments')->name('student.payments');
+    Route::get('/student/results','StudentController@results')->name('student.results');
+    Route::get('/student/assesment','StudentController@assesment')->name('student.assesment');
+    Route::get('/student/createnotes','StudentController@createnotes')->name('student.createnotes');
+    Route::post('/student/store/notes','NotesController@store')->name('student.store.notes');
+    Route::get('/student/show/{filename}','NotesController@view')->name('student.show');
 });
-
+Route::get('/student/gettopics/{id}','StudentController@getTopics')->name('student.gettopics');
+Route::get('/student/getsubtopics/{id}','StudentController@getSubTopics')->name('student.getsubtopics');
 
 //admin dashboard
 Route::middleware('role:superadmin')->group(function(){

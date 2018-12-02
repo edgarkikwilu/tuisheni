@@ -57,7 +57,7 @@
                   <a class="nav-link" href="{{ route('quiz') }}">Online Quizzes</a>
                 </li>
                 <li class="nav-item" style="margin-left:10px; ">
-                    <a class="nav-link" href="{{ route('examination/examination') }}">Examinations</a>
+                    <a class="nav-link" href="{{ route('examination.examination') }}">Examinations</a>
                   </li>
                   <li class="nav-item" style="margin-left:10px; ">
                     <a class="nav-link" href="{{ route('teachers') }}">Teachers</a>

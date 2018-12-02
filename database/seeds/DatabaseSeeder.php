@@ -30,6 +30,6 @@ class DatabaseSeeder extends Seeder
         //$this->call(ViolationTableSeeder::class);
         // $this->call(QuizQuestionTableSeeder::class);
         // $this->call(ChoiceTableSeeder::class);
-        $this->call(AttachmentTableSeeder::class);
+        //$this->call(AttachmentTableSeeder::class);
         }
 }

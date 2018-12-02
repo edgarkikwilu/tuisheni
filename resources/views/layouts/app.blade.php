@@ -18,6 +18,18 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=wbey0h1l7jz2lp8lmlox7olwvkkbg9hxihsn3a4ls25xywr0"></script>
+    <script>
+        tinymce.init({ 
+            selector: 'textarea',
+            plugins: 'media link',
+            api_key: 'wbey0h1l7jz2lp8lmlox7olwvkkbg9hxihsn3a4ls25xywr0 ',
+            height: 600
+        });
+    </script>
+
 </head>
 <body>
     <div id="app">
@@ -76,5 +88,80 @@
             @yield('content')
         </main>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+
+<script>
+        $(document).ready(function() {
+      
+      $('select[name="subject"]').on('change', function(){
+          var subjectId = $(this).val();
+          
+          if(subjectId) {
+            
+              $.ajax({
+                  url: '/student/gettopics/'+subjectId,
+                  type:"GET",
+                  dataType:"json",
+                  data:{id: subjectId},
+                  beforeSend: function(){
+                      $('#loader').css("visibility", "visible");
+                  },
+      
+                  success:function(data) {
+                      $('select[name="topic"]').empty();
+      
+                      $.each(data, function(key, value){
+      
+                          $('select[name="topic"]').append('<option value="'+ key +'">' + value + '</option>');
+      
+                      });
+                  },
+                  complete: function(){
+                      $('#loader').css("visibility", "hidden");
+                  }
+              });
+          } else {
+              $('select[name="topic"]').empty();
+          }
+      
+      });
+
+      $('select[name="topic"]').on('change', function(){
+          var topicId = $(this).val();
+          
+          if(topicId) {
+            
+              $.ajax({
+                  url: '/student/getsubtopics/'+topicId,
+                  type:"GET",
+                  dataType:"json",
+                  data:{id: topicId},
+                  beforeSend: function(){
+                      $('#loader').css("visibility", "visible");
+                  },
+      
+                  success:function(data) {
+                      $('select[name="subtopic"]').empty();
+      
+                      $.each(data, function(key, value){
+      
+                          $('select[name="subtopic"]').append('<option value="'+ key +'">' + value + '</option>');
+      
+                      });
+                  },
+                  complete: function(){
+                      $('#loader').css("visibility", "hidden");
+                  }
+              });
+          } else {
+              $('select[name="subtopic"]').empty();
+          }
+      
+      });
+      
+      });
+      </script>
+      
 </body>
 </html>
