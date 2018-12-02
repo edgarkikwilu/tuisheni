@@ -6,7 +6,7 @@
 
 <div class="container" style="margin-top: 10px; border-top: 1px dotted  #566573 ;">
 <nav class="navbar" style="margin-top: 40px;">
-        <form action="{{ route('filter.quiz') }}" method="POST" class="form-inline col-sm-12">
+        <form action="{{ route('filter.quiz.quiz') }}" method="POST" class="form-inline col-sm-12">
                 @csrf
         <div class="col-sm-3">
         <select name="subject" class="custom-select">
@@ -58,7 +58,7 @@
         <div class="col-lg-3" style="text-align:center; border-left:1px dotted #ccc;">
                 <p style="margin-top:10px;"><small class="text-muted">Posted: {{ $quiz->created_at->diffForHumans() }}</small></p>
                     <small>{{ $quiz->user->username }}, {{ $quiz->user->school }}</small>
-                <a href="{{ route('attempt.quiz', $quiz->id) }}" class="btn btn-sm btn-secondary" style="margin-top:10px;"> Attempt Quiz</a>
+                <a href="{{ route('attempt.quiz.quiz', $quiz->id) }}" class="btn btn-sm btn-secondary" style="margin-top:10px;"> Attempt Quiz</a>
                 <small><a class="nav-link" href="#">30 Attempts</a></small>
         </div>
 </div>

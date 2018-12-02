@@ -166,7 +166,7 @@
         </div>
         <ul class="nav justify-content-center">
                 <li class="nav-item">
-                        <a class="nav-link" href="{{route('examination')}}">See More {{$subject}} Examinations</a>
+                        <a class="nav-link" href="{{route('examination.examination')}}">See More {{$subject}} Examinations</a>
                 </li>
                 
                 </ul>

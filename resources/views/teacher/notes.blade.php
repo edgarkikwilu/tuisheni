@@ -1,17 +1,12 @@
-@extends('layouts.app')
+@extends('teacher.topdash')
 @section('content')
 <div class="container" style=" margin-top: 40px; text-align:left;">
-    <h3 class="display-5" style="color: #001f9c ; " >MY DASHBOARD</h3>  
+    <h3 class="display-5" style="color: #001f9c ; " >MY NOTES</h3>  
   </div>
-  @include('teacher/dashboardnav')
-
+ 
   <!--ALL NOTES -->
 <div class="container" style="margin-top:40px;">
-    <ul class="nav nav-pills nav-fill">
-        <li class="nav-item">
-          <h4><a class="nav-link admin-header-block">MY NOTES</a></h4>
-        </li>
-      </ul>
+    
     <nav class="navbar">
         <form class="form-inline col-sm-12">
           <div class="col-sm-3">

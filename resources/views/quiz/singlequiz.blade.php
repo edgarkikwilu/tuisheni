@@ -23,7 +23,7 @@
                                         <button type="button" class="btn btn-primary">Follow</button>
                                         <button type="button" class="btn btn-success">Message</button>
                                     </div>
-                                    <small><a class="nav-link" href="#">30 Friends</a></small>
+                                    <small><a class="nav-link" href="#">30 Views</a></small>
                         </div>
                     </div>
                 </div>

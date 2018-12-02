@@ -6,7 +6,7 @@
            
 <div class="container" style="margin-top: 10px; border-top: 1px dotted  #566573 ;">
 <nav class="navbar" style="margin-top: 40px;">
-        <form action="{{ route('filter.examination') }}" method="POST" class="form-inline col-sm-12">
+        <form action="{{ route('filter.examination.examination') }}" method="POST" class="form-inline col-sm-12">
                 @csrf
         <div class="col-sm-3">
         <select name="subject" class="custom-select">

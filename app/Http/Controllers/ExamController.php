@@ -21,7 +21,7 @@ class ExamController extends Controller
         $other = Exam::with('subject')->with('examType')->with('user')->where('original',false)
         ->where('week',$week)->orderBy('id','desc')->get();
 
-        return view('examination/examination')->withRecommended($recommended)->withOther($other)->withSubjects($subjects)->withShow($show);
+        return view('examination.examination')->withRecommended($recommended)->withOther($other)->withSubjects($subjects)->withShow($show);
     }
 
     public function filterExams(Request $request){
@@ -56,10 +56,10 @@ class ExamController extends Controller
             });
         }
 
-        return view('examination/examination')->withexams($exams->get())->withSubjects($subjects)->withShow($show);
+        return view('examination.examination')->withexams($exams->get())->withSubjects($subjects)->withShow($show);
     }
     public function single_exam (){
-        return view ('examination/single_exam');
+        return view ('examination.single_exam');
     }
 }
 
