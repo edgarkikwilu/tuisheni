@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAttachementsTable extends Migration
+class CreateExamAttachmentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateAttachementsTable extends Migration
      */
     public function up()
     {
-        Schema::create('attachements', function (Blueprint $table) {
-            $table->increments('id')->unsigned();
-            $table->integer('note_id')->unsigned();
-            $table->foreign('note_id')->references('id')->on('notes');
+        Schema::create('exam_attachments', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('exam_id')->unsigned();
+            $table->foreign('exam_id')->references('id')->on('exams');
             $table->string('filename');
             $table->timestamps();
         });
@@ -29,6 +29,6 @@ class CreateAttachementsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('attachements');
+        Schema::dropIfExists('exam_attachments');
     }
 }

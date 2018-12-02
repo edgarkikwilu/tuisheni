@@ -34,20 +34,20 @@
                 </div>
             
                 <div class="card-body">
-                        {{ $notes->article }}
+                        {!! $notes->article !!}
                 </div>
                 <div class="card-body">
-                    <h5 class="text-muted">Attachments spa</h5>
+                    <h5 class="text-muted">{{ $notes->attachements->count() }} Attachment(s) <span class="badge"></span> </h5>
                     <div class="row">
                         @foreach ($notes->attachements as $attachment)
-                        <div class="col-md-3 text-center">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <img class="card-image" style="margin-left:5px;" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="90" height="90">
+                            <div class="col-md-3 text-center">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <img class="card-image" style="margin-left:5px;" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="90" height="90">
+                                    </div>
+                                    <a href="{{ route('student.show', $attachment->filename) }}"><div class="col-md-12">{{ $attachment->filename }}</div></a>
                                 </div>
-                                <div class="col-md-12">{{ $attachment->filename }}</div>
                             </div>
-                        </div>
                         @endforeach
                     </div>
                 </div>
@@ -55,7 +55,7 @@
         </div>
     </div>
 </div>
-    </div>
+</div>
 </div>
 
 <!-- View -->

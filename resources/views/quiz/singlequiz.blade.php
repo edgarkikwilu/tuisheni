@@ -20,8 +20,8 @@
                         </div>
                         <div class="col-lg-3" style="float:right; margin-top:20px;">
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                        <button type="button" class="btn btn-primary">Follow</button>
-                                        <button type="button" class="btn btn-success">Message</button>
+                                        <a href="{{ route('follow',$quiz->user->id) }}" class="btn btn-sm btn-primary">Follow</a>
+                                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Message</button>
                                     </div>
                                     <small><a class="nav-link" href="#">30 Views</a></small>
                         </div>
@@ -57,8 +57,42 @@
         </div>
     </div>
 </div>
-        </div>
 </div>
- 
+</div>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+      
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header justify-content-center">
+              <h4 class="modal-title">Message {{ $quiz->user->username }}</h4>
+            </div>
+            <div class="modal-body">
+              <div class="row justify-content-center">
+                  <div class="col-md-10 col-offset-2">
+                      <form action="{{ route('message') }}" method="post">
+                          @csrf
+                          <label for="title">Title</label>
+                          <input name="title" type="text" class="form-control">
+                          <label for="description">Description</label>
+                          <input name="description" type="text" class="form-control">
+                          <div class="row" style="margin-top:10px">
+                              <div class="col-md-6">
+                                  <button class="btn btn-danger btn-block" data-dismiss="modal" type="submit">Cancel</button>
+                              </div>
+                              <div class="col-md-6">
+                                  <button class="btn btn-success btn-block" type="submit">Send</button>
+                              </div>
+                          </div>
+                      </form>
+                  </div>
+              </div>
+            </div>
+          </div>
+      
+        </div>
+      </div>
 
 @endsection

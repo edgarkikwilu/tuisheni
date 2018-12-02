@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Subject extends Model
 {
-    public function quizes(){
+    public function quizzes(){
         return $this->hasMany('App\Quiz');
     }
     public function topics(){
