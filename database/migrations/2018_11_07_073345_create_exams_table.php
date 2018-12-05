@@ -25,8 +25,8 @@ class CreateExamsTable extends Migration
             $table->integer('week')->unsigned();
             $table->string('title');
             $table->string('description');
-            $table->datetime('start')->nullable();
-            $table->datetime('end')->nullable();
+            $table->timestamp('start')->nullable();
+            $table->timestamp('end')->nullable();
             $table->integer('attendance')->default(0);
             $table->integer('duration');
             $table->timestamps();

@@ -77,6 +77,7 @@
                                             <div class="col-lg-12">
                                             <p>Starts in: <small class="text-muted">{{ $exam->start}}</small></p>
                                             <p>1st Price: <small class="text-muted">{{ $exam->prize }}</small></p>
+                                            <p><span class="badge-dark">{{ $exam->attachements->count() }}</span> Attachments</p>
                                             </div>
                                         </div>
                                 </div>
@@ -138,6 +139,7 @@
                                         <div class="col-lg-12">
                                         <p>Starts in: <small class="text-muted">{{ $exam->start }}</small></p>
                                         <p>1st Price: <small class="text-muted">{{ $exam->prize }}</small></p>
+                                        <p><span class="badge-dark">{{ $exam->attachements->count() }}</span> Attachments</p>
                                         </div>
                                 </div>
                         </div>

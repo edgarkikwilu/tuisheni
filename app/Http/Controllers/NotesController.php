@@ -53,41 +53,18 @@ class NotesController extends Controller
         return redirect()->back();
     }
 
-    public function view($filename)
-    {
-        // $doc = Data::where('user_id','=', Auth::user()->id)->first();
-        // $file = $doc->document;
-
-        if (File::isFile($filename))
-        {
-            $file = File::get($filename);
-            $response = Response::make($file, 200);
-            $content_types = [
-                'application/octet-stream', // txt etc
-                'application/msword', // doc
-                'application/vnd.openxmlformats-officedocument.wordprocessingml.document', //docx
-                'application/vnd.ms-excel', // xls
-                'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', // xlsx
-                'application/pdf', // pdf
-            ];
-            // using this will allow you to do some checks on it (if pdf/docx/doc/xls/xlsx)
-            $response->header('Content-Type', $content_types);
-
-            return $response;
-        }else{
-            dd('file not found');
-        }
-    }
-
     public function show($filename){
-        $file = $filename;
+        $file = storage_path('app/attachments/'.$filename);
+        $path = str_replace('/', '\\', $file);
         // check if the file exists
-        if (file_exists($file)) {
-            dd('file found');
+        if (file_exists($path)) {
+            //dd('file found');
             // Get the file content to put into your response
             $content = file_get_contents($file);
             //Build your Laravel Response with your content, the HTTP code and the Header application/pdf
-            return Response::make($content, 200, array('content-type'=>'application/pdf'));
+            //return Response::make($content, 200, array('content-type'=>'application/pdf'));
+            return response($content, 200)
+              ->header('Content-Type',  array('content-type'=>'*'));
         }else{
             dd('file not found');
         }

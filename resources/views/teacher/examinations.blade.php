@@ -12,208 +12,99 @@
                                 </li>
                         </ul>
                         <nav class="navbar">
-                                <form class="form-inline col-sm-12">
+                                <form action="{{ route('teacher.filter.examinations') }}" class="form-inline col-sm-12" method="POST">
+                                        @csrf
                                 <div class="col-sm-3">
-                                <select class="custom-select">
-                                        <option value="1">Physics</option>
-                                        <option value="2">Biology</option>
-                                        <option value="3">Chemistry</option>
-                                        <option value="1">Mathematics</option>
-                                        <option value="2">ICT</option>
-                                        <option value="3">Technical Education</option>
-                                        <option value="1">Kiswahili</option>
-                                        <option value="2">English</option>
-                                        <option value="3">French</option>
-                                        <option value="3">Arabic</option>
-                                        <option value="1">Geography</option>
-                                        <option value="2">History</option>
-                                        <option value="3">Civics</option>
-                                        <option value="1">Economics</option>
-                                        <option value="2">Agriculture</option>
-                                        <option value="3">Book-Keeping</option>
-                                        <option value="1">Commerce</option>
-                                        <option value="2">Bible Knowledge</option>
-                                        <option value="3">Islamic Knowledge</option>
-                                        <option value="1">Fine Arts</option>
-                                        <option value="2">Theater Arts</option>
-                                        <option value="3">Physical Education</option>
-                                        <option value="3">Music</option>
-                                        
+                                <select name="subject" class="custom-select">
+                                        <option value="">--Subject--</option>
+                                        @foreach ($subjects as $subject)
+                                        <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                                        @endforeach
                                 </select>
                                 </div>
                                 <div class="col-sm-3">
-                                        <select class="custom-select">
+                                        <select name="form" class="custom-select">
+                                                <option value="">--Form--</option>
                                                 <option value="1">Form 1</option>
                                                 <option value="2">Form 2</option>
                                                 <option value="3">Form 3</option>
                                                 <option value="1">Form 4</option>
                                                 <option value="2">Form 5</option>
                                                 <option value="3">Form 6</option>
-                                                </select>
+                                        </select>
                                 </div>
-                                <div class="col-sm-3"><input class="form-control mr-sm-2" type="search" placeholder="Search By Username" aria-label="username" style="width: 100%;"></div>
-                                <div class="col-sm-3"><input class="form-control mr-sm-2" type="search" placeholder="Search By School" aria-label="school" style="width: 100%;"></div>
-                                <div class="col-sm-3" style="margin-top:10px;"><input class="form-control mr-sm-2" type="search" placeholder="Search By Exam Title" aria-label="examtitle" style="width: 100%;"></div>
+                                <div class="col-sm-3" style="margin-top:10px;"><input name="title" class="form-control mr-sm-2" type="search" placeholder="Search By Exam Title" aria-label="examtitle" style="width: 100%;"></div>
                                 <div class="container">
-                                        <button class="btn btn-primary" style="margin-top: 10px;" href="#">Filter Exams</button>
-                                        <button class="btn btn-secondary" style="margin-top: 10px; float:right;" href="#">Create New Exam</button>
+                                        <button class="btn btn-primary" style="margin-top: 10px;" type="submit">Filter Exams</button>
                                 </div>
                                 </form>
-                                
+                                <a href="{{ route('teacher.create.exam') }}" class="btn btn-secondary" style="margin-top: 10px; float:right;">Create New Exam</a>
                         </nav>
 </div>
 
         <div class="container" style="margin-top: 10px; border-top: 1px dotted  #566573 ;">
         <div class="row">
+          @foreach ($exams as $exam)
           <div class="col-lg-3"  style="margin-top: 20px;">
-              <div class="card">
-                      <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
-                              <div class="container" style="text-align:center;">
-                                  <div class="row">
-                                  <div class="col-lg-12">
-                                  <small class="text-muted" style="color:#001f9c;">Mr. Masore,</small>
-                                  <small class="text-muted">Loyola High School</small>
-                                  </div>
-                                  <div class="col-lg-12">
-                                          <small class="text-muted">9 mins ago</small>
-                                  </div>
-                                  </div>     
-                              </div>
-                  <div class="container">
-                            <div class="row">
-                                  <div class="col-lg-12">
-                                        <h5 class="card-title" style="color:#001f9c">Masore Physics Series 1</h5>
-                                  </div> 
-                          </div>
-                  </div>
-                  
-                    <div class="container">
-                      <div class="row">
-                          <div class="col-lg-12">
-                                  <p>Starts in: <small class="text-muted">2 days 6 hours</small></p>
-                                  <p>1st Price: <small class="text-muted">10000 Points</small></p>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="container">
-                          <div class="row">
-                                  <div class="col-lg-12">
-                                          <small class="text-muted">#physics #weekly</small>
-                                  </div>
-                                  <div class="col-lg-12">
-                                      <small style="text-align:center;"><a class="nav-item nav-link" href="#" style="color:#001f9c;">Edit Post Exam</a></small>
-                                      <small style="text-align:center;"><a class="nav-item nav-link" href="#" style="color:red;">Delete Exam</a></small>
-                              </div>
-                                  
-                          </div>
-                  </div>
-                      
-                  
-                        
-                      </div>
-        
-        
-          </div>
-          <div class="col-lg-3"  style="margin-top: 20px;">
-            <div class="card">
-                    <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
-                            <div class="container" style="text-align:center;">
+                        <div class="card">
+                                <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
+                                        <div class="container" style="text-align:center;">
+                                            <div class="row">
+                                            <div class="col-lg-12">
+                                            <small class="text-muted" style="color:#001f9c;">{{ $exam->user->username }},</small>
+                                            <small class="text-muted">{{ $exam->user->school }}</small>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                    <small class="text-muted">{{ $exam->created_at->diffForHumans() }}</small>
+                                            </div>
+                                            </div>     
+                                        </div>
+                            <div class="container">
+                                      <div class="row">
+                                        <div class="col-lg-12">
+                                                <h5 class="card-title" style="color:#001f9c">{{ $exam->title }}</h5>
+                                        </div> 
+                                    </div>
+                            </div>
+                              <div class="container">
                                 <div class="row">
-                                <div class="col-lg-12">
-                                <small class="text-muted" style="color:#001f9c;">Mr. Masore,</small>
-                                <small class="text-muted">Loyola High School</small>
+                                    <div class="col-lg-12">
+                                        <p>Starts in: <small class="text-muted">
+                                                
+                                        @if ($exam->start)
+                                        {{ $exam->start }}
+                                        @else
+                                        no time specified
+                                        @endif
+                                        </small></p>
+                                        <p>1st Prize: <small class="text-muted">{{ $exam->prize }}</small></p>
+                                        <p>Attachments: <small class="text-muted badge-pill" style="background-color:gainsboro;">{{ $exam->attachements->count() }}</small></p>
+                                    </div>
                                 </div>
-                                <div class="col-lg-12">
-                                        <small class="text-muted">9 mins ago</small>
-                                </div>
-                                </div>     
                             </div>
-                <div class="container">
-                          <div class="row">
-                                <div class="col-lg-12">
-                                      <h5 class="card-title" style="color:#001f9c">Masore Physics Series 1</h5>
-                                </div> 
-                        </div>
-                </div>
-                
-                  <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12">
-                                <p>Starts in: <small class="text-muted">2 days 6 hours</small></p>
-                                <p>1st Price: <small class="text-muted">10000 Points</small></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="container">
-                        <div class="row">
-                                <div class="col-lg-12">
-                                        <small class="text-muted">#physics #weekly</small>
-                                </div>
-                                <div class="col-lg-12">
-                                    <small style="text-align:center;"><a class="nav-item nav-link" href="#" style="color:#001f9c;">Edit Post Exam</a></small>
-                                    <small style="text-align:center;"><a class="nav-item nav-link" href="#" style="color:red;">Delete Exam</a></small>
-                            </div>
-                                
-                        </div>
-                </div>
-                    
-                
-                      
-                    </div>
-        
-        
-          </div>
-          <div class="col-lg-3"  style="margin-top: 20px;">
-            <div class="card">
-                    <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
-                            <div class="container" style="text-align:center;">
+                            <div class="container">
                                 <div class="row">
-                                <div class="col-lg-12">
-                                <small class="text-muted" style="color:#001f9c;">Mr. Masore,</small>
-                                <small class="text-muted">Loyola High School</small>
+                                        <div class="col-lg-12">
+                                                <small class="text-muted">#{{ $exam->subject->name }} #{{ $exam->examType->name }}</small>
+                                        </div>
+                                        <div class="col-lg-12">
+                                        <small style="text-align:center;"><a class="nav-item nav-link" href="#" style="color:#001f9c;">Edit Post Exam</a></small>
+                                        <small style="text-align:center;">
+                                                <form id="" class="ondoaPostForm" action="{{ route('teacher.delete.examination') }}" method="post">
+                                                        @csrf
+                                                        <input type="number" value="{{ $exam->id }}" name="id" style="display:none">
+                                                        <button id="{{ $exam->id }}" type="submit" class="btn        btn-sm btn-danger btn-block btnOndoaPost">Delete Exam 
+                                                            <span class="glyphicon glyphicon-trash"></span>
+                                                        </button>
+                                                    </form>
+
+                                        </small>
+                                </div>      
                                 </div>
-                                <div class="col-lg-12">
-                                        <small class="text-muted">9 mins ago</small>
-                                </div>
-                                </div>     
                             </div>
-                <div class="container">
-                          <div class="row">
-                                <div class="col-lg-12">
-                                      <h5 class="card-title" style="color:#001f9c">Masore Physics Series 1</h5>
-                                </div> 
-                        </div>
-                </div>
-                
-                  <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12">
-                                <p>Starts in: <small class="text-muted">2 days 6 hours</small></p>
-                                <p>1st Price: <small class="text-muted">10000 Points</small></p>
                         </div>
                     </div>
-                </div>
-                <div class="container">
-                        <div class="row">
-                                <div class="col-lg-12">
-                                        <small class="text-muted">#physics #weekly</small>
-                                </div>
-                                <div class="col-lg-12">
-                                    <small style="text-align:center;"><a class="nav-item nav-link" href="#" style="color:#001f9c;">Edit Post Exam</a></small>
-                                    <small style="text-align:center;"><a class="nav-item nav-link" href="#" style="color:red;">Delete Exam</a></small>
-                            </div>
-                                
-                        </div>
-                </div>
-                    
-                
-                      
-                    </div>
-        
-        
-          </div>
+          @endforeach
         </div>
           </div>
-        
-        <!--END ALL EXAMS-->
 @endsection

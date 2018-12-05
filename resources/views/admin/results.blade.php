@@ -8,8 +8,10 @@
     <div class="container">
         <nav class="navbar">
             <form action="{{route('admin.filter.results')}}" method="POST" class="form-inline col-sm-12">
+              @csrf
                 <div class="col-sm-3">
                     <select name="month" class="custom-select">
+                        <option value="">--MONTH--</option>
                       <option value="1">January</option>
                       <option value="2">February</option>
                       <option value="3">March</option>
@@ -27,7 +29,7 @@
                       
                   <div class="col-sm-3">
                     <select name="subject" class="custom-select">
-                      <option value=""></option>
+                      <option value="">--SUBJECT--</option>
                       @foreach ($subjects as $subject)
                       <option value="{{$subject->id}}">{{$subject->name}}</option>
                       @endforeach
@@ -35,6 +37,7 @@
                   </div>
                 <div class="col-sm-3">
                     <select name="form" class="custom-select">
+                        <option value="">--FORM--</option>
                         <option value="1">Form 1</option>
                         <option value="2">Form 2</option>
                         <option value="3">Form 3</option>
