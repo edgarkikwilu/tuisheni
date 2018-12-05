@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\User;
+use App\Quiz;
 use App\Subject;
 use App\Follow;
 
@@ -62,11 +63,17 @@ class TeacherController extends Controller
     public function examinations(){
         return view('teacher/examinations');
     }
-    public function results(){
-        return view('teacher/results');
+    public function single_exam(){
+        return view('teacher/single_exam');
     }
-    public function assesment(){
-        return view('teacher/assesment');
+    public function quiz(){
+        $subjects = Subject::all();
+        $quizzes = Quiz::all(); 
+        return view('teacher/quiz')->withSubjects($subjects)->withQuizzes($quizzes);
+    }
+    
+    public function points(){
+        return view('teacher/points');
     }
     public function payments(){
         return view('teacher/payments');

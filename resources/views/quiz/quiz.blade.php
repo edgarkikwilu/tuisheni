@@ -39,7 +39,7 @@
 
 <!--ALL QUIZZES-->
 <div class="container" style="text-align:left; margin-top: 40px;">
-<h3 class="display-5" style="color: #000 ; " >ALL QUIZZES</h3>  
+<h3 class="display-5" style="color: #000 ; " >ALL QUIZZES</h3> 
 
 @foreach ($quizzes as $quiz)
 <div class="row" style="border:1px solid #ccc; margin-top:20px;">
@@ -47,14 +47,36 @@
                 <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap" style="width:100%">
         </div>
         <div class="col-lg-7">
-                <a href="{{ route('quiz.singlequiz') }}" ><h5 style="margin-top:10px;" >{{ $quiz->title }}</h5></a>
-                <div class="col-md-12">
-                        <label style="width:20%">Topic:</label><small><b> {{ $quiz->subject->name }} (Physics)</b></small></br>
-                        <label style="width:20%">Class:</label><small><b> {{ $quiz->topic->form }}</b></small></br>
-                        <col-md-6><label style="width:20%">Time:</label><small><b> {{ $quiz->created_at->diffForHumans() }}</b></small></col-md-6>
-                        <col-md-6><label style="width:20%; margin-left:15%;"></label><small><b> {{ $quiz->questions->count() }} Questions @ {{ $quiz->prize }} Points</b></small></col-md-6>                          
-                </div>
-        </div>
+                        <a href="#" ><h5 style="margin-top:10px; font-weight:bold;" >{{ $quiz->title }}</h5></a>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <small><label style="width:25%;">Subject: </label> <b>{{ $quiz->subject->name }}</b></small>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <small><label style="width:25%; ">Class: </label><b>Form {{ $quiz->topic->form }}</b></small>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <small><label style="width:25%;">Time: </label> <b>{{ $quiz->created_at->diffForHumans() }}</b></small>
+                                     </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <small><label style="width:25%;">1st Price: </label> <b>5000 Points</b></small>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <small><label style="width:40%; ">{{ $quiz->questions->count() }} Questions </label><em>@ {{ $quiz->prize }} Points</em></small>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <small><label style="margin-right:10px; ">Topic: </label> <b>Introduction to physics</b></small>
+                                    </div>
+                                </div>
+                         </div>
+        
         <div class="col-lg-3" style="text-align:center; border-left:1px dotted #ccc;">
                 <p style="margin-top:10px;"><small class="text-muted">Posted: {{ $quiz->created_at->diffForHumans() }}</small></p>
                     <small>{{ $quiz->user->username }}, {{ $quiz->user->school }}</small>

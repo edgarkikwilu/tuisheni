@@ -110,5 +110,8 @@ class IndexController extends Controller
     public function teacherdash(){
         return view('teacherdash');
     }
+    public function results(){
+        return view('results');
+    }
     
 }

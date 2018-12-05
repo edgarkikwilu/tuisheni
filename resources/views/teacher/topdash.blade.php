@@ -43,10 +43,10 @@
                     <a class="nav-link" href="{{ route('teacher.examinations') }}">My Examinations</a>
                   </li>
                   <li class="nav-item" style="margin-left:10px; ">
-                    <a class="nav-link" href="{{ route('teacher.results') }}">Results</a>
+                    <a class="nav-link" href="{{ route('teacher.quiz') }}">My Quizzes</a>
                   </li>
                   <li class="nav-item" style="margin-left:10px; ">
-                      <a class="nav-link" href="{{ route('teacher.assesment') }}">My Assesment</a>
+                      <a class="nav-link" href="{{ route('teacher.points') }}">My Points</a>
                     </li>
                     <li class="nav-item" style="margin-left:10px; ">
                         <a class="nav-link" href="{{ route('teacher.payments') }}">My Payments</a>
@@ -84,12 +84,20 @@
               </div> 
             </div>
         </nav>
-
-      
-      
-        <div style="text-align:left; margin-left:10px;">
-          <h4  ><small class="text-muted"> SCHOOL WEEK <?php echo date('W') ?></small></h4>  
-        </div>      
+       <div class="row">
+           <div class="col-lg-6">
+                <div style="text-align:left; margin-left:10px;">
+                        <h4  ><small class="text-muted"> SCHOOL WEEK <?php echo date('W') ?></small></h4>  
+                      </div>
+           </div>
+        <div class="col-lg-6">
+                <div style="text-align:right; margin-right:10px;">
+                        <h4  ><small class="text-muted"> {{ Auth::user()->points }} POINTS</small></h4>  
+                    </div>
+        </div>
+                  
+       </div>
+              
    
       @yield('content')
 

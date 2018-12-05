@@ -29,6 +29,7 @@ Route::get('/editprofile', 'IndexController@editprofile')->name('editprofile');
 Route::get('/dm', 'IndexController@dm')->name('dm');
 Route::get('/author/{id}', 'IndexController@author')->name('author');
 Route::get('/subject/{subject}', 'IndexController@subject')->name('subject');
+Route::get('/results', 'IndexController@results')->name('results');
 
 //message controller
 Route::post('/message', 'MessageController@store')->name('message');
@@ -70,10 +71,13 @@ Route::post('/message/student', 'StudentController@messageStudent')->name('messa
 Route::middleware('role:teacher')->group(function(){
     Route::get('/teacher/teacherdash', 'TeacherController@teacherdash')->name('teacher.teacherdash');
     Route::get('/teacher/examinations', 'TeacherController@examinations')->name('teacher.examinations');
+    Route::get('/teacher/single_exam', 'TeacherController@single_exam')->name('teacher.single_exam');
+    Route::get('/teacher/quiz', 'TeacherController@quiz')->name('teacher.quiz');
     Route::get('/teacher/notes', 'TeacherController@notes')->name('teacher.notes');
     Route::get('/teacher/payments', 'TeacherController@payments')->name('teacher.payments');
-    Route::get('/teacher/results', 'TeacherController@results')->name('teacher.results');
-    Route::get('/teacher/assesment', 'TeacherController@assesment')->name('teacher.assesment');
+    
+    Route::get('/teacher/createnotes', 'TeacherController@createnotes')->name('teacher.createnotes');
+    Route::get('/teacher/points', 'TeacherController@points')->name('teacher.points');
  //   Route::get('/teacher/topdash', 'TeacherController@topdash')->name('teacher.topdash');
 });
 

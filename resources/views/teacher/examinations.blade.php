@@ -46,8 +46,6 @@
                                                 <option value="3">Form 6</option>
                                                 </select>
                                 </div>
-                                <div class="col-sm-3"><input class="form-control mr-sm-2" type="search" placeholder="Search By Username" aria-label="username" style="width: 100%;"></div>
-                                <div class="col-sm-3"><input class="form-control mr-sm-2" type="search" placeholder="Search By School" aria-label="school" style="width: 100%;"></div>
                                 <div class="col-sm-3" style="margin-top:10px;"><input class="form-control mr-sm-2" type="search" placeholder="Search By Exam Title" aria-label="examtitle" style="width: 100%;"></div>
                                 <div class="container">
                                         <button class="btn btn-primary" style="margin-top: 10px;" href="#">Filter Exams</button>
@@ -57,158 +55,133 @@
                                 
                         </nav>
 </div>
-
-        <div class="container" style="margin-top: 10px; border-top: 1px dotted  #566573 ;">
-        <div class="row">
-          <div class="col-lg-3"  style="margin-top: 20px;">
-              <div class="card">
-                      <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
-                              <div class="container" style="text-align:center;">
-                                  <div class="row">
-                                  <div class="col-lg-12">
-                                  <small class="text-muted" style="color:#001f9c;">Mr. Masore,</small>
-                                  <small class="text-muted">Loyola High School</small>
-                                  </div>
-                                  <div class="col-lg-12">
-                                          <small class="text-muted">9 mins ago</small>
-                                  </div>
-                                  </div>     
-                              </div>
-                  <div class="container">
-                            <div class="row">
-                                  <div class="col-lg-12">
-                                        <h5 class="card-title" style="color:#001f9c">Masore Physics Series 1</h5>
-                                  </div> 
-                          </div>
-                  </div>
-                  
-                    <div class="container">
-                      <div class="row">
-                          <div class="col-lg-12">
-                                  <p>Starts in: <small class="text-muted">2 days 6 hours</small></p>
-                                  <p>1st Price: <small class="text-muted">10000 Points</small></p>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="container">
-                          <div class="row">
-                                  <div class="col-lg-12">
-                                          <small class="text-muted">#physics #weekly</small>
-                                  </div>
-                                  <div class="col-lg-12">
-                                      <small style="text-align:center;"><a class="nav-item nav-link" href="#" style="color:#001f9c;">Edit Post Exam</a></small>
-                                      <small style="text-align:center;"><a class="nav-item nav-link" href="#" style="color:red;">Delete Exam</a></small>
-                              </div>
-                                  
-                          </div>
-                  </div>
-                      
-                  
-                        
-                      </div>
-        
-        
-          </div>
-          <div class="col-lg-3"  style="margin-top: 20px;">
-            <div class="card">
-                    <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
-                            <div class="container" style="text-align:center;">
+<div class="container">
+        <div class="row" style="border:1px solid #ccc; margin-top:20px;">
+                        <div class="col-lg-2"  style="margin-top: 10px;">
+                                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap" style="width:100%">
+                        </div>
+                        <div class="col-lg-7">
+                                <a href="#" ><h5 style="margin-top:10px; font-weight:bold;" >Examination title</h5></a>
                                 <div class="row">
-                                <div class="col-lg-12">
-                                <small class="text-muted" style="color:#001f9c;">Mr. Masore,</small>
-                                <small class="text-muted">Loyola High School</small>
+                                        <div class="col-lg-6">
+                                        <small><label style="width:22%;">Start Time: </label> <b>6 mins left</b></small>
+                                        </div>
+                                        <div class="col-lg-6">
+                                        <small><label style="width:22%;">Subject: </label> <b>Physics</b></small> 
+                                        </div>
                                 </div>
-                                <div class="col-lg-12">
-                                        <small class="text-muted">9 mins ago</small>
-                                </div>
-                                </div>     
-                            </div>
-                <div class="container">
-                          <div class="row">
-                                <div class="col-lg-12">
-                                      <h5 class="card-title" style="color:#001f9c">Masore Physics Series 1</h5>
-                                </div> 
-                        </div>
-                </div>
-                
-                  <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12">
-                                <p>Starts in: <small class="text-muted">2 days 6 hours</small></p>
-                                <p>1st Price: <small class="text-muted">10000 Points</small></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="container">
-                        <div class="row">
-                                <div class="col-lg-12">
-                                        <small class="text-muted">#physics #weekly</small>
-                                </div>
-                                <div class="col-lg-12">
-                                    <small style="text-align:center;"><a class="nav-item nav-link" href="#" style="color:#001f9c;">Edit Post Exam</a></small>
-                                    <small style="text-align:center;"><a class="nav-item nav-link" href="#" style="color:red;">Delete Exam</a></small>
-                            </div>
-                                
-                        </div>
-                </div>
-                    
-                
-                      
-                    </div>
-        
-        
-          </div>
-          <div class="col-lg-3"  style="margin-top: 20px;">
-            <div class="card">
-                    <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap">
-                            <div class="container" style="text-align:center;">
                                 <div class="row">
-                                <div class="col-lg-12">
-                                <small class="text-muted" style="color:#001f9c;">Mr. Masore,</small>
-                                <small class="text-muted">Loyola High School</small>
+                                        <div class="col-lg-6">
+                                        <small><label style="width:22%; ">Class: </label><b>Form 3</b></small>
+                                        </div>
                                 </div>
-                                <div class="col-lg-12">
-                                        <small class="text-muted">9 mins ago</small>
+                                <div class="row">
+                                        <div class="col-lg-6">
+                                        <small><label style="width:22%">Time: </label> <b>90 minutes</b></small>
+                                        </div>
                                 </div>
-                                </div>     
-                            </div>
-                <div class="container">
-                          <div class="row">
-                                <div class="col-lg-12">
-                                      <h5 class="card-title" style="color:#001f9c">Masore Physics Series 1</h5>
-                                </div> 
-                        </div>
-                </div>
+                                <div class="row">
+                                        <div class="col-lg-6">
+                                        <small><label style="width:20%;">1st Price: </label> <b>5000 Points</b></small>
+                                        </div>
+                                </div>
+                                </div>
+                                <div class="col-lg-3" style="text-align:center; border-left:1px dotted #ccc;">
+                                        <p style="margin-top:10px;"><small class="text-muted">Posted:7 mins ago</small></p>
+                                        
+                                                <small>Chodo, Eagles Secondary SChool</small>
+                                        <button type="button" class="btn btn-sm btn-secondary" style="margin-top:10px;"> View Examination</button>
+                                        <small><a class="nav-link" href="#">30 Views</a></small>
+                                        <small><a class="nav-link" href="#" style="color:red;">Delete</a></small>
                 
-                  <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12">
-                                <p>Starts in: <small class="text-muted">2 days 6 hours</small></p>
-                                <p>1st Price: <small class="text-muted">10000 Points</small></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="container">
-                        <div class="row">
-                                <div class="col-lg-12">
-                                        <small class="text-muted">#physics #weekly</small>
+                                        
                                 </div>
-                                <div class="col-lg-12">
-                                    <small style="text-align:center;"><a class="nav-item nav-link" href="#" style="color:#001f9c;">Edit Post Exam</a></small>
-                                    <small style="text-align:center;"><a class="nav-item nav-link" href="#" style="color:red;">Delete Exam</a></small>
-                            </div>
-                                
-                        </div>
-                </div>
-                    
-                
-                      
-                    </div>
-        
-        
-          </div>
         </div>
-          </div>
-        
+        <div class="row" style="border:1px solid #ccc; margin-top:20px;">
+                        <div class="col-lg-2"  style="margin-top: 10px;">
+                                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap" style="width:100%">
+                        </div>
+                        <div class="col-lg-7">
+                                <a href="#" ><h5 style="margin-top:10px; font-weight:bold;" >Examination title</h5></a>
+                                <div class="row">
+                                        <div class="col-lg-6">
+                                           <small><label style="width:22%;">Start Time: </label> <b>6 mins left</b></small>
+                                        </div>
+                                        <div class="col-lg-6">
+                                           <small><label style="width:22%;">Subject: </label> <b>Physics</b></small> 
+                                        </div>
+                                </div>
+                                <div class="row">
+                                        <div class="col-lg-6">
+                                        <small><label style="width:22%; ">Class: </label><b>Form 3</b></small>
+                                        </div>
+                                </div>
+                                <div class="row">
+                                        <div class="col-lg-6">
+                                        <small><label style="width:22%">Time: </label> <b>90 minutes</b></small>
+                                        </div>
+                                </div>
+                                <div class="row">
+                                        <div class="col-lg-6">
+                                        <small><label style="width:20%;">1st Price: </label> <b>5000 Points</b></small>
+                                        </div>
+                                </div>
+                         </div>
+                         <div class="col-lg-3" style="text-align:center; border-left:1px dotted #ccc;">
+                                        <p style="margin-top:10px;"><small class="text-muted">Posted:7 mins ago</small></p>
+                                        
+                                        <small>Chodo, Eagles Secondary SChool</small>
+                                        <button type="button" class="btn btn-sm btn-secondary" style="margin-top:10px;"> View Examination</button>
+                                        <small><a class="nav-link" href="#">30 Views</a></small>
+                                        <small><a class="nav-link" href="#" style="color:red;">Delete</a></small>
+                
+                                        
+                                </div>
+        </div>
+                    
+        <div class="row" style="border:1px solid #ccc; margin-top:20px;">
+                        <div class="col-lg-2"  style="margin-top: 10px;">
+                                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap" style="width:100%">
+                        </div>
+                        <div class="col-lg-7">
+                                <a href="#" ><h5 style="margin-top:10px; font-weight:bold;" >Examination title</h5></a>
+                                <div class="row">
+                                        <div class="col-lg-6">
+                                        <small><label style="width:22%;">Start Time: </label> <b>6 mins left</b></small>
+                                        </div>
+                                        <div class="col-lg-6">
+                                        <small><label style="width:22%;">Subject: </label> <b>Physics</b></small> 
+                                        </div>
+                                </div>
+                                <div class="row">
+                                        <div class="col-lg-6">
+                                        <small><label style="width:22%; ">Class: </label><b>Form 3</b></small>
+                                        </div>
+                                </div>
+                                <div class="row">
+                                        <div class="col-lg-6">
+                                        <small><label style="width:22%">Time: </label> <b>90 minutes</b></small>
+                                        </div>
+                                </div>
+                                <div class="row">
+                                        <div class="col-lg-6">
+                                        <small><label style="width:20%;">1st Price: </label> <b>5000 Points</b></small>
+                                        </div>
+                                </div>
+                         </div>
+                         <div class="col-lg-3" style="text-align:center; border-left:1px dotted #ccc;">
+                                        <p style="margin-top:10px;"><small class="text-muted">Posted:7 mins ago</small></p>
+                                        
+                                            <small>Chodo, Eagles Secondary SChool</small>
+                                        <button type="button" class="btn btn-sm btn-secondary" style="margin-top:10px;"> View Examination</button>
+                                        <small><a class="nav-link" href="#">30 Views</a></small>
+                                        <small><a class="nav-link" href="#" style="color:red;">Delete</a></small>
+                
+                                        
+                                </div>
+        </div>
+                    
+                            
+</div>
         <!--END ALL EXAMS-->
 @endsection

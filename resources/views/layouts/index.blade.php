@@ -60,6 +60,9 @@
                     <a class="nav-link" href="{{ route('examination.examination') }}">Examinations</a>
                   </li>
                   <li class="nav-item" style="margin-left:10px; ">
+                      <a class="nav-link" href="{{ route('results') }}">Results</a>
+                    </li>
+                  <li class="nav-item" style="margin-left:10px; ">
                     <a class="nav-link" href="{{ route('teachers') }}">Teachers</a>
                   </li>
                   <li class="nav-item" style="margin-left:10px; ">
@@ -71,22 +74,34 @@
               </ul>
               <div class="navbar-nav ml-auto">
                   @guest
-                    <a href="{{ route('login') }}" style=" color:#FFF;">Login</a>
-                    <a href="{{ route('register') }}" style="color:#FFF;">Sign Up</a>
-                  @endguest
-                  @auth
-                    <a href="#" style=" color:#FFF;padding-right:20px;">{{ Auth::user()->points }} Points</a>
-                    {{-- <a href="#" style="color:#FFF;"> {{ Auth::user()->username }}</a> --}}
-                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                        document.getElementById('logout-form').submit();">
-                        {{ Auth::user()->username }}
-                    </a>
-                    <a href="{{ route('admin.admindash') }}" style="color:#FFF;">My Dashboard</a>
+                  <li class="nav-item">
+                      <a class="nav-link" href="{{ route('login') }}" style="color:#FFF;">{{ __('Login') }}</a>
+                  </li>
+                  <li class="nav-item">
+                      @if (Route::has('register'))
+                          <a class="nav-link" href="{{ route('register') }}" style="color:#FFF;">{{ __('Register') }}</a>
+                      @endif
+                  </li>
+              @else
+                  <li class="nav-item dropdown">
+                  <a style="color:#FFF;" id="navbarDropdown" class="nav-link dropdown-toggle" href="{{route('teacher/teacherdash')}}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                          {{ Auth::user()->username }} <span class="caret"></span>
+                      </a>
+  
+                      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                          <a  class="dropdown-item" href="{{ route('logout') }}"
+                             onclick="event.preventDefault();
+                                           document.getElementById('logout-form').submit();">
+                              {{ __('Logout') }}
+                          </a>
+  
+                          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                              @csrf
+                          </form>
+                      </div>
+                  </li>
+              @endguest
 
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
-                  @endauth
               </div> 
             </div>
         </nav>

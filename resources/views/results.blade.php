@@ -1,7 +1,13 @@
-@extends('teacher.topdash')
+@extends('layouts.index')
 @section('content')
+<div class="row">
+         @include('sidebar_subject')
+         <div class="col-md-9">
+
+
+
 <div class="container" style=" margin-top: 40px; text-align:left;">
-    <h3 class="display-5" style="color: #001f9c ; " >REPORTS</h3>  
+    <h3 class="display-5" style="color: #001f9c ; " >RESULTS</h3>  
   </div>
  
   <!--RESULTS-->
@@ -198,7 +204,8 @@
     
       </ul>
 </div>
-        
+         </div>
+</div>
       <!--END RESULTS-->
       
 @endsection

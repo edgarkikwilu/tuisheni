@@ -39,7 +39,7 @@
                             <div class="container" style="text-align:left; margin-top: 40px;">
                                 <div class="row">
                                     <div class="col-lg-9"><h3 class="display-5" style="color: #001f9c ; " >{{ $topics->first()->name }} (Most Voted)</h3></div>
-                                <div class="col-lg-3"><a href="{{ route('student/createnotes') }}"> <button type="button"  class="btn btn-secondary" style="float:right;">Create New Notes</button></a></div>
+                                <div class="col-lg-3"><a href="{{ route('student.createnotes') }}"> <button type="button"  class="btn btn-secondary" style="float:right;">Create New Notes</button></a></div>
                                 </div>
                                     
                                      

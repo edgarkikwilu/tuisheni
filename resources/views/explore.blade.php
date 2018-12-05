@@ -68,14 +68,16 @@
                         <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap" style="width:100%">
                 </div>
                 <div class="col-lg-7">
-                        <a href="{{route('single',$note->id)}}" ><h5 style="margin-top:10px;" >{{ $note->topic->name }}</h5></a>
+                        <a href="{{route('single',$note->id)}}" ><h5 style="margin-top:10px;" >{{ $note->title }}</h5></a>
                         <p>Short Description goes here, just excerpts with some limited number of words and read more link, Three lines will be enough for the good User interface, without forgeting a read more button link  ...read more&raquo;</p>
-                        <p><small class="text-muted">#physics #introduction to physics</small></p>
+                        <small><label style="width:10%;">Subject: </label> <b>Physics</b></small> 
+                        <small><label style="width:10%; margin-left:20%;">Class: </label><b>Form 3</b></small></br>
+                        <small><label style="width:10%;">Topic: </label> <b>Introduction to Physics</b></small>
                 </div>
                 <div class="col-lg-3" style="text-align:center; border-left:1px dotted #ccc;">
                         <p style="margin-top:10px;"><small class="text-muted">Posted: {{ $note->created_at->diffForHumans() }}</small></p>
                         
-                            <small>Chodo, Eagles Secondary SChool</small>
+                            <small>{{ $note->user->username }}, {{ $note->user->school }}</small>
                         <button type="button" class="btn btn-sm btn-secondary" style="margin-top:10px;"> View & Download</button>
                         <small><a class="nav-link" href="#">30 Views</a></small>
                 </div>
@@ -102,15 +104,17 @@
                                 <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap" style="width:100%">
                         </div>
                         <div class="col-lg-7">
-                                <a href="{{route('single',$note->id)}}" ><h5 style="margin-top:10px;" >{{ $note->topic->name }}</h5></a>
-                                <p>{{ $note->title }}  ...read more&raquo;</p>
-                                <p><small class="text-muted">#physics #introduction to physics</small></p>
+                                <a href="{{route('single',$note->id)}}" ><h5 style="margin-top:10px;" >{{ $note->title }}</h5></a>
+                                <p>Short Description goes here, just excerpts with some limited number of words and read more link, Three lines will be enough for the good User interface, without forgeting a read more button link  ...read more&raquo;</p>
+                                <small><label style="width:10%;">Subject: </label> <b>Physics</b></small> 
+                                <small><label style="width:10%; margin-left:20%;">Class: </label><b>Form 3</b></small></br>
+                                <small><label style="width:10%;">Topic: </label> <b>Introduction to Physics</b></small>
                         </div>
                         <div class="col-lg-3" style="text-align:center; border-left:1px dotted #ccc;">
                                 <p style="margin-top:10px;"><small class="text-muted">Posted: {{ $note->created_at->diffForHumans() }}</small></p>
                                 
-                                <small>{{ $note->user->username }}, {{ $note->user->school }}</small>
-                                <a href="{{route('single',$note->id)}}"  class="btn btn-xs btn-secondary"><h5 style="margin-top:10px;" >View & Download</h5></a>
+                                    <small>{{ $note->user->username }}, {{ $note->user->school }}</small>
+                                <button type="button" class="btn btn-sm btn-secondary" style="margin-top:10px;"> View & Download</button>
                                 <small><a class="nav-link" href="#">30 Views</a></small>
                         </div>
                 </div>
