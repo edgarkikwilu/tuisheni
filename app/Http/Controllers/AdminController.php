@@ -236,7 +236,7 @@ class AdminController extends Controller
         }
         return $results;
     }
-    public function filterResults(Request $request){
+    public function filterResult(Request $request){
 
         $reports = new Report();
         $reports = $reports->newQuery();
@@ -279,6 +279,77 @@ class AdminController extends Controller
 
         return view('admin.reports')->withreports($reports->get())->withSubjects($subjects);
 
+    }
+
+    public function filterResults(Request $request){
+
+        $reports = new Report();
+        $reports = $reports->newQuery();
+    
+        $subjects = Subject::all();
+    
+        if ($request->has('subject') && $request->subject != "") {
+            $reports->whereHas('exam', function($query) use ($request){
+                $query->where('subject_id',$request->subject);
+            });
+        }
+    
+        if ($request->has('form') && $request->form != "") {
+            // dd($request->has('form'));
+            $reports->whereHas('exam', function($query) use ($request){
+                $query->where('form',$request->form);
+            });
+        }
+    
+        if ($request->has('title') && $request->title != "") {
+            $reports->whereHas('exam', function($query) use ($request){
+                $query->where('title',$request->title);
+            });
+        }
+    
+        if ($request->has('username') && $request->username != "") {
+            $reports->whereHas('user', function($query) use ($request){
+                $query->where('username',$request->username);
+            });
+        }
+    
+        if ($request->has('school') && $request->school != "") {
+            $reports->whereHas('user', function($query) use ($request){
+                $query->where('school',$request->school);
+            });
+        }
+    
+        if ($request->has('month') && $request->month != "") {
+            $reports->whereMonth('created_at',$request->month);
+        }
+    
+        $reports = $reports->get();
+    
+       $subjects = Subject::all();
+       $results = collect([]);
+       $avgs = collect([]);
+       $users = collect([]);
+       foreach($reports as $report){
+           $user = User::select('firstname','lastname')->where('id',$report->user_id)->get();
+           $users->push($user);
+           //dd($users[0]);
+           $scores = Report::select('user_id','score')->where('user_id',$report->user_id)->distinct()->get();
+           $sum = 0;
+           $avg = 0;
+           $count = 0;
+           foreach($scores as $score){
+               $sum += $score->score;
+               $count++;
+               if($scores->count() == $count){
+                   $avg = $sum/4;
+                   $avgs->push($avg);
+                   //dd($avgs);
+                   break;
+               }
+           }
+           $results->push($scores);
+       }
+       return view('admin/results')->withResults($results)->withSubjects($subjects)->withAverages($avgs)->withUsers($users);
     }
 
     public function getAllAwards(){

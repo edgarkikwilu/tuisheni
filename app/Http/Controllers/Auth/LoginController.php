@@ -55,11 +55,11 @@ class LoginController extends Controller
 
         if (Auth::guard()->attempt(['email'=>$request->email, 'password'=>$request->password])) {
             if (Auth::user()->type == 'student') {
-                return redirect()->route('student.studentdash');
+                return redirect()->intended('student/studentdash');
             } else if (Auth::user()->type == 'teacher') {
-                return redirect()->route('teacher.teacherdash');
+                return redirect()->intended('teacher/teacherdash');
             } else if (Auth::user()->type == 'admin') {
-                return redirect()->route('admin.admindash');
+                return redirect()->intended('admin/admindash');
             }
         }else {
             return redirect()->route('login')->withInput();

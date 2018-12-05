@@ -7,8 +7,12 @@ use App\Note;
 use App\Subject;
 use App\User;
 use App\Follow;
+use App\Report;
+use App\ExamType;
+use App\Payment;
 
 use DB;
+use Auth;
 
 class StudentController extends Controller
 {
@@ -39,22 +43,109 @@ class StudentController extends Controller
         return view('students')->withstudents($students->get());
     }
     public function notes(){
-        $notes = Note::where('user_id',9)->orderBy('id','desc')->get();
+        $notes = Note::where('user_id',Auth::user()->id)->orderBy('id','desc')->get();
         $subjects = Subject::all();
         return view('student/notes')->withNotes($notes)->withSubjects($subjects);
     }
     public function examinations(){
-        return view('student/examinations');
+        $reports = Report::with('exam')->where('user_id',Auth::user()->id)->orderBy('id','desc')->get();
+        $subjects = Subject::all();
+        $types = ExamType::all();
+        return view('student/examinations')->withReports($reports)->withSubjects($subjects)->withTypes($types);
     }
+    public function filterExams(Request $request){
+        $reports = new Report();
+        $reports = $reports->newQuery();
+
+        $subjects = Subject::all();
+        $types = ExamType::all();
+
+        if ($request->has('subject') && $request->subject != "") {
+            $reports->whereHas('exam', function($query) use ($request){
+                $query->where('subject_id',$request->subject);
+            });
+        }
+
+        if ($request->has('form') && $request->form != "") {
+            $reports->whereHas('exam', function($query) use ($request){
+                $query->where('form',$request->form);
+            });
+        }
+
+        if ($request->has('type') && $request->type != "") {
+            $reports->whereHas('exam', function($query) use ($request){
+                $query->where('exam_type_id',$request->type);
+            });
+        }
+
+        $reports->where('user_id', Auth::user()->id)->orderBy('id','desc');
+
+        return view('student.examinations')->withreports($reports->get())->withSubjects($subjects)->withTypes($types);
+    }
+
     public function results(){
         return view('student/results');
     }
     public function assesment(){
-        return view ('student/assesment');
+        $subjects = Subject::all();
+        $reports = collect([]);
+        $avgs = collect([]);
+        $totalAvgs = collect([]);
+        foreach ($subjects as $subject) {
+            $scores = Report::select('score')
+                    ->whereHas('exam', function($query) use ($subject){
+                        $query->where('subject_id', $subject->id);
+                    })
+                    ->where('user_id', Auth::user()->id)
+                    ->whereMonth('created_at', date('m'))
+                    ->get();
+            if ($scores->isEmpty()) {
+                $report = new Report();
+                $report->score = 0;
+                $scores->push($report);
+            }
+            $sum = 0;
+           $avg = 0;
+           $count = 0;
+           foreach($scores as $score){
+               $sum += $score->score;
+               $count++;
+               if($scores->count() == $count){
+                   $avg = $sum/4;
+                   $avgs->push($avg);
+                   //dd($avgs);
+                   break;
+               }
+           }
+            // $scores->push($subject->name);
+            $reports->push($scores);
+        }
+        
+        // dd($reports);
+        return view ('student/assesment')->withReports($reports)->withSubjects($subjects)->withAverages($avgs);
     }
     public function payments(){
-        return view('student/payments');
+        $payments = Payment::where('user_id',Auth::user()->id);
+        return view('student/payments')->withpayments($payments);
     }
+
+    public function filterPayments(Request $request){
+        $payments = new Payment();
+        $payments = $payments->newQuery();
+
+        if ($request->has('month') && $request->month != "") {
+            $payments->whereMonth('created_at',$request->month);
+        }
+
+        if ($request->has('action') && $request->action != "") {
+            $payments->where('action',$request->action);
+        }
+
+        $payments->where('user_id', Auth::user()->id)->orderBy('id','desc');
+
+        return view('student.payments')->withpayments($payments->get());
+    }
+
     public function createnotes(){
         $subjects = Subject::with('topics')->get();
         return view('student/createnotes')->withSubjects($subjects);

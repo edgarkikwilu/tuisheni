@@ -26,10 +26,9 @@
             selector: 'textarea',
             plugins: 'media link',
             api_key: 'wbey0h1l7jz2lp8lmlox7olwvkkbg9hxihsn3a4ls25xywr0 ',
-            height: 600
+            height: 500
         });
     </script>
-
 </head>
 <body>
     <div id="app">
@@ -88,7 +87,6 @@
             @yield('content')
         </main>
     </div>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
 
 <script>
@@ -98,29 +96,18 @@
           var subjectId = $(this).val();
           
           if(subjectId) {
-            
-              $.ajax({
-                  url: '/student/gettopics/'+subjectId,
-                  type:"GET",
-                  dataType:"json",
-                  data:{id: subjectId},
-                  beforeSend: function(){
-                      $('#loader').css("visibility", "visible");
-                  },
-      
-                  success:function(data) {
-                      $('select[name="topic"]').empty();
-      
-                      $.each(data, function(key, value){
-      
-                          $('select[name="topic"]').append('<option value="'+ key +'">' + value + '</option>');
-      
-                      });
-                  },
-                  complete: function(){
-                      $('#loader').css("visibility", "hidden");
-                  }
-              });
+            $.ajax({
+            url: '/student/gettopics/'+subjectId,
+            type:"GET",
+            dataType:"json",
+            data:{id: subjectId},      
+                success:function(data) {
+                    $('select[name="topic"]').empty();
+                    $.each(data, function(key, value){
+                    $('select[name="topic"]').append('<option value="'+ key +'">' + value + '</option>');
+                });
+                }
+            });
           } else {
               $('select[name="topic"]').empty();
           }
@@ -137,21 +124,11 @@
                   type:"GET",
                   dataType:"json",
                   data:{id: topicId},
-                  beforeSend: function(){
-                      $('#loader').css("visibility", "visible");
-                  },
-      
                   success:function(data) {
                       $('select[name="subtopic"]').empty();
-      
                       $.each(data, function(key, value){
-      
                           $('select[name="subtopic"]').append('<option value="'+ key +'">' + value + '</option>');
-      
                       });
-                  },
-                  complete: function(){
-                      $('#loader').css("visibility", "hidden");
                   }
               });
           } else {
@@ -159,9 +136,7 @@
           }
       
       });
-      
-      });
-      </script>
-      
+    });
+    </script>
 </body>
 </html>

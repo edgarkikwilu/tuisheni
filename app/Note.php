@@ -28,4 +28,8 @@ class Note extends Model
     public function topic(){
         return $this->belongsTo('App\Topic');
     }
+
+    public function subtopic(){
+        return $this->belongsTo('App\Subtopic');
+    }
 }

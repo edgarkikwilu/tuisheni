@@ -30,14 +30,14 @@
                 </div>
                 <div class="container" style="text-align:center">
                         <h3 class="card-title" style="color:blue; margin-top:10px; margin-left:5px;" >{{ $notes->title }}</h3>
-                        <span ><small class="text-muted">#physics #introduction to physics</small></span>
+                        <span ><small class="text-muted">#{{ $notes->topic->name }} #{{ $notes->subtopic->name }}</small></span>
                 </div>
             
                 <div class="card-body">
                         {!! $notes->article !!}
                 </div>
                 <div class="card-body">
-                    <h5 class="text-muted">{{ $notes->attachements->count() }} Attachment(s) <span class="badge"></span> </h5>
+                    <h5 class="text-muted">{{ $notes->attachements->count() }} Attachment(s) <span class="badge-dark"></span> </h5>
                     <div class="row">
                         @foreach ($notes->attachements as $attachment)
                             <div class="col-md-3 text-center">
@@ -97,26 +97,5 @@
 
   </div>
 </div>
-
-<script>
-    window.onload = function () {
-    //We need to point the service path
-    lt.Documents.DocumentFactory.servicePath = "WebApp";
-    lt.Documents.DocumentFactory.serviceApiPath = "api";
-    var createOptions = new lt.Documents.UI.DocumentViewerCreateOptions();
-    createOptions.viewContainer = document.getElementById("viewer");
-    createOptions.thumbnailsContainer = document.getElementById("thumbnails");
-    //When using elements we have to style them ourself, with it set to false we use a canvas instead.
-    createOptions.thumbnailsCreateOptions.useElements = false;
-    createOptions.viewCreateOptions.useElements = false;
-    var documentViewer = lt.Documents.UI.DocumentViewerFactory.createDocumentViewer(createOptions);
-    documentViewer.view.preferredItemType = lt.Documents.UI.DocumentViewerItemType.svg;
-    documentViewer.commands.run(lt.Documents.UI.DocumentViewerCommands.interactivePanZoom);
-    lt.Documents.DocumentFactory.loadFromUri("http://demo.leadtools.com/images/pdf/leadtools.pdf", null)
-        .done(function (document) {
-            documentViewer.setDocument(document);
-        });
-}
-</script>
 
 @endsection

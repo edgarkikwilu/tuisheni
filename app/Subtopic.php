@@ -12,4 +12,8 @@ class Subtopic extends Model
     public function topic(){
         return $this->belongsTo('App\Topic');
     }
+
+    public function notes(){
+        return $this->hasMany('App\Note');
+    }
 }
