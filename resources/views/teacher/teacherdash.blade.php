@@ -55,7 +55,7 @@
 
         
 </div>
-  @include('teacher/dashboardnav')  
+
 </div>
   </div>
   </div>

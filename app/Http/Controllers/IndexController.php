@@ -80,7 +80,7 @@ class IndexController extends Controller
             ->withRecommended($recommended)->withOther($other)->withTeachers($teachers)->withExams($exams)->withPackages($packages);
     }
     public function author($id){
-        $user = User::with('notes')->where('id',$id)->first();
+        $user = User::with('notes')->where('id',$id)->get()->first();
         $following = Follow::where('user_id',$id)->count();
         $followers = Follow::where('follow_id',$id)->count();
         return view('author')->withUser($user)->withFollowing($following)->withFollowers($followers);

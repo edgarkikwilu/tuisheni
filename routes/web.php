@@ -75,7 +75,7 @@ Route::middleware('role:teacher')->group(function(){
     
     Route::get('/teacher/points', 'TeacherController@points')->name('teacher.points');
  //   Route::get('/teacher/topdash', 'TeacherController@topdash')->name('teacher.topdash');
-    Route::get('/teacher/teacherdash', 'TeacherController@teacherdash')->name('teacher/teacherdash');
+    Route::get('/teacher/teacherdash', 'TeacherController@teacherdash')->name('teacher.teacherdash');
     Route::get('/teacher/examinations', 'TeacherController@examinations')->name('teacher.examinations');
     Route::get('/teacher/notes', 'TeacherController@notes')->name('teacher.notes');
     Route::post('/teacher/filter/notes', 'TeacherController@filterNotes')->name('teacher.filter.notes');

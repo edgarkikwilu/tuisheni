@@ -151,7 +151,7 @@ class TeacherController extends Controller
     
     public function points(){
         return view('teacher/points');
-
+    }
     public function deleteNotes(Request $request){
         $notes = Note::findOrFail($request->id);
         $notes->delete();
