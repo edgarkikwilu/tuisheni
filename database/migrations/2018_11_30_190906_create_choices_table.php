@@ -13,14 +13,14 @@ class CreateChoicesTable extends Migration
      */
     public function up()
     {
-        Schema::create('choices', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('quiz_question_id')->unsigned();
-            $table->foreign('quiz_question_id')->references('id')->on('quiz_questions');
-            $table->string('index');
-            $table->string('name');
-            $table->timestamps();
-        });
+        // Schema::create('choices', function (Blueprint $table) {
+        //     $table->increments('id');
+        //     $table->integer('quiz_question_id')->unsigned();
+        //     $table->foreign('quiz_question_id')->references('id')->on('quiz_questions');
+        //     $table->string('index');
+        //     $table->string('name');
+        //     $table->timestamps();
+        // });
     }
 
     /**

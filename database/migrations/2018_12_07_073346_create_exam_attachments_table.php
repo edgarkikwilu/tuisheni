@@ -13,13 +13,13 @@ class CreateExamAttachmentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('exam_attachments', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('exam_id')->unsigned();
-            $table->foreign('exam_id')->references('id')->on('exams');
-            $table->string('filename');
-            $table->timestamps();
-        });
+        // Schema::create('exam_attachments', function (Blueprint $table) {
+        //     $table->increments('id');
+        //     $table->integer('exam_id')->unsigned();
+        //     $table->foreign('exam_id')->references('id')->on('exams');
+        //     $table->string('filename');
+        //     $table->timestamps();
+        // });
     }
 
     /**

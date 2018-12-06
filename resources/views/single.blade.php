@@ -45,7 +45,7 @@
                                     <div class="col-md-12">
                                         <img class="card-image" style="margin-left:5px;" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="90" height="90">
                                     </div>
-                                    <a href="{{ route('student.show', $attachment->filename) }}"><div class="col-md-12">{{ $attachment->filename }}</div></a>
+                                    <a href="{{ url('/student/show/notes/'.$attachment->filename) }}"><div class="col-md-12">{{ $attachment->filename }}</div></a>
                                 </div>
                             </div>
                         @endforeach

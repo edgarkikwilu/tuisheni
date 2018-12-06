@@ -10,6 +10,7 @@ use App\Subject;
 use App\Follow;
 use App\Exam;
 use App\Note;
+use App\Answer;
 use App\ExamType;
 use App\Attachement;
 use App\Payment;
@@ -140,8 +141,43 @@ class TeacherController extends Controller
         }
         return redirect()->back();
     }
-    public function single_exam(){
-        return view('teacher/single_exam');
+    public function single_exam($id){
+        $exam = Exam::with('attachements')->findOrFail($id);
+        $answers = Answer::with('answerSheets')->with('user')->where('exam_id',$id)->get();
+        return view('teacher/single_exam')->withExam($exam)->withAnswers($answers);
+    }
+    public function giveMarks(Request $request){
+        $request->validate([
+            'score'=>'bail|required|string|max:100|min:0',
+            'remarks'=>'string|max:255'
+        ]);
+        $report = new Report();
+        $report->user_id = $report->user_id;
+        $report->exam_id = $report->exam_id;
+        $report->score = $report->score;
+        $report->remarks = $report->remarks;
+        $report->teacher_id = Auth::user()->id;
+        $report->week = date('W');
+
+        if ($report->score > 80) {
+            $report->grade = A;
+        } else if ($report->score <= 80 && $report->score >= 71) {
+            $report->grade = B;
+        }else if ($report->score <= 70 && $report->score >= 56) {
+            $report->grade = C;
+        }
+        else if ($report->score <= 55 && $report->score >= 45) {
+            $report->grade = D;
+        }
+        else {
+            $report->grade = F;
+        }
+
+        $report->save();
+        $exam = Exam::with('attachements')->findOrFail($id);
+        $answers = Answer::with('answerSheets')->with('user')->where('exam_id',$id)->get();
+
+        return view('teacher/single_exam')->withExam($exam)->withAnswers($answers);
     }
     public function quiz(){
         $subjects = Subject::all();
@@ -151,6 +187,7 @@ class TeacherController extends Controller
     
     public function points(){
         return view('teacher/points');
+    }
 
     public function deleteNotes(Request $request){
         $notes = Note::findOrFail($request->id);

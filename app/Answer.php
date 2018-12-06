@@ -12,4 +12,7 @@ class Answer extends Model
     public function exam(){
         return $this->belongsTo('App\Exam');
     }
+    public function answerSheets(){
+        return $this->hasMany('App\AnswerSheet');
+    }
 }

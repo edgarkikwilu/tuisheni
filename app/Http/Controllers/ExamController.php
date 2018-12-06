@@ -16,10 +16,8 @@ class ExamController extends Controller
         $week = date('W');
         $subjects = Subject::all();
         $show = true;
-        $recommended = Exam::with('subject')->with('user')->with('examType')->where('original',true)
-        ->where('week',$week)->orderBy('id','desc')->get();
-        $other = Exam::with('subject')->with('examType')->with('user')->where('original',false)
-        ->where('week',$week)->orderBy('id','desc')->get();
+        $recommended = Exam::with('subject')->with('user')->with('examType')->where('original',true)->orderBy('id','desc')->get();
+        $other = Exam::with('subject')->with('examType')->with('user')->where('original',false)->orderBy('id','desc')->get();
         $exams = collect([]);
         return view('examination/examination')->withRecommended($recommended)->withOther($other)->withSubjects($subjects)->withShow($show)->withExams($exams);
     }
@@ -64,7 +62,7 @@ class ExamController extends Controller
     }
 
     public function show($filename){
-        $file = storage_path('app/attachments/'.$filename);
+        $file = storage_path('app/exam_attachments/'.$filename);
         $path = str_replace('/', '\\', $file);
         // check if the file exists
         if (file_exists($path)) {

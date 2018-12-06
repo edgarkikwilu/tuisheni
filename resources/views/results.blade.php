@@ -128,16 +128,9 @@
           </table>
   
       </ul>
-<<<<<<< HEAD:resources/views/results.blade.php
 </div>
          </div>
 </div>
       <!--END RESULTS-->
       
-=======
-</div>    
-
-<!--END RESULTS-->
-
->>>>>>> 2b1e5911cedfaba2d43ec0e1bc7cdaadc1f0af94:resources/views/teacher/results.blade.php
 @endsection
