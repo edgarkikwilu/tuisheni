@@ -8,50 +8,33 @@
     <div class="row">
         <div class="col-lg-12"  style="margin-top: 20px;">
             <div class="card">
-                <div class="container" style="padding:5px; border-bottom:1px dotted #ccc;">
-                    <div class="row">
-                        <div class="col-lg-2" >
-                            <a href="#"> <img class="rounded-circle" style="margin-left:35%; margin-top:5px; " src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="80" height="80"></a>    
-                        </div>
-                        <div class="col-lg-7">
-                            <a href="#"><h4>Karen Jonathan</h4></a> 
-                            <h5><small class="text-muted">Marian Girls Secondary</small></h5>
-                            <span ><small style="color:green;">Posted 9 mins ago</small></span>
-                        </div>
-                        <div class="col-lg-3" style="float:right; margin-top:20px;">
-                            <div class="btn-group" role="group" aria-label="Basic example">
-                                <a href="#" class="btn btn-sm btn-primary">Follow</a>
-                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Message</button>
-                            </div>
-                            <small><a class="nav-link" href="#">10 Views</a></small>
-                        </div>
-                    </div>
-                </div>
                 <div class="container" style="text-align:center">
-                        <h3 class="card-title" style="color:blue; margin-top:10px; margin-left:5px;" >Examination Title</h3>
-                        <span ><small class="text-muted">#physics #introduction to physics</small></span>
+                        <h3 class="card-title" style="color:blue; margin-top:10px; margin-left:5px;" >{{ $exam->title }}</h3>
+                        <span ><small class="text-muted">#{{ $exam->subject->name }}</small></span>
                 </div>
             
                 <div class="card-body">
-                        Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                        {!! $exam->description !!}
                 </div>
                 <div class="container" >
                     <div class="row">
                         <div class="col-lg-6" >
                             <div class="card-body">
-                                    <h5 class="text-muted">Attachments</h5>
+                                    <h5 class="text-muted"> <span style="background-color:lightgray" class="badge-pill">{{ $exam->attachements->count() }}</span> Attachments</h5>
                                     <div class="row">
-                                            <div class="col-md-3 text-center">
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <img class="card-image" style="margin-left:5px;" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="90" height="90">
-                                                    </div>
-                                                    <a href="">
-                                                        <div class="col-md-12">Attachment Name</div>
-                                                    </a>
+                                        @foreach ($exam->attachements as $attchment)
+                                        <div class="col-md-3 text-center">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <img class="card-image" style="margin-left:5px;" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="90" height="90">
                                                 </div>
+                                                <a href="">
+                                                    <div class="col-md-12">{{ $attachment->name }}</div>
+                                                </a>
                                             </div>
                                         </div>
+                                        @endforeach
+                                    </div>
                             </div>
                         </div>
                     </div>
@@ -67,69 +50,58 @@
                     </div>
                 </div>
                 <div class="container">
+                    @foreach ($answers as $answer)
                     <div class="card">
-                        <div class="container">
-                            
-                        </div>
-                        <div class="row">
+                            <div class="container">
+                                
+                            </div>
+                            <div class="row">
                                 <div class="col-md-2">
                                     <div class="container" style="text-align:center;">
                                         <a href="#"> <img class="rounded-circle" style=" margin-top:5px; " src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="80" height="80"></a>
-                                        <a href="#" ><label>Janeth Nelson</label></a>
-                                        <small class="text-muted"><label>Jitegemee High School</label></small>
-                                        <small class="text-muted"><label>4 Mins ago</label></small>
+                                        <a href="#" ><label>{{ $answer->user->username }}</label></a>
+                                        <small class="text-muted"><label>{{ $answer->user->school }}</label></small>
+                                        <small class="text-muted"><label>{{ $answer->created_at->diffForHumans() }}</label></small>
                                         
                                     </div>
                                 </div>
                                 
                                 <div class="col-md-7">
                                     <div class="container" style="margin-top:20px;">
-                                        <p> Leggings occaecat craft beer farm-to-table, raw  heard of them accusamus labore sustainable VHS.</p>
+                                        <p>{{ $answer->feedback }}</p>
                                     </div> 
-                                    <small><h5>Attachments</h5></small>
+                                    <small><h5>{{ $answer->answerSheets->count() }}    Attachments</h5></small>
                                     <div class="row">
+                                        {{ $count = 0 }}
+                                        @foreach ($answer->answerSheets as $sheet)
                                         <div class="col-md-2">
                                             <img class="card-image" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="50" height="50">
-                                            <a href=""><small>Attachment Name</small></a>
+                                            <a href="{{ route('student.show', $sheet->filename) }}"><div class="col-md-12">Attachment {{ $count }}</div></a>
+                                            {{ $count++ }}
                                         </div>
-                                        <div class="col-md-2">
-                                            <img class="card-image" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="50" height="50">
-                                            <a href=""><small>Attachment Name</small></a>
-                                        </div>   
-                                        <div class="col-md-2">
-                                            <img class="card-image" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="50" height="50">
-                                            <a href=""><small>Attachment Name</small></a>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <img class="card-image" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="50" height="50">
-                                            <a href=""><small>Attachment Name</small></a>
-                                        </div> 
-                                        <div class="col-md-2">
-                                            <img class="card-image" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="50" height="50">
-                                            <a href=""><small>Attachment Name</small></a>
-                                        </div>
-                                        
+                                        @endforeach
                                     </div>
                                     
                                 </div>
                                 <div class="col-md-3" style="border-left:1px dotted #ccc;">
                                     <div class="container" style=" text-align:center;">
-                                      <form action="">
-                                            <input class="form-control" type="text" placeholder="Enter Marks" aria-label="marks" style="margin-top:20px; width: 100%;">   
-                                            <textarea name="" id="" cols="15" rows="3" placeholder="Enter Comments" style="margin-top:10px;"></textarea>
-                                            <button class="btn btn-sm btn-success" type="submit" style="margin-top:10px;">Give Marks</button>
-                                      </form>
+                                        <form action="{{ route('teacher.give.marks') }}" method="POST">
+                                            @csrf
+                                            <input name="score" class="form-control" type="text" placeholder="Enter Marks" aria-label="marks" style="margin-top:20px; width: 100%;"> 
+                                            <input type="number" name="user" value="{{ $answer->user_id }}" style="display:none"> 
+                                            <input type="number" name="exam" value="{{ $answer->exam_id }}" style="display:none">  
+                                            <textarea name="remarks" id="" cols="15" rows="3" placeholder="Enter remarks" style="margin-top:10px;"></textarea>
+                                            <button class="btn btn-sm btn-block btn-success" type="submit" style="margin-top:10px;">Give Marks</button>
+                                        </form>
                                     </div>
                                         
                                     </div>            
-                            </div>
-                            
-                    </div>
-                                            
-                                </div>
-                                 
-                            </div>
-                    </div>
+                            </div>        
+                        </div>
+                    @endforeach    
+                </div>           
+                </div>
+                </div>
                     
                 </div>
         </div>

@@ -33,7 +33,7 @@
                 </div>
             
                 <div class="card-body">
-                    {{ $exam->description }}
+                    {!! $exam->description !!}
                 </div>
                 <div class="container" >
                     <div class="row">
@@ -59,27 +59,29 @@
                 <div class="container" style="border-top: 1px dotted #ccc; margin-top:20px;">
                     <div class="row">
                         <div class="col-md-12">
-                            <h4 style="margin-top:20px; margin-left:10px; color:blue;">COMMENTS</h4>
+                            <h4 style="margin-top:20px; margin-left:10px; color:blue;">{{ $exam->comments->count() }} COMMENTS</h4>
                         </div>
                         
                     </div>
                 </div>
                 <div class="container">
+                    @foreach ($exam->comments as $comment)
                     <div class="row">
-                        <div class="col-md-2">
-                            <div class="container" style="text-align:center;">
-                                <a href="#"> <img class="rounded-circle" style=" margin-top:5px; " src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="80" height="80"></a>
-                                <a href="#"><h4><small>Janeth Nelson</small></h4></a> 
-                                <p><small class="text-muted">4 mins ago</small></p>
+                            <div class="col-md-2">
+                                <div class="container" style="text-align:center;">
+                                    <a href="#"> <img class="rounded-circle" style=" margin-top:5px; " src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="80" height="80"></a>
+                                    <a href="#"><h4><small>{{ $comment->user->username }}</small></h4></a> 
+                                    <p><small class="text-muted">{{ $comment->created_at->diffForHumans() }}</small></p>
+                                </div>
                             </div>
-                        </div>
-                        
-                        <div class="col-md-8">
-                            <div class="container" style="margin-top:20px;">
-                              <p> Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.</p>
+                            
+                            <div class="col-md-8">
+                                <div class="container" style="margin-top:20px;">
+                                  <p> {!! $comment->comment !!}</p>
+                                </div> 
                             </div> 
-                        </div> 
-                    </div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>

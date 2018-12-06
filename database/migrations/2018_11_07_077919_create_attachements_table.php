@@ -13,13 +13,13 @@ class CreateAttachementsTable extends Migration
      */
     public function up()
     {
-        Schema::create('attachements', function (Blueprint $table) {
-            $table->increments('id')->unsigned();
-            $table->integer('note_id')->unsigned();
-            $table->foreign('note_id')->references('id')->on('notes');
-            $table->string('filename');
-            $table->timestamps();
-        });
+        // Schema::create('attachements', function (Blueprint $table) {
+        //     $table->increments('id')->unsigned();
+        //     $table->integer('note_id')->unsigned();
+        //     $table->foreign('note_id')->references('id')->on('notes');
+        //     $table->string('filename');
+        //     $table->timestamps();
+        // });
     }
 
     /**

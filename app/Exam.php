@@ -38,4 +38,8 @@ class Exam extends Model
     public function subject(){
         return $this->belongsTo('App\Subject');
     }
+
+    public function comments(){
+        return $this->morphMany('App\Comment', 'commentable');
+    }
 }

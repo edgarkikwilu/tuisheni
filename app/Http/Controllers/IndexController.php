@@ -12,6 +12,7 @@ use App\Note;
 use App\Exam;
 use App\Subject;
 use App\TopStudent;
+use App\Report;
 use Carbon\Carbon;
 use DB;
 use Auth;
@@ -111,7 +112,35 @@ class IndexController extends Controller
         return view('teacherdash');
     }
     public function results(){
-        return view('results');
+        // public function getAllResults(){
+            $ids = Report::select('user_id')->whereMonth('created_at',date('m'))->distinct()->pluck('user_id');
+           //$results = DB::table('reports')->select('user_id','week','score')->whereMonth('created_at',date('m'))->groupBy('user_id')->get();0
+           $subjects = Subject::all();
+           $results = collect([]);
+           $avgs = collect([]);
+           $users = collect([]);
+           foreach($ids as $id){
+               $user = User::select('firstname','lastname')->where('id',$id)->get();
+               $users->push($user);
+               //dd($users[0]);
+               $scores = Report::select('user_id','score')->where('user_id',$id)->whereMonth('created_at',date('m'))->distinct()->get();
+               $sum = 0;
+               $avg = 0;
+               $count = 0;
+               foreach($scores as $score){
+                   $sum += $score->score;
+                   $count++;
+                   if($scores->count() == $count){
+                       $avg = $sum/4;
+                       $avgs->push($avg);
+                       //dd($avgs);
+                       break;
+                   }
+               }
+               $results->push($scores);
+           }
+           return view('results')->withResults($results)->withSubjects($subjects)->withAverages($avgs)->withUsers($users);
+       
     }
     
 }

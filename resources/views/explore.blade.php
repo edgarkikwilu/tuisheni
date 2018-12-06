@@ -41,7 +41,34 @@
                         </nav>
            
                         
-        @if ($show)       
+        @if ($show)
+        <div class="container" style="text-align:left; margin-top: 40px;">
+                <h3 class="display-5" style="color: #000 ; " >RECOMMENDED MATERIALS</h3>  
+        </div> 
+        <div class="container" >
+        @foreach ($notesOg as $note)
+                <div class="row" style="border:1px solid #ccc; margin-top:20px;">
+                        <div class="col-lg-2"  style="margin-top: 10px;">
+                                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap" style="width:100%">
+                        </div>
+                        <div class="col-lg-7">
+                                <a href="{{route('single',$note->id)}}" ><h5 style="margin-top:10px;" >{{ $note->title }}</h5></a>
+                                <p>{{ substr(strip_tags($note->article), 0, 300) }}{{ strlen($note->article) > 300?"...read more":'' }}</p>
+                                <small><label style="width:10%;">Subject: </label> <b>Physics</b></small> 
+                                <small><label style="width:10%; margin-left:20%;">Class: </label><b>Form {{ $note->form}}</b></small><br>
+                                <small><label style="width:10%;">Topic: </label> <b>{{ $note->topic->name }} </b></small>
+                               
+                        </div>
+                        <div class="col-lg-3" style="text-align:center; border-left:1px dotted #ccc;">
+                                <p style="margin-top:10px;"><small class="text-muted">Posted: {{ $note->created_at->diffForHumans() }}</small></p>
+                                <small>{{ $note->user->username }}, {{ $note->user->school }}</small><br>
+                                <a href="{{route('single',$note->id)}}" style="margin-top:10px;"> <button class="btn btn-sm btn-secondary" type="button">View & Download</button> </a>
+                                <small><a class="nav-link" href="#">30 Views</a></small>
+                        </div>
+                </div>
+        @endforeach
+        </div>
+                                
 <div class="container" style="text-align:left; margin-top: 40px;">
         <h3 class="display-5" style="color: #000 ; " >RECOMMENDED MATERIALS</h3>  
 </div> 
@@ -49,23 +76,33 @@
 @foreach ($notesOg as $note)
 <div class="row" style="border:1px solid #ccc; margin-top:20px;">
                 <div class="col-lg-2"  style="margin-top: 10px;">
-                                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap" style="width:100%">
-                        </div>
-                        <div class="col-lg-7">
-                                <a href="{{route('single',$note->id)}}" ><h5 style="margin-top:10px;" >{{ $note->title }}</h5></a>
-                                <p>{{ substr(strip_tags($note->article), 0, 300) }}{{ strlen($note->article) > 300?"...read more":'' }}</p>
-                                <small><label style="width:10%;">Subject: </label> <b>Physics</b></small> 
-                                <small><label style="width:10%; margin-left:20%;">Class: </label><b>Form 3</b></small><br>
-                                <small><label style="width:10%;">Topic: </label> <b>{{ $note->topic->name }}</b></small>
-                        </div>
-                        
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap" style="width:100%">
+                </div>
+                <div class="col-lg-7">
+                        <a href="{{route('single',$note->id)}}" ><h5 style="margin-top:10px;" >{{ $note->title }}</h5></a>
+                        <p>{{ substr(strip_tags($note->article), 0, 300) }}{{ strlen($note->article) > 300?"...read more":'' }}</p>
+                        <small><label style="width:10%;">Subject: </label> <b>Physics</b></small> 
+                        <small><label style="width:10%; margin-left:20%;">Class: </label><b>Form {{ $note->form }}</b></small><br>
+                        <small><label style="width:10%;">Topic: </label> <b>{{ $note->topic->name }} </b></small>
+                       
+                </div>
                 <div class="col-lg-3" style="text-align:center; border-left:1px dotted #ccc;">
                         <p style="margin-top:10px;"><small class="text-muted">Posted: {{ $note->created_at->diffForHumans() }}</small></p>
-                        <small>{{ $note->user->username }}, {{ $note->user->school }}</small>
-                        <a href="{{route('single',$note->id)}}"><button type="button" class="btn btn-sm btn-secondary" style="margin-top:10px;"> View & Download</button></a>
-                        
+                        <small>{{ $note->user->username }}, {{ $note->user->school }}</small><br>
+                        <a href="{{route('single',$note->id)}}" style="margin-top:10px;"> <button class="btn btn-sm btn-secondary" type="button">View & Download</button> </a>
                         <small><a class="nav-link" href="#">30 Views</a></small>
                 </div>
+        </div>
+        @endforeach
+                
+                                
+                
+                <ul class="nav justify-content-center">
+                        <li class="nav-item">
+                        <a class="nav-link" href="#">See More Notes Reccomendations</a>
+                        </li>
+                        
+                        </ul>
         </div>
 @endforeach
         <ul class="nav justify-content-center">
@@ -82,25 +119,24 @@
         <div class="container">
         @foreach ($notes as $note)
         <div class="row" style="border:1px solid #ccc; margin-top:20px;">
-                <div class="col-lg-2"  style="margin-top: 10px;">
+                        <div class="col-lg-2"  style="margin-top: 10px;">
                                 <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap" style="width:100%">
                         </div>
                         <div class="col-lg-7">
                                 <a href="{{route('single',$note->id)}}" ><h5 style="margin-top:10px;" >{{ $note->title }}</h5></a>
                                 <p>{{ substr(strip_tags($note->article), 0, 300) }}{{ strlen($note->article) > 300?"...read more":'' }}</p>
                                 <small><label style="width:10%;">Subject: </label> <b>Physics</b></small> 
-                                <small><label style="width:10%; margin-left:20%;">Class: </label><b>Form 3</b></small><br>
-                                <small><label style="width:10%;">Topic: </label> <b>{{ $note->topic->name }}</b></small>
+                                <small><label style="width:10%; margin-left:20%;">Class: </label><b>Form {{ $note->form }}</b></small><br>
+                                <small><label style="width:10%;">Topic: </label> <b>{{ $note->topic->name }} </b></small>
+                               
                         </div>
-                        
-                <div class="col-lg-3" style="text-align:center; border-left:1px dotted #ccc;">
-                        <p style="margin-top:10px;"><small class="text-muted">Posted: {{ $note->created_at->diffForHumans() }}</small></p>
-                        <small>{{ $note->user->username }}, {{ $note->user->school }}</small>
-                        <a href="{{route('single',$note->id)}}"><button type="button" class="btn btn-sm btn-secondary" style="margin-top:10px;"> View & Download</button></a>
-                        
-                        <small><a class="nav-link" href="#">30 Views</a></small>
+                        <div class="col-lg-3" style="text-align:center; border-left:1px dotted #ccc;">
+                                <p style="margin-top:10px;"><small class="text-muted">Posted: {{ $note->created_at->diffForHumans() }}</small></p>
+                                <small>{{ $note->user->username }}, {{ $note->user->school }}</small><br>
+                                <a href="{{route('single',$note->id)}}" style="margin-top:10px;"> <button class="btn btn-sm btn-secondary" type="button">View & Download</button> </a>
+                                <small><a class="nav-link" href="#">30 Views</a></small>
+                        </div>
                 </div>
-        </div>
         @endforeach
 </div>
 {{-- end of other notes --}}

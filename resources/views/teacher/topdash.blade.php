@@ -33,9 +33,9 @@
               <li class="nav-item active"style="margin-left:10px;">
                 <a class="nav-link" href="{{ route('index') }}">Home <span class="sr-only">(current)</span></a>
               </li>
-              <li class="nav-item" style="margin-left:10px;">
+              {{-- <li class="nav-item" style="margin-left:10px;">
                 <a class="nav-link" href="{{ route('teacher.teacherdash') }}">My Profile</a>
-              </li>
+              </li> --}}
               <li class="nav-item" style="margin-left:10px;">
                   <a class="nav-link" href="{{ route('teacher.notes') }}">My Notes</a>
                 </li>
