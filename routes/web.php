@@ -60,7 +60,6 @@ Route::get('/quiz/singlequiz', 'QuizController@getSingleQuiz')->name('quiz.singl
 Route::post('/filter/quiz/quiz', 'QuizController@filter')->name('filter.quiz.quiz');
 Route::get('/attempt/quiz/quiz/{id}', 'QuizController@attempt')->name('attempt.quiz.quiz');
 Route::get('/quiz/singlequiz', 'QuizController@singlequiz')->name('quiz.singlequiz');
-Route::get('/quiz/createquiz', 'QuizController@createquiz')->name('quiz.createquiz');
 
 //student controller
 Route::get('/students', 'StudentController@students')->name('students');
@@ -75,8 +74,8 @@ Route::middleware('role:teacher')->group(function(){
     Route::get('/teacher/quiz', 'TeacherController@quiz')->name('teacher.quiz');
     
     Route::get('/teacher/points', 'TeacherController@points')->name('teacher.points');
-   Route::get('/teacher/topdash', 'TeacherController@topdash')->name('teacher.topdash');
-    Route::get('/teacher/teacherdash', 'TeacherController@teacherdash')->name('teacher/teacherdash');
+    Route::get('/teacher/topdash', 'TeacherController@topdash')->name('teacher.topdash');
+    Route::get('/teacher/teacherdash', 'TeacherController@teacherdash')->name('teacher.teacherdash');
     Route::get('/teacher/examinations', 'TeacherController@examinations')->name('teacher.examinations');
     Route::get('/teacher/single_exam/{id}', 'TeacherController@single_exam')->name('teacher.single_exam');
     Route::get('/teacher/notes', 'TeacherController@notes')->name('teacher.notes');
@@ -88,12 +87,14 @@ Route::middleware('role:teacher')->group(function(){
     Route::post('/teacher/filter/payments', 'TeacherController@filterpayments')->name('teacher.filter.payments');
     Route::get('/teacher/results', 'TeacherController@getAllResults')->name('teacher.results');
     Route::post('/teacher/filter/results', 'TeacherController@filterResults')->name('teacher.filter.results');
-    //Route::get('/teacher/assesment', 'TeacherController@assesment')->name('teacher/assesment');
+    Route::get('/teacher/assesment', 'TeacherController@assesment')->name('teacher/assesment');
     Route::post('/teacher/filter/examinations', 'TeacherController@filterExams')->name('teacher.filter.examinations');
     Route::get('/teacher/create/examination', 'TeacherController@createExam')->name('teacher.create.exam');
     Route::get('/teacher/give/marks', 'TeacherController@giveMarks')->name('teacher.give.marks');
     Route::post('/teacher/store/examination', 'TeacherController@storeExam')->name('teacher.store.examination');
     Route::post('/teacher/delete/examination', 'TeacherController@deleteExam')->name('teacher.delete.examination');
+    Route::get('/teacher/createquiz', 'TeacherController@createquiz')->name('teacher.createquiz');
+
 });
 
 //student dashboard

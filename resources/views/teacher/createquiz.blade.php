@@ -1,6 +1,6 @@
-@extends('layouts.index')
+@extends('teacher.topdash')
 @section('content')
-    <div class="row">
+  <div class="row">
         @include('sidebar_subject')
         <div class="col-md-9">
                 <div class="container" style=" margin-top: 40px; text-align:left;">
@@ -83,22 +83,75 @@
                       </form>
                       <div class="container" style="margin-top:10px;">
                             <h4 style="margin-top:30px;">SECTION A (Multiple Choice)</h4>
-                            <div class="col-md-12" style="margin-top:10px;">
-                                    <h5>Question No 1.</h5>
-                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Question No 1">
-                              </div>
-                              <div class="col-md-4" style="margin-top:30px; margin-left:30px;">
-                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Selection A">
-                              </div>
-                              <div class="col-md-4" style="margin-top:10px; margin-left:30px;">
-                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Selection B">
-                              </div>
-                              <div class="col-md-4" style="margin-top:10px; margin-left:30px;">
-                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Selection C">
-                              </div>
-                              <div class="col-md-4" style="margin-top:10px; margin-left:30px;">
-                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Selection D">
-                              </div>
+                        <div class="container" style="margin-top:20px; border:1px solid #ccc; padding:1%;">
+                                <div class="col-md-12" style="margin-top:10px;">
+                                        <h5>Question No 1.</h5>
+                                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Question No 1">
+                                  </div>
+                                  <div class="col-md-4" style="margin-top:30px; margin-left:30px;">
+                                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Selection A">
+                                  </div>
+                                  <div class="col-md-4" style="margin-top:10px; margin-left:30px;">
+                                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Selection B">
+                                  </div>
+                                  
+    
+                                  <div class="col-md-4" style="margin-top:10px; margin-left:30px;">
+                                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Selection C">
+                                  </div>
+                                  
+                                  <div class="container">
+                                        <div class="row">
+                                          <div class="col-md-4" style="margin-top:10px; margin-left:30px;">
+                                              <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Selection D">
+                                          </div>
+                                          <div class="col-md-3 offset-md-4">
+                                              <label for="class">Select Answer</label>
+                                                  <select class="custom-select" id="class">
+                                                      <option>A</option>
+                                                      <option>B</option>
+                                                      <option>C</option>
+                                                      <option>D</option>
+                                                  </select>
+                                          </div>        
+                                          </div>
+                                        </div> 
+                        </div>
+                          
+                        <div class="container" style="margin-top:20px; border:1px solid #ccc; padding:1%;">
+                                <div class="col-md-12" style="margin-top:10px;">
+                                        <h5>Question No 2.</h5>
+                                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Question No 1">
+                                  </div>
+                                  <div class="col-md-4" style="margin-top:30px; margin-left:30px;">
+                                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Selection A">
+                                  </div>
+                                  <div class="col-md-4" style="margin-top:10px; margin-left:30px;">
+                                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Selection B">
+                                  </div>
+                                  
+    
+                                  <div class="col-md-4" style="margin-top:10px; margin-left:30px;">
+                                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Selection C">
+                                  </div>
+                                  
+                                  <div class="container">
+                                        <div class="row">
+                                          <div class="col-md-4" style="margin-top:10px; margin-left:30px;">
+                                              <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Selection D">
+                                          </div>
+                                          <div class="col-md-3 offset-md-4">
+                                              <label for="class">Select Answer</label>
+                                                  <select class="custom-select" id="class">
+                                                      <option>A</option>
+                                                      <option>B</option>
+                                                      <option>C</option>
+                                                      <option>D</option>
+                                                  </select>
+                                          </div>        
+                                          </div>
+                                        </div> 
+                        </div>
                             </div>
                     </div>
         </div>

@@ -47,7 +47,7 @@
                 <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap" style="width:100%">
         </div>
         <div class="col-lg-7">
-                        <a href="#" ><h5 style="margin-top:10px; font-weight:bold;" >{{ $quiz->title }}</h5></a>
+                        <a href="{{route('quiz.singlequiz')}}" ><h5 style="margin-top:10px; font-weight:bold;" >{{ $quiz->title }}</h5></a>
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <small><label style="width:25%;">Subject: </label> <b>{{ $quiz->subject->name }}</b></small>
@@ -72,7 +72,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <small><label style="margin-right:10px; ">Topic: </label> <b>Introduction to physics</b></small>
+                                    <small><label style="margin-right:10px; ">Topic: </label> <b>{{ $quiz->topic->name }}</b></small>
                                     </div>
                                 </div>
                          </div>

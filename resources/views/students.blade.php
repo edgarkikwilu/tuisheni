@@ -32,16 +32,21 @@
 <div class="container">
     <div class="row">
         @foreach ($students as $student)
-            <div class="col-lg-3" style=" text-align: center; margin-top:50px;">
-                <a href="#"> <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="110" height="110">
-                <h4>{{ $student->username }}</h4> </a>
-                <h5><small class="text-muted">{{ $student->school }}</small></h5>
-                <p><small class="text-muted">{{ $student->bio }} </small></p>
-                <div class="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-primary">Follow</button>
-                    <button type="button" class="btn btn-success">Message</button>
+        <div class="col-lg-3" style=" text-align: center; margin-top:50px;">
+                <div class="container">
+                    <a href="#"> <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="110" height="110"></a>
                 </div>
-                <small><a class="nav-link" href="#">30 Friends</a></small>
+                <div class="container">
+                    <a href="{{ route('author', $student->id) }}"><label>{{ $student->username }}</label> </a><br>
+                    <small class="text-muted">{{ $student->school }}</small><br>
+                    <p><small class="text-muted">{{ $student->bio }}</small></p>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <a href="{{ route('follow.student') }}" class="btn btn-sm btn-primary">Follow</a>
+                        <a href="{{ route('message.student') }}" class="btn btn-sm btn-success">Message</a>
+                    </div>
+                    <small><a class="nav-link" href="#">30 Friends</a></small>
+                </div>
+                
             </div>
         @endforeach
     </div>

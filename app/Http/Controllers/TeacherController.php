@@ -190,7 +190,6 @@ class TeacherController extends Controller
         $points = Point::with('user')->with('from')->where('user_id',Auth::user()->id)->get();
         return view('teacher/points')->withPoints($points);
     }
-
     public function deleteNotes(Request $request){
         $notes = Note::findOrFail($request->id);
         $notes->delete();
@@ -411,6 +410,9 @@ class TeacherController extends Controller
        $results->push($scores);
    }
    return view('teacher/results')->withResults($results)->withSubjects($subjects)->withAverages($avgs)->withUsers($users);
+}
+public function createquiz (){
+    return view ('teacher/createquiz');
 }
 
 }

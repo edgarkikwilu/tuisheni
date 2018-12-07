@@ -84,7 +84,7 @@
                   </li>
               @else
                   <li class="nav-item dropdown">
-                  <a style="color:#FFF;" id="navbarDropdown" class="nav-link dropdown-toggle" href="{{route('teacher/teacherdash')}}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                  <a style="color:#FFF;" id="navbarDropdown" class="nav-link dropdown-toggle" href="{{route('teacher.teacherdash')}}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                           {{ Auth::user()->username }} <span class="caret"></span>
                       </a>
   

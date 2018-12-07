@@ -45,7 +45,7 @@
                         </div>     
                 </div>
         <div class="container">
-        <a href="{{ route('single') }}">
+        <a href="{{ route('single', $user->id) }}">
                 <div class="row">
                         <div class="col-lg-12">
                         <h5 class="card-title" style="color:#001f9c">{{$notes->title}}</h5>

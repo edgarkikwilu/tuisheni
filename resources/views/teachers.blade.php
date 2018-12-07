@@ -42,15 +42,20 @@
     <div class="row">
         @foreach ($teachers as $teacher)
             <div class="col-lg-3" style=" text-align: center; margin-top:50px;">
-                <a href="#"> <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="110" height="110">
-                <h4>{{ $teacher->username }}</h4> </a>
-                <h5><small class="text-muted">{{ $teacher->school }}</small></h5>
-                <p><small class="text-muted">{{ $teacher->bio }}</small></p>
-                <div class="btn-group" role="group" aria-label="Basic example">
-                    <a href="{{ route('follow.teacher') }}" class="btn btn-primary">Follow</a>
-                    <a href="{{ route('message.teacher') }}" class="btn btn-success">Message</a>
+                <div class="container">
+                    <a href="#"> <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="110" height="110"></a>
                 </div>
-                <small><a class="nav-link" href="#">30 Friends</a></small>
+                <div class="container">
+                    <label><a href="{{ route('author',$teacher->id) }}">{{ $teacher->username }}</a></label> <br>
+                    <small class="text-muted">{{ $teacher->school }}</small><br>
+                    <p><small class="text-muted">{{ $teacher->bio }}</small></p>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <a href="{{ route('follow.teacher') }}" class="btn btn-sm btn-primary">Follow</a>
+                        <a href="{{ route('message.teacher') }}" class="btn btn-sm btn-success">Message</a>
+                    </div>
+                    <small><a class="nav-link" href="#">30 Friends</a></small>
+                </div>
+                
             </div>
         @endforeach       
     </div>
