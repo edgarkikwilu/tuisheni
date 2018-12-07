@@ -106,7 +106,22 @@
             </div>
         </nav>
 
-      
+        @if(Session::has('success'))
+        <div class="alert alert-success" role="alert">
+            <strong>Success:</strong> {{Session::get('success')}}
+        </div>    
+    @endif
+    
+    @if(count($errors) > 0)
+        <div class="alert alert-danger" role="danger">
+            <strong>Errors:</strong>
+            <ul>
+            @foreach($errors->all() as $error)
+                <li>{{$error}}</li>
+            @endforeach
+            </ul>
+        </div>
+    @endif
       
         <div style="text-align:left; margin-left:10px;">
           <h4  ><small class="text-muted"> SCHOOL WEEK <?php echo date('W') ?></small></h4>  
@@ -143,6 +158,76 @@
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script>
+    
+        $('#message').on('submit', function(e){
+            e.preventDefault();
+            // var title = $('#msg_title').val();
+            // var description = $('#msg_description').val();
+
+            var formdata = $(this).serialize();
+            var action = $(this).attr('action');
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: 'post',
+                url: action,
+                data: formdata,
+                success: function(data){
+                    // $("#myModal #close").click()
+                    if (data.success != null) {
+                        $('#msg_feedback').css('color:green;');
+                        $('#msg_feedback').append(data.success);
+                    }else if (data.error != null){
+                        $('#msg_feedback').append(data.error);
+                        $('#msg_feedback').css("color:red");
+                    }
+                },
+                error: function(error){
+                    // alert('message not sent');
+                    $('#msg_feedback').css("color:red");
+                    $('#msg_feedback').append(data.error);
+                    // $("#myModal #close").click()
+                }
+            });
+        });
+        
+        $('#btnfollow').on('click', function(e){
+            e.preventDefault();
+            var id = $(this).val();
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type:'get',
+                url:'/follow/'+id,
+                data:{},
+                success: function(data){
+                    if (data.success != null) {
+                        $('#btnfollow').css('display:none');
+                        $('.following').css('display:block');
+                        alert(data.success);
+                    }else if (data.error != null){
+                        alert(data.error);
+                    }
+                },
+                error: function(error){
+                    alert(error.error);
+                }
+
+            });
+        });
+    </script>
 
 </body>
 </html>

@@ -17,7 +17,11 @@ class CreatePointsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
+            $table->string('source');
             $table->string('type');
+            $table->string('action');
+            $table->integer('from_id')->unsigned();//user that resulted these points
+            $table->foreign('from_id')->references('id')->on('users');
             $table->integer('value');
             $table->timestamps();
         });

@@ -19,11 +19,11 @@
                                 <span ><small style="color:green;">Posted {{ $quiz->created_at->diffForHumans() }}</small></span>
                         </div>
                         <div class="col-lg-3" style="float:right; margin-top:20px;">
-                                <div class="btn-group" role="group" aria-label="Basic example">
-                                        <a href="{{ route('follow',$quiz->user->id) }}" class="btn btn-sm btn-primary">Follow</a>
-                                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Message</button>
-                                    </div>
-                                    <small><a class="nav-link" href="#">30 Views</a></small>
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <a href="{{ route('follow',$quiz->user->id) }}" class="btn btn-sm btn-primary">Follow</a>
+                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Message</button>
+                            </div>
+                            <small><a class="nav-link" href="#">{{ $quiz->attempts }} Attempts</a></small>
                         </div>
                     </div>
                 </div>

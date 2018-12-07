@@ -61,6 +61,7 @@ class QuizController extends Controller
     public function attempt($id)
     {
         $quiz = Quiz::with('questions')->with('user')->where('id',$id)->first();
+        $quiz->increment('attempts');
         return view('quiz/singlequiz')->withQuiz($quiz);
     }
 

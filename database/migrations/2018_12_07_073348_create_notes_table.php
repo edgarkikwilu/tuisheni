@@ -27,6 +27,7 @@ class CreateNotesTable extends Migration
         //     $table->string('article')->nullable();
         //     $table->boolean('original')->default(false);
         //     $table->integer('votes')->default(0);
+        //     $table->integer('views')->default(0);
         //     $table->string('thumbnail')->nullable();
         //     $table->timestamps();
         // });

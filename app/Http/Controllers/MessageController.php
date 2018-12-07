@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Message;
 use Illuminate\Http\Request;
+use Auth;
+use Session;
 
 class MessageController extends Controller
 {
@@ -35,26 +37,27 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'user_id'=>'bail|required|integer',
-            'recipient_id'=>'required|integer',
-            'title'=>'string|max:50',
-            'description'=>'string|min:3|max:255'
-        ]);
-        $message = new Message();
-        $message->user_id = Auth::id;
-        $message->recipient_id = $request->recipient;
-        $message->title = $request->title;
-        $message->description = $request->description;
-        
-        if ($message->save()) {
-            Session::flash('success','Message sent sucessfully');
-            return redirect()->back();
+        if (Auth::user() && $request->ajax()) {
+            $request->validate([
+                // 'user_id'=>'bail|required|integer',
+                'recipient_id'=>'required|integer',
+                'title'=>'string|max:50',
+                'description'=>'string|min:3|max:255'
+            ]);
+            $message = new Message();
+            $message->user_id = Auth::user()->id;
+            $message->recipient_id = $request->recipient_id;
+            $message->title = $request->title;
+            $message->description = $request->description;
+            
+            if ($message->save()) {
+                return response()->json(['success'=>'Message sent succesfully']);
+            } else {
+                return response()->json(['error'=>'please login first']);
+            }
         } else {
-            Session::flash('error','Message not sent');
-            return redirect()->back();
+            return response()->json(['error'=>'please login first']);
         }
-        
     }
 
     /**

@@ -16,6 +16,7 @@ use App\Attachement;
 use App\Payment;
 use App\ExamAttachment;
 use App\Report;
+use App\Point;
 
 use Auth;
 use Carbon\Carbon;
@@ -186,7 +187,8 @@ class TeacherController extends Controller
     }
     
     public function points(){
-        return view('teacher/points');
+        $points = Point::with('user')->with('from')->where('user_id',Auth::user()->id)->get();
+        return view('teacher/points')->withPoints($points);
     }
 
     public function deleteNotes(Request $request){

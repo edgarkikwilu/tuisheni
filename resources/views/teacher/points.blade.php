@@ -25,41 +25,19 @@
                             </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <th scope="row">Examination Title</th>
-                            <td>Exam</td>
-                            <td>1 View</td>
-                            <td>Mwajuma Hassan</td>
-                            <td>12-5-2019 11:08</td>
-                            <td>500 Points</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">Examination Title</th>
-                            <td>Exam</td>
-                            <td>1 View</td>
-                            <td>Mwajuma Hassan</td>
-                            <td>12-5-2019 11:08</td>
-                            <td>500 Points</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">Examination Title</th>
-                            <td>Exam</td>
-                            <td>1 View</td>
-                            <td>Mwajuma Hassan</td>
-                            <td>12-5-2019 11:08</td>
-                            <td>500 Points</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">Examination Title</th>
-                            <td>Exam</td>
-                            <td>1 View</td>
-                            <td>Mwajuma Hassan</td>
-                            <td>12-5-2019 11:08</td>
-                            <td>500 Points</td>
-                          </tr>
+                          @foreach ($points as $point)
+                            <tr>
+                              <th scope="row">{{ $point->source }}</th>
+                              <td>{{ $point->type }}</td>
+                              <td>{{ $point->action }}</td>
+                              <td>{{ $point->from->username }}</td>
+                              <td>{{ $point->created_at }}</td>
+                              <td>{{ $point->value }} Points</td>
+                            </tr>
+                          @endforeach
                         </tbody>
                       </table>
-                      <h3 class="display-5" style="color:#001f9c">45000 POINTS</h3>
+                      <h3 class="display-5" style="color:#001f9c">{{ $points->sum('value') }} POINTS</h3>
             </div>
     </div>
 </div>

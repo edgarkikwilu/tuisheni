@@ -10,6 +10,7 @@ use App\Attachment;
 use App\Follow;
 use App\Subtopic;
 use Illuminate\Http\Request;
+use Auth;
 
 class SubjectController extends Controller
 {
@@ -42,9 +43,24 @@ class SubjectController extends Controller
 
     public function single($id){
         $notes = Note::with('attachements')->where('id',$id)->first();
-        $user_id = Note::select('user_id')->where('id',$id)->get()->first();
-        $followers = Follow::where('follow_id',$user_id)->count();
-        return view('single')->withNotes($notes)->withFollowers($followers);
+        //$note = Note::select('user_id')->where('id',$id)->get()->first();
+        $notes->increment('views');
+        $followers = Follow::where('follow_id',$notes->user_id)->count();
+        $follower = false;
+        $follower = $this->checkIfFollowedByUser($notes->user_id);
+        return view('single')->withNotes($notes)->withFollowers($followers)->withFollower($follower);
+    }
+
+    public function checkIfFollowedByUser($id){
+        if (Auth::user()) {
+            $follows = Follow::where('follow_id',$id)->get();
+        foreach ($follows as $follow) {
+            if ($follow->user_id == Auth::user()->id) {
+                return true;
+            }
+        }
+        }
+        return false;
     }
 
     public function assessment($id){

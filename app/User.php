@@ -57,8 +57,13 @@ class User extends Authenticatable
     public function feedbacks(){
         return $this->hasMany('App\Feedback');
     }
+    //check this relationship of comments shouldbe morph relation
     public function comments(){
         return $this->hasMany('App\Comment');
+    }
+    //end check
+    public function points(){
+        return $this->hasMany('App\Point');
     }
     public function likes(){
         return $this->hasMany('App\Like');

@@ -88,19 +88,31 @@ class IndexController extends Controller
     }
 
     public function follow($id){
-        if (Auth::check()) {
+        // dd($this->checkIfFollowedByUser($id));
+        if (Auth::check() && !$this->checkIfFollowedByUser($id)) {
             $follow = new Follow();
-            $follow->user_id = Auth()->id;
+            $follow->user_id = Auth::user()->id;
             $follow->follow_id = $id;
             $follow->save();
             Session::flash('success','followed!');
-            return redirect()->back();
+            return response()->json(['success'=>'followed']);
         } else {
             Session::flash('error','please login first!');
-            return redirect()->back();
+            return response()->json(['error'=>'please login first']);
         }
-        
     }
+    public function checkIfFollowedByUser($id){
+        if (Auth::user()) {
+            $follows = Follow::where('follow_id',$id)->get();
+        foreach ($follows as $follow) {
+            if ($follow->user_id == Auth::user()->id) {
+                return true;
+            }
+        }
+        }
+        return false;
+    }
+
     public function editprofile(){
         return view('editprofile');
     }

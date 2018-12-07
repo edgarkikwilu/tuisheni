@@ -20,7 +20,12 @@
                         </div>
                         <div class="col-lg-3" style="float:right; margin-top:20px;">
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <a href="{{ route('follow',$notes->user->id) }}" class="btn btn-primary">Follow</a>
+                                @if (!$follower)
+                                {{-- <a href="{{ route('follow',$notes->user->id) }}" class="btn btn-primary follow" id="follow">Follow</a> --}}
+                                <button id="btnfollow" class="btn btn-primary" value="{{ $notes->user->id }}">Follow</button>
+                                @else
+                                    <button class="btn btn-block btn-light following">Following</button>
+                                @endif
                                 <!-- Trigger the modal with a button -->
                             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Message</button>
                             </div>
@@ -75,15 +80,17 @@
       <div class="modal-body">
         <div class="row justify-content-center">
             <div class="col-md-10 col-offset-2">
-                <form action="{{ route('message') }}" method="post">
-                    @csrf
+                <form action="{{ route('message') }}" method="post" id="message">
+                    {{-- @csrf --}}
+                    <span id="msg_feedback"></span><br>
+                    <input name="recipient_id" type="text" value="{{ $notes->user->id }}" style="display:none;">
                     <label for="title">Title</label>
-                    <input name="title" type="text" class="form-control">
+                    <input id="msg_title" name="title" type="text" class="form-control">
                     <label for="description">Description</label>
-                    <input name="description" type="text" class="form-control">
+                    <input id="msg_description" name="description" type="text" class="form-control">
                     <div class="row" style="margin-top:10px">
                         <div class="col-md-6">
-                            <button class="btn btn-danger btn-block" data-dismiss="modal" type="submit">Cancel</button>
+                            <button class="btn btn-danger btn-block" id="close" data-dismiss="modal" type="submit">Cancel</button>
                         </div>
                         <div class="col-md-6">
                             <button class="btn btn-success btn-block" type="submit">Send</button>
