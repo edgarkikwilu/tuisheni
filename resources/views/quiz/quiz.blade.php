@@ -72,7 +72,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <small><label style="margin-right:10px; ">Topic: </label> <b>Introduction to physics</b></small>
+                                    <small><label style="margin-right:10px; ">Topic: </label> <b>{{ $quiz->topic->name }}</b></small>
                                     </div>
                                 </div>
                          </div>

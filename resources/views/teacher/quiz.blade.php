@@ -30,7 +30,8 @@
         <div class="col-sm-3"><input name="topicname" class="form-control mr-sm-2" type="search" placeholder="Search By Topic Name" aria-label="school" style="width: 100%;"></div>
         <div class="col-sm-3" style="margin-top:10px;"><input name="title" class="form-control mr-sm-2" type="search" placeholder="Search By Quiz Title" aria-label="examtitle" style="width: 100%;"></div>
         <div class="container">
-        <button class="btn btn-primary" style="margin-top: 10px;" type="submit">Filter Quizzes</button>
+        <button class="btn btn-sm btn-primary" style="margin-top: 10px;" type="submit">Filter Quizzes</button>
+        <a href="{{route('teacher.createquiz')}}" class="btn btn-sm btn-secondary" style="float:right;">Create New Quiz</a>
         </div>
         </form>
 
@@ -46,7 +47,7 @@
             <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap" style="width:100%">
     </div>
     <div class="col-lg-7">
-    <a href="#" ><h5 style="margin-top:10px; font-weight:bold;" >{{ $quiz->title }}</h5></a>
+    <a href="{{ route('attempt.quiz.quiz', $quiz->id) }}" ><h5 style="margin-top:10px; font-weight:bold;" >{{ $quiz->title }}</h5></a>
             <div class="row">
                 <div class="col-lg-6">
                     <small><label style="width:25%;">Subject: </label> <b>Physics</b></small>
@@ -71,7 +72,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <small><label style="margin-right:10px; ">Topic: </label> <b>Introduction to physics</b></small>
+                    <small><label style="margin-right:10px; ">Topic: </label> <b>{{ $quiz->topic->name }}</b></small>
                 </div>
             </div>
      </div>
@@ -79,7 +80,7 @@
             <p style="margin-top:10px;"><small class="text-muted">Posted:7 mins ago</small></p>
             
                 <small>Chodo, Eagles Secondary SChool</small>
-            <button type="button" class="btn btn-sm btn-secondary" style="margin-top:10px;"> Attempt Quiz</button>
+            <a href="{{ route('attempt.quiz.quiz', $quiz->id) }}" class="btn btn-sm btn-secondary" style="margin-top:10px;">Attempt Quiz</a>
             <small><a class="nav-link" href="#">30 Attempts</a></small>
             <small><a class="nav-link" href="#" style="color:red;">Delete</a></small>
 

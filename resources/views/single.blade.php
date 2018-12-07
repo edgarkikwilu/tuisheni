@@ -34,12 +34,12 @@
                 </div>
             
                 <div class="card-body">
-                        {!! $notes->article !!}
+                        {!! $note->article !!}
                 </div>
                 <div class="card-body">
-                    <h5 class="text-muted">{{ $notes->attachements->count() }} Attachment(s) <span class="badge-dark"></span> </h5>
+                    <h5 class="text-muted">{{ $note->attachements->count() }} Attachment(s) <span class="badge-dark"></span> </h5>
                     <div class="row">
-                        @foreach ($notes->attachements as $attachment)
+                        @foreach ($note->attachements as $attachment)
                             <div class="col-md-3 text-center">
                                 <div class="row">
                                     <div class="col-md-12">

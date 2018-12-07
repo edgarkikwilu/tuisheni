@@ -63,7 +63,7 @@
                                 <p style="margin-top:10px;"><small class="text-muted">Posted: {{ $note->created_at->diffForHumans() }}</small></p>
                                 <small>{{ $note->user->username }}, {{ $note->user->school }}</small><br>
                                 <a href="{{route('single',$note->id)}}" style="margin-top:10px;"> <button class="btn btn-sm btn-secondary" type="button">View & Download</button> </a>
-                                <small><a class="nav-link" href="#">30 Views</a></small>
+                                <small><a class="nav-link" href="#">30 Votes</a></small>
                         </div>
                 </div>
         @endforeach
@@ -90,21 +90,10 @@
                         <p style="margin-top:10px;"><small class="text-muted">Posted: {{ $note->created_at->diffForHumans() }}</small></p>
                         <small>{{ $note->user->username }}, {{ $note->user->school }}</small><br>
                         <a href="{{route('single',$note->id)}}" style="margin-top:10px;"> <button class="btn btn-sm btn-secondary" type="button">View & Download</button> </a>
-                        <small><a class="nav-link" href="#">30 Views</a></small>
+                        <small><a class="nav-link" href="#">30 Votes</a></small>
                 </div>
         </div>
-        @endforeach
-                
-                                
-                
-                <ul class="nav justify-content-center">
-                        <li class="nav-item">
-                        <a class="nav-link" href="#">See More Notes Reccomendations</a>
-                        </li>
-                        
-                        </ul>
-        </div>
-@endforeach
+     @endforeach
         <ul class="nav justify-content-center">
                 <li class="nav-item">
                         <a class="nav-link" href="#">See More Notes Reccomendations</a>
@@ -134,7 +123,7 @@
                                 <p style="margin-top:10px;"><small class="text-muted">Posted: {{ $note->created_at->diffForHumans() }}</small></p>
                                 <small>{{ $note->user->username }}, {{ $note->user->school }}</small><br>
                                 <a href="{{route('single',$note->id)}}" style="margin-top:10px;"> <button class="btn btn-sm btn-secondary" type="button">View & Download</button> </a>
-                                <small><a class="nav-link" href="#">30 Views</a></small>
+                                <small><a class="nav-link" href="#">30 Votes</a></small>
                         </div>
                 </div>
         @endforeach
@@ -165,7 +154,7 @@
                                         <small>{{ $note->user->username }}, {{ $note->user->school }}</small>
                                         <a href="{{route('single',$note->id)}}"><button type="button" class="btn btn-sm btn-secondary" style="margin-top:10px;"> View & Download</button></a>
                                         
-                                        <small><a class="nav-link" href="#">30 Views</a></small>
+                                        <small><a class="nav-link" href="#">30 Votes</a></small>
                                 </div>
                         </div>
                 @endforeach

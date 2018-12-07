@@ -409,5 +409,8 @@ class TeacherController extends Controller
    }
    return view('teacher/results')->withResults($results)->withSubjects($subjects)->withAverages($avgs)->withUsers($users);
 }
+public function createquiz (){
+    return view ('teacher/createquiz');
+}
 
 }
