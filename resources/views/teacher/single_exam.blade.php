@@ -135,7 +135,7 @@
                                 @if ($answer->score != null)
                                         <div class="card text-center">
                                             <div class="card-body">
-                                                Marks Awarded: <h4>{{ $answer->score }}</h4>
+                                                Marks Awarded: <h4>{{ $answer->score }} %</h4>
                                             </div>
                                         </div>
                                 @else
