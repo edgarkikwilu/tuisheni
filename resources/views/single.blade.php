@@ -39,12 +39,20 @@
                 </div>
             
                 <div class="card-body">
-                        {!! $note->article !!}
+                        {!! $notes->article !!}
                 </div>
                 <div class="card-body">
-                    <h5 class="text-muted">{{ $note->attachements->count() }} Attachment(s) <span class="badge-dark"></span> </h5>
                     <div class="row">
-                        @foreach ($note->attachements as $attachment)
+                        <div class="col-md-8 col-md-offset-2">
+                            <h5 class="text-muted">{{ $notes->attachements->count() }} Attachment(s) <span class="badge-dark"></span> </h5>
+                        </div>
+                        <div class="col-md-2">
+                            <!-- Trigger the modal with a button -->
+                            <button type="button" class="btn btn-block btn-light" data-toggle="modal" data-target="#reportModal">Report</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        @foreach ($notes->attachements as $attachment)
                             <div class="col-md-3 text-center">
                                 <div class="row">
                                     <div class="col-md-12">
@@ -58,6 +66,54 @@
                 </div>
             </div>
         </div>
+
+
+        <div class="container">
+            <h4 style="margin-top:20px; margin-left:10px; color:blue;">{{ $notes->comments->count() }} COMMENTS</h4>
+        </div>
+
+        <div class="container" style="margin-top:20px;">
+            <div class="row">
+            
+            <div class="container" style="text-align:center;">
+                <div class="col-lg-12">
+                    <div class="container">
+                        <form action="{{ route('comment') }}" method="post">
+                            @csrf
+                            <input type="hidden" name="type" value="notes">
+                            <input type="hidden" name="type_id" value="{{ $notes->id }}">
+                            <textarea style="margin-top:10px; width:100%;" name="comment" placeholder="Add Your Comments Here!!" id=""  rows="5"></textarea><br>
+                            <button type="submit" class="btn btn-sm btn-primary" style="margin-top:10px;">Add Comment</button>
+                        
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+        </div>
+
+        <div class="container">
+            @foreach ($notes->comments as $comment)
+            <div class="row">
+                    <div class="col-md-2">
+                        <div class="container" style="text-align:center;">
+                            <a href="#"> <img class="rounded-circle" style=" margin-top:5px; " src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="80" height="80"></a>
+                            <a href="#"><h4><small>{{ $comment->user->username }}</small></h4></a> 
+                            <p><small class="text-muted">{{ $comment->created_at->diffForHumans() }}</small></p>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-8">
+                        <div class="container" style="margin-top:20px;">
+                            <p> {!! $comment->comment !!}</p>
+                        </div> 
+                    </div> 
+                </div>
+            @endforeach
+        </div>
+
+
     </div>
 </div>
 </div>
@@ -103,6 +159,43 @@
     </div>
 
   </div>
+</div>
+
+<!--Report Modal -->
+<div id="reportModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+    
+    <!-- Modal content-->
+    <div class="modal-content">
+    <div class="modal-header justify-content-center">
+        <h4 class="modal-title">Report {{ $notes->title }}</h4>
+    </div>
+    <div class="modal-body">
+        <div class="row justify-content-center">
+            <div class="col-md-10 col-offset-2">
+                    <form action="{{ route('report') }}" method="post" id="report">
+                        @csrf
+                        <span id="msg_feedback"></span><br>
+                        <input name="type_id" type="hidden" value="{{ $notes->id }}">
+                        <input name="type" type="hidden" value="notes">
+                        <input name="reported_id" type="hidden" value="{{ $notes->user->id }}">
+                        <label for="comment">Your comment</label>
+                        <input id="msg_comment" name="comment" type="text" class="form-control">
+                        <div class="row" style="margin-top:10px">
+                            <div class="col-md-6">
+                                <button class="btn btn-danger btn-block" id="close" data-dismiss="modal" type="submit">Cancel</button>
+                            </div>
+                            <div class="col-md-6">
+                                <button class="btn btn-success btn-block" type="submit">Send</button>
+                            </div>
+                        </div>
+                    </form>
+            </div>
+        </div>
+    </div>
+    </div>
+
+</div>
 </div>
 
 @endsection

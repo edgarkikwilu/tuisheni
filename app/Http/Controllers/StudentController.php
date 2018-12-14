@@ -10,6 +10,9 @@ use App\Follow;
 use App\Report;
 use App\ExamType;
 use App\Payment;
+use App\QuizAnswer;
+use App\Log;
+use App\Quiz;
 
 use DB;
 use Auth;
@@ -159,5 +162,53 @@ class StudentController extends Controller
     public function getSubTopics($id){
         $subtopics = DB::table("subtopics")->where("topic_id",$id)->pluck("name","id");
         return json_encode($subtopics);
+    }
+
+    public function followStudent($id){
+        if (Auth::check()) {
+            $follow = new Follow();
+            $follow->user_id = Auth()->id;
+            $follow->follow_id = $id;
+            $follow->save();
+            // Session::flash('success','followed!');
+            return response()->json(['success'=>'followed']);
+        } else {
+            // Session::flash('success','please login first!');
+            return response()->json(['success'=>'please login first']);
+        }
+    }
+
+    public function checkQuizAnswers(Request $request){
+        //dd($request);
+        $isAnswerResponse = true;
+        $isCorrect = false;
+        $yourAnswers = collect([]);
+        $correctAnswers = collect([]);
+
+        foreach ($request->answer as $answer) {
+            $questionAnswer = new QuizAnswer();
+            $questionAnswer->user_id = Auth::user()->id;
+            $questionAnswer->quiz_question_id = $answer['qn'];
+            $questionAnswer->answer = $answer['ans'];
+            $yourAnswers->push($answer['ans']);
+            $correctAnswers->push($answer['cans']);
+            $answer['ans'] == $answer['cans']?$questionAnswer->correct = true:$questionAnswer->correct = false;
+            $questionAnswer->save();
+        }
+
+        $points = DB::table('variables')->select('int_value')->where('name','quiz_attempt_points')->first();
+            Auth::user()->increment('points',$points->int_value);
+            $log = new Log();
+            $log->user_id = Auth::user()->id;
+            $log->ip = "";
+            $log->location = "Tanzania";
+            $log->description = "Post Exam";
+            $log->location = "Tanzania";
+            $log->points = $points->int_value;
+            $log->save();
+
+        // dd($correctAnswers);
+        $quiz = Quiz::with('questions')->with('user')->where('id',$request->quiz_id)->first();
+        return view('quiz/singlequiz')->withQuiz($quiz)->withIsAnswerResponse($isAnswerResponse)->withYourAnswers($yourAnswers)->withCorrectAnswers($correctAnswers)->withIsCorrect($isCorrect);
     }
 }

@@ -26,7 +26,6 @@ class IndexController extends Controller
     }
 
     public function index(){
-
         $now = Carbon::now();
         $week = $now->weekOfYear;
         $totalScore = 0;
@@ -52,6 +51,7 @@ class IndexController extends Controller
         // }
 
         //$sortedlist = $list->sortBy('score')->take(3);
+        //dd($topStudents);
         return view('welcome')->withCarousels($carousels)->withPackages($packages)
         ->withTopStudents($topStudents);
     }

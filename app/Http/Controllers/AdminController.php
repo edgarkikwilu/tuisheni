@@ -12,9 +12,9 @@ use App\Quiz;
 use App\Report;
 use App\Award;
 use App\Payment;
-use App\Violation;
 use App\Permission;
 use App\Role;
+use App\Variables;
 
 use DB;
 
@@ -28,9 +28,6 @@ class AdminController extends Controller
     }
     public function advertisements(){
         return view('admin/advertisements');
-    }
-    public function violations(){
-        return view('admin/violations');
     }
 
     public function getAllUsers(){
@@ -448,11 +445,6 @@ class AdminController extends Controller
 
     }
 
-    public function getAllViolations(){
-        $violations = Violation::with('user')->get();
-        return view('admin.violations')->withViolations($violations);
-    }
-
     public function role_permission(){
         $permissions = Permission::all();
         $roles = Role::all();
@@ -489,6 +481,44 @@ class AdminController extends Controller
         $permission->description = $request->description;
         $permission->save();
 
+        return redirect()->back();
+    }
+
+    public function getAllVariables(){
+        $variables = Variables::all();
+        return view('admin/variables')->withVariables($variables);
+    }
+
+    public function storeVariable(Request $request){
+        //dd($request);
+        // $request->validate([
+        //     'name'=>'required|string|max:50',
+        //     'int_value'=>'integer|max:10000',
+        //     'string_value'=>'string|max:150'
+        // ]);
+
+        $variable = new Variables();
+        $variable->name = $request->name;
+        $variable->int_value = $request->has('int_value')?$request->int_value:null;
+        $variable->string_value = $request->has('string_value')?$request->string_value:null;
+        $variable->save();
+        $variables = Variables::all();
+        return redirect()->route('admin.variables')->withVariables($variables);
+    }
+
+    public function editVariable(Request $request){
+        $request->validate([
+            'id'=>'bail|required|integer|min:0',
+            'name'=>'bail|required|string|max:50',
+            'int_value'=>'integer|max:10000',
+            'string_value'=>'string|max:150'
+        ]);
+
+        $variable = Variables::findOrFail($request->id);
+        $variable->name = $request->name;
+        $variable->int_value = $request->has('int_value')?$request->int_value:null;
+        $variable->string_value = $request->has('string_value')?$request->string_value:null;
+        $variable->save();
         return redirect()->back();
     }
     

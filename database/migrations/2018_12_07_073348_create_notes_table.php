@@ -28,6 +28,7 @@ class CreateNotesTable extends Migration
         //     $table->boolean('original')->default(false);
         //     $table->integer('votes')->default(0);
         //     $table->integer('views')->default(0);
+        //     $table->boolean('suspended')->default(false);
         //     $table->string('thumbnail')->nullable();
         //     $table->timestamps();
         // });

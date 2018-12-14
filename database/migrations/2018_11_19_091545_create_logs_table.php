@@ -15,11 +15,13 @@ class CreateLogsTable extends Migration
     {
         // Schema::create('logs', function (Blueprint $table) {
         //     $table->increments('id');
-        //     $table->string('ip');
+            // $table->integer('user_id')->unsigned();
+            // $table->foreign('user_id')->references('id')->on('users');
+        //     $table->string('ip')->nullable();
         //     $table->string('location')->nullable();
         //     $table->string('description')->nullable();
         //     $table->integer('points')->default(100);
-        //     $table->integer('week')->nullable();
+        //     $table->integer('week');
         //     $table->timestamps();
         // });
     }

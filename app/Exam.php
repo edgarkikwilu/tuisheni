@@ -21,8 +21,8 @@ class Exam extends Model
     public function answers(){
         return $this->hasMany('App\Answer');
     }
-    public function markingScheme(){
-        return $this->hasOne('App\MarkingScheme');
+    public function markingSchemes(){
+        return $this->hasMany('App\MarkingScheme');
     }
     public function reports(){
         return $this->hasMany('App\Report');
@@ -41,5 +41,9 @@ class Exam extends Model
 
     public function comments(){
         return $this->morphMany('App\Comment', 'commentable');
+    }
+
+    public function violations(){
+        return $this->morphMany('App\Violation', 'violatable');
     }
 }

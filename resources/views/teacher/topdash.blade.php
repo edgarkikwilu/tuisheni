@@ -8,16 +8,14 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-	<link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+ <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
   <link rel="stylesheet" href="{{ asset ('js/bootstrap.css') }}">
   <link rel="stylesheet" href="{{ asset ('css/style.css') }}">
   <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" id="bootstrap-css">
   <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" id="bootstrap-css">
+  <link href="node_modules/jquery/dist/jquery.min.js" rel="stylesheet" id="bootstrap-css">
 
-<!------ Include the above in your HEAD tag ---------->
-
-
-  
+<!------ Include the above in your HEAD tag --------->
 	<title>School Bata</title>
 
 </head>
@@ -115,6 +113,90 @@
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#btnAddNewQuestion').on('click', function(e){
+            $('.qn').clone().appendTo('.qncontainer');
+        });
+    
+      $('select[name="subject"]').on('change', function(){
+          var subjectId = $(this).val();
+          
+          if(subjectId) {
+            $.ajax({
+            url: '/student/gettopics/'+subjectId,
+            type:"GET",
+            dataType:"json",
+            data:{id: subjectId},      
+                success:function(data) {
+                    $('select[name="topic"]').empty();
+                    $.each(data, function(key, value){
+                    $('select[name="topic"]').append('<option value="'+ key +'">' + value + '</option>');
+                });
+                }
+            });
+          } else {
+              $('select[name="topic"]').empty();
+          }
+      
+      });
+
+      $('select[name="topic"]').on('change', function(){
+          var topicId = $(this).val();
+          
+          if(topicId) {
+            
+              $.ajax({
+                  url: '/student/getsubtopics/'+topicId,
+                  type:"GET",
+                  dataType:"json",
+                  data:{id: topicId},
+                  success:function(data) {
+                      $('select[name="subtopic"]').empty();
+                      $.each(data, function(key, value){
+                          $('select[name="subtopic"]').append('<option value="'+ key +'">' + value + '</option>');
+                      });
+                  }
+              });
+          } else {
+              $('select[name="subtopic"]').empty();
+          }
+      
+      });
+    });
+
+    // Set the date we're counting down to
+var countDownDate = new Date( $time ).getTime();
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+  // Get todays date and time
+  var now = new Date().getTime();
+
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  // Display the result in the element with id="demo"
+  document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+  + minutes + "m " + seconds + "s ";
+
+  // If the count down is finished, write some text
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("demo").innerHTML = "EXPIRED";
+  }
+}, 1000);
+
+    </script>
 
 </body>
 </html>

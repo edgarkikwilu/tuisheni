@@ -29,30 +29,52 @@
                 </div>
                 <div class="container" style="text-align:center">
                         <h3 class="card-title" style="color:blue; margin-top:10px; margin-left:5px;" >{{ $quiz->title }}</h3>
-                        <span ><small class="text-muted">#physics #Matter</small></span>
+                        <span><small class="text-muted">#{{ $quiz->subject->name }} #{{ $quiz->topic->name }}</small></span>
                 </div>
             <div class="container" style="margin-top:10px;">
                  <h4>SECTION A (Multiple Choice 2 Points each) {{ $quiz->questions->count() }}</h4>
             </div>
+
+            <form action="{{ route('quiz.check.answers') }}" id="checkAnsForm" method="post">
+                @csrf
+                <input type="hidden" name="quiz_id" value="{{ $quiz->id }}">
                 <div class="card-body">
                     @php
                         $count = 0
                     @endphp
                     @foreach ($quiz->questions as $question)
-                    @php
-                        $count++
-                    @endphp
+                    
                         <div class="container">
-                            <p>Qn {{ $count }}. {{ $question->question }}</p>
+                            <p>Qn {{ $count+1 }}. {{ $question->question }}</p>
                             <ul>
                                 @foreach ($question->choices as $choice)
-                                <li>{{ $choice->index }} {{ $choice->name }}</li>
+                                <li>
+                                    <input type="hidden" name="answer[{{ $count }}][qn]" value="{{ $question->id }}">
+                                    <input type="hidden" name="answer[{{ $count }}][cans]" value="{{ $question->answer }}">
+
+                                    <input type="checkbox" class="chckbx{{ $count+1 }}" value="{{ $choice->index }}" name="answer[{{ $count }}][ans]">
+                                    {{ $choice->index }} => {{ $choice->name }}
+                                    
+                                </li>
                                 @endforeach
                             </ul>
+                            @if ($isAnswerResponse)
+                                    @if ($yourAnswers[$count] == $correctAnswers[$count])
+                                        <span style="background-color:green;">Your Answer Was: {{ $yourAnswers[$count]}} => CORRECT</span>
+                                    @else
+                                        <span style="background-color:red;">Your Answer Was: {{ $yourAnswers[$count]}} => WRONG</span>
+                                    @endif
+                            @endif
                         </div>
+                        @php
+                            $count++
+                        @endphp
                     @endforeach
                 </div>
-                <button type="button" class="btn btn-success" style="margin-top:10px;">SUBMIT ANSWERS</button>
+                <input type="hidden" name="count" value="{{ $count }}">
+                <button type="submit" id="btnSubmit" class="btn btn-success" style="margin-top:10px;">SUBMIT ANSWERS</button>
+            </form>
+               
             </div>
         </div>
     </div>
@@ -70,10 +92,12 @@
               <h4 class="modal-title">Message {{ $quiz->user->username }}</h4>
             </div>
             <div class="modal-body">
+                <span id="msg_feedback"></span>
               <div class="row justify-content-center">
                   <div class="col-md-10 col-offset-2">
-                      <form action="{{ route('message') }}" method="post">
-                          @csrf
+                      <form action="{{ route('message') }}" id="message" method="post">
+                          {{-- @csrf --}}
+                          <input type="hidden" name="recipient_id" value="{{ $quiz->user->id }}">
                           <label for="title">Title</label>
                           <input name="title" type="text" class="form-control">
                           <label for="description">Description</label>

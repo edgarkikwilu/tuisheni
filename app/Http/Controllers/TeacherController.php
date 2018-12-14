@@ -17,8 +17,15 @@ use App\Payment;
 use App\ExamAttachment;
 use App\Report;
 use App\Point;
+use App\Topic;
+use App\QuizQuestion;
+use App\Choice;
+use App\Log;
+use App\MarkingScheme;
 
 use Auth;
+use Session;
+use DB;
 use Carbon\Carbon;
 
 class TeacherController extends Controller
@@ -57,11 +64,11 @@ class TeacherController extends Controller
             $follow->user_id = Auth()->id;
             $follow->follow_id = $id;
             $follow->save();
-            Session::flash('success','followed!');
-            return redirect()->back();
+            // Session::flash('success','followed!');
+            return response()->json(['success'=>'followed']);
         } else {
-            Session::flash('error','please login first!');
-            return redirect()->back();
+            // Session::flash('success','please login first!');
+            return response()->json(['success'=>'please login first']);
         }
     }
     public function messageTeacher(Request $request){
@@ -102,6 +109,7 @@ class TeacherController extends Controller
         return view('teacher/createnotes')->withSubjects($subjects);
     }
     public function storeNotes(Request $request){
+        
         $request->validate([
             'form'=>'bail|required|integer|max:6',
             'subject'=>'required|integer|max:100',
@@ -137,6 +145,16 @@ class TeacherController extends Controller
                     }
                 }
             }
+            $points = DB::table('variables')->select('int_value')->where('name','notes_post_points')->first();
+            Auth::user()->increment('points',$points->int_value);
+            $log = new Log();
+            $log->user_id = Auth::user()->id;
+            $log->ip = "";
+            $log->location = "Tanzania";
+            $log->description = "Post Exam";
+            $log->location = "Tanzania";
+            $log->points = $points->int_value;
+            $log->save();
         }else{
             return redirect()->back()->withInput();    
         }
@@ -148,42 +166,42 @@ class TeacherController extends Controller
         return view('teacher/single_exam')->withExam($exam)->withAnswers($answers);
     }
     public function giveMarks(Request $request){
-        $request->validate([
-            'score'=>'bail|required|string|max:100|min:0',
-            'remarks'=>'string|max:255'
-        ]);
-        $report = new Report();
-        $report->user_id = $report->user_id;
-        $report->exam_id = $report->exam_id;
-        $report->score = $report->score;
-        $report->remarks = $report->remarks;
-        $report->teacher_id = Auth::user()->id;
-        $report->week = date('W');
+        if ($request->ajax()) {
+            $request->validate([
+                'score'=>'bail|required|string|max:100|min:0',
+                'remarks'=>'string|max:255'
+            ]);
+            $report = new Report();
+            $report->user_id = $request->user_id;
+            $report->exam_id = $request->exam_id;
+            $report->score = $request->score;
+            $report->remarks = $request->remarks;
+            $report->teacher_id = Auth::user()->id;
+            $report->week = date('W');
+    
+            if ($report->score > 80) {
+                $report->grade = 'A';
+            } else if ($report->score <= 80 && $report->score >= 71) {
+                $report->grade = 'B';
+            }else if ($report->score <= 70 && $report->score >= 56) {
+                $report->grade = 'C';
+            }
+            else if ($report->score <= 55 && $report->score >= 45) {
+                $report->grade = 'D';
+            }
+            else {
+                $report->grade = 'F';
+            }
+    
+            $report->save();
 
-        if ($report->score > 80) {
-            $report->grade = A;
-        } else if ($report->score <= 80 && $report->score >= 71) {
-            $report->grade = B;
-        }else if ($report->score <= 70 && $report->score >= 56) {
-            $report->grade = C;
+            return response()->json(['status'=>'success']);
         }
-        else if ($report->score <= 55 && $report->score >= 45) {
-            $report->grade = D;
-        }
-        else {
-            $report->grade = F;
-        }
+        // $exam = Exam::with('attachements')->findOrFail($request->exam_id);
+        // $answers = Answer::with('answerSheets')->with('user')->where('exam_id',$request->exam_id)->get();
 
-        $report->save();
-        $exam = Exam::with('attachements')->findOrFail($id);
-        $answers = Answer::with('answerSheets')->with('user')->where('exam_id',$id)->get();
-
-        return view('teacher/single_exam')->withExam($exam)->withAnswers($answers);
-    }
-    public function quiz(){
-        $subjects = Subject::all();
-        $quizzes = Quiz::all(); 
-        return view('teacher/quiz')->withSubjects($subjects)->withQuizzes($quizzes);
+        // return view('teacher/single_exam')->withExam($exam)->withAnswers($answers);
+        return redirect()->back();
     }
     
     public function points(){
@@ -253,6 +271,7 @@ class TeacherController extends Controller
 
     public function storeExam(Request $request){
         //dd('before validation');
+        // dd($request->hasFile('marking_scheme'));
         $request->validate([
             'form'=>'bail|required|integer|max:6',
             'subject'=>'required|integer|max:100',
@@ -263,11 +282,10 @@ class TeacherController extends Controller
             'description'=>'required|string',
         ]);
 
-        $start = Carbon::create(1975, 12, 25, 14, 15, 16);;
-        $end = Carbon::create(1975, 12, 25, 14, 15, 16);;
-
-        $start = Carbon::createFromFormat('Y-m-d H:i', $request->start);
-        $end = Carbon::createFromFormat('Y-m-d H:i', $request->end);
+        $start = Carbon::create($request->syear, $request->smonth, $request->sday,
+        $request->shour, $request->sminute, 00);
+        $end = Carbon::create($request->eyear, $request->emonth, $request->eday,
+        $request->ehour, $request->eminute, 00);
             
         $exam = new Exam();
         $exam->user_id = Auth::user()->id;
@@ -297,6 +315,33 @@ class TeacherController extends Controller
                     }
                 }
             }
+            if ($request->hasFile('marking_scheme')) {
+                // dd('MarkingScheme');
+                $i = 0;
+                foreach ($request->file('marking_scheme') as $attachment) {
+                    $i = $i + 1;
+                    if($i < 7){
+                    $filename = time().$attachment->getClientOriginalName();
+                    $attachment->storeAs('marking_scheme',$filename);
+    
+                    $markingScheme = new MarkingScheme();
+                    $markingScheme->user_id  = Auth::user()->id;
+                    $markingScheme->exam_id  = $exam->id;
+                    $markingScheme->filename = $filename;
+                    $markingScheme->save();
+                    }
+                }
+            }
+            $points = DB::table('variables')->select('int_value')->where('name','exam_post_points')->first();
+            Auth::user()->increment('points',$points->int_value);
+            $log = new Log();
+            $log->user_id = Auth::user()->id;
+            $log->ip = "";
+            $log->location = "Tanzania";
+            $log->description = "Post Exam";
+            $log->location = "Tanzania";
+            $log->points = $points->int_value;
+            $log->save();
         }else{
             return redirect()->back()->withInput();    
         }
@@ -411,8 +456,81 @@ class TeacherController extends Controller
    }
    return view('teacher/results')->withResults($results)->withSubjects($subjects)->withAverages($avgs)->withUsers($users);
 }
-public function createquiz (){
-    return view ('teacher/createquiz');
-}
+
+    public function quiz(){
+        $subjects = Subject::all();
+        $quizzes = Quiz::all(); 
+        return view('teacher/quiz')->withSubjects($subjects)->withQuizzes($quizzes);
+    }
+    public function createquiz (){
+        $subjects = Subject::all();
+        $topics = Topic::all();
+        return view ('teacher/createquiz')->withSubjects($subjects)->withTopics($topics);
+    }
+
+    public function storeQuiz(Request $request){
+        //dd($request);
+        //dd(count($request->questions)/6);
+        $quiz = new Quiz();
+        $quiz->user_id = Auth::user()->id;
+        $quiz->title = $request->title;
+        $quiz->form = $request->form;
+        $quiz->subject_id = $request->subject;
+        $quiz->topic_id = $request->topic;
+        $quiz->subtopic_id = $request->subtopic;
+
+        if ($quiz->save()) {
+            $count = count($request->questions)/6;
+            $position = 0;
+            for ($is=0; $is < $count; $is++) { 
+                $question = new QuizQuestion();
+                $question->quiz_id = $quiz->id;
+                $question->question = $request->questions[$position];
+                $question->answer = $request->questions[$position+5];
+                $question->question_type_id = 1;
+
+                if ($question->save()) {
+                    //$choiceCount= 0;
+                    for ($i=1; $i < 5; $i++) { 
+                        $choice = new Choice();
+                        $choice->quiz_question_id = $question->id;
+                        switch ($i) {
+                            case 1:
+                                $choice->index = "A";
+                                break;
+                            case 2:
+                                $choice->index = "B";
+                            break;
+                            case 3:
+                                $choice->index = "C";
+                            break;
+                            case 4:
+                                $choice->index = "D";
+                            break;
+                        }
+                        $choice->name = $request->questions[$position+$i];
+                        $choice->save();
+                    }
+                }
+                $position += 6;
+            }
+            $points = DB::table('variables')->select('int_value')->where('name','quiz_post_points')->first();
+            Auth::user()->increment('points',$points->int_value);
+            $log = new Log();
+            $log->user_id = Auth::user()->id;
+            $log->ip = "";
+            $log->location = "Tanzania";
+            $log->description = "Post Quiz";
+            $log->location = "Tanzania";
+            $log->points = $points->int_value;
+            $log->save();
+            return redirect()->back();    
+        } else {
+            return redirect()->back()->withInputs();
+        }
+        
+        
+    }
+
 
 }

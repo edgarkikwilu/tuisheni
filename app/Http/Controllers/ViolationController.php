@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Violation;
+use App\Subject;
+use App\Exam;
+use App\Note;
+use Auth;
 use Illuminate\Http\Request;
 
 class ViolationController extends Controller
@@ -14,7 +18,9 @@ class ViolationController extends Controller
      */
     public function index()
     {
-        //
+        $subjects = Subject::all();
+        $violations = Violation::with('user')->get();
+        return view('admin/violations')->withSubjects($subjects)->withViolations($violations);
     }
 
     /**
@@ -35,7 +41,14 @@ class ViolationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if ($request->type == 'exam') {
+            $exam = Exam::find($request->type_id);
+            $exam->violations()->create(['user_id'=>Auth::user()->id,'reported_id'=>$request->reported_id,'comments'=>$request->comment]);
+        } else if ($request->type == 'notes') {
+            $note = Note::find($request->type_id);
+            $note->violations()->create(['user_id'=>Auth::user()->id,'reported_id'=>$request->reported_id,'comments'=>$request->comment]);
+        }
+        return redirect()->back();
     }
 
     /**

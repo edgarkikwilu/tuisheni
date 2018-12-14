@@ -8,10 +8,13 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <!-- Scripts -->
+    
+    <script src="{{ asset('js/app.js') }}" defer></script>
+
 	<link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
   <link rel="stylesheet" href="{{ asset ('js/bootstrap.css') }}">
   <link rel="stylesheet" href="{{ asset ('css/style.css') }}">
-  <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" id="bootstrap-css">
   <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" id="bootstrap-css">
 
 <!------ Include the above in your HEAD tag ---------->
@@ -20,25 +23,18 @@
   
 	<title>School Bata</title>
 
+    <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=wbey0h1l7jz2lp8lmlox7olwvkkbg9hxihsn3a4ls25xywr0"></script>
+    <script>
+        tinymce.init({ 
+            selector: 'textarea',
+            plugins: 'media link',
+            api_key: 'wbey0h1l7jz2lp8lmlox7olwvkkbg9hxihsn3a4ls25xywr0 ',
+            height: 200
+        });
+    </script>
+
 </head>
 <body>
-<!--    <nav class="navbar navbar-expand navbar-dark bg-dark">
-        <h3 class="display-4" style="color: #FFF ; " ><a href="{{ route('index') }}" style="text-decoration:none; color:#FFF;">SCHOOL BATA</a> </h3>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="navbar-nav ml-auto">
-            @guest
-              <a href="{{ route('login') }}" style=" color:#FFF;">Login</a>
-              <a href="{{ route('register') }}" style="color:#FFF;">Sign Up</a>
-            @endguest
-            @auth
-              <a href="#" style=" color:#FFF;">Points</a>
-              <a href="#" style="color:#FFF;"> Username</a>
-            @endauth
-        </div>  
-      </nav>  -->
-
       <nav class="navbar navbar-expand-lg navbar-light bg-primary" >
           <a class="navbar-brand" href="#" style="font-size:26px; color:#FFF;">SCHOOL BATA</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -107,13 +103,13 @@
         </nav>
 
         @if(Session::has('success'))
-        <div class="alert alert-success" role="alert">
-            <strong>Success:</strong> {{Session::get('success')}}
+        <div class="alert alert-success text-center" role="alert">
+             {{Session::get('success')}}
         </div>    
     @endif
     
     @if(count($errors) > 0)
-        <div class="alert alert-danger" role="danger">
+        <div class="alert alert-danger text-center" role="danger">
             <strong>Errors:</strong>
             <ul>
             @foreach($errors->all() as $error)
@@ -126,46 +122,17 @@
         <div style="text-align:left; margin-left:10px;">
           <h4  ><small class="text-muted"> SCHOOL WEEK <?php echo date('W') ?></small></h4>  
         </div>      
-      
-    <!--  
-      
-      <div class="container">
-          <nav class="nav nav-pills nav-justified">
-              
-             <a class="nav-item nav-link active" href="{{ route('index') }}">Home</a>
-              <a class="nav-item nav-link" href="{{ route('explore') }}">Explore Posts</a>
-              <a class="nav-item nav-link" href="#">Online Quizzes</a>
-              <a class="nav-item nav-link" href="#">Examinations</a>
-              <a class="nav-item nav-link" href="{{ route('profile') }}">My Profile</a>
-              <a class="nav-item nav-link" href="{{ route('dm') }}">Direct Messages</a>
-              
-            </nav>
-      </div>  -->
-
+    
       @yield('content')
 
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-
- <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-    <script src="../../../../assets/js/vendor/popper.min.js"></script>
-    <script src="../../../../dist/js/bootstrap.min.js"></script>
-    <script src="../../../../js/bootstrap.js"></script>
-    <script src="../../../../js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-    <script>
-    
+    <script type="text/javascript">
         $('#message').on('submit', function(e){
             e.preventDefault();
             // var title = $('#msg_title').val();
             // var description = $('#msg_description').val();
-
+            alert('submitted');
             var formdata = $(this).serialize();
             var action = $(this).attr('action');
 
@@ -180,7 +147,6 @@
                 url: action,
                 data: formdata,
                 success: function(data){
-                    // $("#myModal #close").click()
                     if (data.success != null) {
                         $('#msg_feedback').css('color:green;');
                         $('#msg_feedback').append(data.success);
@@ -190,17 +156,138 @@
                     }
                 },
                 error: function(error){
-                    // alert('message not sent');
                     $('#msg_feedback').css("color:red");
                     $('#msg_feedback').append(data.error);
-                    // $("#myModal #close").click()
                 }
             });
         });
         
-        $('#btnfollow').on('click', function(e){
+        // $('#btnfollow').on('click', function(e){
+        //     e.preventDefault();
+        //     var id = $(this).val();
+
+        //     $.ajaxSetup({
+        //         headers: {
+        //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //         }
+        //     });
+
+        //     $.ajax({
+        //         type:'get',
+        //         url:'/follow/'+id,
+        //         data:{},
+        //         success: function(data){
+        //             if (data.success != null) {
+        //                 $('#btnfollow').css('display:none');
+        //                 $('.following').css('display:block');
+        //                 alert(data.success);
+        //             }else if (data.error != null){
+        //                 alert(data.error);
+        //             }
+        //         },
+        //         error: function(error){
+        //             alert(error.error);
+        //         }
+
+        //     });
+        // });
+
+        // $('.btnfollowteacher').on('click', function(e){
+        //     e.preventDefault();
+        //     var id = $(this).val();
+
+        //     $.ajaxSetup({
+        //         headers: {
+        //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //         }
+        //     });
+
+        //     $.ajax({
+        //         type:'get',
+        //         url:'/follow/teacher/'+id,
+        //         data:{},
+        //         success: function(data){
+        //             if (data.success != null) {
+        //                 $('#btnfollow').css('display:none');
+        //                 $('.following').css('display:block');
+        //                 alert(data.success);
+        //             }else if (data.error != null){
+        //                 alert(data.error);
+        //             }
+        //         },
+        //         error: function(error){
+        //             alert(error.error);
+        //         }
+
+        //     });
+        // });
+
+        $('.chckbx1').on('change', function() {
+             $('.chckbx1').not(this).prop('checked', false);
+        });
+        $('.chckbx2').on('change', function() {
+             $('.chckbx2').not(this).prop('checked', false);
+        });
+        $('.chckbx3').on('change', function() {
+             $('.chckbx3').not(this).prop('checked', false);
+        });
+        $('.chckbx4').on('change', function() {
+             $('.chckbx4').not(this).prop('checked', false);
+         });
+        $('.chckbx5').on('change', function() {
+             $('.chckbx5').not(this).prop('checked', false);
+        });
+        $('.chckbx6').on('change', function() {
+             $('.chckbx6').not(this).prop('checked', false);
+        });
+        $('.chckbx7').on('change', function() {
+             $('.chckbx7').not(this).prop('checked', false);
+        });
+        $('.chckbx8').on('change', function() {
+             $('.chckbx8').not(this).prop('checked', false);
+        });
+        $('.chckbx9').on('change', function() {
+             $('.chckbx9').not(this).prop('checked', false);
+        });
+        $('.chckbx10').on('change', function() {
+             $('.chckbx10').not(this).prop('checked', false);
+        });
+        $('.chckbx11').on('change', function() {
+             $('.chckbx11').not(this).prop('checked', false);
+        });
+        $('.chckbx12').on('change', function() {
+             $('.chckbx12').not(this).prop('checked', false);
+        });
+        $('.chckbx13').on('change', function() {
+             $('.chckbx13').not(this).prop('checked', false);
+        });
+        $('.chckbx14').on('change', function() {
+             $('.chckbx14').not(this).prop('checked', false);
+        });
+        $('.chckbx15').on('change', function() {
+             $('.chckbx15').not(this).prop('checked', false);
+        });
+        $('.chckbx16').on('change', function() {
+             $('.chckbx16').not(this).prop('checked', false);
+        });
+        $('.chckbx17').on('change', function() {
+             $('.chckbx17').not(this).prop('checked', false);
+        });
+        $('.chckbx18').on('change', function() {
+             $('.chckbx18').not(this).prop('checked', false);
+        });
+        $('.chckbx19').on('change', function() {
+             $('.chckbx19').not(this).prop('checked', false);
+        });
+        $('.chckbx20').on('change', function() {
+             $('.chckbx20').not(this).prop('checked', false);
+        });
+
+        $('.marksForm').on('submit', function(e){
             e.preventDefault();
-            var id = $(this).val();
+            var formdata = $(this).serialize();
+            var method  = $(this).attr('method');
+            var action  = $(this).attr('action');
 
             $.ajaxSetup({
                 headers: {
@@ -209,24 +296,18 @@
             });
 
             $.ajax({
-                type:'get',
-                url:'/follow/'+id,
-                data:{},
+                type: method,
+                url: action,
+                data: formdata,
                 success: function(data){
-                    if (data.success != null) {
-                        $('#btnfollow').css('display:none');
-                        $('.following').css('display:block');
-                        alert(data.success);
-                    }else if (data.error != null){
-                        alert(data.error);
-                    }
+                    alert(data.status);
                 },
-                error: function(error){
-                    alert(error.error);
+                error:function(error){
+                    alert(error);
                 }
-
             });
         });
+
     </script>
 
 </body>

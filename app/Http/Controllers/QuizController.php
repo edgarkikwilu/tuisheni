@@ -17,7 +17,25 @@ class QuizController extends Controller
     {
         $quizzes = Quiz::all();
         $subjects = Subject::all();
-        return view('quiz/quiz')->withSubjects($subjects)->withQuizzes($quizzes);
+
+        $stats = collect([]);
+
+        foreach ($quizzes as $quiz) {
+            $questions = $quiz->questions;
+            $answers = collect([]);
+            foreach ($questions as $question) {
+                //dd($question->answers->count());
+                foreach ($question->answers as $answer) {
+                    if ($answer->correct == true) {
+                        $answers->push(1);
+                    }
+                }
+            }
+            $stats->push($answers);
+        }
+       // dd($stats);    
+
+        return view('quiz/quiz')->withSubjects($subjects)->withQuizzes($quizzes)->withStats($stats);
     }
 
     public function getSingleQuiz(){
@@ -60,9 +78,14 @@ class QuizController extends Controller
 
     public function attempt($id)
     {
+        $isAnswerResponse = false;
+        $yourAnswers = collect([]);
+        $correctAnswers = collect([]);
+        $isCorrect = false;
+
         $quiz = Quiz::with('questions')->with('user')->where('id',$id)->first();
         $quiz->increment('attempts');
-        return view('quiz/singlequiz')->withQuiz($quiz);
+        return view('quiz/singlequiz')->withQuiz($quiz)->withIsAnswerResponse($isAnswerResponse)->withYourAnswers($yourAnswers)->withCorrectAnswers($correctAnswers)->withIsCorrect($isCorrect);
     }
 
     /**
@@ -73,7 +96,7 @@ class QuizController extends Controller
      */
     public function store(Request $request)
     {
-        //
+            
     }
 
     public function filterQuizzes(Request $request){

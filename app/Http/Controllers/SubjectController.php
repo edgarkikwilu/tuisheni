@@ -11,6 +11,7 @@ use App\Follow;
 use App\Subtopic;
 use Illuminate\Http\Request;
 use Auth;
+use Session;
 
 class SubjectController extends Controller
 {
@@ -32,13 +33,18 @@ class SubjectController extends Controller
         $week = 1;
         $topics = Topic::with('subTopics')->where('form',$class)->orderBy('priority','asc')->get();
         $firstTopic = $topics->first();
-        //dd($firstTopic);
+        
+        if ($firstTopic != null) {
         $recommendedNotes = Note::where('topic_id',$firstTopic->id)->where('original', true)->get();
         $mostVotedNotes = Note::where('topic_id',$firstTopic->id)->orderBy('votes','desc')->where('original', false)->get();
         $topStudents = Report::where('week',$week)->orderBy('score','desc')->take(3)->get();
         $votednotes = Note::where('week', $week)->where('original', true)->orderBy('votes','desc')->take(3)->get();
         return view('class/class')->withSubject($subject)->withClass($class)->withTopStudents($topStudents)
                 ->withTopics($topics->take(7))->withRecommendedNotes($recommendedNotes)->withMostVotedNotes($mostVotedNotes);
+        }else{
+            Session::flash('success','Form '.$class.' notes not found');
+            return redirect()->back();
+        }
     }
 
     public function single($id){

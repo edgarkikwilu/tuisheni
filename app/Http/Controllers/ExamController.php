@@ -58,6 +58,7 @@ class ExamController extends Controller
     }
     public function single_exam ($id){
         $exam = Exam::with('user')->with('attachements')->with('examType')->where('id',$id)->first();
+        $exam->increment('views');
         return view ('examination/single_exam')->withExam($exam);
     }
 

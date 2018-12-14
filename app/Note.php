@@ -32,4 +32,8 @@ class Note extends Model
     public function subtopic(){
         return $this->belongsTo('App\Subtopic');
     }
+
+    public function violations(){
+        return $this->morphMany('App\Violation', 'violatable');
+    }
 }

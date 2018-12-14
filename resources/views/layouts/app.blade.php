@@ -87,7 +87,8 @@
             @yield('content')
         </main>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+    
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script> --}}
 
 <script>
         $(document).ready(function() {
@@ -136,6 +137,11 @@
           }
       
       });
+    });
+
+    $('.editbtn').on('click', function(e){
+        e.preventDefault();
+        alert('editbtn clicked');
     });
     </script>
 </body>

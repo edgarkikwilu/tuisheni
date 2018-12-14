@@ -7,79 +7,20 @@ use Illuminate\Http\Request;
 
 class MarkingSchemeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\MarkingScheme  $markingScheme
-     * @return \Illuminate\Http\Response
-     */
-    public function show(MarkingScheme $markingScheme)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\MarkingScheme  $markingScheme
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(MarkingScheme $markingScheme)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\MarkingScheme  $markingScheme
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, MarkingScheme $markingScheme)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\MarkingScheme  $markingScheme
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(MarkingScheme $markingScheme)
-    {
-        //
+    public function show($filename){
+        $file = storage_path('app/marking_scheme/'.$filename);
+        $path = str_replace('/', '\\', $file);
+        // check if the file exists
+        if (file_exists($path)) {
+            //dd('file found');
+            // Get the file content to put into your response
+            $content = file_get_contents($file);
+            //Build your Laravel Response with your content, the HTTP code and the Header application/pdf
+            //return Response::make($content, 200, array('content-type'=>'application/pdf'));
+            return response($content, 200)
+              ->header('Content-Type',  array('content-type'=>'*'));
+        }else{
+            dd('file not found');
+        }
     }
 }

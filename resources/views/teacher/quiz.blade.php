@@ -1,5 +1,6 @@
 @extends('teacher.topdash')
 @section('content')
+
 <div class="container" style=" margin-top: 40px; text-align:left;">
     <h3 class="display-5" style="color: #001f9c ; " >MY QUIZZES</h3>  
   </div>
@@ -18,12 +19,13 @@
         </div>
         <div class="col-sm-3">
                 <select name="form" class="custom-select">
-                        <option value="1">Form 1</option>
-                        <option value="2">Form 2</option>
-                        <option value="3">Form 3</option>
-                        <option value="4">Form 4</option>
-                        <option value="5">Form 5</option>
-                        <option value="6">Form 6</option>
+                    <option value="">--FORM--</option>
+                    <option value="1">Form 1</option>
+                    <option value="2">Form 2</option>
+                    <option value="3">Form 3</option>
+                    <option value="4">Form 4</option>
+                    <option value="5">Form 5</option>
+                    <option value="6">Form 6</option>
                 </select>
         </div>
         <div class="col-sm-3"><input name="quiztitle" class="form-control mr-sm-2" type="search" placeholder="Search By Quiz Title" aria-label="username" style="width: 100%;"></div>
@@ -34,7 +36,6 @@
         <a href="{{route('teacher.createquiz')}}" class="btn btn-sm btn-secondary" style="float:right;">Create New Quiz</a>
         </div>
         </form>
-
 </nav>
 </div>
 
@@ -50,10 +51,10 @@
     <a href="{{ route('attempt.quiz.quiz', $quiz->id) }}" ><h5 style="margin-top:10px; font-weight:bold;" >{{ $quiz->title }}</h5></a>
             <div class="row">
                 <div class="col-lg-6">
-                    <small><label style="width:25%;">Subject: </label> <b>Physics</b></small>
+                    <small><label style="width:25%;">Subject: </label> <b>{{ $quiz->subject->name }}</b></small>
                 </div>
                 <div class="col-lg-6">
-                    <small><label style="width:25%; ">Class: </label><b>Form 3</b></small>
+                    <small><label style="width:25%; ">Class: </label><b>Form {{ $quiz->form }}</b></small>
                 </div>
             </div>
             
@@ -64,10 +65,10 @@
             </div>
             <div class="row">
                 <div class="col-lg-6">
-                    <small><label style="width:25%;">1st Price: </label> <b>5000 Points</b></small>
+                    <small><label style="width:25%;">1st Price: </label> <b>{{ $quiz->prize }} Points</b></small>
                 </div>
                 <div class="col-lg-6">
-                    <small><label style="width:40%; ">10 Questions </label><em>@ 5 Points</em></small>
+                    <small><label style="width:40%; ">{{ $quiz->questions->count() }} Questions </label><em>@ 5 Points</em></small>
                 </div>
             </div>
             <div class="row">
@@ -81,7 +82,7 @@
             
                 <small>Chodo, Eagles Secondary SChool</small>
             <a href="{{ route('attempt.quiz.quiz', $quiz->id) }}" class="btn btn-sm btn-secondary" style="margin-top:10px;">Attempt Quiz</a>
-            <small><a class="nav-link" href="#">30 Attempts</a></small>
+            <small><a class="nav-link" href="#">{{ $quiz->attempts }} Attempts</a></small>
             <small><a class="nav-link" href="#" style="color:red;">Delete</a></small>
 
             

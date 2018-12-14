@@ -23,6 +23,7 @@ class CreateQuizzesTable extends Migration
             $table->foreign('topic_id')->references('id')->on('topics');
             $table->integer('subtopic_id')->unsigned()->nullable();
             $table->foreign('subtopic_id')->references('id')->on('subtopics');
+            $table->integer('form')->default(1);
             $table->integer('week');
             $table->integer('attempts')->default(0);
             $table->integer('prize')->default(10);

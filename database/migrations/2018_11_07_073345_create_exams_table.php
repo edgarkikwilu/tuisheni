@@ -23,12 +23,14 @@ class CreateExamsTable extends Migration
             $table->foreign('subject_id')->references('id')->on('subjects');
             $table->boolean('original')->default(false);
             $table->integer('week')->unsigned();
+            $table->integer('views')->unsigned();
             $table->string('title');
             $table->string('description');
             $table->timestamp('start')->nullable();
             $table->timestamp('end')->nullable();
             $table->integer('attendance')->default(0);
             $table->integer('duration');
+            $table->boolean('suspended')->default(false);
             $table->timestamps();
         });
     }

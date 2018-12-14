@@ -12,5 +12,6 @@
             <a href="{{route('admin.payments')}}"> <button type="button" class="btn btn-secondary">Payments</button></a>
             <a href="{{route('admin.violations')}}"> <button type="button" class="btn btn-secondary">Violations</button></a>
             <a href="{{route('admin.role_permission')}}"> <button type="button" class="btn btn-secondary">Role Permissions</button></a>
+            <a href="{{route('admin.variables')}}"> <button type="button" class="btn btn-secondary">Variables</button></a>
         </div>
     </div>

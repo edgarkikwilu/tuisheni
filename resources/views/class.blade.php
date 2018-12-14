@@ -56,7 +56,7 @@
                                                 </div>     
                                         </div>
                                 <div class="container">
-                                        <a href="{{route('single')}}">
+                                        <a href="{{route('single',$note->id)}}">
                                         <div class="row">
                                                 <div class="col-lg-12">
                                                         <h5 class="card-title" style="color:#001f9c">{{ $note->title }}</h5>
@@ -105,12 +105,12 @@
                                                 </div>
                                     <div class="container">
                                                 <div class="row">
-                                                                <a href="{{route('single')}}">
-                                                                <div class="col-lg-12">
-                                                                     <h5 class="card-title" style="color:#001f9c">{{ $note->title }}</h5>
-                                                                </div> 
-                                                                </a>
-                                                        </div>
+                                                        <a href="{{route('single',$note->id)}}">
+                                                        <div class="col-lg-12">
+                                                                <h5 class="card-title" style="color:#001f9c">{{ $note->title }}</h5>
+                                                        </div> 
+                                                        </a>
+                                                </div>
                                     </div>
                                     
                                     <div class="container">

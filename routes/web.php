@@ -20,7 +20,7 @@ Route::post('/register', 'RegisterController@register')->name('register');
 Auth::routes();
 //Route::post('register', 'RegisterController@register')->name('register');
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
 
 //from index page
 Route::get('/explore', 'ExploreController@index')->name('explore');
@@ -35,6 +35,9 @@ Route::get('/results', 'IndexController@results')->name('results');
 //message controller
 Route::post('/message', 'MessageController@store')->name('message');
 
+//comment controller
+Route::post('/comment', 'CommentController@store')->name('comment');
+
 //from profile page
 Route::get('/assesment', 'IndexController@assesment')->name('assesment');
 Route::get('/admin', 'IndexController@admin')->name('admin');
@@ -43,7 +46,7 @@ Route::get('/admindash', 'IndexController@admindash')->name('admindash');
 
 Route::get('/teachers', 'TeacherController@teachers')->name('teachers');
 Route::post('/filter/teachers', 'TeacherController@filterTeachers')->name('filter.teachers');
-Route::post('/follow/teacher', 'TeacherController@followTeacher')->name('follow.teacher');
+Route::get('/follow/teacher/{id}', 'TeacherController@followTeacher')->name('follow.teacher');
 Route::post('/message/teacher', 'TeacherController@messageTeacher')->name('message.teacher');
 Route::get('/recomended_subject', 'SubjectController@recomended_subject')->name('recomended_subject');
 Route::get('/sidebar_subject', 'SubjectController@sidebar_subject')->name('sidebar_subject');
@@ -59,7 +62,7 @@ Route::get('/quiz/quiz', 'QuizController@index')->name('quiz.quiz');
 Route::get('/quiz/singlequiz', 'QuizController@getSingleQuiz')->name('quiz.singlequiz');
 Route::post('/filter/quiz/quiz', 'QuizController@filter')->name('filter.quiz.quiz');
 Route::get('/attempt/quiz/quiz/{id}', 'QuizController@attempt')->name('attempt.quiz.quiz');
-Route::get('/quiz/singlequiz', 'QuizController@singlequiz')->name('quiz.singlequiz');
+//Route::get('/quiz/singlequiz', 'QuizController@singlequiz')->name('quiz.singlequiz');
 
 //student controller
 Route::get('/students', 'StudentController@students')->name('students');
@@ -90,10 +93,11 @@ Route::middleware('role:teacher')->group(function(){
     Route::get('/teacher/assesment', 'TeacherController@assesment')->name('teacher/assesment');
     Route::post('/teacher/filter/examinations', 'TeacherController@filterExams')->name('teacher.filter.examinations');
     Route::get('/teacher/create/examination', 'TeacherController@createExam')->name('teacher.create.exam');
-    Route::get('/teacher/give/marks', 'TeacherController@giveMarks')->name('teacher.give.marks');
+    Route::post('/teacher/give/marks', 'TeacherController@giveMarks')->name('teacher.give.marks');
     Route::post('/teacher/store/examination', 'TeacherController@storeExam')->name('teacher.store.examination');
     Route::post('/teacher/delete/examination', 'TeacherController@deleteExam')->name('teacher.delete.examination');
     Route::get('/teacher/createquiz', 'TeacherController@createquiz')->name('teacher.createquiz');
+    Route::post('/teacher/store/quiz', 'TeacherController@storeQuiz')->name('teacher.store.quiz');
 
 });
 
@@ -103,6 +107,7 @@ Route::middleware('role:student')->group(function(){
 
     Route::get('/student/examinations','StudentController@examinations')->name('student.examinations');
     Route::post('/student/filter/examinations', 'StudentController@filterExams')->name('student.filter.examinations');
+    Route::post('/student/submit/examinations', 'AnswerController@store')->name('student.submit.exam');
 
     Route::get('/student/notes','StudentController@notes')->name('student.notes');
     Route::get('/student/createnotes','StudentController@createnotes')->name('student.createnotes');
@@ -112,6 +117,8 @@ Route::middleware('role:student')->group(function(){
     Route::get('/student/payments','StudentController@payments')->name('student.payments');
     Route::post('/student/filter/payments', 'StudentController@filterPayments')->name('student.filter.payments');
 
+    Route::post('/check/quiz/answers', 'StudentController@checkQuizAnswers')->name('quiz.check.answers');
+
     Route::get('/student/results','StudentController@results')->name('student.results');
 
     Route::get('/student/assesment','StudentController@assesment')->name('student.assesment');
@@ -120,6 +127,11 @@ Route::get('/student/gettopics/{id}','StudentController@getTopics')->name('stude
 Route::get('/student/getsubtopics/{id}','StudentController@getSubTopics')->name('student.getsubtopics');
 Route::get('/student/show/notes/{filename}','NotesController@show')->name('student.show');
 Route::get('/student/show/{filename}','ExamController@show')->name('student.show.exam');
+
+Route::get('/show/exam/{filename}','ExamAttachmentController@show')->name('show.exam');
+Route::get('/show/marking/scheme/{filename}','MarkingSchemeController@show')->name('show.marking.scheme');
+Route::get('/show/answer/sheet/{filename}','AnswerSheetController@show')->name('show.marking.scheme');
+
 
 //admin dashboard
 Route::middleware('role:superadmin')->group(function(){
@@ -142,10 +154,19 @@ Route::middleware('role:superadmin')->group(function(){
     Route::get('/admin/advertisements', 'AdminController@advertisements')->name('admin/advertisements');
     Route::get('/admin/payments', 'AdminController@getAllPayments')->name('admin.payments');
     Route::post('/admin/filter/payments', 'AdminController@filterpayments')->name('admin.filter.payments');
-    Route::get('/admin/violations', 'AdminController@getAllViolations')->name('admin.violations');
+
+    Route::get('/admin/violations', 'ViolationController@index')->name('admin.violations');
     Route::get('/admin/role_permission', 'AdminController@role_permission')->name('admin.role_permission');
     Route::post('/admin/addpermission', 'AdminController@addPermission')->name('admin.addpermission');
     Route::post('/admin/addrole', 'AdminController@addRole')->name('admin.addrole');
+
+    Route::get('/admin/variables', 'AdminController@getAllVariables')->name('admin.variables');
+    Route::post('/admin/store/variable', 'AdminController@storeVariable')->name('admin.store.variable');
+    Route::post('/admin/edit/variable', 'AdminController@editVariable')->name('admin.edit.variable');
+});
+
+Route::middleware('role:student')->group(function(){
+    Route::post('/report', 'ViolationController@store')->name('report');
 });
 
 //from subject page

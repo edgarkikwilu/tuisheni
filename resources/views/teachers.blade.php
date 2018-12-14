@@ -19,14 +19,14 @@
         </select>
       </div>
     <div class="col-sm-3">
-            <select name="form" class="custom-select">
-                <option value="1">Form 1</option>
-                <option value="2">Form 2</option>
-                <option value="3">Form 3</option>
-                <option value="4">Form 4</option>
-                <option value="5">Form 5</option>
-                <option value="6">Form 6</option>
-              </select>
+        <select name="form" class="custom-select">
+            <option value="1">Form 1</option>
+            <option value="2">Form 2</option>
+            <option value="3">Form 3</option>
+            <option value="4">Form 4</option>
+            <option value="5">Form 5</option>
+            <option value="6">Form 6</option>
+        </select>
     </div>
       <div class="col-sm-3"><input name="username" class="form-control mr-sm-2" type="search" placeholder="Search By Username" aria-label="username" style="width: 100%;"></div>
       <div class="col-sm-3"><input name="school" class="form-control mr-sm-2" type="search" placeholder="Search By School" aria-label="school" style="width: 100%;"></div>
@@ -34,7 +34,6 @@
           <button class="btn btn-primary" style="margin-top: 10px;" type="submit">Filter Teachers</button>
     </div>
     </form>
-  
 </nav>
 </div>
 
@@ -50,16 +49,57 @@
                     <small class="text-muted">{{ $teacher->school }}</small><br>
                     <p><small class="text-muted">{{ $teacher->bio }}</small></p>
                     <div class="btn-group" role="group" aria-label="Basic example">
-                        <a href="{{ route('follow.teacher') }}" class="btn btn-sm btn-primary">Follow</a>
-                        <a href="{{ route('message.teacher') }}" class="btn btn-sm btn-success">Message</a>
+                        {{-- <a href="{{ route('follow.teacher',$teacher->id) }}" class="btn btn-sm btn-primary">Follow</a> --}}
+                        <button class="btn btn-sm btn-primary btnfollowteacher" value="{{ $teacher->id }}">Follow</button>
+                        <!-- Trigger the modal with a button -->
+                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal{{ $teacher->id }}">Message</button>
                     </div>
-                    <small><a class="nav-link" href="#">30 Friends</a></small>
+                    {{-- <small><a class="nav-link" href="#">30 Friends</a></small> --}}
                 </div>
-                
-            </div>
-        @endforeach       
+            </div>       
+<!-- Modal -->
+<div id="myModal{{ $teacher->id }}" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+  
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header justify-content-center">
+          <h4 class="modal-title">Message {{ $teacher->username }}</h4>
+        </div>
+        <div class="modal-body">
+            <span id="msg_feedback"></span> 
+          <div class="row justify-content-center">
+              <div class="col-md-10 col-offset-2">
+                  <form action="{{ route('message') }}" method="post" id="message">
+                      {{-- @csrf --}}
+                      <span id="msg_feedback"></span><br>
+                      <input name="recipient_id" type="hidden" value="{{ $teacher->id }}">
+                      <label for="title">Title</label>
+                      <input id="msg_title" name="title" type="text" class="form-control">
+                      <label for="description">Description</label>
+                      <input id="msg_description" name="description" type="text" class="form-control">
+                      <div class="row" style="margin-top:10px">
+                          <div class="col-md-6">
+                              <button class="btn btn-danger btn-block" id="close" data-dismiss="modal" type="submit">Cancel</button>
+                          </div>
+                          <div class="col-md-6">
+                              <button class="btn btn-success btn-block" type="submit">Send</button>
+                          </div>
+                      </div>
+                  </form>
+              </div>
+          </div>
+        </div>
+      </div>
+  
     </div>
+  </div>
+  {{-- End of modal --}}
+  @endforeach
+
 </div>
 </div>
 </div>
+</div>
+  
 @endsection

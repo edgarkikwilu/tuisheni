@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Answer;
+use App\AnswerSheet;
+use Auth;
 use Illuminate\Http\Request;
 
 class AnswerController extends Controller
@@ -35,7 +37,29 @@ class AnswerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $answer = new Answer();
+        $answer->user_id = Auth::user()->id;
+        $answer->exam_id = $request->exam_id;
+        $answer->feedback = $request->feedback;
+
+        if ($answer->save()) {
+            if ($request->hasFile('attachments')) {
+                $i = 0;
+                foreach ($request->file('attachments') as $attachment) {
+                    $i = $i + 1;
+                    if($i < 7){
+                    $filename = time().$attachment->getClientOriginalName();
+                    $attachment->storeAs('answer_sheets',$filename);
+    
+                    $answerSheet = new AnswerSheet();
+                    $answerSheet->answer_id  = $answer->id;
+                    $answerSheet->filename = $filename;
+                    $answerSheet->save();
+                    }
+                }
+            }
+        }
+        return redirect()->back();
     }
 
     /**

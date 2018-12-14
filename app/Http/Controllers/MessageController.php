@@ -37,25 +37,29 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        if (Auth::user() && $request->ajax()) {
-            $request->validate([
-                // 'user_id'=>'bail|required|integer',
-                'recipient_id'=>'required|integer',
-                'title'=>'string|max:50',
-                'description'=>'string|min:3|max:255'
-            ]);
-            $message = new Message();
-            $message->user_id = Auth::user()->id;
-            $message->recipient_id = $request->recipient_id;
-            $message->title = $request->title;
-            $message->description = $request->description;
-            
-            if ($message->save()) {
-                return response()->json(['success'=>'Message sent succesfully']);
-            } else {
-                return response()->json(['error'=>'please login first']);
+        if (Auth::user()) {
+           // dd($request);
+            if ($request->ajax()) {
+                $request->validate([
+                    // 'user_id'=>'bail|required|integer',
+                    'recipient_id'=>'required|integer',
+                    'title'=>'string|max:50',
+                    'description'=>'string|min:3|max:255'
+                ]);
+                $message = new Message();
+                $message->user_id = Auth::user()->id;
+                $message->recipient_id = $request->recipient_id;
+                $message->title = $request->title;
+                $message->description = $request->description;
+                
+                if ($message->save()) {
+                    return response()->json(['success'=>'Message sent succesfully']);
+                } else {
+                    return response()->json(['error'=>'please login first']);
+                }
             }
         } else {
+            // dd($request);
             return response()->json(['error'=>'please login first']);
         }
     }

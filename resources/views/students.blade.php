@@ -41,13 +41,50 @@
                     <small class="text-muted">{{ $student->school }}</small><br>
                     <p><small class="text-muted">{{ $student->bio }}</small></p>
                     <div class="btn-group" role="group" aria-label="Basic example">
-                        <a href="{{ route('follow.student') }}" class="btn btn-sm btn-primary">Follow</a>
-                        <a href="{{ route('message.student') }}" class="btn btn-sm btn-success">Message</a>
+                        <button  class="btn btn-sm btn-primary btnfollowteacher" value="{{ $student->id }}">Follow</button>
+                        <!-- Trigger the modal with a button -->
+                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal{{ $student->id }}">Message</button>
                     </div>
-                    <small><a class="nav-link" href="#">30 Friends</a></small>
+                    {{-- <small><a class="nav-link" href="#">30 Friends</a></small> --}}
                 </div>
-                
             </div>
+            <!-- Modal -->
+<div id="myModal{{ $student->id }}" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+      
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header justify-content-center">
+              <h4 class="modal-title">Message {{ $student->username }}</h4>
+            </div>
+            <div class="modal-body">
+              <div class="row justify-content-center">
+                  <div class="col-md-10 col-offset-2">
+                      <form action="{{ route('message') }}" method="post" id="message">
+                          {{-- @csrf --}}
+                          <span id="msg_feedback"></span><br>
+                          <input name="recipient_id" type="text" value="{{ $student->id }}" style="display:none;">
+                          <label for="title">Title</label>
+                          <input id="msg_title" name="title" type="text" class="form-control">
+                          <label for="description">Description</label>
+                          <input id="msg_description" name="description" type="text" class="form-control">
+                          <div class="row" style="margin-top:10px">
+                              <div class="col-md-6">
+                                  <button class="btn btn-danger btn-block" id="close" data-dismiss="modal" type="submit">Cancel</button>
+                              </div>
+                              <div class="col-md-6">
+                                  <button class="btn btn-success btn-block" type="submit">Send</button>
+                              </div>
+                          </div>
+                      </form>
+                  </div>
+              </div>
+            </div>
+          </div>
+      
+        </div>
+      </div>
+      {{-- End of modal --}}
         @endforeach
     </div>
 </div>

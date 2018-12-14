@@ -83,7 +83,7 @@
                                 
                                         <small>{{ $exam->user->username }}, {{ $exam->user->school }}</small>
                                 <a href="{{ route('examination.single_exam', $exam->id) }}" class="btn btn-sm btn-secondary" style="margin-top:10px;"> View Examination</a>
-                                <small><a class="nav-link" href="#">30 Views</a></small>
+                                <small><a class="nav-link" href="#">{{ $exam->views }}  Views</a></small>
                                 
                                 
                         </div>
@@ -141,7 +141,7 @@
                                         
                                                 <small>{{ $exam->user->username }}, {{ $exam->user->school }}</small>
                                         <a href="{{ route('examination.single_exam', $exam->id) }}" class="btn btn-sm btn-secondary" style="margin-top:10px;"> View Examination</a>
-                                        <small><a class="nav-link" href="#">30 Views</a></small>
+                                        <small><a class="nav-link" href="#">{{ $exam->views }} Views</a></small>
                                         
                                         
                                 </div>
@@ -193,7 +193,7 @@
                         
                                 <small>{{ $exam->user->username }}, {{ $exam->user->school }}</small>
                         <a href="{{ route('examination.single_exam', $exam->id) }}" class="btn btn-sm btn-secondary" style="margin-top:10px;"> View Examination</a>
-                        <small><a class="nav-link" href="#">30 Views</a></small>
+                        <small><a class="nav-link">{{ $exam->views }}  Views</a></small>
                         
                         
                 </div>

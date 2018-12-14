@@ -23,7 +23,7 @@
                                 <a href="{{ route('follow',$exam->user->id) }}" class="btn btn-sm btn-primary">Follow</a>
                                 <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#myModal">Message</button>
                             </div>
-                            <small><a class="nav-link" href="#">10 Votes</a></small>
+                            <small><a class="nav-link" href="#">{{ $exam->views }} View</a></small>
                         </div>
                     </div>
                 </div>
@@ -31,7 +31,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <h3 class="card-title" style="color:blue; margin-top:10px; margin-left:5px;" >{{ $exam->title }}</h3>
-                            <span ><small class="text-muted">#physics #introduction to physics</small></span>
+                            <span ><small class="text-muted">#{{ $exam->subject->name }} #{{ $exam->examType->name }}</small></span>
                         </div>
                         
                     </div>
@@ -63,7 +63,8 @@
                         </div>
                         <div class="col-md-3">
                             <button type="button" class="btn btn-sm btn-secondary" style="margin-top:10px; margin-left:10px;" data-toggle="modal" data-target="#submitModal">Submit Exam</button>
-                            <small><a class="nav-link" href="#">Report This Page</a></small>
+                            <!-- Trigger the modal with a button -->
+                            <button type="button" class="btn btn-block btn-light" data-toggle="modal" data-target="#reportModal">Report</button>
                         </div>
                     </div>
                 </div>
@@ -80,8 +81,14 @@
                                 <div class="container" style="text-align:center;">
                                     <div class="col-lg-12">
                                         <div class="container">
-                                            <textarea style="margin-top:10px; width:100%;" placeholder="Add Your Comments Here!!" name="" id=""  rows="5"></textarea><br>
-                                            <button type="submit" class="btn btn-sm btn-primary" style="margin-top:10px;">Add Comment</button>
+                                            <form action="{{ route('comment') }}" method="post">
+                                                @csrf
+                                                <input type="hidden" name="type" value="exam">
+                                                <input type="hidden" name="type_id" value="{{ $exam->id }}">
+                                                <textarea style="margin-top:10px; width:100%;" name="comment" placeholder="Add Your Comments Here!!" id=""  rows="5"></textarea><br>
+                                                <button type="submit" class="btn btn-sm btn-primary" style="margin-top:10px;">Add Comment</button>
+                                            
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -129,10 +136,12 @@
             <h4 class="modal-title">Message {{ $exam->user->username }}</h4>
         </div>
         <div class="modal-body">
+            <span id="msg_feedback"></span>
             <div class="row justify-content-center">
                 <div class="col-md-10 col-offset-2">
-                    <form action="{{ route('message') }}" method="post">
-                        @csrf
+                    <form action="{{ route('message') }}" id="message" method="post">
+                        {{-- @csrf --}}
+                        <input type="hidden" name="recipient_id" value="{{ $exam->user->id }}">
                         <label for="title">Title</label>
                         <input name="title" type="text" class="form-control">
                         <label for="description">Description</label>
@@ -165,10 +174,11 @@
             <div class="modal-body">
                 <div class="row justify-content-center">
                     <div class="col-md-10 col-offset-2">
-                        <form action="#" method="post">
+                        <form action="{{ route('student.submit.exam') }}" method="post" enctype="multipart/form-data">
                             @csrf
+                            <input type="hidden" name="exam_id" value="{{ $exam->id }}">
                             <label for="description">Any Comments</label>
-                            <input name="description" type="text" class="form-control">
+                            <input name="feedback" type="text" class="form-control">
                             <div class="custom-file" style="margin-top:10px;">
                                 <input name="attachments[]" multiple type="file" class="custom-file-input" id="customFile">
                                 <label class="custom-file-label" for="customFile">Choose file</label>
@@ -191,4 +201,40 @@
         </div>
 
 
+        <!--Report Modal -->
+<div id="reportModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+        
+        <!-- Modal content-->
+        <div class="modal-content">
+        <div class="modal-header justify-content-center">
+            <h4 class="modal-title">Report {{ $exam->title }}</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row justify-content-center">
+                <div class="col-md-10 col-offset-2">
+                    <form action="{{ route('report') }}" method="post" id="report">
+                        @csrf
+                        <span id="msg_feedback"></span><br>
+                        <input name="type_id" type="hidden" value="{{ $exam->id }}">
+                        <input name="type" type="hidden" value="exam">
+                        <input name="reported_id" type="hidden" value="{{ $exam->user->id }}">
+                        <label for="comment">Your comment</label>
+                        <input id="msg_comment" name="comment" type="text" class="form-control">
+                        <div class="row" style="margin-top:10px">
+                            <div class="col-md-6">
+                                <button class="btn btn-danger btn-block" id="close" data-dismiss="modal" type="submit">Cancel</button>
+                            </div>
+                            <div class="col-md-6">
+                                <button class="btn btn-success btn-block" type="submit">Send</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        </div>
+    
+    </div>
+    </div>
 @endsection
