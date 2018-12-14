@@ -288,6 +288,7 @@
             var formdata = $(this).serialize();
             var method  = $(this).attr('method');
             var action  = $(this).attr('action');
+            var id  = $(this).attr('id');
 
             $.ajaxSetup({
                 headers: {
@@ -300,10 +301,11 @@
                 url: action,
                 data: formdata,
                 success: function(data){
-                    alert(data.status);
+                    alert('suuce');
+                    $('#marks'+id).append('Marked, scored: '+data.score+'%');
                 },
-                error:function(error){
-                    alert(error);
+                error:function(error){ 
+                    alert(error.error);
                 }
             });
         });

@@ -163,10 +163,14 @@ class TeacherController extends Controller
     public function single_exam($id){
         $exam = Exam::with('attachements')->findOrFail($id);
         $answers = Answer::with('answerSheets')->with('user')->where('exam_id',$id)->get();
-        return view('teacher/single_exam')->withExam($exam)->withAnswers($answers);
+
+        $reports = Report::where('exam_id', $id)->get();
+
+        return view('teacher/single_exam')->withExam($exam)->withAnswers($answers)->withReports($reports);
     }
     public function giveMarks(Request $request){
-        if ($request->ajax()) {
+        
+        if ($request->ajax() && !$this->checkIfReportExists($request->user_id,$request->exam_id)) {
             $request->validate([
                 'score'=>'bail|required|string|max:100|min:0',
                 'remarks'=>'string|max:255'
@@ -193,15 +197,26 @@ class TeacherController extends Controller
                 $report->grade = 'F';
             }
     
-            $report->save();
+            if ($report->save()) {
+                $answer = Answer::find($request->answer_id);
+                $answer->score = $request->score;
+                $answer->save();
+            }
 
-            return response()->json(['status'=>'success']);
+            return response()->json(['status'=>'success','score'=>$request->score]);
+        }else{
+            return response()->json(['status'=>'Report Already Exists']);
         }
         // $exam = Exam::with('attachements')->findOrFail($request->exam_id);
         // $answers = Answer::with('answerSheets')->with('user')->where('exam_id',$request->exam_id)->get();
 
         // return view('teacher/single_exam')->withExam($exam)->withAnswers($answers);
         return redirect()->back();
+    }
+
+    public function checkIfReportExists($user_id, $exam_id){
+        $reports = Report::where('user_id',$user_id)->where('exam_id',$exam_id)->get();
+        return $reports->count() > 0?true:false;
     }
     
     public function points(){

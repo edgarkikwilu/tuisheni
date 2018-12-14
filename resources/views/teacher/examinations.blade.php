@@ -39,32 +39,41 @@
 <div class="container">
         @foreach ($exams as $exam)
         <div class="row" style="border:1px solid #ccc; margin-top:20px;">
-                        <div class="col-lg-2"  style="margin-top: 10px;">
+                        <div class="col-md-2"  style="margin-top: 10px;">
                                 <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Card image cap" style="width:100%">
                         </div>
-                        <div class="col-lg-7">
+                        <div class="col-md-7">
                                 <a href="#" ><h5 style="margin-top:10px; font-weight:bold;" >{{ $exam->title }}</h5></a>
                                 <div class="row">
-                                        <div class="col-lg-6">
+                                        <div class="col-md-6">
                                         <small><label style="width:22%;">Start Time: </label> <b>{{ $exam->start }}</b></small>
                                         </div>
-                                        <div class="col-lg-6">
+                                        <div class="col-md-6">
                                         <small><label style="width:22%;">Subject: </label> <b>{{ $exam->subject->name }}</b></small> 
                                         </div>
                                 </div>
                                 <div class="row">
-                                        <div class="col-lg-6">
+                                        <div class="col-md-6">
                                         <small><label style="width:22%; ">Class: </label><b>Form {{ $exam->form }}</b></small>
+                                        </div>
+                                        <div class="col-md-6">
+                                        <small>Booked: <span class="badge-light">{{ $exam->attendances->count() }}</span></small>
                                         </div>
                                 </div>
                                 <div class="row">
                                         <div class="col-lg-6">
                                         <small><label style="width:22%">Time: </label> <b>{{ $exam->duration }} minutes</b></small>
                                         </div>
+                                        <div class="col-md-6">
+                                                <small>Attendance: <span class="badge-light">{{ $exam->attendances->count() }}</span></small>
+                                        </div>
                                 </div>
                                 <div class="row">
-                                        <div class="col-lg-6">
+                                        <div class="col-md-6">
                                         <small><label style="width:20%;">1st Prize: </label> <b>{{ $exam->prize }}</b></small>
+                                        </div>
+                                        <div class="col-md-6">
+                                        <small>Submitted: <span class="badge-light">{{ $exam->answers->count() }}</span></small>
                                         </div>
                                 </div>
                                 </div>

@@ -127,18 +127,34 @@
                                     @endforeach
                                 </div>
                             </div>
+                            @php
+                                $reportCounter = 0;
+                            @endphp
                             <div class="col-md-3" style="border-left:1px dotted #ccc;">
-                                <div class="container" style=" text-align:center;">
-                                    <form id="marksForm" action="{{ route('teacher.give.marks') }}" method="POST">
-                                        {{-- @csrf --}}
-                                        <input name="score" class="form-control" type="text" placeholder="Enter Marks" aria-label="marks" style="margin-top:20px; width: 100%;"> 
-                                        <input type="hidden" name="user_id" value="{{ $answer->user_id }}"> 
-                                        <input type="hidden" name="exam_id" value="{{ $answer->exam_id }}">  
-                                        <input name="remarks" id="" cols="15" rows="3" placeholder="Enter remarks" style="margin-top:10px;">
-                                        <button class="btn btn-sm btn-block btn-success" type="submit" style="margin-top:10px;">Give Marks</button>
-                                    </form>
+                                <div id="marks{{ $answer->id }}" class="alert alert-success" role="alert"></div>
+                                @if ($answer->score != null)
+                                        <div class="card text-center">
+                                            <div class="card-body">
+                                                Marks Awarded: <h4>{{ $answer->score }}</h4>
+                                            </div>
+                                        </div>
+                                @else
+                                    <div class="container{{ $answer->id }}" style=" text-align:center;">
+                                        <form id="{{ $answer->id }}" class="marksForm" action="{{ route('teacher.give.marks') }}" method="POST">
+                                            {{-- @csrf --}}
+                                            <input type="hidden" name="answer_id" value="{{ $answer->id }}">
+                                            <input name="score" class="form-control" type="text" placeholder="Enter Marks" aria-label="marks" style="margin-top:20px; width: 100%;" required> 
+                                            <input type="hidden" name="user_id" value="{{ $answer->user_id }}"> 
+                                            <input type="hidden" name="exam_id" value="{{ $answer->exam_id }}">  
+                                            <input name="remarks" id="" cols="15" rows="3" placeholder="Enter remarks" style="margin-top:10px;" required>
+                                            <button class="btn btn-sm btn-block btn-success" type="submit" style="margin-top:10px;">Give Marks</button>
+                                        </form>
+                                    </div>   
+                                @endif
                                 </div>   
-                                </div>            
+                                @php
+                                    $reportCounter++;
+                                @endphp         
                         </div>        
                     </div>
                 @endforeach    
