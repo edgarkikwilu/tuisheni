@@ -3,9 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Cog\Contracts\Love\Likeable\Models\Likeable as LikeableContract;
+use Cog\Laravel\Love\Likeable\Models\Traits\Likeable;
 
-class Note extends Model
+class Note extends Model implements LikeableContract
 {
+    use Likeable;
+    
     public function user(){
         return $this->belongsTo('App\User');
     }
@@ -35,5 +39,9 @@ class Note extends Model
 
     public function violations(){
         return $this->morphMany('App\Violation', 'violatable');
+    }
+
+    public function later(){
+        return $this->morphMany('App\Later', 'laterable');
     }
 }

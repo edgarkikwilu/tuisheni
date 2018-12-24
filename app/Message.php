@@ -11,4 +11,7 @@ class Message extends Model
         return $this->belongsTo('App\User');
     }
     //recipient will be fetched manually
+    public function recipient(){
+        return $this->belongsTo('App\User');
+    }
 }

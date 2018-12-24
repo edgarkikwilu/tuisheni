@@ -16,7 +16,7 @@ class CreateExamAttachmentsTable extends Migration
         Schema::create('exam_attachments', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('exam_id')->unsigned();
-            $table->foreign('exam_id')->references('id')->on('exams');
+            $table->foreign('exam_id')->references('id')->on('exams')->onDelete('cascade');
             $table->string('filename');
             $table->timestamps();
         });

@@ -19,6 +19,7 @@ class CreateLogsTable extends Migration
             // $table->foreign('user_id')->references('id')->on('users');
         //     $table->string('ip')->nullable();
         //     $table->string('location')->nullable();
+        //     $table->string('type')->nullable();
         //     $table->string('description')->nullable();
         //     $table->integer('points')->default(100);
         //     $table->integer('week');

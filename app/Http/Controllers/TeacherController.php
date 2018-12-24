@@ -9,6 +9,7 @@ use App\Quiz;
 use App\Subject;
 use App\Follow;
 use App\Exam;
+use App\Tutorial;
 use App\Note;
 use App\Answer;
 use App\ExamType;
@@ -23,7 +24,14 @@ use App\Choice;
 use App\Log;
 use App\MarkingScheme;
 
+use App\Charts\NotesChart;
+use App\Charts\YearPointsChart;
+use App\Charts\MonthlyPointsChart;
+use App\Charts\WeeklyExamChart;
+use App\Charts\MonthlyExamChart;
+
 use Auth;
+use Charts;
 use Session;
 use DB;
 use Carbon\Carbon;
@@ -31,8 +39,124 @@ use Carbon\Carbon;
 class TeacherController extends Controller
 {
     public function teacherdash(){
-        return view('teacher/teacherdash');
+        $notes = Note::where('user_id',Auth::user()->id)->count();
+        $exams = Exam::where('user_id',Auth::user()->id)->count();
+        $quizzes = Quiz::where('user_id',Auth::user()->id)->count();
+        $tutorials = Tutorial::where('user_id',Auth::user()->id)->count();
+
+        $counts = collect([
+            $notes, $exams, $quizzes, $tutorials
+        ]);
+        
+
+        $teacher = User::with('exams')->with('notes')->with('quizzes')->where('id',Auth::user()->id)->first();
+        $followers = Follow::where('follow_id',Auth::user()->id)->count();
+        $following = Follow::where('user_id',Auth::user()->id)->count();
+
+        return view('teacher/dashboard')->withTeacher($teacher)->withFollowers($followers)->withFollowing($following)->withCounts($counts);
     }
+    public function getPointsSumCollection(){
+        $logs = Log::select('points','week')->where('user_id',Auth::user()->id)->whereMonth('created_at',date('m'))->get();
+        $sum = $logs->groupBy('week')->map(function($row){
+            return $row->sum('points');
+        });
+        if ($sum->count() < 1) {
+            $sum->push(0);
+            $sum->push(0);
+            $sum->push(0);
+            $sum->push(0);
+        }else if($sum->count() < 2){
+            $sum->push(0);
+            $sum->push(0);
+            $sum->push(0);
+        }else if($sum->count() < 3){
+            $sum->push(0);
+            $sum->push(0);
+        }else if($sum->count() < 4){
+            $sum->push(0);
+        }
+        //dd($sum);
+        return $sum;
+    }
+    
+    public function getYearPointsSumCollection(){
+        // $logs = Log::select('points','created_at')->where('user_id',Auth::user()->id)->whereYear('created_at',date('y'))->get();
+        $logs = Log::get(['points','created_at'])->groupBy(function($date){
+            return Carbon::parse($date->created_at)->format('m');
+        });
+        
+        for ($i=1; $i <= 12; $i++) { 
+            if (!isset($logs[$i])) {
+                $logs[$i] = collect([]);
+            }
+        }
+        
+        //dd($logs->sortKeys()->toArray());
+        $sum = $logs->sortKeys()->map(function($row){
+            return $row->sum('points');
+        });
+        
+         //dd($sum->values());
+        return $sum->values();
+    }
+
+    public function getWeeklyStudentsAveragePerformanceCollection(){
+        $reports = Report::with('exam')->where('teacher_id', Auth::user()->id)->whereMonth('created_at',date('m'))->get();
+        $reports = $reports->groupBy('week')->map(function($week){
+            return $week->avg('score');
+        });
+        for ($i=1; $i <= 4; $i++) { 
+            if (!isset($reports[$i])) {
+                $reports[$i] = 0;
+            }
+        }
+        //dd($reports->sortKeys()->values());
+        return $reports->sortKeys()->values();
+    }
+    public function getMonthlyStudentExamPerfomanceCollection(){
+        $reports = DB::table('reports')->get(['score','created_at'])->groupBy(function($date){
+            return Carbon::parse($date->created_at)->format('m');
+        });
+        
+        //dd($reports->sortKeys()->toArray());
+        $avg = $reports->map(function($row){
+            return $row->avg('score');
+        });
+        for ($i=1; $i <= 12; $i++) { 
+            if (!isset($avg[$i])) {
+                $avg[$i] = 0;
+            }
+        }
+        //dd($avg->sortKeys());
+        return $avg->sortKeys()->values();
+    }
+    public function getUploadedContents(){
+        $notes = Note::where('user_id',Auth::user()->id)->count();
+        $exams = Exam::where('user_id',Auth::user()->id)->count();
+        $quizzes = Quiz::where('user_id',Auth::user()->id)->count();
+        $tutorials = Tutorial::where('user_id',Auth::user()->id)->count();
+        $contents = collect([]);
+        $contents->push($notes);
+        $contents->push($exams);
+        $contents->push($quizzes);
+        $contents->push($tutorials);
+
+        $contentArray = $contents->toArray();
+        return $contentArray;
+    }
+    public function getChartData(){
+        $monthlyStudentPerformanceCollection = $this->getMonthlyStudentExamPerfomanceCollection();
+        $weeklyStudentPerformanceCollection = $this->getWeeklyStudentsAveragePerformanceCollection();
+        $yearPointsCollection = $this->getYearPointsSumCollection();
+        $pointsCollection = $this->getPointsSumCollection();
+        $contentCollection = $this->getUploadedContents();
+
+        return response()->json(['weeklyPoints'=>$pointsCollection, 'monthlyPoints'=>$yearPointsCollection, 'weeklyPerfomance'=>$weeklyStudentPerformanceCollection, 'monthlyPerfomance'=>$yearPointsCollection, 'contentCollection'=>$contentCollection]);
+    }
+
+
+
+
     public function teachers(){
         $teachers = User::where('type','teacher')->orderBy('id','desc')->get();
         $subjects = Subject::all();
@@ -108,58 +232,7 @@ class TeacherController extends Controller
         $subjects = Subject::with('topics')->get();
         return view('teacher/createnotes')->withSubjects($subjects);
     }
-    public function storeNotes(Request $request){
-        
-        $request->validate([
-            'form'=>'bail|required|integer|max:6',
-            'subject'=>'required|integer|max:100',
-            'topic'=>'required|integer|max:10000',
-            'subtopic'=>'integer|max:100000',
-            'title'=>'string|max:100',
-            'article'=>'required|string'
-        ]);
-
-        $notes = new Note();
-        $notes->user_id = Auth::user()->id;
-        $notes->form = $request->form;
-        $notes->topic_id = $request->topic;
-        $notes->subtopic_id = $request->subtopic;
-        $notes->week = date('W');
-        $notes->title = $request->title;
-        $notes->article = $request->article;
-        $notes->original = false;
-
-        if ($notes->save()) {
-            if ($request->hasFile('attachments')) {
-                $i = 0;
-                foreach ($request->file('attachments') as $attachment) {
-                    $i = $i + 1;
-                    if($i < 7){
-                    $filename = time().$attachment->getClientOriginalName();
-                    $attachment->storeAs('attachments',$filename);
-    
-                    $attachment = new Attachement();
-                    $attachment->note_id  = $notes->id;
-                    $attachment->filename = $filename;
-                    $attachment->save();
-                    }
-                }
-            }
-            $points = DB::table('variables')->select('int_value')->where('name','notes_post_points')->first();
-            Auth::user()->increment('points',$points->int_value);
-            $log = new Log();
-            $log->user_id = Auth::user()->id;
-            $log->ip = "";
-            $log->location = "Tanzania";
-            $log->description = "Post Exam";
-            $log->location = "Tanzania";
-            $log->points = $points->int_value;
-            $log->save();
-        }else{
-            return redirect()->back()->withInput();    
-        }
-        return redirect()->back();
-    }
+   
     public function single_exam($id){
         $exam = Exam::with('attachements')->findOrFail($id);
         $answers = Answer::with('answerSheets')->with('user')->where('exam_id',$id)->get();
@@ -181,7 +254,7 @@ class TeacherController extends Controller
             $report->score = $request->score;
             $report->remarks = $request->remarks;
             $report->teacher_id = Auth::user()->id;
-            $report->week = date('W');
+            $report->week = Carbon::now()->weekInMonth();
     
             if ($report->score > 80) {
                 $report->grade = 'A';
@@ -221,14 +294,20 @@ class TeacherController extends Controller
     
     public function points(){
         $points = Point::with('user')->with('from')->where('user_id',Auth::user()->id)->get();
-        return view('teacher/points')->withPoints($points);
+        $notesPoints = Point::with('user' )->where('user_id',Auth::user()->id)->where('type','Notes')->sum('value');
+        $examsPoints = Point::with('user')->where('user_id',Auth::user()->id)->where('type','Exam')->sum('value');
+        $quizPoints = Point::with('user')->where('user_id',Auth::user()->id)->where('type','Quiz')->sum('value');
+        $tutorialPoints = Point::with('user')->where('user_id',Auth::user()->id)->where('type','Tutorial')->sum('value');
+
+        $pointsCount = collect([]);
+        $pointsCount->push($notesPoints);
+        $pointsCount->push($examsPoints);
+        $pointsCount->push($quizPoints);
+        $pointsCount->push($tutorialPoints);
+
+        return view('teacher/points')->withPoints($points)->withPointsCount($pointsCount);
     }
-    public function deleteNotes(Request $request){
-        $notes = Note::findOrFail($request->id);
-        $notes->delete();
-        $subjects = Subject::all();
-        return view('teacher/notes')->withSubjects($subjects);
-    }
+    
 
     public function examinations(){
         $subjects = Subject::all();
@@ -241,7 +320,8 @@ class TeacherController extends Controller
     }
     public function payments(){
         $payments = Payment::with('user')->where('user_id', Auth::user()->id)->get();
-        return view('teacher/payments')->withPayments($payments);
+        $totalPayments = $payments->sum('amount');
+        return view('teacher/payments')->withPayments($payments)->withTotalPayments($totalPayments)->withMonth(0);
     }
     
     public function filterPayments(Request $request){
@@ -253,7 +333,9 @@ class TeacherController extends Controller
             $payments->whereMonth('created_at',$request->month)->where('user_id', Auth::user()->id);
         }
 
-        return view('teacher.payments')->withpayments($payments->get());
+        $totalPayments = Payment::with('user')->where('user_id', Auth::user()->id)->sum('amount');
+
+        return view('teacher.payments')->withpayments($payments->get())->withTotalPayments($totalPayments)->withMonth($request->month);
 
     }
 
@@ -365,10 +447,18 @@ class TeacherController extends Controller
 
     public function deleteExam(Request $request){
         $exam = Exam::findOrFail($request->id);
+        $exam->markingSchemes()->delete();
+        $exam->answers()->delete();
+        $exam->reports()->delete();
+        $exam->topStudents()->delete();
+        $exam->comments()->delete();
+        $exam->attendances()->delete();
+        $exam->attachements()->delete();
         $exam->delete();
         $subjects = Subject::all();
         $types = ExamType::all();
-        return view('teacher/examination')->withSubjects($subjects)->withTypes($types);
+        $exams = Exam::where('user_id',Auth::user()->id)->get();
+        return view('teacher/examinations')->withExams($exams)->withSubjects($subjects)->withTypes($types);
     }
 
     public function getAllResults(){
@@ -543,9 +633,55 @@ class TeacherController extends Controller
         } else {
             return redirect()->back()->withInputs();
         }
+    }
+
+    public function deleteQuiz(Request $request){
+        $quiz = Quiz::findOrFail($request->id);
+        $quiz->questions()->delete();
+        $quiz->taggable()->delete();
+    
+        $quiz->delete();
+
+        $subjects = Subject::all();
+        $quizzes = Quiz::all();
         
-        
+        return view('teacher/quiz')->withQuizzes($quizzes)->withSubjects($subjects);
     }
 
 
 }
+
+
+// $monthPointChart = Charts::create('pie', 'highcharts')
+        // ->title('Points Earned')
+        // ->elementLabel('Points vs Weeks')
+        // ->labels(['Week 1', 'Week 2', 'Week 3', 'Week 4'])
+        // ->values($pointsCollection)
+        // ->dimensions(1000,500)
+        // ->responsive(true);
+
+        // $yearPointChart = Charts::create('line', 'highcharts')
+        // ->title('Graph of Points Earned This Year')
+        // ->elementLabel('Points vs Months')
+        // ->labels(['January', 'February', 'March','April', 'May', 'June', 'July', 'August'
+        //     ,'September', 'October', 'November', 'December'])
+        // ->values($yearPointsCollection)
+        // ->dimensions(1000,500)
+        // ->responsive(true);
+
+        // $weeklyExamChart = Charts::create('line', 'highcharts')
+        // ->title('Weekly Exam Perfomance')
+        // ->elementLabel('Average Score vs Week Of The Month')
+        // ->labels(['Week 1', 'Week 2', 'Week 3', 'Week 4'])
+        // ->values($monthlyStudentPerformanceCollection->toArray())
+        // ->dimensions(1000,500)
+        // ->responsive(true);
+
+        // $monthlyExamChart = Charts::create('line', 'highcharts')
+        // ->title('Monthly Exam Perfomance')
+        // ->elementLabel('Average Score vs Month Of The year')
+        // ->labels(['January', 'February', 'March','April', 'May', 'June', 'July', 'August'
+        //     ,'September', 'October', 'November', 'December'])
+        // ->values([50,80,20,50,60,65,64,90,85,79,43,20])
+        // ->dimensions(1000,500)
+        // ->responsive(true);

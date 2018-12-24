@@ -64,46 +64,19 @@ class MessageController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Message  $message
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Message $message)
-    {
-        //
+    public function fetchMessages(Request $request){
+        $messages = Message::where('recipient_id',Auth::user()->id)->where('read',false)->get();
+        return response()->json($messages->toArray());
+    }
+    public function read(Request $request){
+        if ($request->ajax()) {
+            $message = Message::findOrFail($request->id);
+            $message->read = true;
+            $message->save();
+            return response()->json(['success'=>true]);
+        }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Message  $message
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Message $message)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Message  $message
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Message $message)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Message  $message
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Message $message)
     {
         //

@@ -12,53 +12,71 @@
     <div class="col-lg-7">
       <div class="row">
         <div class="col-lg-12">
-          <a href="#"><h4 >John Paul</h4></a>
+          <a href="#"><h4 >{{ $teacher->firstname }} {{ $teacher->firstname }}</h4></a>
         </div>
       </div>
       <div class="row">
         <div class="col-lg-6">
-          <small><label class="text-muted" >Makongo High School</label></small>
+          <small><label class="text-muted" >{{ $teacher->school }}</label></small>
         </div>
       </div>
       <div class="row">
         <div class="col-lg-12">
-          <span>This is my short bio, my name is John paul and am a student from Makongo high school</span>
+          <span>{{ $teacher->bio }}</span>
         </div>
       </div>
       <div class="row">
-        <div class="col-lg-6" style="margin-top:10px;"><a class="nav-link" href="#">32 Followers</a></div>
-        <div class="col-lg-6" style="margin-top:10px;"><a class="nav-link" href="#">43 Following</a></div>
+        <div class="col-lg-6" style="margin-top:10px;"><a class="nav-link" href="#">{{ $followers }} Followers</a></div>
+        <div class="col-lg-6" style="margin-top:10px;"><a class="nav-link" href="#">{{ $following }} Following</a></div>
       </div>
     </div>
     <div class="col-lg-3" style="border-left:1px dotted #ccc; text-align:center;">
       <div class="row">
           <div class="col-lg-12">
-            <small><label style="margin-right:10px;">Class: </label><b>Form 5</b></small>
+            <small><label style="margin-right:10px;">Exams Conducted: </label><b>{{ $teacher->exams->count() }}</b></small>
           </div>
         </div>
         <div class="row">
           <div class="col-lg-12">
-            <small><label style="margin-right:10px;">Overall Average:</label><b>76%</b></small>
+            <small><label style="margin-right:10px;">Notes Published:</label><b>{{ $teacher->notes->count() }}</b></small>
           </div>
         </div>
         <div class="row">
           <div class="col-lg-12">
-            <small><label style="margin-right:10px;">Overall Position:</label><b>87/765</b></small>
+            <small><label style="margin-right:10px;">Quizzes Conducted:</label><b>{{ $teacher->quizzes->count() }}</b></small>
           </div>
         </div>
     </div>
     </div>
   </div>
 
-  
+  <div class="text-center text-danger">
+    Showing {{ date('m') }}-20{{ date('y') }} month data
+    {!! $monthPointChart->container() !!}
+  </div>
 
+  <div class="text-center text-danger">
+    Showing 20{{ date('y') }} data
+    {!! $yearPointChart->container() !!}
+  </div>
 
-        
-</div>
+  <div class="text-center text-danger">
+    Showing {{ date('m') }}-20{{ date('y') }} data
+    {!! $weeklyExamChart->container() !!}
+  </div>
+
+  <div class="text-center text-danger">
+    Showing 20{{ date('y') }} data
+    {!! $monthlyExamChart->container() !!}
+  </div>
 
 </div>
   </div>
   </div>
 </div>
 
+{!! $monthPointChart->script() !!}
+{!! $yearPointChart->script() !!}
+{!! $weeklyExamChart->script() !!}
+{!! $monthlyExamChart->script() !!}
 @endsection

@@ -1,0 +1,33 @@
+#btnMenu{
+
+}
+.brand{
+    left: 6%;    
+}
+.alert{
+    padding: 15px;
+    margin-right: 10px;
+}
+
+a{
+    color: white;
+}
+a:active{
+    color: white;
+}
+.selector{
+    color: black;
+    background-color: #cccccc
+}
+.selector_options{
+    color: black;
+}
+
+.a_actions{
+    padding-right: 5px;
+}
+.deleteAttachment{
+    float: right;
+}
+
+

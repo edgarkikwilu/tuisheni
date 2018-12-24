@@ -29,7 +29,11 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->boolean('active')->default(true);
             $table->string('password');
-            $table->rememberToken();
+            $table->string('country')->default('Tanzania');
+            $table->string('city')->default('Dar es salaam');
+            $table->string('district')->default('Kibamba');
+            $table->string('ward')->default('Kimara');
+            $table->rememberToken()->default('Tanzania');
             $table->timestamps();
         });
     }

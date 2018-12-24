@@ -16,7 +16,7 @@ class CreateQuizAnswersTable extends Migration
         Schema::create('quiz_answers', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('quiz_question_id')->unsigned();
-            $table->foreign('quiz_question_id')->references('id')->on('quiz_questions');
+            $table->foreign('quiz_question_id')->references('id')->on('quiz_questions')->onDelete('cascade');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('answer');

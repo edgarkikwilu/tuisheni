@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.teacher')
 @section('content')
-<div class="container" style=" margin-top: 40px; text-align:left;">
+<div class="content">
     <h3 class="display-5" style="color: #001f9c ; " >CREATE NEW NOTES</h3>  
   
   <form action="{{ route('teacher.store.notes') }}" method="POST" enctype="multipart/form-data">
@@ -10,13 +10,13 @@
           <div class="form-group">
               <label for="exampleFormControlSelect1">Select Form</label>
               <select name="form" class="form-control" id="exampleFormControlSelect1">
-                <option value="">--Form--</option>
-                  <option value="1">Form 1</option>
-                  <option value="2">Form 2</option>
-                  <option value="3">Form 3</option>
-                  <option value="4">Form 4</option>
-                  <option value="5">Form 5</option>
-                  <option value="6">Form 6</option>
+                <option class="selector_options" value="">--Form--</option>
+                  <option class="selector_options" value="1">Form 1</option>
+                  <option class="selector_options" value="2">Form 2</option>
+                  <option class="selector_options" value="3">Form 3</option>
+                  <option class="selector_options" value="4">Form 4</option>
+                  <option class="selector_options" value="5">Form 5</option>
+                  <option class="selector_options" value="6">Form 6</option>
               </select>
             </div>
       </div>
@@ -24,19 +24,18 @@
         <div class="form-group">
             <label for="exampleFormControlSelect1">Select Subject</label>
             <select name="subject" class="form-control" id="exampleFormControlSelect1">
-              <option value="">--Subject--</option>
+              <option class="selector_options" value="">--Subject--</option>
               @foreach ($subjects as $subject)
-              <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+              <option class="selector_options" value="{{ $subject->id }}">{{ $subject->name }}</option>
               @endforeach
             </select>
           </div>
       </div>
       <div class="col-md-4">
-        <div class="col-md-2"><span id="loader"><i class="fa fa-spinner fa-3x fa-spin"></i></span></div>
         <div class="form-group">
             <label for="exampleFormControlSelect1">Select Topic</label>
             <select name="topic" class="form-control" id="exampleFormControlSelect1">
-              <option value="">--Topic--</option>
+              <option class="selector_options" value="">--Topic--</option>
             </select>
           </div>
       </div>
@@ -44,7 +43,7 @@
     <div class="form-group">
       <label for="exampleFormControlSelect1">Select SubTopic</label>
       <select class="form-control" name="subtopic" id="exampleFormControlSelect1">
-        <option value="">--SubTopic--</option>
+        <option class="selector_options" value="">--SubTopic--</option>
       </select>
     </div>
     <div class="form-group">

@@ -16,11 +16,11 @@ class CreateQuizQuestionsTable extends Migration
         Schema::create('quiz_questions', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('quiz_id')->unsigned();
-            $table->foreign('quiz_id')->references('id')->on('quizzes');
+            $table->foreign('quiz_id')->references('id')->on('quizzes')->onDelete('cascade');
             $table->string('question');
             $table->string('answer');
             $table->integer('question_type_id')->unsigned();
-            $table->foreign('question_type_id')->references('id')->on('question_types');
+            $table->foreign('question_type_id')->references('id')->on('question_types')->onDelete('cascade');
             $table->timestamps();
         });
     }

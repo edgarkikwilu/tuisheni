@@ -1,10 +1,7 @@
-@extends('layouts.index')
+@extends('layouts.teacher')
 @section('content')
-<div class="row">
-    @include('sidebar_subject')
-    <div class="col-md-9">
    
-<div class="container" style="margin-top: 10px; ">
+<div class="content" style="margin-top: 10px; ">
     <div class="row">
         <div class="col-lg-12"  style="margin-top: 20px;">
             <div class="card">
@@ -13,7 +10,7 @@
                         <span ><small class="text-muted">#{{ $exam->subject->name }}</small></span>
                 </div>
             
-                <div class="card-body">
+                <div class="card-body text-center">
                         {!! $exam->description !!}
                 </div>
                 <div class="container" >
@@ -162,11 +159,7 @@
                 </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-</div>
-</div>
+  
 
  <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">

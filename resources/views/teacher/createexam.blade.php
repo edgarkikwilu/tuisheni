@@ -1,8 +1,11 @@
-@extends('layouts.app')
+@extends('layouts.teacher')
 @section('content')
-<div class="container" style=" margin-top: 40px; text-align:left;">
-    <h3 class="display-5" style="color: #001f9c ; " >CREATE NEW EXAM</h3>  
-  </div>
+<div class="content" style=" margin-top: 40px; text-align:left;">
+    <div class="row text-center">
+        <div class="col-md-12">
+            <h3 class="display-5" style="color: #001f9c ; " >CREATE NEW EXAM</h3>  
+        </div>
+    </div>
  
   
   <form action="{{ route('teacher.store.examination') }}" method="POST" enctype="multipart/form-data">
@@ -12,13 +15,13 @@
               <div class="form-group">
                   <label for="exampleFormControlSelect1">Select Form</label>
                   <select name="form" class="form-control" id="exampleFormControlSelect1">
-                    <option value="">--Form--</option>
-                      <option value="1">Form 1</option>
-                      <option value="2">Form 2</option>
-                      <option value="3">Form 3</option>
-                      <option value="4">Form 4</option>
-                      <option value="5">Form 5</option>
-                      <option value="6">Form 6</option>
+                    <option class="selector_options" value="">--Form--</option>
+                      <option class="selector_options" value="1">Form 1</option>
+                      <option class="selector_options" value="2">Form 2</option>
+                      <option class="selector_options" value="3">Form 3</option>
+                      <option class="selector_options" value="4">Form 4</option>
+                      <option class="selector_options" value="5">Form 5</option>
+                      <option class="selector_options" value="6">Form 6</option>
                   </select>
                 </div>
           </div>
@@ -26,21 +29,20 @@
             <div class="form-group">
                 <label for="exampleFormControlSelect1">Select Subject</label>
                 <select name="subject" class="form-control" id="exampleFormControlSelect1">
-                  <option value="">--Subject--</option>
+                  <option class="selector_options" value="">--Subject--</option>
                   @foreach ($subjects as $subject)
-                  <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                  <option class="selector_options" value="{{ $subject->id }}">{{ $subject->name }}</option>
                   @endforeach
                 </select>
               </div>
           </div>
           <div class="col-md-2">
-            <div class="col-md-2"><span id="loader"><i class="fa fa-spinner fa-3x fa-spin"></i></span></div>
             <div class="form-group">
                 <label for="exampleFormControlSelect1">Select Exam Type</label>
                 <select name="type" class="form-control" id="exampleFormControlSelect1">
-                  <option value="">--Exam Type--</option>
+                  <option class="selector_options" value="">--Exam Type--</option>
                   @foreach ($types as $type)
-                      <option value="{{ $type->id }}">{{ $type->name }}</option>
+                      <option class="selector_options" value="{{ $type->id }}">{{ $type->name }}</option>
                   @endforeach
                 </select>
               </div>
@@ -50,13 +52,13 @@
       <div class="col-md-5">
           <div class="form-group">
             <label for="exampleFormControlInput1">Examination Title</label>
-            <input type="text"  name="title" class="form-control" placeholder="Enter your topic tittle">
+            <input type="text"  name="title" class="form-control" placeholder="Enter your exam tittle">
           </div>
       </div>
       <div class="col-md-5">
         <div class="form-group">
           <label for="exampleFormControlInput1">Examination Prize</label>
-          <input type="text"  name="prize" class="form-control" placeholder="Enter prize">
+          <input type="text"  name="prize" class="form-control" placeholder="Enter 1st student prize(not compulsory)">
         </div>
       </div>
     </div>

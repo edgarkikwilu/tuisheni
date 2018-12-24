@@ -5,81 +5,29 @@ namespace App\Http\Controllers;
 use App\Point;
 use Illuminate\Http\Request;
 
+use Auth;
+
 class PointController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
+    public function studentPoints(){
+        return view('student.points');
     }
+    public function filter(Request $request){
+        if ($request->ajax()) {
+            $points = new Point();
+            $points = $points->newQuery();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+            if ($request->has('month') && $request->month != "") {
+                $points->whereMonth('created_at',$request->month);
+            }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+            if ($request->has('type') && $request->type != "") {
+                $points->where('type',$request->type);
+            }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Point  $point
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Point $point)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Point  $point
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Point $point)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Point  $point
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Point $point)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Point  $point
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Point $point)
-    {
-        //
+            $points->where('user_id', Auth::user()->id)->orderBy('id','desc');
+            
+            return response()->json($points->get());
+        }
     }
 }

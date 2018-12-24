@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Cog\Contracts\Love\Likeable\Models\Likeable as LikeableContract;
+use Cog\Laravel\Love\Likeable\Models\Traits\Likeable;
 
-class Quiz extends Model
+class Quiz extends Model implements LikeableContract
 {
+    use Likeable;
     public function subject(){
         return $this->belongsTo('App\Subject');
     }
@@ -25,5 +28,9 @@ class Quiz extends Model
 
     public function questions(){
         return $this->hasMany('App\QuizQuestion');
+    }
+
+    public function later(){
+        return $this->morphMany('App\Later', 'laterable');
     }
 }

@@ -83,9 +83,38 @@ class QuizController extends Controller
         $correctAnswers = collect([]);
         $isCorrect = false;
 
+        if ($this->isLogPresent($id)) {
+            $points = DB::table('variables')->select('int_value')->where('name','quiz_post_points')->first();
+            Auth::user()->increment('points',$points->int_value);
+
+            $log = new Log();
+            $log->user_id = Auth::user()->id;
+            $log->ip = "";
+            $log->location = "Tanzania";
+            $log->type = "Quiz";
+            $log->description = "Quiz Attempt".$id;
+            $log->points = $points->int_value;
+            $log->save();
+
+            $teacher_id = Quiz::findOrFail($id)->user_id;
+            $teacher_points_log = new Log();
+            $teacher_points_log->user_id = $teacher_id;
+            $teacher_points_log->ip = "";
+            $teacher_points_log->location = "Tanzania";
+            $teacher_points_log->type = "Quiz";
+            $teacher_points_log->description = "Quiz Attempt Points";
+            $teacher_points_log->points = $points->int_value;
+            $teacher_points_log->save();
+        }
+
         $quiz = Quiz::with('questions')->with('user')->where('id',$id)->first();
         $quiz->increment('attempts');
         return view('quiz/singlequiz')->withQuiz($quiz)->withIsAnswerResponse($isAnswerResponse)->withYourAnswers($yourAnswers)->withCorrectAnswers($correctAnswers)->withIsCorrect($isCorrect);
+    }
+
+    public function isLogPresent($id){
+        $log = Log::where('user_id',Auth::user()->id)->where('description', 'Quiz Attempt'.$id)->count();
+        return $log>0?true:false;
     }
 
     /**

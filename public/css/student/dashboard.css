@@ -1,0 +1,63 @@
+.brand{
+    color: black;
+}
+.notifications{
+    position: relative;
+    /* margin-left: 10%; */
+    /* float: right; */
+}
+.username{
+    color: black;
+}
+.user-dropdown{
+    position: relative;
+}
+.filterdiv{
+    margin-top: 10%;
+}
+.btnFilterNotes{
+    transform: skewX(4deg);
+}
+.btnNewNotes{
+    left:10%;
+    top: 10px;
+    margin-bottom: 20px;
+    transform: skewY(3deg);
+}
+.ni-fat-add{
+    size: 20px;
+}
+.notes-card{
+    min-height: 270px;
+    max-height: 270px;
+}
+.notes-title{
+    font-size: 0.8em;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-style: normal;
+}
+.text-mute{
+    color: #caa;
+    font-size: 0.8em;
+    font-style: italic;
+}
+.notes-article{
+    font-size: 15px;
+    font-family: lato;
+    font-style: normal;
+}
+.create-new-notes-title{
+    margin-bottom:12px;
+    text-transform: uppercase;
+}
+.diff{
+    color: #caa;
+    font-size: 0.7em;
+    font-style: italic;
+}
+.btnFilterAssessment{
+    transform: skewY(3deg);
+}
+.mt-10{
+    margin-top: 80px;
+}
