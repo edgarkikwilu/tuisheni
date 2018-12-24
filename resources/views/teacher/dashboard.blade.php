@@ -1,27 +1,29 @@
 @extends('layouts.teacher')
 @section('content')
 <div class="content">
-    <div class="row justify-content-center">
-        <div class="col-md-2 alert alert-primary text-center" style="width:30px" role="alert">
-            <span>Total Points</span><br>
-            <span>{{ Auth::user()->points }}</span>
-        </div>
-        <div class="col-md-2 alert alert-info text-center" style="width:30px" role="alert">
-            <span>Total Notes</span><br>
-            <span>{{ $counts[0] }}</span>
-        </div>
-        <div class="col-md-2 alert alert-warning text-center" style="width:30px" role="alert">
-            <span>Total Exams</span><br>
-            <span>{{ $counts[1] }}</span>
-        </div>
-        <div class="col-md-2 alert alert-primary text-center" style="width:30px" role="alert">
-            <span>Total Quizzes</span><br>
-            <span>{{ $counts[2] }}</span>
-        </div>
-        <div class="col-md-2 alert alert-warning text-center" style="width:30px" role="alert">
-            <span>Total Tutorials</span><br>
-            <span>{{ $counts[3] }}</span>
-        </div>
+    <div class="container">
+      <div class="row justify-content-center">
+          <div class="col-sm-2 alert alert-primary text-center" role="alert">
+              <span>Total Points</span><br>
+              <span>{{ Auth::user()->points }}</span>
+          </div>
+          <div class="col-sm-2 alert alert-info text-center" role="alert">
+              <span>Total Notes</span><br>
+              <span>{{ $counts[0] }}</span>
+          </div>
+          <div class="col-sm-2 alert alert-warning text-center" role="alert">
+              <span>Total Exams</span><br>
+              <span>{{ $counts[1] }}</span>
+          </div>
+          <div class="col-sm-2 alert alert-primary text-center" role="alert">
+              <span>Total Quizzes</span><br>
+              <span>{{ $counts[2] }}</span>
+          </div>
+          <div class="col-sm-2 alert alert-warning text-center" role="alert">
+              <span>Total Tutorials</span><br>
+              <span>{{ $counts[3] }}</span>
+          </div>
+      </div>
     </div>
         <div class="row">
           <div class="col-12">
@@ -37,14 +39,16 @@
                         <input type="radio" name="options" checked>
                         <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Points Earned</span>
                         <span class="d-block d-sm-none">
-                          <i class="tim-icons icon-single-02"></i>
+                          {{-- <i class="tim-icons icon-single-02"></i> --}}
+                          P
                         </span>
                       </label>
                       <label class="btn btn-sm btn-primary btn-simple" id="1">
                         <input type="radio" class="d-none d-sm-none" name="options">
                         <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Exams Score</span>
                         <span class="d-block d-sm-none">
-                          <i class="tim-icons icon-gift-2"></i>
+                          {{-- <i class="tim-icons icon-gift-2"></i> --}}
+                          E
                         </span>
                       </label>
                     </div>

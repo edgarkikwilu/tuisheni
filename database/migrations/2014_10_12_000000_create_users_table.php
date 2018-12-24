@@ -16,10 +16,10 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('username');
-            $table->string('firstname');
-            $table->string('lastname');
-            $table->integer('mobile')->nullable();
-            $table->string('school')->nullable();
+            $table->string('firstname')->default('');
+            $table->string('lastname')->default('');
+            $table->integer('mobile')->default(0);
+            $table->string('school')->default('');
             $table->integer('form')->default(1);
             $table->string('type')->default('student');
             $table->integer('points')->default(1000);
@@ -33,7 +33,7 @@ class CreateUsersTable extends Migration
             $table->string('city')->default('Dar es salaam');
             $table->string('district')->default('Kibamba');
             $table->string('ward')->default('Kimara');
-            $table->rememberToken()->default('Tanzania');
+            $table->rememberToken();
             $table->timestamps();
         });
     }

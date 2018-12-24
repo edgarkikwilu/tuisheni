@@ -10,18 +10,21 @@
   <!-- Scripts -->
   <script src="{{ asset('js/app.js') }}" defer></script>
 
-  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('/teacher/assets/img/apple-icon.png') }}">
+  <link rel="icon" type="image/png" href="{{ asset('/teacher/assets/img/favicon.png') }}">
   <title>
     SchoolBata |Teacher
   </title>
   <!--     Fonts and icons     -->
+  
   <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
   <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
   <!-- Nucleo Icons -->
-  <link href="{{ asset('css/nucleo-icons.css') }}" rel="stylesheet" />
+  <link href="{{ asset('/teacher//assets/css/nucleo-icons.css') }}" rel="stylesheet" />
   <!-- CSS Files -->
-  <link href="{{ asset('css/black-dashboard.css') }}" rel="stylesheet" />
+  <link href="{{ asset('/teacher/assets/css/black-dashboard.css') }}" rel="stylesheet" />
+  <!-- CSS Just for demo purpose, don't include it in your project -->
+  {{-- <link href="../assets/demo/demo.css" rel="stylesheet" /> --}}
   <link href="{{ asset('css/teacher/dashboard.css') }}" rel="stylesheet" />
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -109,10 +112,10 @@
               <li class="dropdown nav-item">
                 <a href="javascript:void(0)" class="dropdown-toggle nav-link" data-toggle="dropdown">
                   <div class="notification d-none d-lg-block d-xl-block"></div>
-                  <i class="tim-icons icon-sound-wave"></i>
-                  <p class="d-lg-none">
+                  <i class="fa fa-bell"></i>
+                  {{-- <p class="d-lg-none">
                     Notifications
-                  </p>
+                  </p> --}}
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right dropdown-navbar">
                   <li class="nav-link">
@@ -135,23 +138,29 @@
               <li class="dropdown nav-item">
                 <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                   <div class="photo">
-                    <img src="../assets/img/anime3.png" alt="Profile Photo">
+                    <img src="{{ asset('/teacher/assets/img/anime3.png') }}" alt="Profile Photo">
                   </div>
                   <b class="caret d-none d-lg-block d-xl-block"></b>
-                  <p class="d-lg-none">
-                    Log out
-                  </p>
                 </a>
                 <ul class="dropdown-menu dropdown-navbar">
                   <li class="nav-link">
-                    <a href="javascript:void(0)" class="nav-item dropdown-item">Profile</a>
-                  </li>
-                  <li class="nav-link">
-                    <a href="javascript:void(0)" class="nav-item dropdown-item">Settings</a>
+                    <a href="{{ route('teacher.profile') }}" class="dropdown-item">
+                      <i class="ni ni-single-02"></i>
+                      <span>My profile</span>
+                    </a>
                   </li>
                   <li class="dropdown-divider"></li>
                   <li class="nav-link">
-                    <a href="javascript:void(0)" class="nav-item dropdown-item">Log out</a>
+                    <a  class="dropdown-item" href="{{ route('logout') }}"
+                      onclick="event.preventDefault();
+                      document.getElementById('logout-form').submit();">
+                      <i class="ni ni-user-run"></i>
+                      Logout
+                    </a>
+    
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
                   </li>
                 </ul>
               </li>
@@ -199,24 +208,38 @@
           <span class="badge dark-badge ml-2"></span>
           <span class="color-label">DARK MODE</span>
         </li>
-        <li class="button-container">
-          <a href="https://www.creative-tim.com/product/black-dashboard" target="_blank" class="btn btn-primary btn-block btn-round">Download Now</a>
-          <a href="https://demos.creative-tim.com/black-dashboard/docs/1.0/getting-started/introduction.html" target="_blank" class="btn btn-default btn-block btn-round">
-            Documentation
-          </a>
-        </li>
-        <li class="header-title">Thank you for 95 shares!</li>
-        <li class="button-container text-center">
-          <button id="twitter" class="btn btn-round btn-info"><i class="fab fa-twitter"></i> &middot; 45</button>
-          <button id="facebook" class="btn btn-round btn-info"><i class="fab fa-facebook-f"></i> &middot; 50</button>
-          <br>
-          <br>
-          <a class="github-button" href="https://github.com/creativetimofficial/black-dashboard" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star ntkme/github-buttons on GitHub">Star</a>
-        </li>
       </ul>
     </div>
   </div>
-  <!--   Core JS Files   -->
+  <footer class="footer">
+      <div class="container-fluid">
+        <ul class="nav">
+          <li class="nav-item">
+            <a href="javascript:void(0)" class="nav-link">
+              QutCode
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="javascript:void(0)" class="nav-link">
+              About Us
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="javascript:void(0)" class="nav-link">
+              Blog
+            </a>
+          </li>
+        </ul>
+        <div class="copyright">
+          ©
+          <script>
+            document.write(new Date().getFullYear())
+          </script> made with <i class="tim-icons icon-heart-2"></i> by
+          <a href="javascript:void(0)" target="_blank">QutCode</a> for a better education.
+        </div>
+      </div>
+    </footer>
+  {{-- <!--   Core JS Files   -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.js"></script>
   <script src="{{ asset('/js/jquery.js') }}"></script>
   <script src="{{ asset('/js/core/popper.min.js') }}"></script>
@@ -227,7 +250,20 @@
   <!--  Notifications Plugin    -->
   <script src="{{ asset('/js/plugins/bootstrap-notify.js') }}"></script>
   <!-- Control Center for Black Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="{{ asset('/js/black-dashboard.min.js') }}"></script>
+  <script src="{{ asset('/js/black-dashboard.min.js') }}"></script> --}}
+  
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <!--   Core JS Files   -->
+  <script src="{{ asset('/argon/assets/vendor/jquery/dist/jquery.min.js') }}"></script>
+  <script src="{{ asset('/argon/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ asset('/teacher/assets/js/plugins/perfect-scrollbar.jquery.min.js') }}"></script>
+
+  <!-- Chart JS -->
+  <script src="{{ asset('/teacher/assets/js/plugins/chartjs.min.js') }}"></script>
+  <!--  Notifications Plugin    -->
+  <script src="{{ asset('/teacher/assets/js/plugins/bootstrap-notify.js') }}"></script>
+  <!-- Control Center for Black Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="{{ asset('/teacher/assets/js/black-dashboard.min.js?v=1.0.0') }}"></script>
   <script src="{{ asset('js/teacher/dashboard.js') }}"></script>
   
   <script>

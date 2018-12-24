@@ -22,6 +22,7 @@ use App\Topic;
 use App\QuizQuestion;
 use App\Choice;
 use App\Log;
+use App\Message;
 use App\MarkingScheme;
 
 use App\Charts\NotesChart;
@@ -81,7 +82,7 @@ class TeacherController extends Controller
     
     public function getYearPointsSumCollection(){
         // $logs = Log::select('points','created_at')->where('user_id',Auth::user()->id)->whereYear('created_at',date('y'))->get();
-        $logs = Log::get(['points','created_at'])->groupBy(function($date){
+        $logs = Log::get(['points','created_at'])->where('teacher_id', Auth::user()->id)->groupBy(function($date){
             return Carbon::parse($date->created_at)->format('m');
         });
         
@@ -114,7 +115,7 @@ class TeacherController extends Controller
         return $reports->sortKeys()->values();
     }
     public function getMonthlyStudentExamPerfomanceCollection(){
-        $reports = DB::table('reports')->get(['score','created_at'])->groupBy(function($date){
+        $reports = DB::table('reports')->where('teacher_id', Auth::user()->id)->get(['score','created_at'])->groupBy(function($date){
             return Carbon::parse($date->created_at)->format('m');
         });
         
@@ -151,7 +152,36 @@ class TeacherController extends Controller
         $pointsCollection = $this->getPointsSumCollection();
         $contentCollection = $this->getUploadedContents();
 
-        return response()->json(['weeklyPoints'=>$pointsCollection, 'monthlyPoints'=>$yearPointsCollection, 'weeklyPerfomance'=>$weeklyStudentPerformanceCollection, 'monthlyPerfomance'=>$yearPointsCollection, 'contentCollection'=>$contentCollection]);
+        return response()->json(['weeklyPoints'=>$pointsCollection, 'monthlyPoints'=>$yearPointsCollection, 'weeklyPerfomance'=>$weeklyStudentPerformanceCollection, 'monthlyPerfomance'=>$monthlyStudentPerformanceCollection, 'contentCollection'=>$contentCollection]);
+    }
+
+    public function profile(){
+        $messages = Message::where('recipient_id',Auth::user()->id)->where('read',false)->get();
+        $followers = Follow::where('follow_id',Auth::user()->id)->count();
+        $following = Follow::where('user_id',Auth::user()->id)->count();
+        return view('teacher/profile')->withMessages($messages)->withFollowers($followers)->withFollowing($following);
+    }
+    public function editProfile(Request $request){
+        $user = User::findOrFail(Auth::user()->id);
+        $user->username = $request->username;
+        $user->firstname = $request->firstname;
+        $user->lastname = $request->lastname;
+        $user->mobile = $request->mobile;
+        $user->school = $request->school;
+        $user->form = $request->form;
+        $user->bio = $request->bio;
+        $user->email = $request->email;
+        $user->country = $request->country;
+        $user->city = $request->city;
+        $user->district = $request->district;
+        $user->ward = $request->ward;
+
+        $user->save();
+
+        $messages = Message::where('recipient_id',Auth::user()->id)->where('read',false)->get();
+        $followers = Follow::where('follow_id',Auth::user()->id)->count();
+        $following = Follow::where('user_id',Auth::user()->id)->count();
+        return view('teacher/profile')->withMessages($messages)->withFollowers($followers)->withFollowing($following);
     }
 
 
@@ -564,7 +594,7 @@ class TeacherController extends Controller
 
     public function quiz(){
         $subjects = Subject::all();
-        $quizzes = Quiz::all(); 
+        $quizzes = Quiz::where('user_id', Auth::user()->id); 
         return view('teacher/quiz')->withSubjects($subjects)->withQuizzes($quizzes);
     }
     public function createquiz (){

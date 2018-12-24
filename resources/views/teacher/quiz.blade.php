@@ -70,7 +70,7 @@
             </div>
      </div>
     <div class="col-lg-3" style="text-align:center; border-left:1px dotted #ccc;">
-        <p style="margin-top:10px;"><small class="text-muted">Posted:7 mins ago</small></p>
+        <p style="margin-top:10px;"><small class="text-muted">Posted:{{ $quiz->created_at->diffForHumans() }}</small></p>
         <a href="{{ route('attempt.quiz.quiz', $quiz->id) }}" class="btn btn-sm btn-secondary" style="margin-top:10px;">Preview Quiz</a>
         <small><div>{{ $quiz->attempts }} Attempts</div></small>
         <small style="text-align:center;">

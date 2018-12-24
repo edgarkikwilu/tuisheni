@@ -1,127 +1,245 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html>
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
+  <meta name="author" content="Creative Tim">
+  <title>Argon Dashboard - Free Dashboard for Bootstrap 4</title>
+  <!-- CSRF Token -->
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <!-- Favicon -->
+  <link href="{{ asset('/argon/assets/img/brand/favicon.png') }}" rel="icon" type="image/png">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+  <!-- Icons -->
+  <link href="{{ asset('/argon/assets/vendor/nucleo/css/nucleo.css') }}" rel="stylesheet">
+  <link href="{{ asset('/argon/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
+  <!-- Argon CSS -->
+  <link type="text/css" href="{{ asset('/argon/assets/css/argon.css') }}" rel="stylesheet">
+</head>
 
-                <div class="card-body">
-                    <form method="post" action="{{ route('register') }}">
-                        @csrf
-
-                        <div class="form-group row">
-                            <label for="username" class="col-md-4 col-form-label text-md-right">{{ __('Username') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="username" type="text" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{ old('username') }}" required autofocus>
-
-                                @if ($errors->has('username'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('username') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="firstname" class="col-md-4 col-form-label text-md-right">{{ __('Firstname') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="firstname" type="text" class="form-control{{ $errors->has('firstname') ? ' is-invalid' : '' }}" name="firstname" value="{{ old('firstname') }}" required autofocus>
-
-                                @if ($errors->has('firstname'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('firstname') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="lastname" class="col-md-4 col-form-label text-md-right">{{ __('Lastname') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="lastname" type="text" class="form-control{{ $errors->has('lastname') ? ' is-invalid' : '' }}" name="lastname" value="{{ old('lastname') }}" required >
-
-                                @if ($errors->has('lastname'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('lastname') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
-
-                                @if ($errors->has('email'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="school" class="col-md-4 col-form-label text-md-right">{{ __('School') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="school" type="text" class="form-control{{ $errors->has('school') ? ' is-invalid' : '' }}" name="school" value="{{ old('school') }}" required autofocus>
-
-                                @if ($errors->has('school'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('school') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-gr-row">
-                            <div class="col-md-4 col-form-label text-md-right">Account Type</div>
-                            <div class="col-md-6">
-                                    <!-- Default unchecked -->
-                                <select name="type" id="type">
-                                    <option value="student">Student</option>
-                                    <option value="teacher">Teacher</option>
-                                </select>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">Register</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+<body class="bg-default">
+  <div class="main-content">
+    <!-- Navbar -->
+    <nav class="navbar navbar-top navbar-horizontal navbar-expand-md navbar-dark">
+      <div class="container px-4">
+        <a class="navbar-brand" href="../index.html">
+          <img src="{{ asset('/argon/assets/img/brand/white.png') }}" />
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse-main" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar-collapse-main">
+          <!-- Collapse header -->
+          <div class="navbar-collapse-header d-md-none">
+            <div class="row">
+              <div class="col-6 collapse-brand">
+                <a href="../index.html">
+                  <img src="{{ asset('/argon/assets/img/brand/blue.png') }}">
+                </a>
+              </div>
+              <div class="col-6 collapse-close">
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse-main" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle sidenav">
+                  <span></span>
+                  <span></span>
+                </button>
+              </div>
             </div>
+          </div>
+          <!-- Navbar items -->
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link nav-link-icon" href="../index.html">
+                <i class="ni ni-planet"></i>
+                <span class="nav-link-inner--text">Dashboard</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link nav-link-icon" href="../examples/register.html">
+                <i class="ni ni-circle-08"></i>
+                <span class="nav-link-inner--text">Register</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link nav-link-icon" href="../examples/login.html">
+                <i class="ni ni-key-25"></i>
+                <span class="nav-link-inner--text">Login</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link nav-link-icon" href="../examples/profile.html">
+                <i class="ni ni-single-02"></i>
+                <span class="nav-link-inner--text">Profile</span>
+              </a>
+            </li>
+          </ul>
         </div>
+      </div>
+    </nav>
+    <!-- Header -->
+    <div class="header bg-gradient-primary py-7 py-lg-8">
+      <div class="container">
+        <div class="header-body text-center mb-7">
+          <div class="row justify-content-center">
+            <div class="col-lg-5 col-md-6">
+              <h1 class="text-white">Welcome!</h1>
+              <p class="text-lead text-light">Please register to access awesome Content to enhance your studying experience</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="separator separator-bottom separator-skew zindex-100">
+        <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+          <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
+        </svg>
+      </div>
     </div>
-</div>
-@endsection
+    <!-- Page content -->
+    <div class="container mt--8 pb-5">
+      <!-- Table -->
+      <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+          <div class="card bg-secondary shadow border-0">
+            <div class="card-header bg-transparent pb-5">
+              <div class="text-muted text-center mt-2 mb-4"><small>Sign up with</small></div>
+              <div class="text-center">
+                <a href="#" class="btn btn-neutral btn-icon mr-4">
+                  <span class="btn-inner--icon"><img src="{{ asset('/argon/assets/img/icons/common/github.svg') }}"></span>
+                  <span class="btn-inner--text">Github</span>
+                </a>
+                <a href="#" class="btn btn-neutral btn-icon">
+                  <span class="btn-inner--icon"><img src="{{ asset('/argon/assets/img/icons/common/google.svg') }}"></span>
+                  <span class="btn-inner--text">Google</span>
+                </a>
+              </div>
+            </div>
+            <div class="card-body px-lg-5 py-lg-5">
+              <div class="text-center text-muted mb-4">
+                <small>Or sign up with credentials</small>
+              </div>
+              <form role="form" method="post" action="{{ route('register') }}">
+                @csrf
+                <div class="form-group">
+                  <div class="input-group input-group-alternative mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                    </div>
+                    <input id="username" type="text" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" placeholder="username" value="{{ old('username') }}" required autofocus>
+                    @if ($errors->has('username'))
+                      <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('username') }}</strong>
+                      </span>
+                    @endif
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="input-group input-group-alternative mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                    </div>
+                    <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" placeholder="email" value="{{ old('email') }}" required>
+
+                    @if ($errors->has('email'))
+                      <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('email') }}</strong>
+                      </span>
+                    @endif
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-md-4 col-form-label text-md-right">Account Type</div>
+                    <div class="col-md-6">
+                      <select name="type" id="type" class="form-control" required>
+                          <option value="student">Student</option>
+                          <option value="teacher">Teacher</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="input-group input-group-alternative">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                    </div>
+                    <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" placeholder="password" required>
+                    @if ($errors->has('password'))
+                      <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('password') }}</strong>
+                      </span>
+                    @endif
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="input-group input-group-alternative">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                    </div>
+                    <input id="password-confirm" type="password" placeholder="confirm password" class="form-control" name="password_confirmation" required>
+                  </div>
+                </div>
+                <div class="text-muted font-italic"><small>password strength: <span class="text-success font-weight-700">strong</span></small></div>
+                {{-- <div class="row my-4">
+                  <div class="col-12">
+                    <div class="custom-control custom-control-alternative custom-checkbox">
+                      <input class="custom-control-input" id="customCheckRegister" type="checkbox">
+                      <label class="custom-control-label" for="customCheckRegister">
+                        <span class="text-muted">I agree with the <a href="#!">Privacy Policy</a></span>
+                      </label>
+                    </div>
+                  </div>
+                </div> --}}
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary mt-4">Create account</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Footer -->
+  <footer class="py-5">
+    <div class="container">
+      <div class="row align-items-center justify-content-xl-between">
+        <div class="col-xl-6">
+          <div class="copyright text-center text-xl-left text-muted">
+            &copy; 2018 <a href="https://www.creative-tim.com" class="font-weight-bold ml-1" target="_blank">Creative Tim</a>
+          </div>
+        </div>
+        <div class="col-xl-6">
+          <ul class="nav nav-footer justify-content-center justify-content-xl-end">
+            <li class="nav-item">
+              <a href="https://www.creative-tim.com" class="nav-link" target="_blank">Creative Tim</a>
+            </li>
+            <li class="nav-item">
+              <a href="https://www.creative-tim.com/presentation" class="nav-link" target="_blank">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a href="http://blog.creative-tim.com" class="nav-link" target="_blank">Blog</a>
+            </li>
+            <li class="nav-item">
+              <a href="https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md" class="nav-link" target="_blank">MIT License</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- Argon Scripts -->
+  <!-- Core -->
+  <script src="{{ asset('/argon/assets/vendor/jquery/dist/jquery.min.js') }}"></script>
+  <script src="{{ asset('/argon/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
+  <!-- Optional JS -->
+  <script src="{{ asset('/argon/assets/vendor/chart.js/dist/Chart.min.js') }}"></script>
+  <script src="{{ asset('/argon/assets/vendor/chart.js/dist/Chart.extension.js') }}"></script>
+  <!-- Argon JS -->
+  <script src="{{ asset('/argon/assets/js/argon.js') }}"></script>
+  <!--My JS-->
+  <script src="{{ asset('/js/student/dashboard.js') }}"></script>
+</body>
+
+</html>

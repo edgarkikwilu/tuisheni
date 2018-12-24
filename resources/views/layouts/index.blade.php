@@ -8,20 +8,15 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <!-- Scripts -->
-    
+    <!-- Scripts -->    
     <script src="{{ asset('js/app.js') }}" defer></script>
 
 	<link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
-  <link rel="stylesheet" href="{{ asset ('js/bootstrap.css') }}">
-  <link rel="stylesheet" href="{{ asset ('css/style.css') }}">
-  <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="{{ asset ('js/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ asset ('css/style.css') }}">
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" id="bootstrap-css">
 
-<!------ Include the above in your HEAD tag ---------->
-
-
-  
-	<title>School Bata</title>
+	<title>SchoolBata</title>
 
     <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=wbey0h1l7jz2lp8lmlox7olwvkkbg9hxihsn3a4ls25xywr0"></script>
     <script>

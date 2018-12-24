@@ -1,6 +1,9 @@
 #btnMenu{
 
 }
+.notificationbtn{
+    text-decoration: none;
+}
 .brand{
     left: 6%;    
 }

@@ -80,6 +80,7 @@ Route::post('/message/student', 'StudentController@messageStudent')->name('messa
 Route::middleware('role:teacher')->group(function(){
     Route::get('/teacher/teacherdash','TeacherController@teacherdash')->name('teacher.teacherdash');
     Route::get('/teacher/profile','TeacherController@profile')->name('teacher.profile');
+    Route::post('/teacher/edit/profile','TeacherController@editProfile')->name('teacher.edit.profile');
 
     Route::get('/teacher/chart/data', 'TeacherController@getChartData')->name('teacher.chart.data');
     
