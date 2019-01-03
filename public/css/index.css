@@ -88,9 +88,9 @@
     font-size: 1em;
     font-weight: 400;
 }
-.quiz-choices{
+/* .quiz-choices{
     
-}
+} */
 .quiz-choice{
     list-style-type: none;
     font-family: lato;
@@ -98,9 +98,9 @@
     font-weight: 400;
 }
 
-.classses{
+/* .classses{
     
-}
+} */
 .topics{
     padding: 10px;
     border-style: solid;

@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->integer('points')->default(1000);
             $table->string('email')->unique();
             $table->string('bio')->default('');
+            $table->string('subjects')->default('');
             $table->integer('rate')->default(0);
             $table->timestamp('email_verified_at')->nullable();
             $table->boolean('active')->default(true);
