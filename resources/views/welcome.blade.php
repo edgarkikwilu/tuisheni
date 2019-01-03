@@ -1,7 +1,7 @@
-@extends('layouts.index')
+@extends('layouts.guest')
 @section('content')
-<div class="row">
-    @include('sidebar_subject')
+<div class="content">
+  <div class="row" style="margin-top:20px; position:relative;">
     <div class="col-md-9">
         <div id="carouselExampleIndicators" class="carousel slide" style="margin-top: 30px; margin-left:20px;" data-ride="carousel">
             <ol class="carousel-indicators">
@@ -11,13 +11,13 @@
             </ol>
             <div class="carousel-inner">
               <div class="carousel-item active">
-                <img class="d-block w-100" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="First slide" height="300px">
+                <img class="d-block w-100 slides" src="{{ asset('/images/sc1.png') }}" alt="First slide">
               </div>
               <div class="carousel-item">
-                <img class="d-block w-100" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Second slide" height="300px">
+                <img class="d-block w-100 slides" src="{{ asset('/images/sc4.png') }}" alt="Second slide">
               </div>
               <div class="carousel-item">
-                <img class="d-block w-100" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Third slide" height="300px">
+                <img class="d-block w-100 slides" src="{{ asset('/images/sc5.jpg') }}" alt="Third slide">
               </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -29,11 +29,164 @@
               <span class="sr-only">Next</span>
             </a>
           </div>
+
+          <div class="row card-container">
+            <div class="col-md-4">
+              <a href="{{ route('explore') }}" class="">
+                  <div style="width: 18rem;">
+                    <div class="card card-stats mb-4 mb-lg-0 card-explore card-interactions">
+                      <div class="card-body">
+                        <div class="row">
+                          <div class="col">
+                            <h5 class="card-title text-uppercase text-muted mb-0">Explore Notes</h5>
+                            <span class="h2 font-weight-bold mb-0">{{ $counts[0] }}</span>
+                          </div>
+                          <div class="col-auto">
+                            <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                              <i class="fas fa-chart-bar"></i>
+                            </div>
+                          </div>
+                        </div>
+                        <p class="mt-3 mb-0 text-muted text-sm">
+                          <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+                          <span class="text-nowrap">Since last month</span>
+                        </p>
+                      </div>
+                    </div>
+                  </div> <!--end of card-->
+              </a>
+            </div> <!--end of card container-->
+            <div class="col-md-4">
+              <a href="{{ route('quiz.quiz') }}">
+                <div style="width: 18rem;">
+                  <div class="card card-stats mb-4 mb-lg-0 card-quiz card-interactions">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col">
+                          <h5 class="card-title text-uppercase text-muted mb-0">Online Quizzes</h5>
+                          <span class="h2 font-weight-bold mb-0">{{ $counts[1] }}</span>
+                        </div>
+                        <div class="col-auto">
+                          <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                              <i class="fas fa-chart-bar"></i>
+                          </div>
+                        </div>
+                      </div>
+                      <p class="mt-3 mb-0 text-muted text-sm">
+                        <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+                        <span class="text-nowrap">Since last month</span>
+                      </p>
+                    </div>
+                  </div>
+                </div> <!--end of card-->
+              </a>
+            </div> <!--end of card container-->
+            <div class="col-md-4">
+              <a href="{{ route('examination.examination') }}">
+                <div style="width: 18rem;">
+                  <div class="card card-stats mb-4 mb-lg-0 card-exams card-interactions">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col">
+                          <h5 class="card-title text-uppercase text-muted mb-0">Examinations</h5>
+                          <span class="h2 font-weight-bold mb-0">{{ $counts[2] }}</span>
+                        </div>
+                        <div class="col-auto">
+                          <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                            <i class="fas fa-chart-bar"></i>
+                          </div>
+                        </div>
+                      </div>
+                      <p class="mt-3 mb-0 text-muted text-sm">
+                        <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+                        <span class="text-nowrap">Since last month</span>
+                      </p>
+                    </div>
+                  </div>
+                </div> <!--end of card-->
+              </a>
+            </div> <!--end of card container-->
+            <div class="col-md-4">
+              <a href="{{ route('results') }}">
+                <div style="width: 18rem;">
+                    <div class="card card-stats mb-4 mb-lg-0 card-results card-interactions">
+                      <div class="card-body">
+                        <div class="row">
+                          <div class="col">
+                            <h5 class="card-title text-uppercase text-muted mb-0">Results</h5>
+                            <span class="h2 font-weight-bold mb-0">{{ $counts[3] }}</span>
+                          </div>
+                          <div class="col-auto">
+                            <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                              <i class="fas fa-chart-bar"></i>
+                            </div>
+                          </div>
+                        </div>
+                        <p class="mt-3 mb-0 text-muted text-sm">
+                          <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+                          <span class="text-nowrap">Since last month</span>
+                        </p>
+                      </div>
+                    </div>
+                  </div> <!--end of card-->
+              </a>
+            </div> <!--end of card container-->
+            <div class="col-md-4">
+              <a href="{{ route('teachers') }}">
+                  <div style="width: 18rem;">
+                    <div class="card card-stats mb-4 mb-lg-0 card-teachers card-interactions">
+                      <div class="card-body">
+                        <div class="row">
+                          <div class="col">
+                            <h5 class="card-title text-uppercase text-muted mb-0">Teachers</h5>
+                            <span class="h2 font-weight-bold mb-0">{{ $counts[4] }}</span>
+                          </div>
+                          <div class="col-auto">
+                            <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                              <i class="fas fa-chart-bar"></i>
+                            </div>
+                          </div>
+                        </div>
+                        <p class="mt-3 mb-0 text-muted text-sm">
+                          <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+                          <span class="text-nowrap">Since last month</span>
+                        </p>
+                      </div>
+                    </div>
+                  </div> <!--end of card-->
+                </a>
+              </div> <!--end of card container-->
+              <div class="col-md-4">
+                <a href="{{ route('students') }}">
+                  <div style="width: 18rem;">
+                    <div class="card card-stats mb-4 mb-lg-0 card-student card-interactions">
+                      <div class="card-body">
+                        <div class="row">
+                          <div class="col">
+                            <h5 class="card-title text-uppercase text-muted mb-0">Students</h5>
+                            <span class="h2 font-weight-bold mb-0">{{ $counts[5] }}</span>
+                          </div>
+                          <div class="col-auto">
+                            <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                              <i class="fas fa-chart-bar"></i>
+                            </div>
+                          </div>
+                        </div>
+                        <p class="mt-3 mb-0 text-muted text-sm">
+                          <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+                          <span class="text-nowrap">Since last month</span>
+                        </p>
+                      </div>
+                    </div>
+                    </div> <!--end of card-->
+                </a>
+              </div> <!--end of card container-->
+          </div>
     
           <!-- Three columns of text below the carousel -->
           <div class="row" style="margin-left: 20px; margin-top:30px;">
-            <div class="container" style=" text-align: center;">
-                <h3 class="display-5" style="color: #001f9c ; " >TOP 3 STUDENTS WEEK 1</h3>
+            <div class="container partition" style=" text-align: center;">
+                <h3 class="display-5 partition-title" >TOP 3 STUDENTS WEEK 1</h3>
             </div>
             
             @foreach ($topStudents as $student)
@@ -47,81 +200,79 @@
             </div><!-- /.col-lg-4 -->
             @endforeach
           </div><!-- /.row -->
-          <div class="container" style="text-align:center; margin-top: 50px;">
-              <h3 class="display-5" style="color: #001f9c ; " >NATURAL SCIENCES MATERIALS</h3>
+          <div class="container partition" style="text-align:center; margin-top: 50px;">
+              <h3 class="display-5 partition-title " >NATURAL SCIENCES MATERIALS</h3>
           </div>
-          <div class="row" style="margin-top:40px;">
-              <div class="col-md-2" style="margin-left:30px; text-align:center;">
-                <div class="thumbnail">
-                  <a href="{{ route('subject', 'physics') }}">
-                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Image1" style="width:100%">
-                    <div class="caption">
-                      <p>PHYSICS</p>
-                    </div>
-                  </a>
-                </div>
-              </div>
-              <div class="col-md-2" style="margin-left:30px; text-align:center;">
-                <div class="thumbnail">
-                  <a href="{{ route('subject', 'chemistry') }}">
-                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Image2" style="width:100%">
-                    <div class="caption">
-                      <p>CHEMISTRY</p>
-                    </div>
-                  </a>
-                </div>
-              </div>
-              <div class="col-md-2" style="margin-left:30px; text-align:center;">
-                <div class="thumbnail">
-                  <a href="{{ route('subject', 'maths') }}">
-                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Image3" style="width:100%">
-                    <div class="caption">
-                      <p>MATHEMATICS</p>
-                    </div>
-                  </a>
-                </div>
-              </div>
-              <div class="col-md-2" style="margin-left:30px; text-align:center;" >
-                  <div class="thumbnail">
-                    <a href="{{ route('subject', 'biology') }}">
-                      <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Image3" style="width:100%">
-                      <div class="caption">
-                        <p>BIOLOGY</p>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-                  <div class="col-md-2" style="margin-left:30px; text-align:center;">
-                      <div class="thumbnail">
-                        <a href="{{ route('subject', 'ict') }}">
-                          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Image3" style="width:100%">
-                          <div class="caption">
-                            <p>ICT</p>
-                          </div>
-                        </a>
-                      </div>
-                    </div>
-                    <div class="col-md-2" style="margin-left:30px; text-align:center;">
-                        <div class="thumbnail">
-                          <a href="{{ route('subject', 'technical') }}">
-                            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Image3" style="width:100%">
-                            <div class="caption">
-                              <p>TECHNICAL EDUCATION</p>
-                            </div>
-                          </a>
-                        </div>
-                      </div>
+          <div class="row justify-content-center" style="margin-top:40px;">
+            
+
+<div class="card" style="width: 18rem;">
+    <a href="{{ route('subject', 'physics') }}">
+  <img class="card-img-top" src="{{ asset('/icons/physics.jpg') }}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Physics</h5>
+    <p class="card-text">Itakusaidia katika Tanzania ya viwanda.</p>
+  </div>
+</a>
+</div>
+  
+  
+<div class="card" style="width: 18rem;">
+    <a href="{{ route('subject', 'chemistry') }}">
+    <img class="card-img-top" src="{{ asset('/icons/chemistry.png') }}" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">Chemistry</h5>
+      <p class="card-text">Itakusaidia katika Tanzania ya viwanda.</p>
+    </div>
+  </a>
+  </div>
+  <div class="card" style="width: 18rem;">
+      <a href="{{ route('subject', 'mathematics') }}">
+    <img class="card-img-top" src="{{ asset('/icons/math.jpg') }}" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">Mathematics</h5>
+      <p class="card-text">Itakusaidia katika Tanzania ya viwanda.</p>
+    </div>
+  </a>
+  </div>
+  <div class="card" style="width: 18rem;">
+      <a href="{{ route('subject', 'biology') }}">
+      <img class="card-img-top" src="{{ asset('/icons/biology.jpg') }}" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Biology</h5>
+        <p class="card-text">Itakusaidia katika Tanzania ya viwanda.</p>
+      </div>
+    </a>
+    </div>
+    <div class="card" style="width: 18rem;">
+        <a href="{{ route('subject', 'ict') }}">
+      <img class="card-img-top" src="{{ asset('/icons/ict.png') }}" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">ICT</h5>
+        <p class="card-text">Itakusaidia katika Tanzania ya viwanda.</p>
+      </div>
+    </a>
+    </div>
+    <div class="card" style="width: 18rem;">
+        <a href="{{ route('subject', 'technical') }}">
+        <img class="card-img-top" src="{{ asset('/icons/ict.png') }}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Technical</h5>
+          <p class="card-text">Itakusaidia katika Tanzania ya viwanda.</p>
+        </div>
+      </a>
+      </div>
             </div>
     
     
-            <div class="container" style="text-align:center; margin-top: 50px;">
-                <h3 class="display-5" style="color: #001f9c ; " >SOCIAL SCIENCES MATERIALS</h3>
+            <div class="container partition" style="text-align:center; margin-top: 50px;">
+                <h3 class="display-5 partition-title" >SOCIAL SCIENCES MATERIALS</h3>
             </div>
             <div class="row" style="margin-top:40px;">
                 <div class="col-md-2" style="margin-left:30px; text-align:center;">
                   <div class="thumbnail">
                     <a href="{{ route('subject', 'geography') }}">
-                      <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Image1" style="width:100%">
+                      <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Image1">
                       <div class="caption">
                         <p>GEOGRAPHY</p>
                       </div>
@@ -131,7 +282,7 @@
                 <div class="col-md-2" style="margin-left:30px; text-align:center;">
                   <div class="thumbnail">
                     <a href="{{ route('subject', 'history') }}">
-                      <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Image2" style="width:100%">
+                      <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Image2">
                       <div class="caption">
                         <p>HISTORY</p>
                       </div>
@@ -141,7 +292,7 @@
                 <div class="col-md-2" style="margin-left:30px; text-align:center;">
                   <div class="thumbnail">
                     <a href="{{ route('subject', 'civics') }}">
-                      <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Image3" style="width:100%">
+                      <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Image3">
                       <div class="caption">
                         <p>CIVICS</p>
                       </div>
@@ -151,7 +302,7 @@
                 <div class="col-md-2" style="margin-left:30px; text-align:center;" >
                     <div class="thumbnail">
                       <a href="{{ route('subject', 'economcs') }}">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Image3" style="width:100%">
+                        <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Image3">
                         <div class="caption">
                           <p>ECONOMICS</p>
                         </div>
@@ -161,7 +312,7 @@
                   <div class="col-md-2" style="margin-left:30px; text-align:center;">
                       <div class="thumbnail">
                         <a href="{{ route('subject', 'agriculture') }}">
-                          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Image3" style="width:100%">
+                          <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Image3">
                           <div class="caption">
                             <p>AGRICULTURE</p>
                           </div>
@@ -171,14 +322,14 @@
                     
               </div>
     
-              <div class="container" style="text-align:center; margin-top: 50px;">
-                  <h3 class="display-5" style="color: #001f9c ; " >AESTHETICS MATERIALS</h3>
+              <div class="container partition" style="text-align:center; margin-top: 50px;">
+                  <h3 class="display-5 partition-title" >AESTHETICS MATERIALS</h3>
               </div>
               <div class="row" style="margin-top:40px;">
                   <div class="col-md-2" style="margin-left:30px; text-align:center;">
                     <div class="thumbnail">
                       <a href="{{ route('subject', 'fine_arts') }}">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Image1" style="width:100%">
+                        <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Image1">
                         <div class="caption">
                           <p>FINE ARTS</p>
                         </div>
@@ -188,7 +339,7 @@
                   <div class="col-md-2" style="margin-left:30px; text-align:center;">
                     <div class="thumbnail">
                       <a href="{{ route('subject', 'theatre_arts') }}">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Image2" style="width:100%">
+                        <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Image2">
                         <div class="caption">
                           <p>THEATER ARTS</p>
                         </div>
@@ -198,7 +349,7 @@
                   <div class="col-md-2" style="margin-left:30px; text-align:center;">
                     <div class="thumbnail">
                       <a href="{{ route('subject', 'physical_education') }}">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Image3" style="width:100%">
+                        <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Image3">
                         <div class="caption">
                           <p>PHYSICAL EDUCATION MATERIALS</p>
                         </div>
@@ -208,7 +359,7 @@
                   <div class="col-md-2" style="margin-left:30px; text-align:center;" >
                       <div class="thumbnail">
                         <a href="{{ route('subject', 'music') }}">
-                          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Image3" style="width:100%">
+                          <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Image3">
                           <div class="caption">
                             <p>MUSIC</p>
                           </div>
@@ -217,14 +368,14 @@
                     </div>
                 </div>
     
-                <div class="container" style="text-align:center; margin-top: 50px; width:50%;">
-                    <h3 class="display-5" style="color: #001f9c ; " >BUSINESS STUDIES & RELIGION MATERIALS</h3>
+                <div class="container partition" style="text-align:center; margin-top: 50px;">
+                    <h3 class="display-5 partition-title" >BUSINESS STUDIES & RELIGION MATERIALS</h3>
                 </div>
                 <div class="row" style="margin-top:40px; ">
                     <div class="col-md-2" style="margin-left:30px; ">
                       <div class="thumbnail">
                         <a href="{{ route('subject', 'book_keeping') }}">
-                          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Image1" style="width:100%">
+                          <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Image1">
                           <div class="caption">
                             <p>BOOK-KEEPING</p>
                           </div>
@@ -234,7 +385,7 @@
                     <div class="col-md-2" style="margin-left:30px; text-align:center;">
                       <div class="thumbnail">
                         <a href="{{ route('subject', 'commerce') }}">
-                          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Image2" style="width:100%">
+                          <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Image2">
                           <div class="caption">
                             <p>COMMERCE</p>
                           </div>
@@ -244,7 +395,7 @@
                     <div class="col-md-2" style="margin-left:30px; text-align:center;">
                         <div class="thumbnail">
                           <a href="{{ route('subject', 'bible_studies') }}">
-                            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Image1" style="width:100%">
+                            <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Image1">
                             <div class="caption">
                               <p>BIBLE STUDIES</p>
                             </div>
@@ -254,7 +405,7 @@
                       <div class="col-md-2" style="margin-left:30px; text-align:center;">
                         <div class="thumbnail">
                           <a href="{{ route('subject', 'islamic_knowledge') }}">
-                            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Image2" style="width:100%">
+                            <img class="card-img-top" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Image2">
                             <div class="caption">
                               <p>ISLAMIC KNOWLEDGE</p>
                             </div>
@@ -262,8 +413,8 @@
                         </div>
                       </div>
                     </div>
-      <div class="container" style="text-align:center; margin-top:40px;">
-              <h3 class="display-5" style="color: #001f9c ; ">Subscribe Now</h3>
+      <div class="container partition" style="text-align:center; margin-top:40px;">
+              <h3 class="display-5 partition-title">Subscribe Now</h3>
               <p class="lead">Subscribe our packages now to get different experiences with your education career.</p>
        </div>
         
@@ -289,7 +440,6 @@
               </div>
             </div>
     </div>
+  </div>
 </div>
-
-
 @endsection

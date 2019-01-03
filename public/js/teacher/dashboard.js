@@ -227,3 +227,26 @@ $('#pointsfilterform').on('submit', function(e){
         }
     });
 });
+
+$('.btnShowNotification').click(function(e){
+    e.preventDefault();
+    var id = $(this).val();
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    
+    $.ajax({
+        url: '/read/message',
+        method: 'post',
+        data: {id: id},
+        success: function(data){
+            console.log(data);  
+        },
+        error:function(error){
+            console.log(error);
+        }
+    });
+});

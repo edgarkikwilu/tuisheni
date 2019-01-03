@@ -7,6 +7,8 @@ use App\Exam;
 use App\Subject;
 use Carbon\carbon;
 
+use Auth;
+
 class ExamController extends Controller
 {
     public function recomended_exam(){
@@ -19,7 +21,11 @@ class ExamController extends Controller
         $recommended = Exam::with('subject')->with('user')->with('examType')->where('original',true)->orderBy('id','desc')->get();
         $other = Exam::with('subject')->with('examType')->with('user')->where('original',false)->orderBy('id','desc')->get();
         $exams = collect([]);
-        return view('examination/examination')->withRecommended($recommended)->withOther($other)->withSubjects($subjects)->withShow($show)->withExams($exams);
+        $messages = collect([]);
+        if (Auth::user() != null) {
+            $messages = Message::where('recipient_id',Auth::user()->id)->where('read',false)->get();
+        }
+        return view('examination/examination')->withRecommended($recommended)->withOther($other)->withSubjects($subjects)->withShow($show)->withExams($exams)->withMessages($messages);
     }
 
     public function filterExams(Request $request){
@@ -54,12 +60,24 @@ class ExamController extends Controller
             });
         }
 
-        return view('examination.examination')->withexams($exams->get())->withSubjects($subjects)->withShow($show);
+        $messages = collect([]);
+        if (Auth::user() != null) {
+            $messages = Message::where('recipient_id',Auth::user()->id)->where('read',false)->get();
+        }
+
+        return view('examination.examination')->withexams($exams->get())->withSubjects($subjects)->withShow($show)->withMessages($messages);
     }
     public function single_exam ($id){
         $exam = Exam::with('user')->with('attachements')->with('examType')->where('id',$id)->first();
         $exam->increment('views');
-        return view ('examination/single_exam')->withExam($exam);
+        $messages = collect([]);
+        if (Auth::user() != null) {
+            $messages = Message::where('recipient_id',Auth::user()->id)->where('read',false)->get();
+        }
+
+        $subjects = Subject::all();
+
+        return view ('examination/single_exam')->withExam($exam)->withMessages($messages)->withSubjects($subjects);
     }
 
     public function show($filename){

@@ -44,7 +44,8 @@
       <!-- Brand -->
       <a class="navbar-brand pt-0 brand" href="{{ route('student.studentdash') }}">
         {{-- <img src="./assets/img/brand/blue.png" class="navbar-brand-img" alt="..."> --}}
-        SchoolBata
+        {{-- SchoolBata --}}
+        <img src="{{ asset('/images/schoolbata.png') }}" width="140" height="130" alt="" srcset="">
       </a>
       <!-- User -->
       <ul class="nav align-items-center d-md-none">
@@ -53,9 +54,13 @@
             <i class="ni ni-bell-55"></i>
           </a>
           <div class="dropdown-menu dropdown-menu-arrow notifications dropdown-menu-right" aria-labelledby="navbar-default_dropdown_1">
-            <a class="dropdown-item" href="#">Notification 1</a>
-            <a class="dropdown-item" href="#">Notification 2</a>
-            <a class="dropdown-item" href="#">Notification 3</a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              @foreach ($messages as $message)
+                <button type="button" class="btn btn-block btnShowNotification" value="{{ $message->id }}" data-container="body" data-toggle="popover" data-color="default" data-placement="bottom" data-content="{{ $message->description }}">
+                    {{ $message->title }}
+                  </button>
+              @endforeach
+            </div>
           </div>
         </li>
         <li class="nav-item dropdown">

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Note;
 use App\Subject;
 
+use Auth;
+
 class ExploreController extends Controller
 {
     public function index(){
@@ -13,8 +15,12 @@ class ExploreController extends Controller
         $notesOg = Note::with('topic')->with('subtopic')->with('user')->where('original',true)->orderBy('votes','desc')->limit(8)->get();
         $notes = Note::with('topic')->with('subtopic')->with('user')->where('original',false)->orderBy('id','desc')->get();
         $subjects = Subject::all();
+        $messages = collect([]);
+        if (Auth::user() != null) {
+            $messages = Message::where('recipient_id',Auth::user()->id)->where('read',false)->get();
+        }
 
-    return view('explore')->withNotesOg($notesOg)->withNotes($notes)->withSubjects($subjects)->withShow($show);
+    return view('explore')->withNotesOg($notesOg)->withNotes($notes)->withSubjects($subjects)->withShow($show)->withMessages($messages);
     }
 
     public function filterNotes(Request $request){
@@ -22,6 +28,10 @@ class ExploreController extends Controller
         $notes = new Note();
         $notes = $notes->newQuery();
         $subjects = Subject::all();
+        $messages = collect([]);
+        if (Auth::user() != null) {
+            $messages = Message::where('recipient_id',Auth::user()->id)->where('read',false)->get();
+        }
 
         if ($request->has('subject') && $request->subject != "") {
             $notes->whereHas('topic', function($query) use ($request){
@@ -46,6 +56,6 @@ class ExploreController extends Controller
             });
         }
 
-    return view('explore')->withNotes($notes->get())->withSubjects($subjects)->withShow($show);
+    return view('explore')->withNotes($notes->get())->withSubjects($subjects)->withShow($show)->withMessages($messages);
 }
 }

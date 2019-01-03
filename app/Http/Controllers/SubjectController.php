@@ -33,6 +33,12 @@ class SubjectController extends Controller
         $week = 1;
         $topics = Topic::with('subTopics')->where('form',$class)->orderBy('priority','asc')->get();
         $firstTopic = $topics->first();
+        $subjects = Subject::all();
+
+        $messages = collect([]);
+        if (Auth::user() != null) {
+            $messages = Message::where('recipient_id',Auth::user()->id)->where('read',false)->get();
+        }
         
         if ($firstTopic != null) {
         $recommendedNotes = Note::where('topic_id',$firstTopic->id)->where('original', true)->get();
@@ -40,9 +46,9 @@ class SubjectController extends Controller
         $topStudents = Report::where('week',$week)->orderBy('score','desc')->take(3)->get();
         $votednotes = Note::where('week', $week)->where('original', true)->orderBy('votes','desc')->take(3)->get();
         return view('class/class')->withSubject($subject)->withClass($class)->withTopStudents($topStudents)
-                ->withTopics($topics->take(7))->withRecommendedNotes($recommendedNotes)->withMostVotedNotes($mostVotedNotes);
+                ->withTopics($topics->take(7))->withRecommendedNotes($recommendedNotes)->withClass($class)->withMostVotedNotes($mostVotedNotes)->withSubjects($subjects)->withMessages($messages);
         }else{
-            Session::flash('success','Form '.$class.' notes not found');
+            Session::flash('message','Form '.$class.' notes not found');
             return redirect()->back();
         }
     }
@@ -51,10 +57,16 @@ class SubjectController extends Controller
         $notes = Note::with('attachements')->where('id',$id)->first();
         //$note = Note::select('user_id')->where('id',$id)->get()->first();
         $notes->increment('views');
+        $subjects = Subject::all();
+
+        $messages = collect([]);
+        if (Auth::user() != null) {
+            $messages = Message::where('recipient_id',Auth::user()->id)->where('read',false)->get();
+        }
         $followers = Follow::where('follow_id',$notes->user_id)->count();
         $follower = false;
         $follower = $this->checkIfFollowedByUser($notes->user_id);
-        return view('single')->withNotes($notes)->withFollowers($followers)->withFollower($follower);
+        return view('single')->withNotes($notes)->withFollowers($followers)->withFollower($follower)->withSubjects($subjects)->withMessages($messages);
     }
 
     public function checkIfFollowedByUser($id){
@@ -73,72 +85,7 @@ class SubjectController extends Controller
         return view('assesment');
     }
 
-    /*
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Subject  $subject
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Subject $subject)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Subject  $subject
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Subject $subject)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Subject  $subject
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Subject $subject)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Subject  $subject
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Subject $subject)
-    {
-        //
-    }
-
+    
     public function recomended_subject(){
         return view('recomended_subject');
     }
@@ -147,5 +94,27 @@ class SubjectController extends Controller
     }
     public function class_topic(){
         return view('class/class_topic');
+    }
+
+    public function topicNotes($subject, $class, $topic){
+        //$subject_id = Subject::where('name',$subject)->first()->id;
+        $week = 1;
+    
+        $topics = Topic::with('subTopics')->where('form',$class)->orderBy('priority','asc')->get();
+
+        $subjects = Subject::all();
+
+        $messages = collect([]);
+        if (Auth::user() != null) {
+            $messages = Message::where('recipient_id',Auth::user()->id)->where('read',false)->get();
+        }
+
+        $recommendedNotes = Note::where('topic_id',$topic)->where('form',$class)->where('original', true)->get();
+        $mostVotedNotes = Note::where('topic_id',$topic)->where('form',$class)->orderBy('votes','desc')->where('original', false)->get();
+        $topStudents = Report::where('week',$week)->orderBy('score','desc')->take(3)->get();
+        $votednotes = Note::where('week', $week)->where('original', true)->orderBy('votes','desc')->take(3)->get();
+
+        return view('class/class')->withSubject($subject)->withClass($class)->withTopStudents($topStudents)
+        ->withTopics($topics->take(7))->withRecommendedNotes($recommendedNotes)->withClass($class)->withMostVotedNotes($mostVotedNotes)->withSubjects($subjects)->withMessages($messages);
     }
 }

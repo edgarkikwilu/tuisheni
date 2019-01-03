@@ -10,9 +10,12 @@ use App\User;
 use App\Follow;
 use App\Note;
 use App\Exam;
+use App\Quiz;
 use App\Subject;
 use App\TopStudent;
 use App\Report;
+use App\Message;
+
 use Carbon\Carbon;
 use DB;
 use Auth;
@@ -32,28 +35,35 @@ class IndexController extends Controller
         $averegaScore = 0;
         $iterations = 0;
 
+        $notes = Note::all()->count();
+        $exams = Exam::all()->count();
+        $results = Report::all()->count();
+        $quizs = Quiz::all()->count();
+        $teachers = User::where('type','teacher')->count();
+        $students = User::where('type','student')->count();
+
+        $counts = collect([]);
+        $counts->push($notes);
+        $counts->push($quizs);
+        $counts->push($exams);
+        $counts->push($results);
+        $counts->push($teachers);
+        $counts->push($students);
+
         $carousels = Carousel::all();
+        $subjects = Subject::all();
         $packages = Package::with('packageSpecs')->get();
-        //$topIds = DB::table('top_students')->where('week',$week)->pluck('user_id')->distinct()->get();
-        // $topIds = TopStudent::select('user_id')->where('week',23)->orderBy('score')->distinct()->get();
+        $messages = collect([]);
+        if (Auth::user() != null) {
+            $messages = Message::where('recipient_id',Auth::user()->id)->where('read',false)->get();
+        }
         $topStudents = TopStudent::where('week',1)->where('subject','Overall')->orderBy('score','desc')->limit(3)->get();
 
         $list = collect([]);
         $sortedlist = collect([]);
 
-        // foreach ($topIds as $id) {
-        //     $averegaScore = DB::table('top_students')->where('week',23)->where('user_id',$id)->avg('score');
-        //     $top = new TopStudent();
-        //     $top->user_id = $id;
-        //     $top->score = $averegaScore;
-        //     dd($id);
-        //     $list->push($top);
-        // }
-
-        //$sortedlist = $list->sortBy('score')->take(3);
-        //dd($topStudents);
         return view('welcome')->withCarousels($carousels)->withPackages($packages)
-        ->withTopStudents($topStudents);
+        ->withTopStudents($topStudents)->withMessages($messages)->withSubjects($subjects)->withCounts($counts);
     }
     public function explore(){
         return view('explore');
@@ -69,22 +79,32 @@ class IndexController extends Controller
         $topStudents = TopStudent::where('week',1)->where('subject',$subject)
                         ->orderBy('score','desc')->limit(3)->get();
         $recommended = Note::where('original',true)->whereHas('topic.subject', function($query)  use ($subject_id){
-            $query->where('id', 8);
+            $query->where('id', $subject_id);
         })->get();
         $other = Note::where('original',true)->whereHas('topic.subject', function($query)  use ($subject_id){
-            $query->where('id', 8);
+            $query->where('id', $subject_id);
         })->get();
+        $subjects = Subject::all();
+        $messages = collect([]);
+        if (Auth::user() != null) {
+            $messages = Message::where('recipient_id',Auth::user()->id)->where('read',false)->get();
+        }
         $exams = Exam::with('user')->where('subject_id', $subject_id)->get();
         $packages = Package::with('packageSpecs')->get();
         $teachers = User::where('type','teacher')->orderBy('rate','desc')->limit(4)->get();
         return view('subject')->withSubject($subject)->withTopStudents($topStudents)
-            ->withRecommended($recommended)->withOther($other)->withTeachers($teachers)->withExams($exams)->withPackages($packages);
+            ->withRecommended($recommended)->withOther($other)->withTeachers($teachers)->withExams($exams)->withPackages($packages)->withMessages($messages)->withSubjects($subjects);
     }
     public function author($id){
         $user = User::with('notes')->where('id',$id)->get()->first();
+        $subjects = Subject::all();
         $following = Follow::where('user_id',$id)->count();
         $followers = Follow::where('follow_id',$id)->count();
-        return view('author')->withUser($user)->withFollowing($following)->withFollowers($followers);
+        $messages = collect([]);
+        if (Auth::user() != null) {
+            $messages = Message::where('recipient_id',Auth::user()->id)->where('read',false)->get();
+        }
+        return view('author')->withUser($user)->withFollowing($following)->withFollowers($followers)->withMessages($messages)->withSubjects($subjects);
     }
 
     public function follow($id){
@@ -113,16 +133,6 @@ class IndexController extends Controller
         return false;
     }
 
-    public function editprofile(){
-        return view('editprofile');
-    }
-    
-    public function single(){
-        return view('single');
-    }
-    public function teacherdash(){
-        return view('teacherdash');
-    }
     public function results(){
         // public function getAllResults(){
             $ids = Report::select('user_id')->whereMonth('created_at',date('m'))->distinct()->pluck('user_id');
@@ -131,6 +141,12 @@ class IndexController extends Controller
            $results = collect([]);
            $avgs = collect([]);
            $users = collect([]);
+           $messages = collect([]);
+
+            if (Auth::user() != null) {
+            $messages = Message::where('recipient_id',Auth::user()->id)->where('read',false)->get();
+            }
+
            foreach($ids as $id){
                $user = User::select('firstname','lastname')->where('id',$id)->get();
                $users->push($user);
@@ -151,8 +167,7 @@ class IndexController extends Controller
                }
                $results->push($scores);
            }
-           return view('results')->withResults($results)->withSubjects($subjects)->withAverages($avgs)->withUsers($users);
-       
+           return view('results')->withResults($results)->withSubjects($subjects)->withAverages($avgs)->withUsers($users)->withMessages($messages);
     }
     
 }

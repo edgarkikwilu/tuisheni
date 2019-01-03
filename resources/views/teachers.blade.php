@@ -1,7 +1,6 @@
-@extends('layouts.index')
+@extends('layouts.guest')
 @section('content')
-<div class="row">
-@include('sidebar_subject')
+<div class="content">
 <div class="col-md-9">
    
 <div class="container" style=" margin-top: 40px;">
@@ -47,12 +46,12 @@
                 <div class="container">
                     <label><a href="{{ route('author',$teacher->id) }}">{{ $teacher->username }}</a></label> <br>
                     <small class="text-muted">{{ $teacher->school }}</small><br>
-                    <p><small class="text-muted">{{ $teacher->bio }}</small></p>
+                    <p><small class="text-muted">{{ substr(strip_tags($teacher->bio),0,90) }}{{ strlen($teacher->bio) > 90?"...":"" }}</small></p>
                     <div class="btn-group" role="group" aria-label="Basic example">
                         {{-- <a href="{{ route('follow.teacher',$teacher->id) }}" class="btn btn-sm btn-primary">Follow</a> --}}
                         <button class="btn btn-sm btn-primary btnfollowteacher" value="{{ $teacher->id }}">Follow</button>
                         <!-- Trigger the modal with a button -->
-                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal{{ $teacher->id }}">Message</button>
+                        <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#myModal{{ $teacher->id }}">Message</button>
                     </div>
                     {{-- <small><a class="nav-link" href="#">30 Friends</a></small> --}}
                 </div>

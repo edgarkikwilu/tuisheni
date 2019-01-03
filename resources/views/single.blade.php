@@ -1,7 +1,6 @@
-@extends('layouts.index')
+@extends('layouts.guest')
 @section('content')
-<div class="row">
-    @include('sidebar_subject')
+<div class="content">
     <div class="col-md-9">
    
 <div class="container" style="margin-top: 10px; ">
@@ -22,14 +21,14 @@
                             <div class="btn-group" role="group" aria-label="Basic example">
                                 @if (!$follower)
                                 {{-- <a href="{{ route('follow',$notes->user->id) }}" class="btn btn-primary follow" id="follow">Follow</a> --}}
-                                <button id="btnfollow" class="btn btn-primary" value="{{ $notes->user->id }}">Follow</button>
+                                <button id="btnfollow" class="btn btn-sm btn-block btn-primary" value="{{ $notes->user->id }}">Follow</button>
                                 @else
-                                    <button class="btn btn-block btn-light following">Following</button>
+                                    <button class="btn btn-sm btn-block btn-light following">Following</button>
                                 @endif
                                 <!-- Trigger the modal with a button -->
-                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Message</button>
+                            <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#myModal">Message</button>
                             </div>
-                            <small><a class="nav-link" href="#">{{ $followers }} Friends/Views</a></small>
+                            <small><a class="nav-link" href="#">{{ $notes->views }} Views</a></small>
                         </div>
                     </div>
                 </div>
@@ -48,7 +47,7 @@
                         </div>
                         <div class="col-md-2">
                             <!-- Trigger the modal with a button -->
-                            <button type="button" class="btn btn-block btn-light" data-toggle="modal" data-target="#reportModal">Report</button>
+                            <button type="button" class="btn btn-block btn-sm btn-danger" data-toggle="modal" data-target="#reportModal">Report</button>
                         </div>
                     </div>
                     <div class="row">

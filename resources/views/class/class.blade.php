@@ -1,13 +1,34 @@
-@extends('layouts.index')
+@extends('layouts.guest')
 @section('content')
 
 <div class="row">
-@include('class/class_topic')
+
+<div class="col-md-12">
+        @if(Session::has('message'))
+        <p class="alert alert-danger">{{ Session::get('message') }}</p>
+        @endif
+</div>
+
     <div class="col-md-9">
                 <div class="container" style="text-align:center; margin-top: 40px;">
-                                <h3 class="display-5" style="color: #001f9c ; " >PHYSICS FORM ONE</h3>  
+                                
+                        <h3 class="display-5" style="color: #001f9c ; " >{{ strtoupper($subject) }} FORM {{ $class }}</h3>  
                         </div>
                         @include('class/classnav')
+                        <div class="row text-center topics">
+                        <div class="col-md-12">
+                        <span>Topics</span>
+                        <div class="row">
+                        @foreach ($topics as $topic)
+                                <div class="col-md-3">
+                                <a href="{{ route('class.topic.notes',[$subject,$class,$topic->id]) }}" class="nav-link active topic">{{ $topic->name }}</a>
+                                </div>
+                        @endforeach
+                        </div>
+                                    
+                        </div>
+                        </div>
+                        
                 
                         @if ($recommendedNotes->count() != 0)
                         <div class="container" style="text-align:left; margin-top: 40px;">
@@ -29,7 +50,7 @@
                                                         <p style="margin-top:10px;"><small class="text-muted">Posted: {{ $note->created_at->diffForHumans() }}</small></p>
                                                         
                                                         <small>{{ $note->user->username }}, {{ $note->user->school }}</small>
-                                                        <button type="button" class="btn btn-sm btn-secondary" style="margin-top:10px;">View & Download</button>
+                                                        <a href="{{ route('single', $note->id) }}" class="btn btn-sm btn-secondary" style="margin-top:10px;">View & Download</a>
                                                         <small><a class="nav-link" href="#">30 Views</a></small>
                                                 </div>
                                         </div>
@@ -62,7 +83,7 @@
                                                 <p style="margin-top:10px;"><small class="text-muted">Posted: {{ $note->created_at->diffForHumans() }}</small></p>
                                                 
                                                         <small>{{ $note->user->username }}, {{ $note->user->school }}</small>
-                                                <button type="button" class="btn btn-sm btn-secondary" style="margin-top:10px;">View & Download</button>
+                                                        <a href="{{ route('single', $note->id) }}" class="btn btn-sm btn-secondary" style="margin-top:10px;">View & Download</a>
                                                 <small><a class="nav-link" href="#">{{ $note->views }} Views</a></small>
                                         </div>
                                 </div>

@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Quiz;
 use App\Subject;
+use App\Log;
 use Illuminate\Http\Request;
+
+use Auth;
+use DB;
 
 class QuizController extends Controller
 {
@@ -15,7 +19,7 @@ class QuizController extends Controller
      */
     public function index()
     {
-        $quizzes = Quiz::all();
+        $quizzes = Quiz::paginate(10);
         $subjects = Subject::all();
 
         $stats = collect([]);
@@ -34,8 +38,12 @@ class QuizController extends Controller
             $stats->push($answers);
         }
        // dd($stats);    
+       $messages = collect([]);
+        if (Auth::user() != null) {
+            $messages = Message::where('recipient_id',Auth::user()->id)->where('read',false)->get();
+        }
 
-        return view('quiz/quiz')->withSubjects($subjects)->withQuizzes($quizzes)->withStats($stats);
+        return view('quiz/quiz')->withSubjects($subjects)->withQuizzes($quizzes)->withStats($stats)->withMessages($messages);
     }
 
     public function getSingleQuiz(){
@@ -73,7 +81,12 @@ class QuizController extends Controller
             });
         }
 
-        return view('quiz')->withquizzes($quizzes->get())->withSubjects($subjects);
+        $messages = collect([]);
+        if (Auth::user() != null) {
+            $messages = Message::where('recipient_id',Auth::user()->id)->where('read',false)->get();
+        }
+
+        return view('quiz')->withquizzes($quizzes->get())->withSubjects($subjects)->withMessages($messages);
     }
 
     public function attempt($id)
@@ -83,40 +96,19 @@ class QuizController extends Controller
         $correctAnswers = collect([]);
         $isCorrect = false;
 
-        if ($this->isLogPresent($id)) {
-            $points = DB::table('variables')->select('int_value')->where('name','quiz_post_points')->first();
-            Auth::user()->increment('points',$points->int_value);
+        $subjects = Subject::all();
 
-            $log = new Log();
-            $log->user_id = Auth::user()->id;
-            $log->ip = "";
-            $log->location = "Tanzania";
-            $log->type = "Quiz";
-            $log->description = "Quiz Attempt".$id;
-            $log->points = $points->int_value;
-            $log->save();
-
-            $teacher_id = Quiz::findOrFail($id)->user_id;
-            $teacher_points_log = new Log();
-            $teacher_points_log->user_id = $teacher_id;
-            $teacher_points_log->ip = "";
-            $teacher_points_log->location = "Tanzania";
-            $teacher_points_log->type = "Quiz";
-            $teacher_points_log->description = "Quiz Attempt Points";
-            $teacher_points_log->points = $points->int_value;
-            $teacher_points_log->save();
+        $messages = collect([]);
+        if (Auth::user() != null) {
+            $messages = Message::where('recipient_id',Auth::user()->id)->where('read',false)->get();
         }
 
         $quiz = Quiz::with('questions')->with('user')->where('id',$id)->first();
-        $quiz->increment('attempts');
-        return view('quiz/singlequiz')->withQuiz($quiz)->withIsAnswerResponse($isAnswerResponse)->withYourAnswers($yourAnswers)->withCorrectAnswers($correctAnswers)->withIsCorrect($isCorrect);
+        $quiz->increment('views');
+        return view('quiz/singlequiz')->withQuiz($quiz)->withIsAnswerResponse($isAnswerResponse)->withYourAnswers($yourAnswers)->withCorrectAnswers($correctAnswers)->withIsCorrect($isCorrect)->withMessages($messages)->withSubjects($subjects);
     }
 
-    public function isLogPresent($id){
-        $log = Log::where('user_id',Auth::user()->id)->where('description', 'Quiz Attempt'.$id)->count();
-        return $log>0?true:false;
-    }
-
+    
     /**
      * Store a newly created resource in storage.
      *

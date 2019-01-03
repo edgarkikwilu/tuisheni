@@ -1,0 +1,143 @@
+.brand-name{
+    color: black;
+    margin: 10px;
+}
+.main-content{
+    left:20%;
+}
+.partition{
+    margin-top: 25px;
+    padding: 20px 10px;
+    font-family: sans-serif;
+    font-weight: 800;
+    background-color: teal;
+    color: whitesmoke;
+    box-shadow: burlywood 4px 3px 2px 1px;
+}
+#navbar-main{
+    opacity: 6;
+    
+}
+.brand{
+    font-family: cursive;
+}
+.slides{
+    max-height: 350px;
+}
+.partition-title{
+    color:#fff;
+}
+.see-more{
+    align-items: center;
+}
+.form-links{
+    padding:10px 16px 8px;
+    margin-right: 4px;
+}
+
+.card-container{
+    margin-left: 10px;
+    margin-top: 10px;
+}
+.card-student{
+    background-color: green;
+    margin-top: 10px;
+}
+.card-teachers{
+    background-color: yellowgreen;
+    margin-top: 10px;
+}
+.card-explore{
+    background-color: red;
+    margin-top: 10px;
+}
+.card-results{
+    background-color: brown;
+    margin-top: 10px;
+}
+.card-exams{
+    background-color: chartreuse;
+    margin-top: 10px;
+}
+.card-quiz{
+    background-color: crimson;
+    margin-top: 10px;
+}
+.card-interactions:hover{
+    box-shadow: gray 5px 3px 5px 4px;
+}
+.card-img-top{
+    max-height: 150px;
+    margin: 10px;
+}
+.card-img-top:hover{
+    box-shadow: gray 5px 3px 5px 4px;
+}
+
+/***
+*Quiz Styles
+*/
+.quiz-qn{
+    border-style:inset;
+    border-width: 1px;
+    box-shadow: grey 3px 2px 2px 2px;
+    margin-bottom: 10px;
+}
+.question{
+    font-family: lato;
+    font-size: 1em;
+    font-weight: 400;
+}
+.quiz-choices{
+    
+}
+.quiz-choice{
+    list-style-type: none;
+    font-family: lato;
+    font-size: 1em;
+    font-weight: 400;
+}
+
+.classses{
+    
+}
+.topics{
+    padding: 10px;
+    border-style: solid;
+    border-color: thistle;
+    border-width: 1px;
+}
+.topic{
+    color: #000;
+    font-family: lato;
+    font-weight: 700;
+}
+
+
+@media screen and (max-width: 600px) {
+    .main-content{
+        left:0%;
+    }
+    .notifications{
+        position: relative;;
+    }
+    .user-dropdown{
+        position: relative;
+    }
+    .dropdown-item{
+        color:black;
+    }
+    .auth-links{
+        text-decoration: none;
+    }
+    .form-links{
+        padding:5px 6px 0px;
+        margin-right: 1px;
+    }
+    .exam-image{
+        display: none;
+    }
+    .card-img-top{
+        max-height: 150px;
+    }
+  }

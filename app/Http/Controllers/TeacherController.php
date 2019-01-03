@@ -49,12 +49,12 @@ class TeacherController extends Controller
             $notes, $exams, $quizzes, $tutorials
         ]);
         
-
+        $messages = Message::where('recipient_id',Auth::user()->id)->where('read',false)->get();
         $teacher = User::with('exams')->with('notes')->with('quizzes')->where('id',Auth::user()->id)->first();
         $followers = Follow::where('follow_id',Auth::user()->id)->count();
         $following = Follow::where('user_id',Auth::user()->id)->count();
 
-        return view('teacher/dashboard')->withTeacher($teacher)->withFollowers($followers)->withFollowing($following)->withCounts($counts);
+        return view('teacher/dashboard')->withTeacher($teacher)->withFollowers($followers)->withFollowing($following)->withCounts($counts)->withMessages($messages);
     }
     public function getPointsSumCollection(){
         $logs = Log::select('points','week')->where('user_id',Auth::user()->id)->whereMonth('created_at',date('m'))->get();
@@ -189,15 +189,22 @@ class TeacherController extends Controller
 
     public function teachers(){
         $teachers = User::where('type','teacher')->orderBy('id','desc')->get();
+        $messages = collect([]);
+
+        if (Auth::user() != null) {
+        $messages = Message::where('recipient_id',Auth::user()->id)->where('read',false)->get();
+        }
+        
         $subjects = Subject::all();
         //$followers = Follow::where('follow_id',$id)->count();
-        return view('teachers')->withTeachers($teachers)->withSubjects($subjects);
+        return view('teachers')->withTeachers($teachers)->withSubjects($subjects)->withMessages($messages);
     }
 
     public function filterTeachers(Request $request){
         $user = new User();
         $teachers = $user->newQuery();
         $subjects = Subject::all();
+        $messages = Message::where('recipient_id',Auth::user()->id)->where('read',false)->get();
 
         if ($request->has('username') && $request->username != "") {
             $teachers->where('username', 'like' ,'%'.$request->username.'%');
@@ -210,7 +217,7 @@ class TeacherController extends Controller
         if ($request->has('school') && $request->school != "") {
             $teachers->where('school', 'like' ,'%'.$request->school.'%');
         }
-        return view('teachers')->withteachers($teachers->get())->withSubjects($subjects);
+        return view('teachers')->withteachers($teachers->get())->withSubjects($subjects)->withMessages($messages);
     }
     public function followTeacher($id){
         if (Auth::check()) {
@@ -232,12 +239,15 @@ class TeacherController extends Controller
 
     public function notes(){
         $subjects = Subject::all();
+        $messages = Message::where('recipient_id',Auth::user()->id)->where('read',false)->get();
         $notes = Note::where('user_id', Auth::user()->id)->with('topic')->with('subtopic')->get();
-        return view('teacher/notes')->withSubjects($subjects)->withNotes($notes);
+        return view('teacher/notes')->withSubjects($subjects)->withNotes($notes)->withMessages($messages);
     }
     public function filterNotes(Request $request){
         $notes = new Note();
         $notes = $notes->newQuery();
+
+        $messages = Message::where('recipient_id',Auth::user()->id)->where('read',false)->get();
 
         $subjects = Subject::all();
 
@@ -256,20 +266,22 @@ class TeacherController extends Controller
             $notes->where('title','like','%'.$request->title.'%')->where('user_id',Auth::user()->id);
         }
 
-        return view('teacher.notes')->withNotes($notes->get())->withSubjects($subjects);
+        return view('teacher.notes')->withNotes($notes->get())->withSubjects($subjects)->withMessages($messages);
     }
     public function createNotes(){
         $subjects = Subject::with('topics')->get();
-        return view('teacher/createnotes')->withSubjects($subjects);
+        $messages = Message::where('recipient_id',Auth::user()->id)->where('read',false)->get();
+        return view('teacher/createnotes')->withSubjects($subjects)->withMessages($messages);
     }
    
     public function single_exam($id){
         $exam = Exam::with('attachements')->findOrFail($id);
         $answers = Answer::with('answerSheets')->with('user')->where('exam_id',$id)->get();
+        $messages = Message::where('recipient_id',Auth::user()->id)->where('read',false)->get();
 
         $reports = Report::where('exam_id', $id)->get();
 
-        return view('teacher/single_exam')->withExam($exam)->withAnswers($answers)->withReports($reports);
+        return view('teacher/single_exam')->withExam($exam)->withAnswers($answers)->withReports($reports)->withMessages($messages);
     }
     public function giveMarks(Request $request){
         
@@ -328,6 +340,7 @@ class TeacherController extends Controller
         $examsPoints = Point::with('user')->where('user_id',Auth::user()->id)->where('type','Exam')->sum('value');
         $quizPoints = Point::with('user')->where('user_id',Auth::user()->id)->where('type','Quiz')->sum('value');
         $tutorialPoints = Point::with('user')->where('user_id',Auth::user()->id)->where('type','Tutorial')->sum('value');
+        $messages = Message::where('recipient_id',Auth::user()->id)->where('read',false)->get();
 
         $pointsCount = collect([]);
         $pointsCount->push($notesPoints);
@@ -335,23 +348,26 @@ class TeacherController extends Controller
         $pointsCount->push($quizPoints);
         $pointsCount->push($tutorialPoints);
 
-        return view('teacher/points')->withPoints($points)->withPointsCount($pointsCount);
+        return view('teacher/points')->withPoints($points)->withPointsCount($pointsCount)->withMessages($messages);
     }
     
 
     public function examinations(){
         $subjects = Subject::all();
         $exams = Exam::where('user_id',Auth::user()->id)->get();
-        return view('teacher/examinations')->withSubjects($subjects)->withExams($exams);
+        $messages = Message::where('recipient_id',Auth::user()->id)->where('read',false)->get();
+        return view('teacher/examinations')->withSubjects($subjects)->withExams($exams)->withMessages($messages);
     }
    
     public function assesment(){
-        return view('teacher/assesment');
+        $messages = Message::where('recipient_id',Auth::user()->id)->where('read',false)->get();
+        return view('teacher/assesment')->withMessages($messages);
     }
     public function payments(){
         $payments = Payment::with('user')->where('user_id', Auth::user()->id)->get();
         $totalPayments = $payments->sum('amount');
-        return view('teacher/payments')->withPayments($payments)->withTotalPayments($totalPayments)->withMonth(0);
+        $messages = Message::where('recipient_id',Auth::user()->id)->where('read',false)->get();
+        return view('teacher/payments')->withPayments($payments)->withTotalPayments($totalPayments)->withMonth(0)->withMessages($messages);
     }
     
     public function filterPayments(Request $request){
@@ -364,15 +380,17 @@ class TeacherController extends Controller
         }
 
         $totalPayments = Payment::with('user')->where('user_id', Auth::user()->id)->sum('amount');
+        $messages = Message::where('recipient_id',Auth::user()->id)->where('read',false)->get();
 
-        return view('teacher.payments')->withpayments($payments->get())->withTotalPayments($totalPayments)->withMonth($request->month);
+        return view('teacher.payments')->withpayments($payments->get())->withTotalPayments($totalPayments)->withMonth($request->month)->withMessages($messages);
 
     }
 
     public function createexam(){
         $subjects = Subject::all();
         $types = ExamType::all();
-        return view('teacher/createexam')->withSubjects($subjects)->withTypes($types);
+        $messages = Message::where('recipient_id',Auth::user()->id)->where('read',false)->get();
+        return view('teacher/createexam')->withSubjects($subjects)->withTypes($types)->withMessages($messages);
     }
 
     public function filterExams(Request $request){
@@ -380,6 +398,7 @@ class TeacherController extends Controller
         $exams = $exams->newQuery();
 
         $subjects = Subject::all();
+        $messages = Message::where('recipient_id',Auth::user()->id)->where('read',false)->get();
 
         if ($request->has('subject') && $request->subject != "") {
             $exams->where('subject_id', $request->subject)->where('user_id',Auth::user()->id);
@@ -393,7 +412,7 @@ class TeacherController extends Controller
             $exams->where('title','like','%'.$request->title.'%')->where('user_id',Auth::user()->id);
         }
 
-        return view('teacher.examinations')->withExams($exams->get())->withSubjects($subjects);
+        return view('teacher.examinations')->withExams($exams->get())->withSubjects($subjects)->withMessages($messages);
     }
 
     public function storeExam(Request $request){
@@ -488,13 +507,15 @@ class TeacherController extends Controller
         $subjects = Subject::all();
         $types = ExamType::all();
         $exams = Exam::where('user_id',Auth::user()->id)->get();
-        return view('teacher/examinations')->withExams($exams)->withSubjects($subjects)->withTypes($types);
+        $messages = Message::where('recipient_id',Auth::user()->id)->where('read',false)->get();
+        return view('teacher/examinations')->withExams($exams)->withSubjects($subjects)->withTypes($types)->withMessages($messages);
     }
 
     public function getAllResults(){
         $ids = Report::select('user_id')->whereMonth('created_at',date('m'))->distinct()->pluck('user_id')->where('teacher_id', Auth::user()->id);
        //$results = DB::table('reports')->select('user_id','week','score')->whereMonth('created_at',date('m'))->groupBy('user_id')->get();0
        $subjects = Subject::all();
+       $messages = Message::where('recipient_id',Auth::user()->id)->where('read',false)->get();
        $results = collect([]);
        $avgs = collect([]);
        $users = collect([]);
@@ -518,7 +539,7 @@ class TeacherController extends Controller
            }
            $results->push($scores);
        }
-       return view('teacher/results')->withResults($results)->withSubjects($subjects)->withAverages($avgs)->withUsers($users);
+       return view('teacher/results')->withResults($results)->withSubjects($subjects)->withAverages($avgs)->withUsers($users)->withMessages($messages);
    }
 
    public function filterResults(Request $request){
@@ -527,6 +548,7 @@ class TeacherController extends Controller
     $reports = $reports->newQuery();
 
     $subjects = Subject::all();
+    $messages = Message::where('recipient_id',Auth::user()->id)->where('read',false)->get();
 
     if ($request->has('subject') && $request->subject != "") {
         $reports->whereHas('exam', function($query) use ($request){
@@ -589,18 +611,20 @@ class TeacherController extends Controller
        }
        $results->push($scores);
    }
-   return view('teacher/results')->withResults($results)->withSubjects($subjects)->withAverages($avgs)->withUsers($users);
+   return view('teacher/results')->withResults($results)->withSubjects($subjects)->withAverages($avgs)->withUsers($users)->withMessages($messages);
 }
 
     public function quiz(){
         $subjects = Subject::all();
-        $quizzes = Quiz::where('user_id', Auth::user()->id); 
-        return view('teacher/quiz')->withSubjects($subjects)->withQuizzes($quizzes);
+        $quizzes = Quiz::where('user_id', Auth::user()->id);
+        $messages = Message::where('recipient_id',Auth::user()->id)->where('read',false)->get(); 
+        return view('teacher/quiz')->withSubjects($subjects)->withQuizzes($quizzes)->withMessages($messages);
     }
     public function createquiz (){
         $subjects = Subject::all();
         $topics = Topic::all();
-        return view ('teacher/createquiz')->withSubjects($subjects)->withTopics($topics);
+        $messages = Message::where('recipient_id',Auth::user()->id)->where('read',false)->get();
+        return view ('teacher/createquiz')->withSubjects($subjects)->withTopics($topics)->withMessages($messages);
     }
 
     public function storeQuiz(Request $request){
@@ -674,8 +698,9 @@ class TeacherController extends Controller
 
         $subjects = Subject::all();
         $quizzes = Quiz::all();
+        $messages = Message::where('recipient_id',Auth::user()->id)->where('read',false)->get();
         
-        return view('teacher/quiz')->withQuizzes($quizzes)->withSubjects($subjects);
+        return view('teacher/quiz')->withQuizzes($quizzes)->withSubjects($subjects)->withMessages($messages);
     }
 
 

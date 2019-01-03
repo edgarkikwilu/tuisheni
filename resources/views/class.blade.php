@@ -1,4 +1,4 @@
-@extends('layouts.index')
+@extends('layouts.guest')
 @section('content')
 
 <div class="container" style="text-align:center; margin-top: 40px;">

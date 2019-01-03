@@ -100,7 +100,9 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="{{ url('/') }}">SCHOOLBATA</a>
+            <a class="navbar-brand" href="{{ url('/') }}">
+                <img src="{{ asset('/images/schoolbata.png') }}" width="140" height="130" alt="" srcset="">
+            </a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -118,21 +120,13 @@
                   </p> --}}
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right dropdown-navbar">
-                  <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">Mike John responded to your email</a>
-                  </li>
-                  <li class="nav-link">
-                    <a href="javascript:void(0)" class="nav-item dropdown-item">You have 5 more tasks</a>
-                  </li>
-                  <li class="nav-link">
-                    <a href="javascript:void(0)" class="nav-item dropdown-item">Your friend Michael is in town</a>
-                  </li>
-                  <li class="nav-link">
-                    <a href="javascript:void(0)" class="nav-item dropdown-item">Another notification</a>
-                  </li>
-                  <li class="nav-link">
-                    <a href="javascript:void(0)" class="nav-item dropdown-item">Another one</a>
-                  </li>
+                  @foreach ($messages as $message)
+                    <li class="nav-link">
+                      <button type="button" class="btn btn-block btnShowNotification" value="{{ $message->id }}" data-container="body" data-toggle="popover" data-color="default" data-placement="bottom" data-content="{{ $message->description }}">
+                        {{ $message->title }}
+                      </button>
+                    </li>
+                  @endforeach
                 </ul>
               </li>
               <li class="dropdown nav-item">

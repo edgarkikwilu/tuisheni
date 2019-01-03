@@ -104,8 +104,13 @@ class StudentController extends Controller
     }
     public function students(){
         $students = User::where('type','student')->orderBy('id','desc')->get();
+        $messages = collect([]);
+        if (Auth::user() != null) {
+            $messages = Message::where('recipient_id',Auth::user()->id)->where('read',false)->get();
+        }
+        $subjects = Subject::all();
         //$followers = Follow::where('follow_id',$id)->count();
-        return view('/students')->withStudents($students);
+        return view('/students')->withStudents($students)->withSubjects($subjects)->withMessages($messages);
     }
     public function filterStudents(Request $request){
         $user = new User();
@@ -333,22 +338,43 @@ class StudentController extends Controller
             $questionAnswer->save();
         }
 
+        if ($this->isLogPresent($id)) {
         $points = DB::table('variables')->select('int_value')->where('name','quiz_attempt_points')->first();
             Auth::user()->increment('points',$points->int_value);
             $log = new Log();
             $log->user_id = Auth::user()->id;
             $log->ip = "";
             $log->location = "Tanzania";
-            $log->description = "Post Exam";
-            $log->location = "Tanzania";
+            $log->type = "Quiz";
+            $log->description = "Quiz Attempt".$id;
             $log->points = $points->int_value;
             $log->save();
+
+            $teacher_id = Quiz::findOrFail($id)->user_id;
+            $teacher_points_log = new Log();
+            $teacher_points_log->user_id = $teacher_id;
+            $teacher_points_log->ip = "";
+            $teacher_points_log->location = "Tanzania";
+            $teacher_points_log->type = "Quiz";
+            $teacher_points_log->description = "Quiz Attempt Points";
+            $teacher_points_log->points = $points->int_value;
+            $teacher_points_log->save();
+
+        }
 
         // dd($correctAnswers);
         $quiz = Quiz::with('questions')->with('user')->where('id',$request->quiz_id)->first();
         return view('quiz/singlequiz')->withQuiz($quiz)->withIsAnswerResponse($isAnswerResponse)->withYourAnswers($yourAnswers)->withCorrectAnswers($correctAnswers)->withIsCorrect($isCorrect);
     }
 
+    public function isLogPresent($id){
+        if (Auth::user()) {
+            $log = Log::where('user_id',Auth::user()->id)->where('description', 'Quiz Attempt'.$id)->count();
+            return $log>0?false:true;
+        } else {
+            return false;
+        }        
+    }
 
 
 

@@ -203,8 +203,9 @@ Route::middleware('role:student')->group(function(){
 
 //from subject page
 Route::get('/class/{subject}/{class}', 'SubjectController@class')->name('class/class');
-Route::get('/class/{subject}/{classnav}', 'SubjectController@classnav')->name('class/classnav');
-Route::get('/class/{subject}/{class_topic}', 'SubjectController@class_topic')->name('class/class_topic');
+Route::get('/class/{subject}/{class}/{topic}', 'SubjectController@topicNotes')->name('class.topic.notes');
+// Route::get('/class/{subject}/{classnav}', 'SubjectController@classnav')->name('class/classnav');
+// Route::get('/class/{subject}/{class_topic}', 'SubjectController@class_topic')->name('class/class_topic');
 Route::get('/assessment/{id}', 'SubjectController@assessment')->name('assessment');
 Route::get('/single/{id}', 'SubjectController@single')->name('single');
 

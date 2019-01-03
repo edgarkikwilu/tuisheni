@@ -1,10 +1,9 @@
-@extends('layouts.index')
+@extends('layouts.guest')
 @section('content')
 <div class="row">
-        @include('sidebar_subject')
         <div class="col-md-9">
    
-<div class="container" style="margin-top: 10px; ">
+<div class="content">
     <div class="row">
         <div class="col-lg-12"  style="margin-top: 20px;">
             <div class="card">
@@ -21,7 +20,7 @@
                         <div class="col-lg-3" style="float:right; margin-top:20px;">
                             <div class="btn-group" role="group" aria-label="Basic example">
                                 <a href="{{ route('follow',$quiz->user->id) }}" class="btn btn-sm btn-primary">Follow</a>
-                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Message</button>
+                                <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#myModal">Message</button>
                             </div>
                             <small><a class="nav-link" href="#">{{ $quiz->attempts }} Attempts</a></small>
                         </div>
@@ -31,8 +30,8 @@
                         <h3 class="card-title" style="color:blue; margin-top:10px; margin-left:5px;" >{{ $quiz->title }}</h3>
                         <span><small class="text-muted">#{{ $quiz->subject->name }} #{{ $quiz->topic->name }}</small></span>
                 </div>
-            <div class="container" style="margin-top:10px;">
-                 <h4>SECTION A (Multiple Choice 2 Points each) {{ $quiz->questions->count() }}</h4>
+            <div class="text-center" style="margin-top:10px;">
+                 <h4>{{ $quiz->questions->count() }} Questions Only</h4>
             </div>
 
             <form action="{{ route('quiz.check.answers') }}" id="checkAnsForm" method="post">
@@ -44,16 +43,16 @@
                     @endphp
                     @foreach ($quiz->questions as $question)
                     
-                        <div class="container">
-                            <p>Qn {{ $count+1 }}. {{ $question->question }}</p>
-                            <ul>
+                        <div class="container quiz-qn">
+                            <p class="question">Qn {{ $count+1 }}. {{ $question->question }}</p>
+                            <ul class="quiz-choices">
                                 @foreach ($question->choices as $choice)
-                                <li>
+                                <li class="quiz-choice">
                                     <input type="hidden" name="answer[{{ $count }}][qn]" value="{{ $question->id }}">
                                     <input type="hidden" name="answer[{{ $count }}][cans]" value="{{ $question->answer }}">
 
                                     <input type="checkbox" class="chckbx{{ $count+1 }}" value="{{ $choice->index }}" name="answer[{{ $count }}][ans]">
-                                    {{ $choice->index }} => {{ $choice->name }}
+                                    {{ $choice->index }} : {{ $choice->name }}
                                     
                                 </li>
                                 @endforeach

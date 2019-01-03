@@ -1,7 +1,6 @@
-@extends('layouts.index')
+@extends('layouts.guest')
 @section('content')
-<div class="row">
-    @include('sidebar_subject')
+<div class="content">
 <div class="col-md-9">
    
 <div class="container" style="margin-top: 10px; ">
@@ -45,7 +44,7 @@
                     <div class="row">
                         <div class="col-md-9" >
                             <div class="card-body">
-                                    <h5 class="text-muted"> <span>{{ $exam->attachements->count() }}</span> Attachments</h5>
+                                    <h5 class="text-muted"> <span class="badge-pill badge-info">{{ $exam->attachements->count() }}</span> Attachments</h5>
                                     <div class="row">
                                         @foreach ($exam->attachements as $attachment)
                                             <div class="col-md-3 text-center">
@@ -62,9 +61,9 @@
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <button type="button" class="btn btn-sm btn-secondary" style="margin-top:10px; margin-left:10px;" data-toggle="modal" data-target="#submitModal">Submit Exam</button>
+                            <button type="button" class="btn btn-sm btn-success btn-block" style="" data-toggle="modal" data-target="#submitModal">Submit Exam</button>
                             <!-- Trigger the modal with a button -->
-                            <button type="button" class="btn btn-block btn-light" data-toggle="modal" data-target="#reportModal">Report</button>
+                            <button type="button" class="btn btn-sm btn-block btn-danger" data-toggle="modal" data-target="#reportModal">Report Exam</button>
                         </div>
                     </div>
                 </div>
@@ -86,7 +85,7 @@
                                                 <input type="hidden" name="type" value="exam">
                                                 <input type="hidden" name="type_id" value="{{ $exam->id }}">
                                                 <textarea style="margin-top:10px; width:100%;" name="comment" placeholder="Add Your Comments Here!!" id=""  rows="5"></textarea><br>
-                                                <button type="submit" class="btn btn-sm btn-primary" style="margin-top:10px;">Add Comment</button>
+                                                <button type="submit" class="btn btn-sm btn-block btn-primary" style="margin-top:10px;">Add Comment</button>
                                             
                                             </form>
                                         </div>
